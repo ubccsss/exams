@@ -1,0 +1,31 @@
+# cs101
+
+These are all the exams for cs101.
+
+See `handin` at https://fn.lc/hw/cs101.
+
+
+
+## 2005
+
+
+* [Sample Midterm Questions](/static/exams/cs101/2005/mt-sample.pdf)
+
+
+
+## 2009
+
+
+* [Quiz 1 (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-quiz1.pdf)
+
+* [Quiz 2 (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-quiz2.pdf)
+
+* [Quiz 3 (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-quiz3.pdf)
+
+* [Quiz 4 (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-quiz4.pdf)
+
+* [Midterm (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-midterm.pdf)
+
+* [Final (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-final.pdf)
+
+
