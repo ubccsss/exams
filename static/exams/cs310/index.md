@@ -21,9 +21,32 @@ See `handin` at https://fn.lc/hw/cs310.
 
 
 
+## 2011
+
+
+* [Sample Midterm 1](/static/exams/cs310/2011/sample-midterm-1.pdf)
+
+
+
 ## 2013
 
 
 * [Practice Midterm Questions](/static/exams/cs310/2013/sampleMidtermQuestions.pdf)
+
+
+
+## 2014
+
+
+* [Summer Term 1 Midterm Study Questions](/static/exams/cs310/2014/sample-midterm-2014-S1.pdf)
+
+
+
+## 2015
+
+
+* [Sample Final](/static/exams/cs310/2015/CPSC310-2015W1-SampleFinal.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs310/2015/CPSC310-2015W1-SampleFinal-Solutions.pdf)
 
 

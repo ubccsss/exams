@@ -15,6 +15,13 @@ See `handin` at https://fn.lc/hw/cs314.
 
 
 
+## 2005
+
+
+* [Midterm (Summer) (Solution)](/static/exams/cs314/2005/midterm.soln.pdf)
+
+
+
 ## 2007
 
 
@@ -57,6 +64,13 @@ See `handin` at https://fn.lc/hw/cs314.
 * [Final (Term 1)](/static/exams/cs314/2009/cs314-2009-t1-final.pdf)
 
 * [(Solution)](/static/exams/cs314/2009/cs314-2009-t1-final-solution.pdf)
+
+
+
+## 2012
+
+
+* [Midterm 2 (Solution)](/static/exams/cs314/2012/midterm2_solved.pdf)
 
 
 

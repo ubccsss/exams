@@ -53,3 +53,10 @@ See `handin` at https://fn.lc/hw/cs210.
 * [Sample Final 2](/static/exams/cs210/2014/CPSC210-2014%20-%20Sample%20Final.pdf)
 
 
+
+## 2015
+
+
+* [Sample Midterm 2 (Solution)](/static/exams/cs210/2015/Sample-Midterm2Soln.pdf)
+
+

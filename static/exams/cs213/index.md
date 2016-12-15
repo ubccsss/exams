@@ -100,6 +100,19 @@ See `handin` at https://fn.lc/hw/cs213.
 
 * [Practice Final (Solution)](/static/exams/cs213/2013/213-2013-practice_final_solutions_1.pdf)
 
+* [Sample Midterm](/static/exams/cs213/2013/mt-sample-1.pdf)
+
+
+
+## 2014
+
+
+* [Some More Sample Midterm Questions (Solution)](/static/exams/cs213/2014/mt-sample-2-soln.pdf)
+
+* [Sample Midterm](/static/exams/cs213/2014/mt-sample-2.pdf)
+
+* [Sample Midterm (Solution)](/static/exams/cs213/2014/mt-sample-1-soln.pdf)
+
 
 
 ## 2015

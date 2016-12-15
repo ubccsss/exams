@@ -24,6 +24,8 @@ import (
 
 var templates = template.Must(template.ParseGlob("template/*"))
 
+var yearRegex = regexp.MustCompile("\\d{4}")
+
 // Course ...
 type Course struct {
 	Code  string
@@ -62,6 +64,7 @@ type File struct {
 	Path  string
 	Hash  string
 	Score float64
+	Term  string
 }
 
 func (f *File) hash() error {
@@ -107,7 +110,7 @@ type Database struct {
 	PotentialFiles []*File
 }
 
-func (db *Database) addFile(course string, year int, name, path string) error {
+func (db *Database) addFile(course string, year int, term, name, path string) error {
 	if _, ok := db.Courses[course]; !ok {
 		db.Courses[course] = &Course{Code: course, Years: map[int]*CourseYear{}}
 	}
@@ -128,6 +131,16 @@ func (db *Database) addFile(course string, year int, name, path string) error {
 
 	courseYear.Files = append(courseYear.Files, &File{Name: name, Path: path})
 	return nil
+}
+
+func (db *Database) processedCount() int {
+	count := 0
+	for _, course := range db.Courses {
+		for _, year := range course.Years {
+			count += len(year.Files)
+		}
+	}
+	return count
 }
 
 func (db *Database) hashes() map[string]struct{} {
@@ -292,6 +305,7 @@ func main() {
 
 	http.HandleFunc("/admin/potential", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
+		fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d</p>", len(db.PotentialFiles), db.processedCount())
 		fmt.Fprint(w, "<ul>")
 		for _, file := range db.PotentialFiles {
 			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s</a></li>`, file.Hash, file.Path)
@@ -327,29 +341,60 @@ func main() {
 				return
 			}
 			name := r.FormValue("name")
+			quickname := r.FormValue("quickname")
+			if len(name) > 0 && len(quickname) > 0 {
+				http.Error(w, "can't have both name and quickname", 400)
+				return
+			}
+			name += quickname
 			if len(name) == 0 {
 				http.Error(w, "must specify name", 400)
 				return
 			}
+			term := r.FormValue("term")
 			year, err := strconv.Atoi(r.FormValue("year"))
 			if err != nil {
 				http.Error(w, err.Error(), 400)
 				return
 			}
-			fetchFileAndSave(w, course, year, name, file.Path)
+			fetchFileAndSave(w, course, year, term, name, file.Path)
 			db.PotentialFiles = append(db.PotentialFiles[:filei], db.PotentialFiles[filei+1:]...)
+			http.Redirect(w, r, "/admin/potential", 302)
 			if err := saveAndGenerate(); err != nil {
 				http.Error(w, err.Error(), 500)
 				return
 			}
-			http.Redirect(w, r, "/admin/potential", 302)
 			return
 		}
 		w.Header().Set("Content-Type", "text/html")
 		meta := struct {
 			File    *File
 			Courses map[string]*Course
-		}{file, db.Courses}
+			Course  string
+			Year    string
+			Terms   []string
+			Term    string
+		}{
+			File:    file,
+			Courses: db.Courses,
+			Terms:   []string{"W1", "W2", "S"},
+		}
+
+		lowerPath := strings.ToLower(file.Path)
+		for c := range db.Courses {
+			if strings.Contains(lowerPath, c) {
+				meta.Course = c
+			}
+		}
+		meta.Year = yearRegex.FindString(lowerPath)
+
+		for _, term := range meta.Terms[:2] {
+			if strings.Contains(lowerPath, strings.ToLower(term)) {
+				meta.Term = term
+				break
+			}
+		}
+
 		if err := templates.ExecuteTemplate(w, "file.html", meta); err != nil {
 			http.Error(w, err.Error(), 500)
 			return
@@ -416,7 +461,7 @@ func main() {
 					}
 					if strings.Contains(href, "/files/") {
 						fmt.Fprintf(w, "file: %d, %s, %s\n", year, s.Text(), href)
-						fetchFileAndSave(w, courseCode, year, s.Text(), href)
+						fetchFileAndSave(w, courseCode, year, "", s.Text(), href)
 					}
 				}
 			})
@@ -434,7 +479,7 @@ func main() {
 	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
 
-func fetchFileAndSave(w http.ResponseWriter, course string, year int, name, href string) {
+func fetchFileAndSave(w http.ResponseWriter, course string, year int, term, name, href string) {
 	resp, err := http.Get(href)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -449,9 +494,13 @@ func fetchFileAndSave(w http.ResponseWriter, course string, year int, name, href
 	}
 	raw, _ := ioutil.ReadAll(resp.Body)
 	file := path.Join(dir, base)
+	if _, err := os.Stat(file); !os.IsNotExist(err) {
+		http.Error(w, "file already exists!", 500)
+		return
+	}
 	if err := ioutil.WriteFile(file, raw, 0755); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	db.addFile(course, year, name, file)
+	db.addFile(course, year, term, name, file)
 }

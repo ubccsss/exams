@@ -49,6 +49,21 @@ See `handin` at https://fn.lc/hw/cs320.
 
 * [(Solution)](/static/exams/cs320/2010/cs320-2010-t1-sample-final-solution.pdf)
 
+* [Sample Final](/static/exams/cs320/2010/sampleFinal.pdf)
+
+
+
+## 2011
+
+
+* [Sample FInal](/static/exams/cs320/2011/sampleFinal.pdf)
+
+* [Sample Midterm 2](/static/exams/cs320/2011/sampleMidterm2.pdf)
+
+* [Sample Midterm 1](/static/exams/cs320/2011/sampleMidterm1.pdf)
+
+* [Sample Midterm 2 (Solution)](/static/exams/cs320/2011/sampleMidterm2-alt-sol.pdf)
+
 
 
 ## 2012
@@ -56,12 +71,29 @@ See `handin` at https://fn.lc/hw/cs320.
 
 * [Sample Midterm 1](/static/exams/cs320/2012/sampleMidterm1.pdf)
 
+* [Sample Midterm 2](/static/exams/cs320/2012/sampleMidterm2.pdf)
+
 
 
 ## 2013
 
 
 * [Sample Midterm 1](/static/exams/cs320/2013/sampleMidterm1.pdf)
+
+* [Sample Midterm 2 (Solution)](/static/exams/cs320/2013/sampleMidterm2-sol.pdf)
+
+* [Sample Midterm 1](/static/exams/cs320/2013/sampleMidterm1-sol.pdf)
+
+* [Sample Final](/static/exams/cs320/2013/sampleFinal.pdf)
+
+
+
+## 2014
+
+
+* [Sample Midterm 2](/static/exams/cs320/2014/sampleMidterm2.pdf)
+
+* [Sample Final](/static/exams/cs320/2014/sampleFinal.pdf)
 
 
 

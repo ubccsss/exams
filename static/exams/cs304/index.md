@@ -67,6 +67,8 @@ See `handin` at https://fn.lc/hw/cs304.
 
 * [(Solution)](/static/exams/cs304/2009/cs304-2009-t2-midterm-solution.pdf)
 
+* [Midterm (Solution)](/static/exams/cs304/2009/Mid04w1-sols.pdf)
+
 
 
 ## 2016

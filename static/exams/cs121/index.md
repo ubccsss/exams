@@ -129,4 +129,46 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Sample Final (Term 2)](/static/exams/cs121/2008/cs121-2008-t2-sample-final.pdf)
 
+* [Sample Final](/static/exams/cs121/2008/sampleFinal-2008W1-soln.pdf)
+
+
+
+## 2010
+
+
+* [Midterm 1 (Solution)](/static/exams/cs121/2010/midterm1-sol.pdf)
+
+
+
+## 2012
+
+
+* [Midterm 1 (Solution)](/static/exams/cs121/2012/midterm1-sol.pdf)
+
+
+
+## 2013
+
+
+* [Midterm 1 (Term 2)](/static/exams/cs121/2013/midterm1.pdf)
+
+* [Midterm 2](/static/exams/cs121/2013/cpsc-121-2013W2-midterm2-indiv-full.pdf)
+
+* [Sample Midterm (Solution)](/static/exams/cs121/2013/cpsc-121-2013W2-sample-midterm-question-solns.pdf)
+
+* [Midterm 2](/static/exams/cs121/2013/midterm2.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs121/2013/sampleFinal-sol.pdf)
+
+
+
+## 2015
+
+
+* [Midterm 2](/static/exams/cs121/2015/midterm2.pdf)
+
+* [Midterm (Solution)](/static/exams/cs121/2015/midterm1-sol.pdf)
+
+* [Sample Midterm 1](/static/exams/cs121/2015/midterm1.pdf)
+
 

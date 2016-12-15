@@ -28,4 +28,15 @@ See `handin` at https://fn.lc/hw/cs101.
 
 * [Final (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-final.pdf)
 
+* [Sample Final Exam Questions (Summer)](/static/exams/cs101/2009/second-sample-final.pdf)
+
+
+
+## 2014
+
+
+* [Practice Final](/static/exams/cs101/2014/sample-final2.pdf)
+
+* [Practice Final (Solution)](/static/exams/cs101/2014/sample-final2-answers.pdf)
+
 

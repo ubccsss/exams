@@ -28,20 +28,52 @@ iframe {
     <h2>Controls</h2>
     <form method="POST">
       <label>Name</label>
+      <br>
+      <select name="quickname" size="17">
+        <option></option>
+        <option>Final</option>
+        <option>Final (Solution)</option>
+        <option>Sample Final</option>
+        <option>Sample Final (Solution)</option>
+        <option>Midterm</option>
+        <option>Midterm (Solution)</option>
+        <option>Sample Midterm</option>
+        <option>Sample Midterm (Solution)</option>
+        <option>Midterm 1</option>
+        <option>Midterm 1 (Solution)</option>
+        <option>Sample Midterm 1</option>
+        <option>Sample Midterm 1 (Solution)</option>
+        <option>Midterm 2</option>
+        <option>Midterm 2 (Solution)</option>
+        <option>Sample Midterm 2</option>
+        <option>Sample Midterm 2 (Solution)</option>
+      </select>
+      <br>
       <input type="text" name="name" value="{{.File.Name}}">
       <br>
       <br>
       <label>Course</label>
       <select name="course">
         <option value="">Select Course Code</option>
+        {{ $predicted := .Course }}
 {{ range $course, $v := .Courses }}
-<option value="{{$course}}">{{$course}}</option>
+<option value="{{$course}}" {{if eq $course $predicted}}selected{{end}}>{{$course}}</option>
 {{ end }}
       </select>
       <br>
       <br>
       <label>Year</label>
-      <input type="number" name="year" value="0">
+      <input type="number" name="year" value="{{.Year}}">
+      <br>
+      <br>
+      <label>Term</label><br>
+      <select name="term" size=4>
+        <option value="">Select Term</option>
+        {{ $predicted := .Term }}
+        {{ range $term := .Terms }}
+        <option {{if eq $term $predicted}}selected{{end}}>{{ $term }}</option>
+        {{ end }}
+      </select>
       <br>
       <br>
       <input type="submit" value="Classify">

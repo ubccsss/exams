@@ -6,6 +6,20 @@ See `handin` at https://fn.lc/hw/cs311.
 
 
 
+## 2010
+
+
+* [Midterm Exam #1](/static/exams/cs311/2010/311-2010w1-midterm1-sample-soln.pdf)
+
+
+
+## 2011
+
+
+* [Midterm Exam #2 (Solution)](/static/exams/cs311/2011/311-2011w1-midterm2-sample-soln.pdf)
+
+
+
 ## 2015
 
 
