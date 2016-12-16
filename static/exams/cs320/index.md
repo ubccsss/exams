@@ -64,6 +64,8 @@ See `handin` at https://fn.lc/hw/cs320.
 
 * [Sample Midterm 2 (Solution)](/static/exams/cs320/2011/sampleMidterm2-alt-sol.pdf)
 
+* [Sample Midterm 1](/static/exams/cs320/2011/sampleMidterm1-alt.pdf)
+
 
 
 ## 2012
@@ -85,6 +87,8 @@ See `handin` at https://fn.lc/hw/cs320.
 * [Sample Midterm 1](/static/exams/cs320/2013/sampleMidterm1-sol.pdf)
 
 * [Sample Final](/static/exams/cs320/2013/sampleFinal.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs320/2013/sampleFinal-sol.pdf)
 
 
 

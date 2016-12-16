@@ -47,7 +47,83 @@ func (c Course) Generate() error {
 		return err
 	}
 	html := blackfriday.MarkdownCommon(buf.Bytes())
-	if err := ioutil.WriteFile(path.Join(dir, "index.html"), html, 0755); err != nil {
+	buf.Reset()
+	if _, err := buf.Write(html); err != nil {
+		return err
+	}
+	doc, err := goquery.NewDocumentFromReader(&buf)
+	if err != nil {
+		return err
+	}
+	doc.Find("h1").AddClass("page-header")
+	htmlStr, err := doc.Html()
+	if err != nil {
+		return err
+	}
+	styled := renderTemplateExam(c.Code, htmlStr)
+	if err := ioutil.WriteFile(path.Join(dir, "index.html"), []byte(styled), 0755); err != nil {
+		return err
+	}
+	return nil
+}
+
+// FileCount returns the number of files for that course.
+func (c Course) FileCount() int {
+	count := 0
+	for _, year := range c.Years {
+		count += len(year.Files)
+	}
+	return count
+}
+
+// Generate generates an index of all courses.
+func (db Database) Generate() error {
+	dir := examsDir
+	if err := os.MkdirAll(dir, 0755); err != nil {
+		return err
+	}
+
+	type course struct {
+		Name      string
+		FileCount int
+	}
+	type courses map[string]course
+	type level map[string]courses
+
+	l := level{}
+	for _, c := range db.Courses {
+		cl := c.Code[2:3] + "00"
+		cs, ok := l[cl]
+		if !ok {
+			cs = courses{}
+			l[cl] = cs
+		}
+		cs[c.Code] = course{Name: strings.ToUpper(c.Code), FileCount: c.FileCount()}
+	}
+
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "index.md", l); err != nil {
+		return err
+	}
+	if err := ioutil.WriteFile(path.Join(dir, "index.md"), buf.Bytes(), 0755); err != nil {
+		return err
+	}
+	html := blackfriday.MarkdownCommon(buf.Bytes())
+	buf.Reset()
+	if _, err := buf.Write(html); err != nil {
+		return err
+	}
+	doc, err := goquery.NewDocumentFromReader(&buf)
+	if err != nil {
+		return err
+	}
+	doc.Find("h1").AddClass("page-header")
+	htmlStr, err := doc.Html()
+	if err != nil {
+		return err
+	}
+	styled := renderTemplate("Exams Database", htmlStr)
+	if err := ioutil.WriteFile(path.Join(dir, "index.html"), []byte(styled), 0755); err != nil {
 		return err
 	}
 	return nil
@@ -82,10 +158,21 @@ var scoreRegexes = []string{
 	"final", "exam", "midterm", "sample", "mt", "cs\\d{3}", "20\\d{2}",
 }
 
+// CoursesNoFiles returns the courses with no files.
+func (db Database) CoursesNoFiles() []string {
+	var classes []string
+	for id, c := range db.Courses {
+		if c.FileCount() == 0 {
+			classes = append(classes, id)
+		}
+	}
+	return classes
+}
+
 func (f *File) score() {
 	path := strings.ToLower(f.Path)
 	var score float64
-	for _, r := range scoreRegexes {
+	for _, r := range append(scoreRegexes, db.CoursesNoFiles()...) {
 		matched, err := regexp.MatchString(r, path)
 		if err != nil {
 			log.Fatal(err)
@@ -136,9 +223,7 @@ func (db *Database) addFile(course string, year int, term, name, path string) er
 func (db *Database) processedCount() int {
 	count := 0
 	for _, course := range db.Courses {
-		for _, year := range course.Years {
-			count += len(year.Files)
-		}
+		count += course.FileCount()
 	}
 	return count
 }
@@ -216,6 +301,8 @@ func saveDatabase() error {
 }
 
 func createDirs() error {
+	db.Generate()
+
 	for _, course := range db.Courses {
 		if err := course.Generate(); err != nil {
 			return err
@@ -259,10 +346,60 @@ func saveAndGenerate() error {
 	return nil
 }
 
+func renderTemplateExam(title, content string) string {
+	title = strings.ToUpper(title)
+	return renderTemplate(title, fmt.Sprintf(
+		`<ol class="breadcrumb"><li><a href="..">Exams Database</a></li>
+		<li class="active">%s</li>
+		</ol>
+		%s
+		<div id="book-navigation-1440" class="book-navigation">
+		<ul class="pager clearfix">
+		<li><a href=".." class="page-up" title="Go to parent page">up</a></li>
+		</ul>
+		</div>`, title, content))
+}
+
+func renderTemplate(title, content string) string {
+	return fmt.Sprintf(layout, title, content)
+}
+
+func fetchTemplate() (string, error) {
+	doc, err := goquery.NewDocument("https://ubccsss.org/services")
+	if err != nil {
+		return "", err
+	}
+
+	doc.Find("a[href]").Each(func(_ int, s *goquery.Selection) {
+		url := s.AttrOr("href", "")
+		if strings.HasPrefix(url, "/") {
+			s.SetAttr("href", "https://ubccsss.org"+url)
+		}
+	})
+
+	title := doc.Find("title")
+	parts := strings.Split(title.Text(), "|")
+	title.ReplaceWithHtml("<title>%s |" + parts[len(parts)-1] + "</title>")
+
+	section := doc.Find(".main-container .row > section")
+	children := section.Children()
+	children.First().ReplaceWithHtml(`%s`)
+	children.Remove()
+	return doc.Html()
+}
+
+var layout string
+
 func main() {
 	if err := loadDatabase(); err != nil {
 		log.Printf("tried to load database: %s", err)
 	}
+
+	wrapperTemplate, err := fetchTemplate()
+	if err != nil {
+		log.Fatal(err)
+	}
+	layout = wrapperTemplate
 
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	http.HandleFunc("/admin/loadcourses", func(w http.ResponseWriter, r *http.Request) {

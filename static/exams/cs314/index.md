@@ -15,6 +15,13 @@ See `handin` at https://fn.lc/hw/cs314.
 
 
 
+## 2004
+
+
+* [Final](/static/exams/cs314/2004/Vjan2004-final.pdf)
+
+
+
 ## 2005
 
 

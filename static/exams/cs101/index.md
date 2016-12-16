@@ -13,6 +13,15 @@ See `handin` at https://fn.lc/hw/cs101.
 
 
 
+## 2007
+
+
+* [Sample Midterm (Solution)](/static/exams/cs101/2007/sample_midterm_answers.pdf)
+
+* [Sample Midterm](/static/exams/cs101/2007/sample_midterm.pdf)
+
+
+
 ## 2009
 
 
@@ -29,6 +38,13 @@ See `handin` at https://fn.lc/hw/cs101.
 * [Final (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-final.pdf)
 
 * [Sample Final Exam Questions (Summer)](/static/exams/cs101/2009/second-sample-final.pdf)
+
+
+
+## 2012
+
+
+* [Sample Final (Solution)](/static/exams/cs101/2012/sample-final.pdf)
 
 
 

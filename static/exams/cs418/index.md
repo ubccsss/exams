@@ -13,6 +13,13 @@ See `handin` at https://fn.lc/hw/cs418.
 
 
 
+## 2010
+
+
+* [Final](/static/exams/cs418/2010/final_questions.pdf)
+
+
+
 ## 2011
 
 
@@ -26,5 +33,21 @@ See `handin` at https://fn.lc/hw/cs418.
 
 
 * [Final (Solution)](/static/exams/cs418/2012/a.pdf)
+
+
+
+## 2013
+
+
+* [Final (Solution)](/static/exams/cs418/2013/a2013-1.pdf)
+
+
+
+## 2015
+
+
+* [Final (Solution)](/static/exams/cs418/2015/a.pdf)
+
+* [Final](/static/exams/cs418/2015/q.pdf)
 
 
