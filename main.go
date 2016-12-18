@@ -27,7 +27,7 @@ import (
 
 var templates = template.Must(template.ParseGlob("template/*"))
 
-var yearRegex = regexp.MustCompile("\\d{4}")
+var yearRegex = regexp.MustCompile("(20|19)\\d{2}")
 
 // Course ...
 type Course struct {
@@ -139,12 +139,13 @@ type CourseYear struct {
 
 // File ...
 type File struct {
-	Name   string
-	Path   string
-	Source string
-	Hash   string
-	Score  float64
-	Term   string
+	Name      string
+	Path      string
+	Source    string
+	Hash      string
+	Score     float64
+	Term      string
+	NotAnExam bool
 }
 
 func (f *File) reader() (io.ReadCloser, error) {
@@ -183,8 +184,9 @@ func (f *File) hash() error {
 	return nil
 }
 
-var scoreRegexes = []string{
-	"final", "exam", "midterm", "sample", "mt", "cs\\d{3}", "20\\d{2}",
+var scoreRegexes = map[int][]string{
+	1:  []string{"final", "exam", "midterm", "sample", "mt", "(cs|cpsc)\\d{3}", "(20|19)\\d{2}"},
+	-1: []string{"report", "presentation", "thesis", "slide"},
 }
 
 // CoursesNoFiles returns the courses with no files.
@@ -198,19 +200,34 @@ func (db Database) CoursesNoFiles() []string {
 	return classes
 }
 
+var regexCache = map[string]*regexp.Regexp{}
+
+func regexpMatch(pattern, path string) bool {
+	r, ok := regexCache[pattern]
+	if !ok {
+		r = regexp.MustCompile(pattern)
+		regexCache[pattern] = r
+	}
+
+	return r.FindIndex([]byte(path)) != nil
+}
+
 func (f *File) score() {
-	path := strings.ToLower(f.Path)
-	var score float64
-	for _, r := range append(scoreRegexes, db.CoursesNoFiles()...) {
-		matched, err := regexp.MatchString(r, path)
-		if err != nil {
-			log.Fatal(err)
-		}
-		if matched {
+	path := strings.ToLower(f.Source)
+	var score int
+	for _, r := range db.CoursesNoFiles() {
+		if regexpMatch(r, path) {
 			score++
 		}
 	}
-	f.Score = score
+	for s, rs := range scoreRegexes {
+		for _, r := range rs {
+			if regexpMatch(r, path) {
+				score += s
+			}
+		}
+	}
+	f.Score = float64(score)
 }
 
 // FileSlice attaches the methods of sort.Interface to []*File, sorting in increasing order.
@@ -254,6 +271,7 @@ func unprocessedSourceWorker() {
 		}
 
 		db.addPotentialFiles(os.Stderr, []*File{f})
+		log.Printf("%d remaining unprocessed sources", len(db.UnprocessedSources))
 	}
 }
 
@@ -397,6 +415,8 @@ func verifyConsistency() error {
 
 	for _, f := range db.PotentialFiles {
 		f.score()
+		f.Path = strings.TrimSpace(f.Path)
+		f.Source = strings.TrimSpace(f.Source)
 	}
 	sort.Sort(FileSlice(db.PotentialFiles))
 

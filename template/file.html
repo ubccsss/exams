@@ -56,9 +56,9 @@ iframe {
       <select name="course">
         <option value="">Select Course Code</option>
         {{ $predicted := .Course }}
-{{ range $course, $v := .Courses }}
-<option value="{{$course}}" {{if eq $course $predicted}}selected{{end}}>{{$course}}</option>
-{{ end }}
+        {{ range $course, $v := .Courses }}
+        <option value="{{$course}}" {{if eq $course $predicted}}selected{{end}}>{{$course}}</option>
+        {{ end }}
       </select>
       <br>
       <br>
@@ -77,6 +77,11 @@ iframe {
       <br>
       <br>
       <input type="submit" value="Classify">
+    </form>
+    <form method="POST">
+      <p>If the file is invalid, or not an exam please click below.</p>
+      <input type="hidden" name="invalid" value="true">
+      <input type="submit" value="Not An Exam / Invalid">
     </form>
   </div>
   <iframe src="{{ .File.Source }}">

@@ -88,6 +88,8 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Sample Final (Term 1)](/static/exams/cs121/2007/cs121-2007-t1-sample-final.pdf)
 
+* [Quiz 1](/static/exams/cs121/2007/quiz1-summer07.pdf)
+
 
 
 ## 2008

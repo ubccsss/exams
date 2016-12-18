@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"os/exec"
 	"path"
@@ -28,16 +29,21 @@ func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
 		if !courseRegex.Match(part) {
 			continue
 		}
-		course := string(part)
-		if _, ok := db.Courses[course]; ok {
-			continue
-		}
-		if db.Courses == nil {
-			db.Courses = map[string]*Course{}
-		}
-		db.Courses[course] = &Course{Code: course}
-		fmt.Fprintf(w, "Added: %s\n", course)
+		db.AddCourse(w, string(part))
 	}
+
+	doc, err := goquery.NewDocument("https://courses.students.ubc.ca/cs/main?dept=CPSC&pname=subjarea&req=1&tname=subjareas")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	doc.Find("#mainTable a").Each(func(_ int, s *goquery.Selection) {
+		linkTitle := strings.ToLower(strings.TrimSpace(s.Text()))
+		if strings.HasPrefix(linkTitle, "cpsc ") {
+			course := "cs" + linkTitle[5:]
+			db.AddCourse(w, course)
+		}
+	})
 
 	fmt.Fprintf(w, "Done.")
 
@@ -45,6 +51,19 @@ func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+}
+
+// AddCourse adds a course the DB if it doesn't exist already.
+func (db *Database) AddCourse(w io.Writer, code string) {
+	code = strings.ToLower(strings.TrimSpace(code))
+	if _, ok := db.Courses[code]; ok {
+		return
+	}
+	if db.Courses == nil {
+		db.Courses = map[string]*Course{}
+	}
+	db.Courses[code] = &Course{Code: code}
+	fmt.Fprintf(w, "Added: %s\n", code)
 }
 
 // ingressDeptFiles talks to the exams.cgi binary running on the ugrad servers and

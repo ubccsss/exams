@@ -6,6 +6,13 @@ See `handin` at https://fn.lc/hw/cs444.
 
 
 
+## 2001
+
+
+* [Midterm (Solution)](/static/exams/cs444/2001/cs444mt-01.pdf)
+
+
+
 ## 2007
 
 

@@ -10,9 +10,19 @@ import (
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d</p>", len(db.PotentialFiles), db.processedCount())
-	fmt.Fprint(w, "<ul>")
+	fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
 	for _, file := range db.PotentialFiles {
-		fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s</a></li>`, file.Hash, file.Source)
+		if !file.NotAnExam {
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s</a> %.0f</li>`, file.Hash, file.Source, file.Score)
+		}
+	}
+	fmt.Fprint(w, "</ul>")
+
+	fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
+	for _, file := range db.PotentialFiles {
+		if file.NotAnExam {
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s</a></li>`, file.Hash, file.Source)
+		}
 	}
 	fmt.Fprint(w, "</ul>")
 }
@@ -37,6 +47,15 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, err.Error(), 400)
+			return
+		}
+		if len(r.FormValue("invalid")) > 0 {
+			file.NotAnExam = true
+			http.Redirect(w, r, "/admin/potential", 302)
+			if err := saveAndGenerate(); err != nil {
+				http.Error(w, err.Error(), 500)
+				return
+			}
 			return
 		}
 		course := r.FormValue("course")

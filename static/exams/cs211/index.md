@@ -14,3 +14,10 @@ See `handin` at https://fn.lc/hw/cs211.
 * [(Solution)](/static/exams/cs211/2008/cs211-2008-t1-midterm-solution.pdf)
 
 
+
+## 2009
+
+
+* [Sample Midterm (Solution)](/static/exams/cs211/2009/midtermpracticeexercises-solutions-09w.pdf)
+
+

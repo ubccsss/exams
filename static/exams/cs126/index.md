@@ -13,4 +13,8 @@ See `handin` at https://fn.lc/hw/cs126.
 
 * [Sample Final](/static/exams/cs126/2002/sampleFinal.pdf)
 
+* [Midterm (Solution)](/static/exams/cs126/2002/alt-midtermsol.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs126/2002/samplefinalsol.pdf)
+
 

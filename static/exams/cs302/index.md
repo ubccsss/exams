@@ -6,6 +6,13 @@ See `handin` at https://fn.lc/hw/cs302.
 
 
 
+## 2001
+
+
+* [Final (Solution)](/static/exams/cs302/2001/finalsol01.pdf)
+
+
+
 ## 2010
 
 
