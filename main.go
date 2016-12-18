@@ -7,18 +7,21 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 	"path"
 	"regexp"
 	"sort"
-	"strconv"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/alecthomas/units"
+	"github.com/pkg/errors"
 	"github.com/russross/blackfriday"
 )
 
@@ -92,7 +95,7 @@ func (db Database) Generate() error {
 
 	l := level{}
 	for _, c := range db.Courses {
-		cl := c.Code[2:3] + "00"
+		cl := strings.ToUpper(c.Code[0:3] + "00")
 		cs, ok := l[cl]
 		if !ok {
 			cs = courses{}
@@ -136,20 +139,46 @@ type CourseYear struct {
 
 // File ...
 type File struct {
-	Name  string
-	Path  string
-	Hash  string
-	Score float64
-	Term  string
+	Name   string
+	Path   string
+	Source string
+	Hash   string
+	Score  float64
+	Term   string
 }
 
+func (f *File) reader() (io.ReadCloser, error) {
+	var source io.ReadCloser
+	if len(f.Path) > 0 {
+		var err error
+		source, err = os.Open(f.Path)
+		if err != nil {
+			return nil, err
+		}
+	} else if len(f.Source) > 0 {
+		req, err := http.Get(f.Source)
+		if err != nil {
+			return nil, err
+		}
+		source = req.Body
+	} else {
+		return nil, errors.Errorf("No source or path for %+v", f)
+	}
+	return source, nil
+}
+
+var maxFileSize = int64(10 * units.MB)
+
 func (f *File) hash() error {
-	bytes, err := ioutil.ReadFile(f.Path)
+	hasher := sha1.New()
+	source, err := f.reader()
 	if err != nil {
 		return err
 	}
-	hasher := sha1.New()
-	hasher.Write(bytes)
+	defer source.Close()
+	if _, err := io.Copy(hasher, io.LimitReader(source, maxFileSize)); err != nil {
+		return err
+	}
 	f.Hash = hex.EncodeToString(hasher.Sum(nil))
 	return nil
 }
@@ -193,11 +222,42 @@ func (p FileSlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
 // Database ...
 type Database struct {
-	Courses        map[string]*Course
-	PotentialFiles []*File
+	Courses            map[string]*Course
+	PotentialFiles     []*File
+	UnprocessedSources []*File
+	SourceHashes       map[string]string
 }
 
-func (db *Database) addFile(course string, year int, term, name, path string) error {
+var unprocessedSourcesMu sync.Mutex
+
+func unprocessedSourceWorker() {
+	for {
+		if len(db.UnprocessedSources) == 0 {
+			time.Sleep(1 * time.Second)
+			continue
+		}
+
+		var f *File
+		unprocessedSourcesMu.Lock()
+		if len(db.UnprocessedSources) > 0 {
+			f = db.UnprocessedSources[len(db.UnprocessedSources)-1]
+			db.UnprocessedSources = db.UnprocessedSources[:len(db.UnprocessedSources)-1]
+		}
+		unprocessedSourcesMu.Unlock()
+
+		if f == nil {
+			continue
+		}
+
+		if err := f.hash(); err != nil {
+			log.Printf("error processing source: %+v: %s", f, err)
+		}
+
+		db.addPotentialFiles(os.Stderr, []*File{f})
+	}
+}
+
+func (db *Database) addFile(course string, year int, term, name, path, source string) error {
 	if _, ok := db.Courses[course]; !ok {
 		db.Courses[course] = &Course{Code: course, Years: map[int]*CourseYear{}}
 	}
@@ -212,11 +272,16 @@ func (db *Database) addFile(course string, year int, term, name, path string) er
 	for _, file := range courseYear.Files {
 		if file.Path == path {
 			file.Name = name
+			file.Source = source
 			return nil
 		}
 	}
 
-	courseYear.Files = append(courseYear.Files, &File{Name: name, Path: path})
+	f := &File{Name: name, Path: path, Source: source}
+	if err := f.hash(); err != nil {
+		return err
+	}
+	courseYear.Files = append(courseYear.Files, f)
 	return nil
 }
 
@@ -250,11 +315,13 @@ func (db *Database) hashes() map[string]struct{} {
 	return m
 }
 
-func (db *Database) addPotentialFiles(w http.ResponseWriter, files []*File) {
+func (db *Database) addPotentialFiles(w io.Writer, files []*File) {
 	m := db.hashes()
+	var unhashed []*File
 	for _, f := range files {
 		if len(f.Hash) == 0 {
 			fmt.Fprintf(w, "missing Hash for %+v, skipping...\n", f)
+			unhashed = append(unhashed, f)
 			continue
 		}
 
@@ -266,6 +333,9 @@ func (db *Database) addPotentialFiles(w http.ResponseWriter, files []*File) {
 		m[f.Hash] = struct{}{}
 		db.PotentialFiles = append(db.PotentialFiles, f)
 	}
+	unprocessedSourcesMu.Lock()
+	defer unprocessedSourcesMu.Unlock()
+	db.UnprocessedSources = append(db.UnprocessedSources, unhashed...)
 }
 
 const staticDir = "static"
@@ -312,6 +382,7 @@ func createDirs() error {
 }
 
 func verifyConsistency() error {
+	log.Println("Verifying consistency of data and doing house keeping...")
 	for _, course := range db.Courses {
 		for _, year := range course.Years {
 			for _, f := range year.Files {
@@ -346,48 +417,6 @@ func saveAndGenerate() error {
 	return nil
 }
 
-func renderTemplateExam(title, content string) string {
-	title = strings.ToUpper(title)
-	return renderTemplate(title, fmt.Sprintf(
-		`<ol class="breadcrumb"><li><a href="..">Exams Database</a></li>
-		<li class="active">%s</li>
-		</ol>
-		%s
-		<div id="book-navigation-1440" class="book-navigation">
-		<ul class="pager clearfix">
-		<li><a href=".." class="page-up" title="Go to parent page">up</a></li>
-		</ul>
-		</div>`, title, content))
-}
-
-func renderTemplate(title, content string) string {
-	return fmt.Sprintf(layout, title, content)
-}
-
-func fetchTemplate() (string, error) {
-	doc, err := goquery.NewDocument("https://ubccsss.org/services")
-	if err != nil {
-		return "", err
-	}
-
-	doc.Find("a[href]").Each(func(_ int, s *goquery.Selection) {
-		url := s.AttrOr("href", "")
-		if strings.HasPrefix(url, "/") {
-			s.SetAttr("href", "https://ubccsss.org"+url)
-		}
-	})
-
-	title := doc.Find("title")
-	parts := strings.Split(title.Text(), "|")
-	title.ReplaceWithHtml("<title>%s |" + parts[len(parts)-1] + "</title>")
-
-	section := doc.Find(".main-container .row > section")
-	children := section.Children()
-	children.First().ReplaceWithHtml(`%s`)
-	children.Remove()
-	return doc.Html()
-}
-
 var layout string
 
 func main() {
@@ -402,242 +431,44 @@ func main() {
 	layout = wrapperTemplate
 
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
-	http.HandleFunc("/admin/loadcourses", func(w http.ResponseWriter, r *http.Request) {
-		resp, err := exec.Command("ssh", "q7w9a@remote.ugrad.cs.ubc.ca", "-C", "ls /home/c").Output()
-		if err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-		parts := bytes.Split(resp, []byte("\n"))
-		courseRegex := regexp.MustCompile("^cs\\d{3}$")
-		for _, part := range parts {
-			if !courseRegex.Match(part) {
-				continue
-			}
-			course := string(part)
-			if _, ok := db.Courses[course]; ok {
-				continue
-			}
-			if db.Courses == nil {
-				db.Courses = map[string]*Course{}
-			}
-			db.Courses[course] = &Course{Code: course}
-			fmt.Fprintf(w, "Added: %s\n", course)
-		}
 
-		fmt.Fprintf(w, "Done.")
+	http.HandleFunc("/admin/generate", handleGenerate)
+	http.HandleFunc("/admin/potential", handlePotentialFileIndex)
+	http.HandleFunc("/admin/file/", handleFile)
 
-		if err := saveAndGenerate(); err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-	})
+	http.HandleFunc("/admin/ingress/deptcourses", ingressDeptCourses)
+	http.HandleFunc("/admin/ingress/deptfiles", ingressDeptFiles)
+	http.HandleFunc("/admin/ingress/ubccsss", ingressUBCCSSS)
+	http.HandleFunc("/admin/ingress/archive.org", ingressArchiveOrgFiles)
 
-	http.HandleFunc("/admin/generate", func(w http.ResponseWriter, r *http.Request) {
-		if err := saveAndGenerate(); err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-	})
-
-	http.HandleFunc("/admin/potential", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/html")
-		fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d</p>", len(db.PotentialFiles), db.processedCount())
-		fmt.Fprint(w, "<ul>")
-		for _, file := range db.PotentialFiles {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s</a></li>`, file.Hash, file.Path)
-		}
-		fmt.Fprint(w, "</ul>")
-	})
-
-	http.HandleFunc("/admin/file/", func(w http.ResponseWriter, r *http.Request) {
-		parts := strings.Split(r.URL.Path, "/")
-		hash := parts[len(parts)-1]
-		var file *File
-		var filei int
-		for i, f := range db.PotentialFiles {
-			if f.Hash == hash {
-				file = f
-				filei = i
-				break
-			}
-		}
-		if file == nil {
-			http.Error(w, "not found", 404)
-			return
-		}
-
-		if r.Method == "POST" {
-			if err := r.ParseForm(); err != nil {
-				http.Error(w, err.Error(), 400)
-				return
-			}
-			course := r.FormValue("course")
-			if len(course) == 0 {
-				http.Error(w, "must specify course", 400)
-				return
-			}
-			name := r.FormValue("name")
-			quickname := r.FormValue("quickname")
-			if len(name) > 0 && len(quickname) > 0 {
-				http.Error(w, "can't have both name and quickname", 400)
-				return
-			}
-			name += quickname
-			if len(name) == 0 {
-				http.Error(w, "must specify name", 400)
-				return
-			}
-			term := r.FormValue("term")
-			year, err := strconv.Atoi(r.FormValue("year"))
-			if err != nil {
-				http.Error(w, err.Error(), 400)
-				return
-			}
-			fetchFileAndSave(w, course, year, term, name, file.Path)
-			db.PotentialFiles = append(db.PotentialFiles[:filei], db.PotentialFiles[filei+1:]...)
-			http.Redirect(w, r, "/admin/potential", 302)
-			if err := saveAndGenerate(); err != nil {
-				http.Error(w, err.Error(), 500)
-				return
-			}
-			return
-		}
-		w.Header().Set("Content-Type", "text/html")
-		meta := struct {
-			File    *File
-			Courses map[string]*Course
-			Course  string
-			Year    string
-			Terms   []string
-			Term    string
-		}{
-			File:    file,
-			Courses: db.Courses,
-			Terms:   []string{"W1", "W2", "S"},
-		}
-
-		lowerPath := strings.ToLower(file.Path)
-		for c := range db.Courses {
-			if strings.Contains(lowerPath, c) {
-				meta.Course = c
-			}
-		}
-		meta.Year = yearRegex.FindString(lowerPath)
-
-		for _, term := range meta.Terms[:2] {
-			if strings.Contains(lowerPath, strings.ToLower(term)) {
-				meta.Term = term
-				break
-			}
-		}
-
-		if err := templates.ExecuteTemplate(w, "file.html", meta); err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-	})
-
-	http.HandleFunc("/admin/ingressdept", func(w http.ResponseWriter, r *http.Request) {
-		req, err := http.Get("https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi/")
-		if err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-		var files []*File
-		if err := json.NewDecoder(req.Body).Decode(&files); err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-		db.addPotentialFiles(w, files)
-		if err := saveAndGenerate(); err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-		fmt.Fprintf(w, "Done.")
-	})
-
-	http.HandleFunc("/admin/ubccsss", func(w http.ResponseWriter, r *http.Request) {
-		doc, err := goquery.NewDocument("https://ubccsss.org/services/exams/")
-		if err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-
-		var examPages []string
-		doc.Find("a").Each(func(_ int, s *goquery.Selection) {
-			href := s.AttrOr("href", "")
-			if strings.Contains(href, "exams/cpsc") {
-				examPages = append(examPages, "https://ubccsss.org"+href)
-			}
-		})
-
-		for _, page := range examPages {
-			courseCode := strings.ToLower("cs" + path.Base(page)[4:])
-			fmt.Fprintf(w, "Loading %s: %s ...\n", courseCode, page)
-			doc, err := goquery.NewDocument(page)
-			if err != nil {
-				http.Error(w, err.Error(), 500)
-				return
-			}
-			var year int
-			doc.Find("article.node h2, article.node a").Each(func(_ int, s *goquery.Selection) {
-				tag := s.Get(0).Data
-				switch tag {
-				case "h2":
-					text := strings.Split(s.Text(), " ")[0]
-					year, err = strconv.Atoi(text)
-					if err != nil {
-						http.Error(w, err.Error(), 500)
-						return
-					}
-				case "a":
-					href := s.AttrOr("href", "")
-					if !strings.Contains(href, "http") {
-						href = "https://ubccsss.org/" + href
-					}
-					if strings.Contains(href, "/files/") {
-						fmt.Fprintf(w, "file: %d, %s, %s\n", year, s.Text(), href)
-						fetchFileAndSave(w, courseCode, year, "", s.Text(), href)
-					}
-				}
-			})
-		}
-
-		if err := saveAndGenerate(); err != nil {
-			http.Error(w, err.Error(), 500)
-			return
-		}
-
-		fmt.Fprintf(w, "Done.")
-	})
+	// Launch 4 source workers
+	for i := 0; i < 4; i++ {
+		go unprocessedSourceWorker()
+	}
 
 	log.Println("Listening...")
 	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
 
-func fetchFileAndSave(w http.ResponseWriter, course string, year int, term, name, href string) {
+func fetchFileAndSave(course string, year int, term, name, href string) error {
 	resp, err := http.Get(href)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
+		return err
 	}
 	defer resp.Body.Close()
 	base := path.Base(href)
 	dir := fmt.Sprintf("%s/%s/%d", examsDir, course, year)
 	if err := os.MkdirAll(dir, 0755); err != nil {
-		http.Error(w, err.Error(), 500)
-		return
+		return err
 	}
 	raw, _ := ioutil.ReadAll(resp.Body)
 	file := path.Join(dir, base)
 	if _, err := os.Stat(file); !os.IsNotExist(err) {
-		http.Error(w, "file already exists!", 500)
-		return
+		return errors.New("file already exists!")
 	}
 	if err := ioutil.WriteFile(file, raw, 0755); err != nil {
-		http.Error(w, err.Error(), 500)
-		return
+		return err
 	}
-	db.addFile(course, year, term, name, file)
+	db.addFile(course, year, term, name, file, href)
+	return nil
 }

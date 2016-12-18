@@ -20,7 +20,7 @@ iframe {
 <header>
   <h1>{{ .File.Name }}</h1>
   <a href="/admin/potential">All</a> <br>
-  <a href="{{ .File.Path }}">{{ .File.Path }}</a>
+  <a href="{{ .File.Source }}">{{ .File.Source }}</a>
 </header>
 
 <article>
@@ -79,7 +79,7 @@ iframe {
       <input type="submit" value="Classify">
     </form>
   </div>
-  <iframe src="{{ .File.Path }}">
+  <iframe src="{{ .File.Source }}">
   </iframe>
 </article>
 </well>
