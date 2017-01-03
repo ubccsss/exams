@@ -24,12 +24,35 @@ import (
 	"github.com/temoto/robotstxt"
 )
 
-const userAgent = "UBC CSSS Exam Bot vpc@ubccsss.org"
-const workerCount = 8
+const (
+	userAgent   = "UBC CSSS Exam Bot vpc@ubccsss.org"
+	workerCount = 8
+)
 
-var validPostfix = []string{"/", ".html", ".htm", ".cgi", ".php"}
-
-var blacklist = []string{"//www.cs.ubc.ca/~davet/music/"}
+var (
+	seedURLs = []string{
+		"https://www.cs.ubc.ca/~schmidtm/Courses/340-F16/",
+		"http://www.cs.ubc.ca/~pcarter/",
+		"https://sites.google.com/site/ubccpsc110/",
+	}
+	archiveSearchPrefixes = []string{
+		"https://www.ugrad.cs.ubc.ca/~",
+		"https://www.cs.ubc.ca/~",
+		"https://blogs.ubc.ca/cpsc",
+	}
+	validPostfix = []string{"/", ".html", ".htm", ".cgi", ".php"}
+	blacklist    = []string{".*//www.cs.ubc.ca/~davet/music/.*"}
+	validHosts   = map[string]struct{}{
+		"www.cs.ubc.ca":       struct{}{},
+		"www.ugrad.cs.ubc.ca": struct{}{},
+		"blogs.ubc.ca":        struct{}{},
+		"sites.google.com":    struct{}{},
+	}
+	scoreRegexes = map[int][]string{
+		-1: []string{"final", "exam", "midterm", "sample", "mt", "(cs|cpsc)\\d{3}", "(20|19)\\d{2}"},
+		1:  []string{"report", "presentation", "thesis", "slide"},
+	}
+)
 
 var robotsCache = map[string]*robotstxt.Group{}
 var robotsCacheLock sync.RWMutex
@@ -66,7 +89,7 @@ func validURL(uri string) (bool, error) {
 	}
 
 	// Check valid hosts
-	if !(u.Host == "www.cs.ubc.ca" || u.Host == "www.ugrad.cs.ubc.ca") {
+	if _, ok := validHosts[u.Host]; ok {
 		return false, nil
 	}
 
@@ -81,7 +104,11 @@ func validURL(uri string) (bool, error) {
 
 	lower := strings.ToLower(uri)
 	for _, pattern := range blacklist {
-		if strings.Contains(lower, pattern) {
+		match, err := regexp.MatchString(pattern, lower)
+		if err != nil {
+			return false, err
+		}
+		if match {
 			return false, nil
 		}
 	}
@@ -150,11 +177,6 @@ func fetchURL(uri string) ([]string, string, error) {
 	hash := hex.EncodeToString(hasher.Sum(nil))
 
 	return links, hash, nil
-}
-
-var scoreRegexes = map[int][]string{
-	-1: []string{"final", "exam", "midterm", "sample", "mt", "(cs|cpsc)\\d{3}", "(20|19)\\d{2}"},
-	1:  []string{"report", "presentation", "thesis", "slide"},
 }
 
 var regexCache = map[string]*regexp.Regexp{}
@@ -424,8 +446,8 @@ func main() {
 	}()
 
 	log.Println("Fetching seed data from internet archive...")
-	urls := []string{"https://www.cs.ubc.ca/~schmidtm/Courses/340-F16/"}
-	for _, prefix := range []string{"https://www.ugrad.cs.ubc.ca/~", "https://www.cs.ubc.ca/~"} {
+	urls := seedURLs
+	for _, prefix := range archiveSearchPrefixes {
 		results := archive.SearchPrefix(prefix)
 		for result := range results {
 			urls = append(urls, result.OriginalURL)
