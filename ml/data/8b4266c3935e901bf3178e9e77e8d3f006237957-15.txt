@@ -1,0 +1,159 @@
+
+CPSC 320 Sample Midterm 2
+November 2014
+Name:
+
+Student ID:
+
+Signature:
+– You have 65 minutes to write the 5 questions on this examination.
+A total of 45 marks are available.
+– Justify all of your answers.
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11in sheet of notes, and nothing else.
+
+Question
+1
+2
+
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+Marks
+
+3
+4
+5
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her UBC card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 6
+[12] 1. Answer each question with True or False, and then justify your answer briefly.
+[2] (a) The Master theorem can be applied to the recurrence relation
+
+
+T (n) =
+
+T (bn2/3 c) + n
+Θ(1)
+
+if n ≥ 2
+if n = 1
+
+to prove that T (n) ∈ Θ(n).
+
+[2] (b) A divide and conquer algorithm always splits a problem into approximately equalsized subproblems.
+
+[2] (c) The worst-case performance for the Randomized Caching algorithm discussed in
+class is at least as good as the worst-case performance for the Least-Recently-Used
+Caching algorithm.
+
+[2] (d) Let S be a skip list with 25 keys. It is possible that every node of S, except for the
+head node and the tail node (if the implementation uses one), will have only a single
+level.
+
+[2] (e) Amortized analysis is used to obtain a tight bound on the running time of one operation on a data structure.
+
+page 3 out of 6
+[2] (f) When we use the potential method for amortized analysis, the potential of a data
+structure can only become negative after an operation has been performed if it becomes ≥ 0 during the execution of the next operation.
+
+[7] 2. In class, we proved that given the recurrence
+
+
+T (n) =
+
+aT (n/b) + f (n)
+Θ(1)
+
+if n ≥ n0
+if n < n0
+
+and a value n = bt , the function T (n) is equal to
+Θ(nlogb a ) +
+
+t−1
+X
+
+aj f (n/bj ).
+
+j=0
+
+[2] (a) Where did the term Θ(nlogb a ) come from?
+
+[2] (b) Where did the term
+
+Pt−1 j
+j
+j=0 a f (n/b ) come from?
+
+[3] (c) How is this formula related to the three cases of the Master Theorem?
+
+page 4 out of 6
+[9] 3. Prove upper and lower bounds on the function T (n) defined by
+
+
+T (n) =
+
+2T (n/2) + 8T (n/4) + n2
+1
+
+if n ≥ 4
+if n ≤ 3
+
+Your grade will depend on the quality of the bound you provide (so, proving that T (n) ∈
+Ω(1) and T (n) ∈ O(100n ), while true, will not give you many marks).
+
+page 5 out of 6
+[13] 4. The Hidden Surface Removal problem occurs in Computer Graphics and can be described
+as follows: you are given a collection of coloured objects, which are projected onto a screen
+to produce an image. The objects are at different distances (depth) from the screen; objects
+that are closer cover those that are further back. The problem is to decide how to color each
+point of the screen.
+In this question we consider the one-dimensional version of the problem: each object is
+an interval on the x-axis, with a depth and a color, and can be represented by a 4-tuple
+(xl , xr , d, c). For instance, (0, 4, 3, blue) is an interval that goes from x = 0 to x = 4, has
+depth 3, and color blue.
+[10] a. Describe an efficient divide-and-conquer algorithm that takes as input a collection
+of n shapes, and returns a list of 4-tuples (xl , xr , d, c) where such a 4-tuple indicates
+that the points from x = xl to x = xr should be colored c (and the line segment
+with that color is at depth d). For instance, given the shapes
+(2, 5, 1, red), (9, 10, 6, red), (0, 4, 3, blue), (1, 8, 5, green)
+
+your algorithm should return
+(0, 2, 3, blue), (2, 5, 1, red), (5, 8, 5, green), (9, 10, 6, red).
+
+(the vertical bars were added as separators between colors because the exam is
+printed in black and white). More space is available for your answer on the next
+page.
+
+page 6 out of 6
+
+[3] b. Analyze the running time of your algorithm.
+
+[4] 5. Mr. Isulo, an alien computer scientist, decided he does not like the definition of good pivot
+used in the expected time analysis of the RandomizedQuickSelect algorithm. Instead,
+he decides to call a pivot good if bn/10c ≤ leftsize ≤ n − 1 − bn/10c. That is,
+good pivots are any pivot that ends up in the middle 80% of the array after the call to
+RandomizedPartition.
+What recurrence relation would Mr. Isulo get for the expected time E(T (n)) of algorithm
+RandomizedQuickSelect using his definition of good pivot?
+

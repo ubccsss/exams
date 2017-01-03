@@ -1,0 +1,92 @@
+
+CPSC 320 Sample Midterm 1
+October 2011
+Name:
+Signature:
+
+Student ID:
+
+– You have 60 minutes to write the 5 questions on this examination.
+A total of 45 marks are available.
+– Justify all of your answers.
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11in sheet of notes, and nothing else.
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+Question
+
+Marks
+
+1
+2
+3
+4
+5
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her library card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 5
+[12] 1. Short Answers
+[3] a. Why is the interval scheduling algorithm we discussed in class greedy?
+
+[3] b. When we use decision trees to prove a lower bound, how do determine the number
+of leaves of the decision tree for a given input size n?
+
+[3] c. Suppose that we want to use decision trees to prove a lower bound on the worst-case
+running time of every algorithm that solves a problem. Can it be done? If not, what
+restrictions should we put on the class of algorithms about which we are proving this
+lower bound?
+
+[3] d. Joel User gives you a proof that every comparison sort requires in ω(n log n) comparisons in the worst-case. Should you believe Joel’s proof? Explain why or why
+not.
+
+page 3 out of 5
+[5] 2. Prove that if a, b, c are three functions from N into R+ such that a ∈ O(c), and b ∈ O(c),
+then the function d defined by d(n) = 2a(n) + 5b(n) is in O(c).
+
+[5] 3. Prove that for every two positive integers a, b, if a 6= b then an ∈
+/ Θ(bn ).
+
+page 4 out of 5
+[8] 4. Huffman’s algorithm
+[3] a. In our proof of correctness of Huffman’s algorithm, we stated the following claim:
+If x and y are two letters with the lowest frequency, T is a prefix tree in
+which x and y are siblings on the tree’s lowest level, and T ′ is the prefix
+tree obtained by deleting x and y, and assigning frequency f (x) + f (y) to
+the parent of x and y, then length(T ′ ) = length(T ) − (f (x) + f (y)).
+Recall that T ′ is a prefix tree for the string which is identical to the input string,
+except that all occurrences of x and y have been replaced by a new letter w.
+How does this claim relate to the algorithm we discussed in class?
+
+[5] b. What prefix tree would be produced by Huffman’s algorithm for the string “A deaf
+bee faced a faded facade”? Ignore the spaces between words.
+
+page 5 out of 5
+[15] 5. An explorer named Ha’DIbaH wishes to cross a desert carrying only a single water bottle.
+He has a map that marks all the watering holes along the way, and can walk k kilometers on
+one bottle of water.
+[8] a. Design an efficient algorithm for determining where Ha’DIbaH should refill his bottle
+in order to make as few stops as possible.
+
+[7] b. Sketch a proof that your algorithm his correct. Hint: the complete proof would look
+a lot like one of the proofs we studied in class.
+

@@ -1,0 +1,213 @@
+
+Author: Neil Ernst
+THE UNIVERSITY OF BRITISH COLUMBIA
+CPSC 310: MIDTERM #1
+2009/2010 WINTER TERM 1
+TH
+OCTOBER 14 , 2009
+Name: ____________________________________
+
+Student #: _________________
+
+Signature: _________________________________
+
+Notes about this examination
+1. You have 45 minutes to write this examination.
+2. No notes, books, or any type of electronic
+equipment is allowed including cell phones and
+calculators.
+3. Good luck!
+
+1.
+2.
+3.
+4.
+
+5.
+6.
+
+Marks
+Multiple Choice
+True/False
+11
+12
+13
+Total
+
+Max
+10
+10
+6
+6
+8
+40
+
+Rules Governing Formal Examinations
+Each candidate must be prepared to produce, upon request, a UBCcard for identification.
+Candidates are not permitted to ask questions of the invigilators, except in cases of
+supposed errors or ambiguities in examination questions.
+No candidate shall be permitted to enter the examination room after the expiration of onehalf hour from the scheduled starting time, or to leave during the first half hour of the
+examination.
+Candidates suspected of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+• Having at the place of writing any books, papers or memoranda, calculators,
+computers, sound or image players/recorders/transmitters (including telephones),
+or other memory aid devices, other than those authorized by the examiners.
+• Speaking or communicating with other candidates.
+• Purposely exposing written papers to the view of other candidates. The plea of
+accident or forgetfulness shall not be received.
+Candidates must not destroy or mutilate any examination material; must hand in all
+examination papers; and must not take any examination material from the examination
+room without permission of the invigilator.
+Candidates must follow any additional examination rules or directions communicated by
+the instructor or invigilator.
+
+Page 2 of 7
+
+Multiple Choice
+Choose the best answer for each question and provide a brief justification of your answer.
+
+1. Circle all of the functional requirements below. [2 marks]
+a. The user must be able to bookmark a search result.
+b. The user must be able to choose the location of the exported text file when she exports her
+bookmarks.
+
+c.
+d.
+e.
+f.
+g.
+
+The system must be developed in Java.
+The user must be able to manually enter a new search.
+
+The system must display an error message if an internet connection is not available.
+The help system must be available in English and French.
+The system must be available 99.9% of the time.
+
+2. The question “When do you need the software project to be completed?” from a
+requirements interview is: [2 marks]
+a.
+b.
+c.
+d.
+
+Closed-ended and context-free
+Closed-ended but not context-free
+Open-ended and context-free
+Open-ended but not context-free
+
+3. Which design pattern provides a single point of communication between logically
+connected objects? [2 marks]
+a. Observer
+b. Composite
+c. Singleton
+d. Mediator
+e. Façade
+f. Decorator
+g. none of the above
+
+Page 3 of 7
+4. Which design principle is violated in the following code snippet? [2 marks]
+public class ViewManager
+{
+// rest of the code omitted
+public void updateMainView()
+{
+IViewPart mView;
+try {
+mView = getWorkbench().getActiveWindow().getActivePage().showView("main.ui");
+mView.setFocus();
+} catch (PartInitException e) {
+e.printStackTrace();
+}
+}
+}
+
+a.
+b.
+c.
+d.
+e.
+f.
+
+Open/Closed Principle
+Law of Demeter
+Liskov Substitution Principle
+High Cohesion
+Low Coupling
+None of the above
+
+5. Which of the following is not a benefit of agile development? [2 marks]
+a. ability to react to changing requirements and environments
+b. progress can be seen quickly because of the focus on continuous integration and
+working software
+c. time to complete the project is less than if you used another lifecycle
+d. none of the above
+
+Page 4 of 7
+
+True/False
+For each true/false question below provide a brief justification of your answer.
+6. A Software Requirements Specification fully documents how a software system will be
+built. [2 marks]
+
+7. The design principles we learned in class are only relevant if you are using the waterfall
+lifecycle. [2 marks]
+
+8. A disadvantage of the waterfall lifecycle is that it’s difficult to get the requirements
+correct, and the rest of the project will be built on the (potentially faulty) requirements.
+The staged delivery model does not have this disadvantage. [2 marks]
+
+9. The intent of the Abstract Factory design pattern is to allow the creation of different types
+of related objects without having to rely on the concrete classes. [2 marks]
+
+10. Scrum dictates that development teams must pair program and use test-driven
+development. [2 marks]
+
+Page 5 of 7
+
+Short Answer
+11. In class we discussed many techniques for eliciting requirements including interviews,
+questionnaires, and ethnographic analysis. Fill in the following table about each of those
+techniques? (Point form answers are fine) [6 marks]
+Example situation in
+Which stakeholders
+which the technique is would you involve?
+appropriate
+(in your example)
+Interviews
+
+Questionnaires
+
+Ethnographic
+analysis
+
+Advantage of the
+technique
+
+Disadvantage of the
+technique
+
+Page 6 of 7
+12. Use one of the design patterns from the appendix to draw a class diagram for the
+following system. You should not use the stereotype names (ie, the class names shown in
+the UML diagram in the appendix). Instead, choose class names that are appropriate for
+this situation. You only need to include the classes that demonstrate how the design
+pattern is used.
+You are creating new user interface widgets (eg, text boxes, windows, buttons, and
+panels to contain other widgets). Some of the widgets will need to scroll horizontally,
+some will need to scroll vertically, and some will need both. [6 marks]
+
+Page 7 of 7
+13. Imagine that you are working in a 7-person, professional development team that has
+historically used the waterfall lifecycle. Your team is about to start working on a new
+project with somewhat unknown requirements.
+a. What would you say to your technical team lead to convince him or her that you
+should use an agile methodology? [4 marks]
+
+b. Even after hearing your arguments (from part a), your technical team lead is hesitant to
+completely adopt an agile methodology (eg, XP or Scrum) but he/she is willing to try
+some agile practices. Which two agile practices would you suggest your team adopt
+first and why? [4 marks]
+

@@ -1,0 +1,340 @@
+
+CPSC 121 Midterm 1
+Tuesday, October 15th, 2013
+[1] 1. Do you want your tutorial attendance to count towards your grade?
+If you answered ‘YES’, then 1% of your final course mark will be based on your tutorial attendance (# attended divided by total number minus 2, but no more than full credit). Online
+quizzes will be worth 5%. If you answered ‘NO’, then tutorial attendance is worth nothing
+in your mark, and online quizzes count for 6% of your final course mark.
+[6] 2. Short Answers
+[3] a. Recall the arithmetic and logic unit from lab #4:
+
+This circuit can not compute the OR of its two inputs (i.e. aluA ∨ aluB). Describe
+briefly the changes you would need to make to the circuit to add the OR function to
+it. You are not allowed to remove one of the functions it currently computes to make
+room for OR.
+Solution : You would need to (1) add an OR gate connected to the inputs aluA and
+aluB, (2) modify the two multiplexers to have 8 inputs (instead of 4) and a 3-bit
+select input (instead of a 2-bit select input), and (3) increase the width of the
+function input to 3 bits from 2.
+The modified ALU is shown below:
+
+page 2
+
+[3] b. How could you determine if the following is a valid rule of inference, knowing that
+it can not be proved by applying the rules listed on the lectures slides and/or in Epp ?
+(p → q) ∧ (r → s)
+p∨r
+∴q∨s
+Solution : You could verify that the proposition ((p → q) ∧ (r → s) ∧ (p ∨ r)) →
+(q ∨ s) is a tautology using a truth table.
+[9] 3. Consider the following circuit:
+
+[3] a. Write an unsimplified boolean algebraic expression for the output of this circuit.
+Solution : The unsimplified boolean expression corresponding to the circuit is
+x : ∼ (∼ (p ∧ ∼ q) ∧ ∼ (q ∧ r)) ∨ r
+[4] b. Using a sequence of logical equivalences, simplify this expression as much as possible.
+Solution :
+x ≡ (∼∼ (p ∧ ∼ q) ∨ ∼∼ (q ∧ r)) ∨ r
+
+by DeMorgan’s law
+
+≡ ((p ∧ ∼ q) ∨ (q ∧ r)) ∨ r
+
+by the double negative law
+
+≡ (p ∧ ∼ q) ∨ ((q ∧ r) ∨ r)
+
+by the associative law
+
+≡ (p ∧ ∼ q) ∨ r
+
+by the absorption law
+
+page 3
+[2] c. Finally, draw the circuit corresponding to the simplified expression. Hint: you should
+only need three gates.
+Solution :
+
+[11] 4. A political sciences major is studying the political deeds (and misdeeds) before an election
+in the country of Borduria. He learns the following facts:
+• Either Syldavia is a much nicer country to visit than Borduria, or the bordurian secret
+police planted stolen art in someone’s bedroom.
+• If colonel Sponsz had a rival thrown in jail on a fake charge, then the bordurian secret
+police planted stolen art in someone’s bedroom.
+• Marshal Pleksy-gladz is proud of his facial hair, and either colonel Sponsz had a rival
+thrown in jail on a fake charge or general Tapioca likes bananas.
+• If Boris is a friend of the king of Syldavia, then colonel Sponsz did not have a rival
+thrown in jail on a fake charge and general Tapioca does not like bananas.
+• If Syldavia is not a much nicer country to visit than Borduria, then either Boris is a
+friend of the king of Syldavia or colonel Sponsz did not have a rival thrown in jail on
+a fake charge.
+• Either colonel Sponsz had a rival thrown in jail on a fake charge or Boris is a friend of
+the king of Syldavia.
+Note: Syldavia is a country that borders Borduria.
+[3] (a) Rewrite each of these statements using propositional logic. Make sure to define the
+propositions you are using (that is, state something like: “s: Syldavia is a much
+nicer country to visit than Borduria.’ before writing the proposition ∼s). You can
+abbreviate these (e.g. “s: Syldavia is a . . . Borduria”) if you wish.
+Solution : We will use the following propositions (I have ordered them alphabetically, but there was no need for you to do that):
+b
+c
+g
+m
+p
+s
+
+:
+:
+:
+:
+:
+:
+
+Boris is a friend of the king of Syldavia.
+Colonel Sponsz had a rival thrown in jail on a fake charge.
+General Tapioca likes bananas.
+Marshal Pleksy-gladz is proud of his facial hair.
+The bordurian secret police planted stolen art in someone’s bedroom.
+Syldavia is a much nicer country to visit than Borduria.
+
+page 4
+Given that, the statements can be rewritten as:
+1. s ∨ p
+2. c → p
+3. m ∧ (c ∨ g)
+4. b → (∼ c ∧ ∼ g)
+5. ∼ s → (b ∨ ∼ c)
+6. c ∨ b
+[8] (b) Using your answer from part (a), known logical equivalences, and the rules of inference, prove that Syldavia is a much nicer country to visit than Borduria (note: there
+is additional space at the top of the next page).
+Solution :
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+
+Here is one possible proof:
+c∨g
+specialization from 3.
+∼∼ (c ∨ g)
+double negative law from 7.
+∼ (∼ c ∧ ∼ g)
+De Morgan’s law from 8.
+∼b
+modus tollens from 4 and 9.
+c
+elimination from 6 and 10.
+∼b ∧ c
+conjunction from 10 and 11.
+∼∼ (∼ b ∧ c)
+double negative law from 12.
+∼ (∼∼ b∨ ∼ c) De Morgan’s law from 13.
+∼ (b ∨ ∼ c)
+double negative law from 14.
+∼∼ s
+modus tollens from 5 and 15.
+s
+double negative law from 16.
+
+page 5
+[6] 5. The Ant-el 9099 CPU uses 9 bit integers and represents signed integers using two’s complement.
+[2] a. What sequence of bits would the Ant-el 9099 CPU use to represent
+the integer −215? Hint: 215 = 128 + 64 + 16 + 4 + 2 + 1.
+Solution : Since 21510 = 0110101112 , it follows that −21510 =
+1001010002 + 1 = 100101001.
+[2] b. The Ant-el then adds −80 to your answer from part (a). Knowing
+that −8010 = 1101100002 , what will be the decimal value of the
+sum ?
+Solution : The sum is 100101001 + 110110000 = 011011001 in
+binary, which is 128 + 64 + 16 + 8 + 1 = 217.
+[2] c. Why is the sum of these two negative integers on the Ant-el 9099
+positive?
+Solution : It is negative because −215 − 80 = −295, which is
+outside the range of values that can be represented with a 9-bit
+signed integer (−256 . . . 255).
+[6] 6. Given the following definitions:
+• P : the set of people.
+• C: the set of the kinds of creatures.
+• Likes(x, y): person x likes creature y.
+• AfraidOf(x, y): person x is afraid of creature y.
+translate each of the following English statements into predicate logic. For instance, the
+statement “Paul likes dogs” would be translated as Likes(P aul, dogs).
+[3] a. One or more people are afraid of ghosts and witches, but are not afraid of (and like)
+black cats.
+Solution : ∃p ∈ P, AfraidOf(p, ghosts) ∧ AfraidOf(p, witches) ∧ ∼ AfraidOf(p, black cats)∧
+Likes(p, black cats).
+[3] b. People do not like creatures they are afraid of.
+Solution : ∀p ∈ P, ∀c ∈ C, Afraid(p, c) →∼ Likes(p, c)
+
+page 6
+[3] 7. Using the same definitions as in the previous question, translate
+∀p ∈ P, ∀q ∈ P, ∃c ∈ C, Likes(p, c) ∧ Likes(q, c)
+into English.
+Solution : Any two people have a creature that they both like in common.
+[8] 8. Design a circuit that takes as input a four bit unsigned integer b3 b2 b1 b0 and outputs the
+integer part of its square root as a two bit unsigned integer x1 x0 . For instance, if the input
+was 4, then the output would be 2, and if the input was 8 then the output would also be 2.
+Hint: think about the outputs individually; your circuit should not attempt to “compute” the
+square root mathematically!
+Solution : We start by writing out the truth table for the circuit:
+Input
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+b3
+0
+0
+0
+0
+0
+0
+0
+0
+1
+1
+1
+1
+1
+1
+1
+1
+
+b2
+0
+0
+0
+0
+1
+1
+1
+1
+0
+0
+0
+0
+1
+1
+1
+1
+
+b1
+0
+0
+1
+1
+0
+0
+1
+1
+0
+0
+1
+1
+0
+0
+1
+1
+
+b0
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+0
+1
+
+Output
+0
+1
+1
+1
+2
+2
+2
+2
+2
+3
+3
+3
+3
+3
+3
+3
+
+x1
+0
+0
+0
+0
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+
+x0
+0
+1
+1
+1
+0
+0
+0
+0
+0
+1
+1
+1
+1
+1
+1
+1
+
+We can then observe the following patterns:
+• Output x1 is 1 whenever the input is greater than or equal to 4. That is, x1 is 1 when
+either b3 is 1, or b2 is 1 (or both).
+• Output x0 is 1 when the input is either less than 4 (but not 0), or larger than 8. The
+first condition can be written as ∼ b3 ∧ ∼ b2 ∧ (b1 ∨ b0 ), while the second condition
+can be expressed as b3 ∧ (b2 ∨ b1 ∨ b0 ).
+These give us the following circuit:
+
+page 7
+

@@ -1,0 +1,118 @@
+
+CPSC 426
+
+Midterm Exam
+
+Name:
+
+October 28, 2011
+
+Student ID:
+
+1) Why is the frame rate for film different from the rate at which it’s projected?
+Film runs at 24fps, which is enough to convince viewers of smooth motion: faster would be an unnecessary expense. However,
+flashing frames with a projector at 24fps is too slow for flicker fusion, especially in peripheral vision, so it is projected at 48fps
+(each frame shown twice) to avoid apparent flicker.
+
+2) Why is it difficult to convincingly integrate stop-motion animation into real footage?
+In stop-motion every frame is a separate photograph of a still scene, and thus doesn’t show motion blur. Real footage of moving
+scenes has motion blur: this is very apparent when combining the two.
+
+3) Write down the lerp at time t between control points (2, f0 ) and (10, f1 ).
+
+f (t) =
+
+10 − t
+8
+
+
+
+
+f0 +
+
+t−2
+8
+
+
+f1
+
+4) Write down a formula for the i’th Bernstein basis polynomial of degree n.
+Bi,n (s) =
+
+n
+i
+
+(1 − s)n−i si
+
+5) Why does a Forward Kinematic skeleton have to be structured as a tree (or forest) instead of a more
+general directed graph?
+Every node’s frame must be related by a joint transformation to the frame of a unique parent node (or directly to the world
+space, with no parent): if there was more than one parent, the two joints could be in conflict leading to an unacceptable
+ambiguity. This is equivalent to requiring the graph be a tree or forest.
+
+6) How could you model the joint connecting an eyeball’s frame to the head’s frame, and in particular,
+how many DOFs do you need?
+A reasonable model has two rotational DOF: fixing the centre of the eyeball to a constant position within the head and allowing
+rotation about the x axis (up-down) and y axis (left-right).
+
+7) Give the details on performing linear blend skinning for a mesh vertex i with rest position p~ik with
+respect to bone k, blend weight wik for bone k, and transformation T W ←k from bone k to world space,
+for k = 1, . . . n.
+Each bone provides a guess on where it thinks the vertex should be based on its own frame: T W ←k p~ik . The actual position of
+the vertex is a weighted average of the bones’ guesses using the blend weights:
+p~iW =
+
+n
+X
+
+
+
+wik T W ←k p~ik
+
+k=1
+
+8) Suggest a context where blend shapes would be more useful than linear blend skinning.
+Facial expressions. The face has almost no natural bones, no natural hierarchy, and instead is a complex web of interconnecting
+muscles attached to the skull, each other, and the skin — so FK and linear blend skinning is a bad fit. Blend shapes are much
+more intuitive for the artist.
+
+9) Define and describe how matchmove and inverse kinematics are related.
+Matchmove: solving for the transformation between world space and camera space given constraints on where markers have
+to lie.
+page 1
+
+(out of 2)
+
+CPSC 426
+
+Midterm Exam
+
+Name:
+
+October 28, 2011
+
+Student ID:
+
+Inverse Kinematics: solving for the transformations between bones in a skeleton given constraints on where end-effectors have
+to lie.
+Both are inverse problems, solving for transformations given geometric constraints on the transformations, and may use the
+same optimization methods.
+
+10) Why is the problem minx,y (x − y − 1)2 (solve for x and y) ill-posed, and how could you make it
+well-posed?
+There are infinitely many solutions: any pair (x, y) where x = y + 1 achieves the minimum value of 0. A well-posed problem
+must have a unique solution instead. This could be regularized to make it well-posed, for example adding a term that penalizes
+larger solutions:
+min(x − y − 1)2 + 10−6 (x2 + y 2 )
+x,y
+
+This has the unique solution x = 1/(2 + 10
+
+−6
+
+), y = −1/(2 + 10−6 ).
+
+page 2
+
+(out of 2)
+

@@ -1,0 +1,545 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs344/current-term/res/oldexams/cpsc344-2008w1-midterm-sample-soln.pdf
+Author: Karon MacLean
+Name:
+
+Student ID Number:
+
+Signature:
+
+CPSC 344 2008W1 Midterm Exam
+90 minutes
+SOLUTIONS + comments
+Department of Computer Science
+University of British Columbia
+K. MacLean
+Exam Instructions (read carefully):
+1. Sign this page in the space provided to indicate your
+agreement with these instructions. (You must sign to
+write the exam.)
+2. Continue reading these instructions, but do not open
+the exam booklet until you are told to do so by a
+proctor.
+3. Print your Name and Student ID at the top of each
+page of the exam before you start working.
+4. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+5. The exam is closed book. There are no aids
+permitted (this includes calculators).
+6. Interpret the exam questions as written. When in
+doubt, take a strict, literal interpretation of the
+question.
+7. You have 90 minutes in which to work (~1
+min/mark). Budget your time wisely.
+
+Question
+
+Points
+
+1
+
+12
+
+2
+
+12
+
+3
+
+12
+
+4
+
+16
+
+5
+
+8
+
+6
+
+22
+
+Total
+
+82
+
+Received
+
+10 pts on
+distributed exam
+
+80 pts on
+distributed exam
+
+8. No one will be permitted to leave the exam room
+during the last ten minutes of the exam.
+
+CPSC 344 2008-09 T1
+
+1 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #1 [12 points total]: True/False
+For each of the 6 statements below, indicate whether the statement is true or false by circling either True
+or False. Briefly explain your T/F response in one or two sentences, and illustrate with an example where
+appropriate. [2 pts each; 1 pt for T/F + 1 pt for explanation] explanation: full credit only for very good
+ones
+(a) Statement: In HCI, we refer to “human error” as a “myth” because in fact, people never make
+mistakes.
+True
+
+False
+
+Explain:
+False. People do make mistakes - all the time. The question is WHY – it’s often because the interface was
+not designed with their abilities and context in mind, and a better design could have avoided them. In
+extreme cases, the interface requires humans to do something that’s physically impossible for them.
+Calling it “human error” lays responsibility entirely on the user, when this may be unrealistic.
+
+(b) Statement: Contrary to how it may seem, the mental visual image we hold of a scene is constructed
+gradually, with attention determining what goes into the image.
+True
+
+False
+
+Explain:
+True. The “parallel” camera metaphor is an inaccurate, even though it seems right. Our focal point is
+always moving, update is selective and guided by attention. This is how we can visually miss so much.
+(must reference “how it seems” in explanation).
+
+(c) Statement: The secretary who processes all the expense reports filed by faculty and students in a
+department is an object of the task of expense report processing in that department.
+True
+
+False
+
+Explain:
+True. While we don’t like to refer to people as objects, in this case the secretary is a resource or “task
+object” because the task depends on her special skills, job description and/or access privileges
+
+CPSC 344 2008-09 T1
+
+2 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+(d) Statement: Statement: The gulfs of execution and evaluation (Norman) are part of a model that is
+useful for understanding (in particular) expert, rather than novice, interface use.
+True
+
+False
+
+Explain:
+False. Norman’s model of Goal-Oriented Action is focused on exploratory use; it is not going to be that
+applicable to expert use. 0 pts for explanation of “Applies to all users” (implication: equally applicable
+to all).
+
+(e) Statement: As designers, we use evaluation tools aimed at understanding a user’s mental model of an
+interaction, so we can then modify the user’s mental model when we see it is incorrect.
+True
+
+False
+
+Explain:
+False. Designers can influence user’s mental models only indirectly; we only have direct control over the
+system image.
+
+(f) Statement: One way a designer can build the affordances of an interaction is by using constraints.
+True
+
+False
+
+Explain:
+True. Visible constraints are a way of revealing affordances, because they highlight the “negative”
+space of what is not possible; or said another way, they indicate (helpfully) limits on what is possible. Of
+course, this is true only if the constraints are perceivable to the user as he/she assesses the interface and
+forms action goals. 0 pts for just giving an example; an explanation was also required.
+
+CPSC 344 2008-09 T1
+
+3 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #2 [12 points total]: Design Concepts
+A 5-year-old child (indicated by the cartoon
+figure in the figure) encounters the structure
+shown in the photograph on left side of figure,
+in the middle of a park. He has not seen
+anything like it before.
+(You can ignore the bubble gum in the child’s
+hair, and just focus on the confused expression
+on his face ).
+The structure’s height relative to the child’s
+size is as indicated in the figure. No other
+children are around.
+Four design concepts are listed below. For
+each, describe how one aspect of the structure
+or situation which is referenced by this
+concept could influence, or conversely fail to
+influence this child as he decides whether,
+why and how to interact with the structure.
+[up to 3 pts per concept]
+(a) Affordance:
+FOR ALL ANSWERS: full credit only for excellent answers.
+(a): Many possible good answers; it was easier to provide an excellent answer by offering multiple
+examples. E.g.
+• bars at the arm/shoulder height are about the right height for pulling up and holding onto
+• the platform at knee height suggests climbing onto (sitting: just 1 pt. legs would drag!)
+• roundness (might) suggest spinning
+• However, the bars don’t have handholds, so the grasping part might be unclear
+(b) Feedback:
+When he climbs onto it, it moves easily. Leaning in and out makes it spin faster and slower. If these
+movements are enjoyable, this helps him learn how to play with it, without having to be shown or told.
+For full marks, needed to include how the user utilized the feedback (e.g. enjoyable motion -> play more)
+(c) Transfer:
+Since he hasn’t seen this before, there might not be transfer; also, he doesn’t get to watch what other
+children do with it. (Answers which suggest he has seen spinning things in other domains work).
+An answer of “no transfer occurred” needed to be backed up with rationale such as above.
+(d) Individual differences:
+The structure is oriented towards his height. If it were smaller and taller relative to his size, the same
+actions might not be clear to him. For full marks, needed to provide some elaboration.
+CPSC 344 2008-09 T1
+
+4 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #3 [12 points total]: Mental Models
+Contrast structural versus functional mental models:
+(a) Explain the difference between structural and functional mental models [2 pts]:
+A structural model presents an image of WHAT the system is; a functional (action-based) model describes
+HOW it is used.
+For each model, 1 point if the given definition matches the meaning of the sample solution (what the
+system is; how its components are laid out and are interrelated; etc.)
+• structural: not sufficient to only say "how the system works", as this leaves certain structural aspects
+unclear (-1/2)
+• structural: not sufficient to only say "what the system looks like", as this is a superficial "map"
+definition (-1/2)
+• structural: incorrect (0) if it is implied that the model describes use (this is a functional model)
+• functional: must describe that it is action-based, provides a step-by-step flow, etc. for full marks
+• -1/2 in all cases for erroneous extraneous information
+(b) State one good and one bad aspect of EACH [2 pt each]:
+Structural:
+
+Functional:
+Structural: For example,
+- User may need additional knowledge to use
+- may be harder to use generally.
++ often more powerful or flexible (more global knowledge
+Functional: For example,
++ easier to use, does not assume global/system knowledge
+- not helpful for problem-solving or dealing with unexpected
+Each advantage/disadvantage marked out of 1. Full marks for clear identification.
+•
+
+complete reversal of advantages/disadvantages between structural and functional are acceptable if
+they are explained (i.e., "harder vs. easier" requires clarification)
+
+•
+
+1/2 marks for vague answers that are not given in the context of the models (the question asks for a
+good and bad aspect of each)
+
+CPSC 344 2008-09 T1
+
+5 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+(c) Give one example of EACH. Minimal points for repeating examples given in class [3 pts each]:
+Structural:
+
+Functional:
+Examples given in class are listed here. To get full marks, example must be spot-on and clearly
+explained. Max 1 point per example if repeat class examples.
+Structural: road map (shows a particular type of information, but isn’t customized to your particular use
+of the information. You can use it in many ways; it gives you a global view of the information.
+Functional: Google directions (step-by-step): great when everything’s there; need more when there’s a
+roadblock. If something goes wrong or you change your plan, they do not help your error recovery.
+[Many kinds of step-by-step manuals or ‘wizards’ would be acceptable answer here.]
+Full marks if a clear example is given with a correct explanation of what makes it structural/functional
+•
+
+1/3 given for repetitions from lecture (maps, directions)
+
+•
+
+structural: 1/3 for identifying the "overview" aspect of the example (e.g., layout of things in my
+kitchen); explanation about how this guides/drives the model required for 3 points
+
+•
+
+functional: full marks for accurate examples if they mention guidance, step-by-step progress, and
+roadblocks to troubleshooting or some other clear reason that the example is functional (or if they
+mention this in an answer to a different part of the question)
+
+•
+
+-1 in all cases for erroneous extraneous information
+
+CPSC 344 2008-09 T1
+
+6 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #4 [16 points total]: Discussion Questions
+(a) Subjective evaluation [5 pts total]:
+Give one example of a subjective evaluation metric [1 pt]:
+Answer must be subjective (half) and metric (half). Half marks for orderable, multi-choice questions.
+Likert scale is ideal (e.g. “From 1-5, how much did you like Interface A?”), as it’s metric(-like) and often
+asks for subjective information (users’ opinions, feelings, etc.)
+Explain what makes it subjective [2 pts]:
+The data relies on personal experience, opinions, or attitudes, and it cannot be observed objectively. The
+data is self-reported.
+Describe a situation in which this type of data would be particularly valuable [2 pts]:
+Subjective data (one and a half) is valuable when you seek information about attitudes, interpretation of
+behavior you’ve observed, and when objective data cannot be obtained. A metric (half) would be useful
+for easily compiling and comparing the data (as it exists along a common scale/categories). Subjective
+data can be quantitative or qualitative.
+
+(b) Quantitative evaluation [5 pts total]:
+Give one example of a quantitative evaluation technique [1 pt]:
+Any technique in which data is captured in a numerical form; rated, ordered, measured (e.g.
+performance speed, # of errors). Allowed Likert, though they’re a little tricky.
+Explain what makes it quantitative [2 pts]:
+It is quantitative because data can be described on a numerical scale; it’s more easily compared or
+compiled.
+Describe a situation in which this type of technique would be particularly valuable [2 pts]:
+Quantitative data is valuable for comparing data from different situations (e.g. how do you know one
+system is better than another), compiling data, and for analysis and summary statistics. Again,
+quantitative data can be subjective or objective.
+
+CPSC 344 2008-09 T1
+
+7 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+(c) Describe cognitive walkthrough by describing its following aspects: [6 pts total]
+Consists of [2 pts]:
+Goals [2 pts]:
+When in the design process it is most useful [2 pts]:
+Consists of: description/prototype of interface, task examples and actions necessary to complete them,
+users or experimenters that try to perform tasks using the interface, and questions to ask at each step
+(see http://www.pages.drexel.edu/~zwz22/CognWalk.htm)
+Goals: to understand if and how users learn to accomplish tasks with the interface (i.e. the degree to
+which the prototype establishes a helpful mental model in the user), and any problems that may come up
+while learning.
+When: It is most useful in early design (even with a description of the interface, or partial prototype), to
+establish the large parameters of the design.
+
+CPSC 344 2008-09 T1
+
+8 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+Questions 5-6 are based on the following design brief.
+Your design team has been retained by a university researcher (for a fee) to design the interface for a new
+web-based recruitment and reservation system for psychology experiments (known by the internal name
+“SubjectSignupNow”). This system will be used by university graduate students and staff running user
+experiments, the staff managing the experiment rooms and equipment, and the subjects (mainly students)
+who participate in these experiments.
+In the past, experimenters have used email and posters to recruit and sign up subjects, who are
+compensated with a monetary payment, course credit, or the satisfaction of a job well done. However,
+these methods are not good for developing and accessing a subject pool. Furthermore, subjects and
+experimenters alike find it cumbersome to use. For whatever reason, not very many subjects have been
+signing up lately.
+Your client (the researcher), having noticed how much students these days use cell phones, has told you
+it’s very important that students be able to view available experiment opportunities and sign up for them
+using a mobile networked device (i.e. mobile phone with internet access).
+Your team is right at the start of the design process for SubjectSignupNow. And while you are excited
+about the project, you are also concerned that your client might not completely understand either the
+source of the problems observed with current method, or the implications of the suggested new approach.
+
+CPSC 344 2008-09 T1
+
+9 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #5 [8 points total]: Stakeholders
+(a) List 4 important stakeholders, given the information provided in the design brief. Be specific in your
+answer: e.g. clearly identify demographic characteristics when relevant.
+Then, justify them: for each stakeholder you list, state in 1 sentence what makes this role
+important. You do not need to identify their potential needs and concerns beyond this justification.
+[1.5 pts each; up to 2 additional pts total for exceptional insight]
+Example (probably not the most important one!): “Significant others” of potential subjects: may
+want to know if an experiment is really the reason for a cancelled date.
+1.
+
+2.
+
+3.
+
+4.
+
+.5 pt for stakeholder; 1 pt for justification. Reasonable answers accepted. E.g.:
+- the students (potential subjects); the researcher, both as employer and as user of the utility; the
+experimenters (grad students and staff); the facility managers; the granting agency; the university ethics
+board, who may be concerned about the recruiting procedure followed; instructors giving course credit.
+Keep points low. Most of the stakeholders are identified in design brief. Emphasis on good justification.
++1 (extra) for mentioning ethics.
+
+CPSC 344 2008-09 T1
+
+10 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #6 [22 points total]: Pre-Design Activities
+(a) In 1-2 sentences, explain why it is wise to use more than one such activity to understand what is
+involved in the process that this new interface will support [3 pts]:
+No one activity will accommodate all your pre-design evaluation needs, because all evaluation activities
+suffer from some flaw or limitation; instead you must use a variety of approaches to look at a question
+from different perspectives.
+NOTE: this is called “triangulation” but we didn’t dwell on that term in 2008 – term not required.
+Was looking (in particular) for “complementing of strengths and weaknesses”. Each evaluation method
+has different strengths and weakness, which results in faulty (patchy or erroneous) data if you use just
+one type. By using different methods, your view becomes more robust.
+Another good reason, more commonly mentioned, is to access different user groups, address different
+questions, etc. in that different methods might be more suited to different groups (e.g. researchers vs
+potential subjects. “Get more data that way” was not, by itself, a good answer. Obviously, you can get
+large amounts of data with a single method if you use it enough.
+
+(b) What are the most immediately appropriate activities that you, as a trained HCI designer, could do in
+this stage to learn how this interface should work (or even if it’s a good idea)? You will want to
+address the concerns noted in the design brief, both those of the client and those of the design team.
+In each case, state (1) the specific goal of the activity (including how it addresses a noted concern),
+(2) the type of activity, (3) the makeup of the group you’d access, (4) how you’d contact them, (5)
+most important things you’d ask/show them; and (6) potential problems with this approach that
+you must be aware of and try to address.
+Ensure that the various parts of your answer are clear (name/ number them as in example).
+[8 pts per activity and description; up to 3 pts more, total, for highly insightful responses]
+
+Example response (if you use this activity or goal, other parts of your answer should be quite different):
+Activity X:
+1. Goal: To understand what is keeping students from signing up with the present system.
+2. Type: Anonymous web survey.
+3. Makeup: Members of a psychology course which gives extra credit for experiment participation.
+4. Contact: by email (list shared by the course instructor, on condition of appropriate use).
+5. Questions: history of performing evaluations; awareness of posted experiments; reasons for not
+signing up; difficulty of learning of experiments/signing up; would proposed web-based system, cell
+phone access help; any other suggestions?
+CPSC 344 2008-09 T1
+
+11 of 16
+
+Midterm Exam (90 minutes)
+
+Name:
+
+Student ID Number:
+
+6. Potential problems: Addressees need incentive to respond to survey; potential inaccuracy or bias
+in self-reporting; if students have not yet tried to sign up, might not learn much from them; accessing
+only one type of potential subjects (those who would be compensated with course credit.)
+To get full base credit, must have basically appropriate answers at the detail level of example: 1 pt each
+for 1-4, 2 pt each for 5-6. To get add’l 3 pts, must have exceptional choices, rationale, insight into issues;
+and in particular, nice coverage across all methods (the example provided plus your two) was rewarded
+here.
+More observations, accumulated during marking:
+•
+
+Choosing your evaluation goals: Strategize! You are looking for high value. What are the MOST
+IMPORTANT things you need to learn? In early design, don’t focus on details. Activities should
+complement one another so together they cover your most important need-to-know items. So, e.g.
+seeking details of how people respond to text messages (in general) is of low relevance. Text
+solicitation for experiments wasn’t even mentioned (we spoke of sign-ups) and while it is one possible
+approach, you first need to know why people aren’t signing up now.
+
+•
+
+Choosing your sample: your subjects need to be people who have the information you need. For
+example, why would you ask a general sample of all university students why they don’t sign up? (A
+common answer). Most of these students probably have never heard of the system.
+
+•
+
+Sampling your demographic: there are other drawbacks to having large samples (e.g. “whole
+university”). For example, if you are solicited to participate in a survey and you are aware that you
+are just one of thousands, you may be less likely to participate because your input does not feel
+important. When you are aware you are part of a more selective sample, and you are persuaded that
+your input is particularly valuable in some way, this helps.
+
+•
+
+Contacting your sample: just saying “email” no good. How will you get those email /phone
+addresses? If everyone did what you’re proposing to do, this would be a huge source of spam,
+reducing its value/impact. There were a LOT of responses that said “we’ll use the emergency contact
+registry” or “contact through student services”. What makes you think you have access to these lists?
+Do you get other communications through them? What would it do to the emergency contact service
+if it got clogged with spam? Indiscriminate bombardment is what telemarketers do.
+
+•
+
+Anonymity: there are cases where respondents don’t need to be anonymous. For example, when they
+are the clients … More complex case is when the information they yield is useless if you can’t follow
+up on it. In this case, taking great pains to anonymize researcher respondents is probably misplaced
+effort, unless you imagine their responses might reflect badly upon them to their boss.
+
+•
+
+Incentives: are a double-edged sword. If you offer an incentive that has potential of offending, this
+reduce recruitment. (e.g. Starbucks card: some people have principled objections to this business,
+and an assumption that “everyone loves Starbucks” is an example of experimenter bias.)
+
+•
+
+Asking questions about the “new” system in pre-design: You don’t even have requirements yet –
+that will presumably come out of pre-design evaluations; you certainly don’t have much information
+about the new system. Asking users, either researchers or potential subjects, what they think about
+the new system is not likely to yield valuable data. What are they supposed to base their responses
+on?
+
+CPSC 344 2008-09 T1
+
+12 of 16
+
+Midterm Exam (90 minutes)
+

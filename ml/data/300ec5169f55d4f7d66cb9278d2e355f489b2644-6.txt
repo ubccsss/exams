@@ -1,0 +1,272 @@
+
+CPSC 340 Midterm (Fall 2016)
+
+Name:
+
+Student Number:
+
+Please enter your information above, turn off cellphones, space yourselves out throughout the room, and
+wait until the official start of the exam to begin. You can raise your hand to ask a question, and please look
+up occasionally in case there are clarifications written on the projector (the time will also be written on the
+projector). You are welcome to (quietly) leave early if you finish early, and we will ask everyone to stop at
+2:55.
+The midterm consists of 5 questions, and they will all be equally weighted in the marking scheme. Note that
+some question have multiple parts, written as (a) and (b). All parts are equally weighted. Clearly show
+where you are answering each part, and make sure to check that you answered all parts before handing in
+your midterm.
+Good luck!
+
+1
+
+Cross-Validation
+
+Consider a supervised regression problem where we have 60 training examples and 10 features, where the
+features are stored in a 60 by 10 matrix X and the labels are stored in a 60 by 1 vector y. The examples
+are given to you sorted by yi values. As in the assignments, assume that you have a ‘model’ function that
+depends on a parameter ‘k’ with the following interface:
+• model = train(X,y,k);
+
+% Train model on {X, y} with parameter k
+
+• yhat = predict(model,Xhat);
+
+% Predicst using the model on Xhat.
+
+Assume that k can be either 1, 2, or 3.
+Give pseudo-code describing how to choose k using 3-fold cross-validation.
+
+1
+
+Answer:
+Randomly re-order the rows of X (and the corresponding elements of y) to remove the effect of the sorting.
+Split X and y into two parts so that:
+• X1 and y1 contain the first 20 training examples.
+• X2 and y2 contain training examples 21-40.
+• X3 and y3 contain training examples 41-60.
+For each value of k from 1 to 3, perform the following:
+• Fold 1:
+– Set Xtrain to {X2 , X3 } and ytrain to {y2 , y3 }.
+– model = train(Xtrain,ytrain,k).
+– yhat = predict(model,X1 )
+– err1 = squared error between yhat and y1 (or some other regression error).
+• Fold 2:
+– Set Xtrain to {X1 , X3 } and ytrain to {y1 , y3 }.
+– model = train(Xtrain,ytrain,k).
+– yhat = predict(model,X2 )
+– err2 = squared error between yhat and y2 (or some other regression error).
+• Fold 3:
+– Set Xtrain to {X1 , X2 } and ytrain to {y1 , y2 }.
+– model = train(Xtrain,ytrain,k).
+– yhat = predict(model,X3 )
+– err3 = squared error between yhat and y3 (or some other regression error).
+• err = (err1 + err2 + err3)/60.
+• Update the minimum if this is the lowest error found.
+Return the k that resulted in the lowest error.
+
+2
+
+2
+
+Predictions for Linear Regression and K-Means
+
+Consider the dataset below, which has 5 training
+
+2
+10
+
+X=
+10
+5
+8
+
+examples and 2 features:
+ 
+
+8.0
+1
+6.5
+4
+ 
+
+ 
+9
+ , y = 4.0 .
+7.5
+8
+2.0
+10
+
+Suppose that you have the following test example:
+
+x̂ = 9
+
+
+4 .
+
+(a) Suppose we use a linear regression model with coefficients given by
+
+
+2/3
+w=
+.
+−1/4
+What prediction ŷ would we make for the test example?
+
+(b) Suppose we fit an unsupervised k-means model to this dataset and obtained the following
+means:
+
+
+9.0 9.5
+W = 3.0 5.0
+9.5 4.0
+Which cluster would the test example x̂ get assigned to?
+
+3
+
+Answer:
+(a)
+wT xi = (2/3)(9) + (−1/4)(4) = 6 − 1 = 5.
+(b) The closest row of W is clearly [9.5 4.0], so we would assign it cluster 3.
+
+4
+
+3
+
+Fundamental Trade-Off for CNN and Laplace Smoothing
+
+On the assignment, you implemented a condensed nearest neighbours (CNN) classifier as a faster alternative to k-nearest neighbours. In your CNN method, you went through the training set once and stored
+examples that were misclassified. Consider a variation of CNN where you go through the training examples
+k times, each time adding even more examples that are misclassified.
+So k = 0 is the usual CNN method, k = 1 will go through the dataset again and have more training examples
+in the subset than k = 0, and k = 2 will have more training examples than k = 1.
+(a) Briefly explain how k would affect the two parts of the fundamental trade-off, and why it
+would have this effect on each part.
+
+In the most basic naive Bayes model, we estimate our conditional probabilities from the data using
+p(xij = c|yi = 1) =
+
+(number of times xij = c and yi = 1)
+.
+(number of times yi = 1)
+
+This can cause a problem if we’ve never seen a training example where xij = c and yi = 1, since the
+probability will be 0. The standard solution to this problem is to estimate the conditional probabilites with
+Laplace smoothing,
+p(xij = c|yi = 1) =
+
+(number of times xij = c and yi = 1) + β
+,
+(number of times yi = 1) + βk
+
+where k is the number of values that c can take and β is a positive constant.
+(b) Briefly explain how β would affect the two parts of the fundamental trade-off, and why it
+would have this effect on each part.
+
+5
+
+Answer:
+(a)
+1. As k increases, we are explicitly making sure that we have classified more examples correctly, so the
+training error will go down.
+2. As k increases, our model is getting more complicated and more dependent on our specific training
+set, so the training error will become a worse approximation of the test error.
+(b)
+1. As β increases, the conditional probabilities move towards 1/k and we start ignoring the features, so
+we would expect the training error to go up.
+2. As β increases, the conditional probabilities become less sensitive to our particular dataset, so we would
+expect the training error to be a better approximation of the test error.
+
+6
+
+4
+
+Runtime of Random Trees
+
+In the assignment, you implemented a variant on √
+decision trees called a random tree. In a random tree,
+each time we fit a decision stump we only consider d random features as candidates for the split variable.
+Following our usual convention, we’ll use:
+• n as the number of training examples.
+• d as the number of features..
+• m as the depth of the decision tree.
+• t as the number of test examples.
+(a) What is the cost of fitting a random tree of depth m to our training data in terms of the
+above four quantities? (Briefly justify your answer.)
+
+(b) What is the cost of prediction on t test examples using a random tree in terms of the above
+four quantities? (Briefly justify your answer.)
+
+7
+
+Answer:
+(a) Our normal cost for fitting a decision tree is O(mnd
+log n), and the factor of d comes from
+√ searching
+√
+through all features for each split. If we only search d features this will be reduced to O(mn d log n).
+(b) For each training example t, we only do an O(1) operation at each level of the decision tree to decide
+whether we satisfy the rule. This gives a total cost of O(tm).
+
+8
+
+5
+
+Weighted Regression with Weighted Regularization
+
+Consider a variation on L2-regularized least squares where we have a positive weight zi for each training
+example i and a positive variable-specific regularization weight λj for each feature j. In this case our objective
+function can be written as
+1
+1
+f (w) = (Xw − y)T Z(Xw − y) + wT Λw,
+2
+2
+where Z is an n by n diagonal matrix with the zi values along its diagonal and Λ is a d by d matrix with
+the λj values along its diagonal.
+(a) Write finding a minimizer w of this (convex) function as a system of linear equations.
+
+Consider a variant where to gain robustness we use the absolute error and where we also regularize by a
+weighted sum of absolute values (instead of squaring the wj ),
+f (w) =
+
+n
+X
+
+zi |wT xi − yi | +
+
+i=1
+
+d
+X
+
+λj |wj |.
+
+j=1
+
+(b) Express this function in terms of vectors, matrices, and norms (there should be no summations in the final answer, and you can use Z and Λ as defined in the previous part).
+
+9
+
+(a) Expanding we have
+f (w) =
+
+1 T T
+1
+1
+w X ZXw−wT X T Zy + y T Zy + wT Λw.
+2
+2
+2
+
+Taking the gradient we get
+∇f (w) = X T ZXw−X T Zy + Λw.
+Equating with zero we obtain the linear system
+(X T ZX + Λ)w = X T Zy.
+(b) Following our standard approach we’ll get
+kZ(Xw − y)k1 + kΛwk1 ,
+It would also be ok to define vectors z and v and use element-wise products ◦ (or whatever notation as long
+as it’s defined)
+kz ◦ (Xw − y)k1 + kv ◦ wk1 .
+
+10
+

@@ -1,0 +1,175 @@
+
+CPSC 340 Midterm (Fall 2015)
+
+Name:
+
+Student Number:
+
+Please enter your information above, turn off cellphones, space yourselves out throughout the room, and
+wait until the official start of the exam to begin. You can raise your hand to ask a question, and please look
+up occasionally in case there are clarifications written on the projector (the time will also be written on the
+projector). You are welcome to (quietly) leave early if you finish early, and we will ask everyone to stop at
+3:55.
+The midterm consists of 5 questions, and they will all be equally weighted in the marking scheme. Note
+that some question have multiple parts, written as (a), (b), and in some cases (c). All parts are equally
+weighted. Clearly mark where you are answering each part, and make sure to check that you answered all
+parts before handing in your midterm.
+Good luck!
+
+1
+
+1
+
+Cross-Validation
+
+Consider a supervised classification problem where we have 50 training examples and 10 features, where the
+features are stored in an 50 by 10 matrix X and the labels are stored in a 50 by 1 vector y (you can assume
+that the examples are in a random order). As in the assignments, assume that you have a ‘model’ function
+that depends on a parameter ‘k’ with the following interface:
+• model = train(X,y,k);
+
+% Train model on {X, y} with parameter k
+
+• yhat = predict(model,Xhat);
+
+% Predicst using the model on Xhat.
+
+Assume that k can be either 1, 2, or 3.
+Give pseudo-code describing how to choose k using 2-fold cross-validation.
+
+2
+
+2
+
+KNN and Decision Stumps
+
+Consider the dataset below, which has 10 training examples and 2 features:
+ 
+
+
+1
+0 1
+1
+1 0
+ 
+
+
+1
+0 0
+ 
+
+
+1
+1 1
+ 
+
+
+1
+1 1
+ 
+
+
+X=
+ , y = 1 .
+0
+0
+ 
+
+
+0
+1 0
+ 
+
+
+0
+1 0
+ 
+
+
+0
+1 1
+0
+1 0
+Suppose that you want to classify the following test example:
+
+
+x̂ = 1 1 .
+(a) What class label would we assign to the test example if we used a k-nearest neighours
+classifier, with k = 3 and the Euclidean distance measure?
+(b) Suppose we want to fit a decision stump to this dataset. What is the decision rule (based
+on a single variable) that minimizes the classification error? (Show your reasoning for the two
+possible splits.)
+(c) Under the decision rule you estimated from part (b), what is the most likely label for the
+test example?
+
+3
+
+3
+
+Less-Naive Bayes
+
+In class, we talked about naive Bayes models. Given a set of features {x1 , x2 , x3 , . . . , xd }, naive Bayes
+approximates the conditional probability of a label y using
+p(y|x1 , x2 , x3 , . . . , xd ) ∝ p(y)p(x1 , x2 , x3 , . . . , xd |y)
+= p(y)p(x1 |y)p(x2 |x1 , y)p(x3 |x1 , x2 , y) . . . p(xd |x1 , x2 , x3 , . . . , xd−1 , y)
+≈ p(y)p(x1 |y)p(x2 |y)p(x3 |y) . . . p(xd |y).
+Naive Bayes makes a strong independence assumption (“≈”), and there are various ways to relax it. For
+example, consider a ‘less-naive’ Bayes model that depends on a parameter k and assumes that xj given y is
+independent of all variables except the up to k largest values j where j < i. For example, if k = 3 then x6
+is conditionally independent of all other variables given y (as in the usual naive Bayes model) and given x3 ,
+x4 , and x5 : p(x6 |x1 , x2 , x3 , . . . , xd , y) = p(x6 |x3 , x4 , x5 , y).
+Naive Bayes corresponds to k = 0, and we make weaker assumptions as k grows. As another example, if
+k = 2 then we use
+p(y|x1 , x2 , x3 , . . . , xd ) ∝ p(y)p(x1 , x2 , x3 , . . . , xd |y)
+= p(y)p(x1 |y)p(x2 |x1 , y)p(x3 |x1 , x2 , y) . . . p(xd |x1 , x2 , x3 , . . . , xd−1 , y)
+≈ p(y)p(x1 |y)p(x2 |x1 , y)p(x3 |x2 , x1 , y) . . . p(xd |xd−1 , xd−2 , y).
+Instead of simply estimating conditionals like p(x5 = 1|y = 1), this will now involve estimating conditionals
+like p(x5 = 1|x4 = 1, x3 = 0, y = 1).
+(a) What are the two parts of the fundamental trade-off in machine learning?
+(b) For the less-naive Bayes model, how would the choice of k affect the two parts of the
+fundamental trade-off ?
+
+4
+
+4
+
+Runtime of K-Means
+
+One of the outputs of the k-means algorithm is a set of cluster means µc . To find the cluster of a new data
+point x̂, we can perform the following:
+• For each cluster c, compute the Euclidean distance between x̂ and the cluster mean µc .
+• Assign x̂ to the cluster c with the minimum distance.
+Following our usual convention, we’ll use:
+1. d as the length of an x̂ and µc .
+2. k as the number of clusters.
+3. t as the number of test examples.
+If we use the above two steps to find the cluster of t test examples, what is the total cost in
+terms of d, k, and t?
+
+5
+
+5
+
+Regularized Linear Regression in 1D
+
+Consider the problem of performing linear regression in 1-dimension where:
+• We use the squared error as our loss function.
+• We use an `2 -regularizer with weight λ.
+This gives us the following objective:
+n
+
+argmin
+w
+
+ λ
+1 X
+(yi − wxi )2 + w2 .
+2 i=1
+2
+
+(a) Compute the derivative of this objective function with respect to w.
+(b) By equating the derivative of this objective (which is convex and quadratic) with 0, compute
+the solution of this problem in terms of the xi , yi , and λ (show your work).
+
+6
+

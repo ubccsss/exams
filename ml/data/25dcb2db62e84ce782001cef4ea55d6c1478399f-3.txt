@@ -1,0 +1,72 @@
+
+Author: Joanna
+CPSC 444: User Interface Design
+2006-07/Term 2: Final Exam Review Questions
+Note: these review questions concentrate mostly on material from lectures, but the
+exam will cover tutorials and the labs (project) as well.
+Question 1: Experimental Design and Statistical Analysis
+Recall that Hick’s Law defines a log-linear decision-time relationship for choosing one
+item from n equally-likely alternatives. Suppose you wanted to verify Hick’s Law as part
+of developing general design guidelines for a menu-based GUI. Design a simple user
+study task that verifies Hick’s Law and explain what kind of statistical analyses would be
+appropriate for this study. You do not have to provide a description of your subject pool
+and you do not need to provide a complete description of your equipment/apparatus.
+
+Question 2: Experimental Design and Statistical Analysis
+Buggy Inc. is a company that specializes in the development of visual debugging
+interfaces for large, complex software engineering projects. They have recently
+developed a software package that uses an innovative scheme to highlight syntax errors
+in code. Because their package has the exact same functionality as a software package
+sold by their competitors, they want to run a controlled user study to see which of the two
+software packages is more usable (hoping they can say their package is more usable than
+their competitor’s). They hope that their interface will be better for both novices and
+experts, but suspect it may only be the case for novices. They are most interested in
+comparing how rapidly users can find syntactic errors in their code and how quickly their
+interface allows them to make corrections.
+(a) What are the independent and dependent variables for this user study? In terms of a
+statistical test, what is the relationship between the independent and dependent
+variables?
+(b) Describe the most powerful statistical test to compare how quickly users can find
+syntactic errors in their code and whether there is an impact of expertise? What are
+the possible outcomes from the statistical test? Specify one assumption that must be
+satisfied before you can use the test.
+(c) When designing a user study such as this one, what are two possible threats to
+validity that need to be considered? Explain how they threaten validity.
+(d) What is a nuisance variable? Give one example of a nuisance variable in this kind of
+situation and explain how you might accommodate for it.
+
+1
+
+Question 3: Field methods
+The following questions refer to the CHI 2002 paper: “An Evaluation of a Multiple
+Interface Design Solution for Bloated Software” by McGrenere et al.
+(a) What commercial software application was used in the research?
+(b) Briefly describe the setting where the experimental study took place.
+(c) There were two independent variables in the experimental study. What were they and
+what were their specific values?
+(d) Name two limitations to this study as it was conducted and briefly provide alternative
+study designs that would address each of the limitations.
+
+Question 4: Video
+(a) In 444 you used video to capture data in a lab experiment of a hi-fi prototype.
+Video can also be a powerful tool in the early stages of design, as demonstrated
+by Wendy Mackay. Briefly explain what those early stages are, how video is used
+in those design stages, and why it is a useful tool.
+(b) Name and explain one primary drawback to using video in these early stages of
+design.
+
+Question 5: History of HCI
+List 5 innovations by Doug Englebart as described and shown in Alan Kay’s lecture and
+explain to what extent HCI has evolved today with respect to those innovations.
+
+Question 6: Cognitive Engineering
+One heuristic in Heuristic Evaluation is to “Help users recognize, diagnose, and recover
+from errors.” Which of the two “gulfs” identified in Norman’s 7-stage model of humancomputer interaction does that heuristic best attempt to address. Explain your answer.
+
+Question 7: HCI research and industry
+You have been asked to design a technology supported small workroom to support faceto-face collaboration for small to medium size groups (2-6 people). Identify and briefly
+explain five factors that you need to consider in terms of how to outfit that room with
+displays.
+
+2
+

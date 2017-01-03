@@ -1,0 +1,229 @@
+
+CPSC 121 Sample Final Examination
+April 2013
+Name:
+
+Student ID:
+
+Signature:
+
+– You have 150 minutes to write the 11 questions on this examination. A total of 98 marks are available.
+– Justify all of your answers.
+– You are only allowed to bring in one hand-written (or printed
+using at least a 11 point font), double-sided 8.5 x 11in sheet of
+notes.
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+– Use the back of the pages for your rough work.
+– Good luck!
+
+Question
+
+Marks
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+Total
+
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her UBC card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic
+equipment, or other memory aid or communication devices, other than those authorised by
+the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination papers; and must not take any examination material from the examination room without
+permission of the invigilator.
+
+page 2 out of 9
+[6] 1. Short answers
+[3] a. What is wrong with the following circuit?
+a
+
+on
+off
+
+b
+
+on
+off
+
+[3] b. Explain briefly the difference between the purpose of a half-adder and that of a fulladder.
+
+[6] 2. Let A = {1, 2, 3 . . . , 299, 300}.
+[3] a. Give an example of a function f from Z+ into A that is not onto (surjective).
+
+[3] b. Consider the function f : {1, 2, . . . , 18} → A defined by f (x) = x2 − 3x + 3. Is f
+one-to-one (injective)? Explain why or why not.
+
+page 3 out of 9
+[9] 3. Number representation
+[3] (a) What unsigned integer is represented by the 9-bit value 100111011?
+
+[3] (b) What signed integer is represented by the 9-bit value 100111011?
+
+[3] (c) A professional programmer wrote a program that takes a floating point number x,
+sets its value to 0, and then adds 0.1 to x repeatedly until it becomes equal to 10,
+printing each value of x as it goes. Why does the program produce the output
+0.0 0.1 0.2 0.3 0.4 0.5 0.6
+1.0000001 1.1000001 1.2000002
+
+0.70000005
+
+0.8000001
+
+(and so on) instead of
+0.0
+?
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+1.0
+
+0.9000001
+
+page 4 out of 9
+[12] 4. Consider the following circuit:
+reset
+
+char
+oneBit
+valid bit
+
+on
+off
+
+C E
+D
+
+C E
+Q
+Q
+
+D
+
+Q
+Q
+
+The terminal and the oneBit subcircuit provide bits one at a time to the remainder of the
+circuit, and the clock attached to the D flip-flops ticks each time a bit is available.
+[4] a. Suppose that the user first flips the reset switch on, then off, and finally types in the
+digits 0, 0, 1, 1, 0, 1, 1, 0 in this order. What will be the state of the LED (on/off)
+after each of the digits is typed (you need to provide 8 answers).
+
+[4] b. Explain in English the purpose of this circuit.
+
+[4] c. Show how to modify the part of the circuit that is inside the gray box so the LED
+would be on if an odd number of 1 digits had been typed, and off if an even number of
+1 digits had been typed. Hint: you will only need one flip-flop, and a few other gates.
+
+page 5 out of 9
+[7] 5. Determine the validity of the following argument. Justify your answer fully.
+1. (∼ p ∨ q) → r
+2. r → (s ∨ t)
+3. ∼ s ∧ ∼ u
+4. ∼ u →∼ t
+∴p
+
+[9] 6. A perfect number is a positive integer that is equal to the sum of its divisors (except itself).
+For instance, 28 is perfect since 28 = 1 + 2 + 4 + 7 + 14. In this question, we will look at
+almost-perfect numbers: numbers that are one more than the sum of their divisors (except
+themselves). For instance, 16 is almost perfect since 1+2+4+8 = 15. Consider the following
+statement:
+Given any positive integer n, we can always find an almost-perfect number that is
+larger than n.
+[3] a. Translate this statement into first-order logic (that is, using predicates and quantifiers).
+You may assume the existence of a predicate isAlmostPerfect.
+
+[6] b. Prove the statement. Hint: look carefully at the example I gave, and see if you can
+make it more general.
+
+page 6 out of 9
+[11] 7. Let U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, and f be a function from U into U. Finally, let
+F : P(U) → P(U) be the function defined by
+F (X) = {f (x) | x ∈ X}
+For instance, if f (x) = 13 − x, and X = {1, 3, 4, 7}, then F (X) = {f (1), f (3), f (4), f (7)} =
+{12, 10, 9, 6}.
+[7] a. Prove that for every two subsets A, B of U, we have F (A ∩ B) ⊆ F (A) ∩ F (B).
+
+[4] b. Give an example that shows that F (A−B) is not necessarily a subset of F (A)−F (B).
+
+page 7 out of 9
+[8] 8. Prove that for every positive integer n,
+n
+X
+i=1
+
+i(i + 1) =
+
+n(n + 1)(n + 2)
+3
+
+[8] 9. The inhabitants of the country of Pirlouitland use only three kinds of coins, worth 1 schlip, 5
+schlips and 10 schlips respectively. Johan, one of the knights, makes the following observation:
+For every amount n ≥ 10 schlips, the way to pay for n schlips that uses the fewest
+coins always contains a 10 schlip coin.
+Prove Johan’s observation using an indirect proof. Hint: think of substituting some coin(s)
+for other coin(s).
+
+page 8 out of 9
+[12] 10. Mathematical Induction
+[3] a. Explain briefly the two forms of mathematical induction discussed in class.
+
+[9] b. Recall that ⌊x⌋ is the largest integer that is ≤ x, that ⌈x⌉ is the smallest integer that
+is ≥ x, and that ∀x ∈ R+ , ⌊x/2⌋ + ⌈x/2⌉ = x.
+Let p0 , p1 , p2 , p3 , . . . be a sequence of integers defined by
+p1 = 0, p2 = 1
+
+and
+
+pn = p⌊n/2⌋ + p⌈n/2⌉ + 1
+
+for all n ∈ Z+ where n ≥ 3.
+
+For example, p3 = p⌊3/2⌋ + p⌈3/2⌉ + 1 = p1 + p2 + 1 = 0 + 1 + 1 = 2
+Prove that for all nonnegative integers n ≥ 1, pn = n− 1. You must state the induction
+hypothesis clearly.
+
+page 9 out of 9
+[10] 11. Consider the set L of all strings over the alphabet {a, b, c, d} that start and end with the
+same letter, and do not contain this letter in any other position. For instance, the strings a,
+bb and cabbac belong to L, but the empty string and the strings acccb and cabcbac do not.
+[7] a. Design a DFA that accepts every string in L, and reject every other string.
+
+[3] b. Write a regular expression that matches exactly the strings that belong to L.
+

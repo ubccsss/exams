@@ -1,0 +1,178 @@
+
+CPSC 414, Midterm Exam
+20 Oct 2003
+Closed book, one sheet of handwritten notes allowed. Answer the questions in the space provided. If you
+run out of room for an answer, continue on the back.
+
+Name:
+Student Number:
+
+Question Points Earned Points Possible
+1
+1
+2
+2
+3
+1
+4
+1
+5
+2
+6
+1
+7
+1
+8
+1
+9
+1
+10
+2
+11
+1
+12
+1
+13
+1
+14
+1
+15
+1
+16
+2
+17
+2
+Total
+22
+
+1
+
+1. (1 pt) Write down the 4x4 matrix for rotating an object by 90% around the z axis.
+
+2. (2 pts) Describe in words what this matrix does (be specific about the order of operations)
+
+0 .707 0
+2
+0
+0 
+
+0 .707 0 
+0
+0
+1
+
+
+
+.707
+
+0
+
+ −.707
+0
+
+3. (1 pt) Draw a picture of the object below transformed by the above matrix
+
+4. (1 pt) Give sequence of OpenGL commands necessary to implement the above transformation.
+
+2
+
+5. (2 pts) Draw houseA and houseB, transformed by the appropriate OpenGL commands. The untransformed house is
+below.
+glIdentity();
+glTranslate(1, 0, 0);
+glRotate(90, 1, 0, 0);
+glPushMatrix();
+glTranslate(0, 2, 0);
+drawHouseA();
+glPopMatrix();
+glTranslate(-1, 0, 0);
+drawHouseB();
+
+6. (1 pt) Give the series of affine transformations (assuming postmultiplying) needed to create the picture below, assuming
+the house started from the position shown in the above questions.
+
+y
+
+x
+
+3
+
+7. (1 pt) The point coordinate P, as shown below to the right, can be thought of as P = 1*i + 3*j, where i and j are basis
+vectors of unit length along the x and y axes, respectively. In effect, a coordinate system is defined by the location of its
+origin, and its basis vectors. Describe the point P in terms of the 3 other coordinate systems given below.
+
+Cj Ci
+Bj
+
+P
+j
+
+Aj
+
+Bi
+
+Ai
+
+i
+
+8. (1 pt) Normalize the homogenous point (2,4,6,2).
+
+9. (1 pt) Draw the cavalier projection of a box of size x=4, y=2, z=6. Use a 20 ◦ projection (that is, the z axis in the scene
+should make a 20◦ angle with the x axis in the projection). The drawing doesn’t have to be exactly to scale, but you must
+label the point locations.
+
+4
+
+10. (2 pts) Derive a 4x4 matrix that when applied to the point (x, y, z, 1) T would result in the projection in the picture below.
+Show your work.
+
+11. (1 pt) Sketch a side view (yz plane) of the perspective view frustum, in VCS, that is specified by the following parameters:
+near = 3, top = 2, right = 1, far = 5, bot = -1, left = -1
+
+12. (1 pt) Write out the OpenGL perspective transformation matrix for the above configuration.
+
+5
+
+13. (1 pt) Briefly describe how to implement per-object picking using the back buffer.
+
+14. (1 pt) A point in a triangle can be expressed using barycentric coordinates as follows: P = αP 1 + βP2 + γP3 , where
+0 <= α, β, γ <= 1 and α + β + gamma = 1. Draw the line corresponding to α = .6 on the following triangle which
+sits in the xy-plane.
+
+15. (1 pt) Briefly describe how to use parity when scan converting a general polygon.
+
+6
+
+In the problems below, use the Phong illumination model given by I = I a ka + kd IL (N · L) + ks IL (R · V )n with
+parameters Ia = .8, IL = 1.0, ka = .2, kd = .9, ks = .5, n = 30.
+
+L
+
+(1,2,0)
+
+NA
+
+A
+
+(5,2,0)
+
+B
+
+(2,0,0) (3,0,0)
+
+C
+
+N
+
+C
+
+(4,0,0)
+
+16. (2 pts) Give the specular component of B, using the Gouraud shading model.
+
+17. (2 pts) Give the specular component of B, using the Phong shading model.
+
+7
+
+E
+

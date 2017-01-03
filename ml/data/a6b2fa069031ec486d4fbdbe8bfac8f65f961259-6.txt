@@ -1,0 +1,603 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca:80/~cs344/current-term/resources/oldexams/cpsc444old-2001w1-midterm-sample-soln.pdf
+Name:
+
+Student ID Number:
+
+Signature:
+
+CPSC 444 2001-2001 (T1) Midterm Exam
+Solutions
+Department of Computer Science
+University of British Columbia
+K. MacLean
+Exam Instructions (read carefully):
+1. Sign the first page of the exam with your signature in
+the space provided on the upper left immediately.
+Question
+
+Points
+
+Class Mean
+
+1
+
+18
+
+15.8
+
+2
+
+28
+
+24.5
+
+3
+
+24
+
+15.1
+
+5. Please read the entire exam before answering any of
+the questions.
+
+4
+
+18
+
+11.4
+
+6. There are 5 questions on this exam, each worth the
+indicated number of points. Answer as many
+questions as you can.
+
+5
+
+12
+
+9.3
+
+Total
+
+100
+
+76.1
+
+2. Continue reading the instructions, but do not open
+the exam booklet until you are told to do so by a
+proctor.
+3. Print your Name and Student Identification
+Number on every page in the space provided at the
+top of each page before you start the exam.
+4. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+
+7. Write all of your answers on these pages. If you need
+more space, there is blank space at the end of the
+exam. Be sure to indicate when a question is
+continued, both on the page for that question and on
+the continuation page.
+8. Interpret the exam questions as written. No questions
+will be answered by the proctor(s) during the exam
+period.
+9. The exam is closed book. There are no aids
+permitted, except for a calculator.
+10. You have 50 minutes in which to work. Budget your
+time wisely.
+11. No one will be permitted to leave the exam room
+during the last ten minutes of the exam.
+
+CPSC 444 2001-2001 (T1)
+
+1 of 7
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #1 [18 points total]: Usability Metrics
+You’ve been assigned by your employer (a user interface consulting firm) to help another firm evaluate
+their in-house calendaring system prior to a re-design. Incommunicado Inc., your client, is a managementconsulting firm employing about 100 individuals - most of who spend much of their time off-site with
+their own clients. This calendar was custom-designed for Incommunicado two years ago, and employees,
+who are required to use it, have been complaining about it ever since. Because of the amount of time
+employees spend away from the office, and the need for employees to confer about their clients when
+they’re back home, the calendar plays a central role in the company and it’s imperative that it work well.
+Therefore Incommunicado’s VP of Administration would like to make sure that the problems are clearly
+understood and quantified before commissioning a new system.
+The primary purpose of the company calendar is to publicize time and location of scheduled meetings and
+seminars, as well as planned individual absences due to business trips, vacation, etc. It relies on web
+access (to which all employees have ready access, both when on-site and traveling) both to make entries
+and to view. Typically, users submit an entry to the calendar when they have scheduled a meeting
+involving several other employees, or when they know they will be out of the office for more than a few
+hours. By looking at the calendar before scheduling a meeting, they theoretically can avoid conflicts with
+other meetings, or absences of key attendees.
+You’ve decided that as a first step, you should look at the existing calendaring system and evaluate it in
+terms of relevant quantitative usability metrics. Below, list up to 6 additional usability metrics that are
+likely to provide useful data for this situation. One is already listed as an example. For each metric,
+make sure you identify exactly what is to be measured. [3 pts per metric]
+0. Time required to create a new entry in the shared calendar
+1.
+
+…
+
+Variants on the following responses were accepted. Points were subtracted if metric was not related to
+this system, or if a non-quantifiable metric was used (i.e. there is no obvious way to measure it).
+•
+
+Time required to modify or delete an entry in the calendar, view a specific time or day in the
+calendar, etc
+
+•
+
+Number of individuals required to make an entry in the calendar (e.g. does a secretary or
+someone with special privileges have to authorize the entry?)
+
+•
+
+Frequency with which erroneous input is accidentally supplied to the system
+
+•
+
+User’s ability to recover from erroneous input
+
+•
+
+Time required for a user to learn to use any aspect of the system (e.g. entry input or viewing a
+specific part of the calendar)
+
+•
+
+User’s retention of learning of system use
+
+•
+
+User’s ability to customize the system for their own situation
+
+•
+
+The ease with which users can reorganize their scheduling activities – e.g. change their methods
+of scheduling meetings, view extra commitments, etc.
+
+•
+
+User’s satisfaction with the system.
+
+CPSC 444 2001-2001 (T1)
+
+2 of 7
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #2 [28 points total]: Problem Definition
+Your next step in the evaluation of Incommunicado Inc.’s offending calendar system is to create a
+problem statement. After conducting some quantitative tests on the system and talking to a few
+employees, you have tentatively defined a situation of concern that includes the following problems with
+the existing calendaring system, among others:
+•
+
+Too many steps are required to make a new entry in the calendar. These include
+accessing the web form, choosing a day, time and duration, choosing the list of
+participants from a pull-down list of employees, choosing a location, submitting
+the request, authorizing the request, and refreshing the database. The initial entry
+process takes about five minutes for a group of 5 attendees (not including the
+authorization delay). Users interviewed feel the process should take only one
+minute for an attendee list of any length.
+
+•
+
+Before the entry appears in the public calendar, it must be authorized by one of
+two secretaries with the proper system privilege. The authorization requirement
+frequently imparts a delay between an entry request and actual appearance of up
+to an entire day, and in the meantime individual schedules may change. Users
+interviewed feel a delay guaranteed to be within one hour would be acceptable.
+
+Create a one-line problem statement that, if executed, will resolve this situation of concern. In this
+statement, identify each of the four fundamental components of the problem definition by circling and
+labeling them. [7 pts per correctly mentioned and identified component]
+
+Variants of the following were accepted: 3 pts per fundamental component mentioned and correctly
+identified (12 pts total), and 4 pts per fundamental component included in the problem statement (16 pts
+total). Points also subtracted if level of support was not quantified (-2 pts); the statement was not a
+sentence; if components did not make sense with respect to each other; or if whole statement generally
+didn’t make sense or say anything helpful.
+
+form of solution
+Modify the current online calendaring system to provide
+rapid (1 minute) and automatically authorized (1 hour) event entry
+by all company employees.
+level of support
+users
+
+CPSC 444 2001-2001 (T1)
+
+supported activity
+
+3 of 7
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #3 [24 points total]: Human Performance
+(a) List the three types of memory discussed in class and readings, in the order in which sensed
+information travels through them. For each, describe the three attributes in terms of the specified
+relative adjectives [14 pts]:
+
+Rate of access
+
+Rate of decay
+
+Capacity
+
+(rapid, slow)
+
+(rapid, slow, never)
+
+(small, large, infinite)
+
+Sensory, or iconic
+/ echoic / haptic
+
+rapid
+
+rapid
+
+large
+
+Working or
+short-term
+
+rapid
+
+rapid
+
+small
+
+Long-term
+
+slow
+
+never
+
+large or infinite
+
+Memory type
+
+Points allocation for (a), total of 14:
+•
+
+Types named correctly (1 pt / type = 3 pts)
+
+•
+
+Types listed in correct order (2 pts)
+
+•
+
+Correct attributes (1 pt each, = 9 pts)
+
+(b) The 7 ± 2 rule [4 pts]:
+Briefly describe it (1 sentence):
+We can remember 7 ± 2 chunks of information; therefore chunking information can increase the
+short-term memory capacity [2 pts]
+
+To which type of memory does it apply?
+
+working [2 pts]
+
+(c) State how information moves from memory module to the next [6 pts]:
+
+Sensory to working memory:
+
+attention [3 pts]
+
+Working to long-term memory:
+
+rehearsal [3 pts]
+
+The words listed in the box are the ones given in class and in readings. For Working to Long-Term
+Memory, partial credit (2/3) was given for near-synonyms such as “practice” or “repetition”.
+
+CPSC 444 2001-2001 (T1)
+
+4 of 7
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #4 [18 points total]: Empirical Laws
+You have been given the task of designing the menu system of a powerful CAD application. There are a
+total of Ntot = 100 specialized tools which must be distributed into a set of menus; it will be up to you to
+decide how many menus there should be.
+As a first cut, you have decided to estimate the optimal number of menus (and items per menu) based
+sheerly on speed of access by applying empirical laws to the problem. (Of course, there will be other
+criteria as well, such as logical / semantic groupings of functions; but first you want to know
+approximately how many items you should try to group together).
+You know from cpsc444 that Hick’s law is the empirical rule that you need to apply in this case; looking
+it up in your old textbook, you recall that it is defined as decision time = TDec = K log( N + 1) .
+You thus need to determine the values of m and n which, based on Hick’s Law, should result in the lowest
+total decision time, where
+
+m
+n
+N tot
+
+= number of menus
+= avg. number of items per menu
+= m × n = total # of menu items
+
+(a) For this exercise, compute the total relative decision time (TDecTot / K) resulting from the values of m
+listed in the table below. Show your work. [15 pts]
+You may use either a calculator or use the table of logarithms at the end of the exam; please state which
+method was used.
+Method (check one):
+
+table of logarithms
+
+calculator
+
+Answers are listed for both base-10 and (natural) logarithms, which produce the same relative trend.
+Allocation: correct values of “n” (3 pts), recognizing equation must be applied 2x (6 pts), correctly
+deriving equation (3 pts), and correctly computing values given equations you’ve derived (3 pts).
+
+m
+
+n
+
+Total Decision Time / K
+
+1
+
+100
+
+Log(2)+log(101) = 2.30 (5.30)
+
+5
+
+20
+
+Log (6)+log(21)= 2.10 (4.84)
+
+10
+
+10
+
+Log(11)+log(11)= 2.08 (4.80)
+
+(b) Based on the results above, state your guess for the optimal values for m and n, as well as a brief
+(1-2 sentence) justification. [3 pts]
+
+m=n=10 delivers the best value of the cases tried here, and this also makes intuitive sense; however, the
+curve is flattening out by then and there’s little difference between 5/20 and 10/10. (You could verify this
+estimate either by computing another neighboring value or two (e.g. 9x11); or by actually optimizing the
+base equation, TDecTot = K {log( n + 1) + log( m + 1)} , by taking its derivative and setting it to zero).
+
+CPSC 444 2001-2001 (T1)
+
+5 of 7
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #5 [12 points total]: Requirements Definition
+Okay, back to Incommunicado Inc. You’ve gotten a general idea of the problems with the current design,
+and you’ve been asked to generate a requirements definition document for a re-design of
+Incommunicado’s in-house calendaring system.
+You’ve realized that this is clearly a complicated case: a lot of different people with different roles in the
+company use the system – and of course by now, you’ve talked with representatives of each group and
+received their individual perspectives.
+Below, list three key stakeholders (groups or individuals) who will need to be involved in the redesign
+process. [12 pts]
+Note that there is not a single correct response to this question. Use your common sense.
+Stakeholder 1:
+Stakeholder 2:
+Stakeholder 3:
+
+Credit was given for all reasonable answers: 4 pts / stakeholder (12 pts total). Examples of possible
+answers are listed below. Points were subtracted for answers that were unhelpfully vague (e.g.
+“employees”: there are many possible roles an employee can take, and therefore different stakes. A VP,
+consultant and a secretary are all employees.)
+On the clients side, there could be:
+•
+
+Consultation team members (primary users) – traveling and non-traveling
+
+•
+
+VP of Administration, who apparently is responsible for having a good calendaring system
+
+•
+
+Financial officers, who will determine whether the company can afford it
+
+•
+
+IT staff in charge of maintaining the system
+
+•
+
+Administrative staff in charge of scheduling meeting rooms
+
+On the developers side, there could be:
+•
+
+Designers (whoever is eventually given the job of actually defining the new system)
+
+•
+
+Programmers (whoever is eventually given the job of building the new system)
+
+•
+
+Management of your own company (interface design consultancy) who also needs to make a
+profit on the whole business
+
+CPSC 444 2001-2001 (T1)
+
+6 of 7
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Table of natural logarithms
+
+CPSC 444 2001-2001 (T1)
+
+n
+
+log (n)
+
+1
+
+0.000
+
+2
+
+0.301
+
+3
+
+0.477
+
+4
+
+0.602
+
+5
+
+0.699
+
+6
+
+0.778
+
+7
+
+0.845
+
+8
+
+0.903
+
+9
+
+0.954
+
+10
+
+1.000
+
+11
+
+1.041
+
+12
+
+1.079
+
+13
+
+1.114
+
+14
+
+1.146
+
+15
+
+1.176
+
+16
+
+1.204
+
+17
+
+1.230
+
+18
+
+1.255
+
+19
+
+1.279
+
+20
+
+1.301
+
+21
+
+1.322
+
+22
+
+1.342
+
+23
+
+1.362
+
+24
+
+1.380
+
+25
+
+1.398
+
+30
+
+1.477
+
+40
+
+1.602
+
+50
+
+1.699
+
+60
+
+1.778
+
+70
+
+1. 845
+
+80
+
+1.903
+
+90
+
+1. 954
+
+100
+
+2.000
+
+7 of 7
+
+Midterm Exam (50 minutes)
+

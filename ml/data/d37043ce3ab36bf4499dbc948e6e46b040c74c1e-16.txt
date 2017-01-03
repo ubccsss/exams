@@ -1,0 +1,129 @@
+
+CPSC 320 Sample Midterm 2
+March 2014
+[10] 1. State whether each of the following statements is true or false. Justify each of your answers
+briefly.
+[3] a. If a recurrence relation can be solved using the Master theorem, then it can also be
+solved using recursion trees.
+Solution : This is true: the Master theorem was proved using recursion trees.
+[3] b. When we create a new node in a skip list, we choose the level of the new node
+uniformly and at random between 1 and the maximum level used for the skip list
+(that is, it has equal probabilities of having height 1, 2, 3, etc).
+Solution : This is false: a node has a probability pi of having more than i levels,
+so the probabilities decrease exponentially with i. In other words, a node is much
+more likely to only have one level than two, much more likely to have two levels than
+three, etc.
+[4] c. Explain the best way to find a tight upper bound on the solution of the recurrence
+relation
+
+
+T (n) =
+
+4T (n/2 + 3) + 5n2 log n
+Θ(1)
+
+if n ≥ 8
+if n < 7
+
+and state what you believe the upper bound to be (you do not need to prove your
+upper bound).
+Solution : We would first use the Master theorem to obtain a bound (ignoring the
++3 term) and then use guess and test with this bound to prove it formally.
+Now, if we ignore the +3 term, we have a = 4, b = 2, and nlogb a = nlog2 4 = n2 .
+Hence f (n) ∈ Θ(nlogb a log n) which means that we are in case 2, and so our guess
+would be T (n) ∈ Θ(n2 log2 n).
+[5] 2. Randomized Caching
+[2] a. How does the randomized caching algorithm discussed in class choose an item to
+evict when a cache miss occurs?
+Solution : It chooses an element uniformly and at random out of the unmarked elements current held in the cache.
+[3] b. Why does the probability of a cache miss for the ith request for a recurring unmarked
+item increase with i?
+Solution : As i increases, the number of unmarked recurring items remaining in
+the case decreases. So it becomes more and more likely that the element we are
+requesting was evicted (there may also be more fresh items in the cache).
+
+page 2
+[7] 3. Describe an efficient divide and conquer algorithm that takes as input a sorted array A of
+real numbers, and returns a binary search tree of minimum height that contains the elements
+of the array. If you want, you can add parameters other than the array A to your function.
+Solution : The idea is to place the median of the array at the root, and the smaller (larger)
+elements in its left (right) subtree. In pseudo-code:
+Function makebalancedtree(A, first, last)
+if first ≤ last then
+mid ← b (first + last) / 2 c
+N2 ← new node with key A[mid]
+left[N2] ← makebalancedtree(A, first, mid - 1)
+right[N2] ← makebalancedtree(A, mid + 1, last)
+return N2
+endif
+return null
+[8] 4. Prove an upper bound on the function T (n) defined by
+
+
+T (n) =
+
+2T (n/2) + T (2n/3) + 2T (n/6) + n2
+1
+
+if n ≥ 6
+if n ≤ 5
+
+Your grade will depend on the quality of the bound you provide (that is, showing that T (n) ∈
+O(100n ), while true, will not give you many marks).
+Solution : Here are the first three levels of the recursion tree (some of the repeated nodes
+have been removed, and replaced by an indication that there are “2 of these” since the tree
+would not have fit on the page otherwise).
+
+As we can see, the children of a node do the same amount of work, together, as their parent.
+Hence the work done on every level of the tree is exactly n2 , at least up to the level containing the leaf closest to the root (after which the amount of work done starts decreasing).
+The tree contains log3/2 n levels, since the path along which the size of the subproblems
+
+page 3
+decreases slowest is that where the size is multiplied by 2/3 when we go from one level to
+the next. Hence the total amount of work done is in O(n2 log n) (recall that the base of the
+log does not matter when we use asymptotic notations, because logx n is within a constant
+factor of logy n).
+For the lower bound (which you were not asked to provide), notice that the first leaf occurs
+at level log6 n, and that every level up to that one does exactly n2 work, and so the total
+amount of work done is in Ω(n2 log n).
+[10] 5. You are asked to design a data structure that supports the following two operations on a set
+S:
+• Insert(S, x): adds the element x to S.
+• Delete-Larger-Half(S): deletes the largest d|S|/2e elements of S.
+After pondering the problem for a few hours, you decide to store the elements of S in an
+ArrayList, since it supports Θ(1) insert operations.
+Note that parts (a) and (b) are independent, and you can do them in either order.
+[4] a. Explain how to implement Delete-Larger-Half(S) in Θ(|S|) worst-case time.
+Hint: your first step should be to use an algorithm from one of the assignments.
+Solution : Note that the question did not state that the elements are guaranteed to be
+distinct, and hence we need to be careful when deleting elements. Let Sorig denote
+the set S before we delete half its elements. The algorithm proceeds in three steps:
+i. Find the median m of Sorig using DeterministicSelect.
+ii. Delete all of the elements of Sorig that are larger than m.
+iii. Delete enough elements equal to m so the cardinality of S becomes b|Sorig |/2c
+[6] b. Prove that the worst-case running time of a sequence of n operations, starting with
+an empty set, is in O(n). Hint: use Φ(Si ) = u|Si | for some constant u (that you can
+choose later on).
+Solution : Following the hint, let Φ(Si ) = u|Si |. Clearly Φ(S0 ) = 0 since S
+is initially empty, and Φ(Si ) ≥ 0 since |Si | ≥ 0. Now we need to compute the
+amortized costs of the two operations.
+• Insert: costreal (Insert) = 1 and the potential difference Φ(Si+1 ) − Φ(Si ) is u.
+Hence costam (Insert) = 1 + u ∈ Θ(1).
+• Delete-Larger-Half: costreal (Delete-Larger-Half) is in Θ(|S|) ≤ c|S|.
+The potential difference Φ(Si+1 ) − Φ(Si ) = −ud|S|/2e ≤ −(u/2)|S|. Therefore, as long as u ≥ 2c, costam (Delete-Larger-Half) ≤ c|S| − (u/2)|S| ≤
+c|S| − c|S| = 0.
+Thus a sequence of n operations takes time at most
+Θ(n).
+
+Pn
+
+i=1 costam (opi )
+
+≤
+
+Pn
+
+i=1 Θ(1)
+
+∈
+

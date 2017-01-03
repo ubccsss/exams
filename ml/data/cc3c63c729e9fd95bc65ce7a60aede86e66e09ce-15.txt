@@ -1,0 +1,178 @@
+
+Author: 
+CPSC 121 Some Sample Questions for Midterm Exam #2
+Wednesday, March 12, 2014, 17:30–19:30
+Student ID:
+Name:
+Signature:
+Section (circle one):
+George Steve
+Your signature acknowledges your understanding of and agreement to the rules below.
+(Note: our cover page will look different, but the rules will be the same.
+– You have 65 minutes (individual); 40 minutes (group) to write the
+0 questions on this examination. A total of 0 marks are available.
+– You may have as an aid up to three 8.5x11” sheets of paper with
+any information you choose written or printed on them, as long
+as they are readable without magnification. No other aids—
+including electronic devices—are allowed; so, no cell phones
+and no calculators. (We will provide “Dave Tompkins’s Awesome Handout” and the “Proof Strategy Tips”.)
+– Keep your answers short. If you run out of space for a question,
+you have likely written too much.
+
+Question
+
+Marks
+
+Total
+
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you plan your use of time on the exam.
+– Clearly indicate your answer to each problem. If your answer is
+not in the provided blank, then indicate where the answer is, and
+at the answer’s location indicate the question it addresses.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her UBC card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+[1] 1. iSaks: At the iSaks auction site, vendors offer up “lots” of identical items for sale. Each lot
+must have at least 1000 items. A bid is a dollar value per item d and a quantity q of items:
+(d, q).
+The following definitions describe this domain, but unless we state them explicitly, the parts
+described as “intentions” are not known to hold.
+• B is the set of bidders
+• Lot(i, n) means lot number i offers n (a positive integer) items for auction. i is a
+positive integer ID number. (The intention of i is that it uniquely identifies a particular
+lot and tells us what order lots were offered in; that is, no two lots should have the
+same ID number. For now, iSaks sells only lots of salt shakers; so, there’s no need for
+a description of the item.)
+• Bid(j, b, d, q, i) means bidder b bid d (positive integer) dollars per item for q (positive
+integer) items on the lot with ID i. j is a positive integer ID number for the bid. (A
+lot and a bid may coincidentally have the same ID number, but the intention is that no
+two bids should have the same ID number.)
+• Won(b, d, q, i) means that bidder b won q items from lot i at the price d.
+[1] a. Defining Predicates:
+iSaks has noticed a problem with “sacrifice bids”: very high bids for one item by onetime bidders. The high bid shows up first in their table of bids and thus discourages
+others from bidding, often allowing a much lower bid for more items to win.
+Define the predicate Sac(j) which means bid ID j is a (possible) sacrifice bid to
+mean:
+i. j is the only bid by its bidder,
+ii. the bid value d for j is more than twice as high as the next highest bid,
+iii. and the bid quantity q for j is fewer than 1% of the items available in the lot.
+
+[1] b. Making Statements:
+State the following facts that we want to assume true in predicate logic. YOU
+MAY USE THE EXTRA PREDICATE(S) YOU WERE ASKED TO DEFINE
+ABOVE. (Assume they are correct. Note: this ability to use your predicate is essentially irrelevant for the practice exam; you may make an intelligent guess as to why
+we said it.)
+i. No two bids have the same ID number.
+ii. A later bid by a bidder must increase either or both of the dollar value and quantity over an earlier bid.
+iii. A bidder cannot win more of an item than they bid on.
+iv. The bidder who bid the highest dollar value earliest (with the lowest bid ID) on a
+lot must win precisely their bid (i.e., the dollar value and quantity they bid for).
+[1] c. Negation practice:
+Negate the following statement, moving the negations “inward” as far as they will
+go:
+∀b ∈ B, ∀d1 ∈ Z+ , ∀d2 ∈ Z+ , ∀q1 ∈ Z+ , ∀q2 ∈ Z+ , (∃j1 ∈ Z+ , ∃j2 ∈ Z+ , ∃i ∈
+Z+ , j1 6= j2 ∧ Bid(j1 , b, d1 , q1 , i) ∧ Bid(j2 , b, d2 , q2 , i)) → (d1 < d2 ⊕ q1 < q2 ).
+[1] 2. Who’s on First (or the Equivalent)?
+For each of the following pairs of predicate logic statements, circle one of: EQUIV (meaning they’re logically equivalent), 1 → 2 (meaning the second one follows from the first but
+the first does not follow from the second), 2 → 1 (meaning the first one follows from the
+second but the second one does not follow from the first), or NEITHER meaning neither
+one implies the other.
+TODO: circlable!!!
+(a) ∀a ∈ A, ∃b ∈ B, (P (a, b) ∧ Q(b)) → P (a, a).
+∃a ∈ A, ∃b ∈ B, Q(b) → (P (a, a) ∨ ∼P (a, b)).
+(b) ∀a ∈ A, ∀b ∈ B, S(a, b) ∨ S(b, a).
+∀a ∈ A, ∼∃b ∈ B, ∼S(a, b) ∧ ∼S(b, a).
+(c) ∀a ∈ A, P (a) → Q(a).
+∀a ∈ A, Q(a) → P (a).
+(d) ∃a ∈ A, ∀b ∈ B, P (a, b).
+∀b ∈ B, ∃a ∈ A, P (a, b).
+(e) Assuming that c1 is an element of C,
+∃c ∈ C, P (c, c).
+P (c1 , c1 ).
+(f) ∼∀a ∈ A, ∼∀b ∈ B, P (a, b).
+∃a ∈ A, ∃b ∈ B, ∼P (a, b).
+
+[1] 3. Sketchy Proofs:
+[1] a. Pred Logic Statement to Proof:
+Sketch a proof in as much detail as possible for the theorem: ∃x ∈ N, ∀y ∈
+Y, P (y) → ∃z ∈ R, z 6= y ∧ (R(x, y, z) ∨ R(x, z, y)). (Do not use logical equivalences to alter the form of the theorem, which also means no proof by contradiction
+or contrapositive.)
+[1] b. Proof to English Theorem:
+Consider the following fragment of a proof which is missing some details. (It was
+damaged by rioting voters after a controversial election.) Write the theorem this was
+proving in predicate logic in as much detail as possible. Clearly define any sets or
+predicates you need.
+Without loss of generality, let v be a voting system. Assume that v is deterministic
+and that it provides basic fairness guarantees. We choose the voting strategy s to be
+the following, based on the voting system: SECTION OF THE PROOF MISSING
+HERE. We now show that there exists a vote distribution (which we derive from v
+and s) in which a voter voting strategically gets the outcome they desire but a voter
+voting honestly does not; furthermore, there is no vote distribution for which the
+reverse is true: . . . PROOF ENDS HERE . . .
+[1] 4. I Want the PROOF:
+Prove the following theorems using informal, English-language proofs. Substantial partial
+credit is available for well-formed proofs. Unclear, awkward, or unusual proof structures
+that are not precisely correct are likely to lose substantial credit.
+(a) Prove the following theorem:
+The difference of the squares of two positive integers is divisible by their sum.
+(b) Prove the following theorem (which coincidentally compares two algorithms’ performance):
+∃c ∈ R+ , ∃n0 ∈ Z+ , ∀n ∈ Z+ , (n ≥ n0 ) → 20n < cn log10 n
+(The inequality reads: 20 times n is less than c times n times the log base 10 of n.
+Hint: recall that if log10 a = b, then 10b = a.)
+[1] 5. Manifold Circuits:
+Draw a diagram of a circuit implementing the following truth table using only the constant
+inputs 0 and 1, the inputs x, y, and z, and as many 1-of-2 multiplexers as you would like.
+
+x
+T
+T
+T
+T
+F
+F
+F
+F
+
+y
+T
+T
+F
+F
+T
+T
+F
+F
+
+z
+T
+F
+T
+F
+T
+F
+T
+F
+
+output
+F
+T
+T
+T
+T
+T
+F
+F
+

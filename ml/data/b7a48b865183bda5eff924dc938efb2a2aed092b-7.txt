@@ -1,0 +1,457 @@
+
+CPSC 213, Winter 2014, Term 1 — Sample Midterm (Winter 2013 Term 2)
+Date: October 2014; Instructor: Mike Feeley
+
+This is a closed book exam. No notes. No electronic calculators.
+Answer in the space provided. Show your work; use the backs of pages if needed. There are 9
+questions on 7 pages, totaling 50 marks. You have 50 minutes to complete the exam.
+STUDENT NUMBER:
+NAME:
+SIGNATURE:
+
+1 (8 marks)
+
+Memory and Numbers. Consider the following C code with global variables a and b.
+
+int a[2];
+int* b;
+void foo()
+b
+=
+a[0] =
+b[1] =
+}
+
+Q1
+
+/8
+
+Q2
+
+/4
+
+Q3
+
+/4
+
+Q4
+
+/4
+
+Q5
+
+/8
+
+Q6
+
+/4
+
+Q7
+
+/4
+
+Q8
+
+/4
+
+Q9
+
+/ 10
+
+Total
+
+/ 50
+
+{
+a;
+1;
+2;
+
+void checkGlobalVariableAddressesAndSizes() {
+if ((&a==0x2000) && (&b==0x3000) && sizeof(int)==4
+printf ("OKAY");
+}
+
+&& sizeof(int*)==4)
+
+When checkGlobalVariableAddressesAndSizes() executes it prints “OKAY”. Recall that sizeof(t)
+returns the number of bytes in variables of type t.
+Describe what you know about the content of memory following the execution of foo() on a Little Endian processor. List only memory locations whose address and value you know. List each byte of memory on a separate line using
+the form: “byte_address: byte_value”. List all numbers in hex.
+
+2 (4 marks)
+
+Pointers in C. Consider the following declaration of C global variables.
+
+int a[10] = {0,1,2,3,4,5,6,7,8,9};
+int* b
+= &a[6];
+
+// i.e., a[i] = i
+
+And the following expression that accesses them found in some procedure.
+*(a + ((&a[9] + 5) - b))
+When this expression is evaluated at runtime does it cause an error? If not, what value does it compute?
+Briefly explain your answer as follows: if there is a runtime error, clearly explain what causes it; if there is not an
+error, show at least 3 lines of work with intermediate values to explain your answer, step by step.
+
+3 (4 marks)
+
+Global Arrays. Consider the following C global variable declarations.
+
+int a[10];
+int* b;
+Give the SM213 assembly code the compiler might generate for the following statements that access these variables.
+Assume the value 0 is in r0 and the value of i is in r1. Use labels a and b for variable addresses.
+
+3a a[i] = 0;
+
+3b b[i] = 0;
+
+2
+
+4 (4 marks)
+
+Instance Variables. Consider the following C global variable declarations.
+
+struct S
+int
+int*
+int
+};
+
+{
+a;
+b;
+c;
+
+struct S s0;
+struct S* s1;
+Give the SM213 assembly code the compiler might generate for the following statements that access these variables.
+Assume the value 0 is in r0. Use labels s0 and s1 for variable addresses.
+
+4a s0.c = 0;
+
+4b s1->c = 0;
+
+3
+
+5 (8 marks)
+
+Count Memory References. Consider the following C global variable declarations.
+
+struct S {
+struct S* s;
+int*
+a;
+int
+b[10];
+};
+struct S s0;
+And this statement found in some procedure.
+int v = s0.s->a[s0.s->b[2]];
+List every memory read that will occur when this statement executes in the SM213 machine. List only memory reads
+and list each read separately. For each read give the name of the variable being read and an expression that computes the
+target memory address. This expression may only contain the label s0, numbers, the name of any variable previously
+read and arithmetic operators such as for addition and multiplication. Numbers must be immediately followed by a
+description in parentheses (e.g., “. . . 4 (size of int)”). There are more lines listed below than you need:
+
+1.
+
+Variable:
+
+Address:
+
+2.
+
+Variable:
+
+Address:
+
+3.
+
+Variable:
+
+Address:
+
+4.
+
+Variable:
+
+Address:
+
+5.
+
+Variable:
+
+Address:
+
+6.
+
+Variable:
+
+Address:
+
+4
+
+6 (4 marks)
+
+Branch and Jump Instructions.
+
+6a What is one important benefit that PC-relative branches have over absolute-address jumps.
+
+6b What is the value of the program-counter register (i.e., the PC) following the execution of this unconditional
+branch instruction at address 0x500. Justify your answer.
+0x500: 8005
+
+7 (4 marks) Loops. Consider the consequences of eliminating the two conditional branch instructions from SM213
+(and not adding any other instructions). Would compilers still be able to compile C programs to run on this modified
+machine? If so, explain how. If not, carefully explain what feature or features of C would be impossible to execute on
+the modified machine.
+
+8 (4 marks)
+
+Dynamic Allocation. The following code contains a procedure that creates a copy of a null-terminated
+string (the standard representation for strings in C). It contains a serious bug related to dynamic memory allocation.
+char* copy (char* s) {
+int
+i, len = 0;
+char* cpy;
+while (s [len] != 0)
+len++;
+cpy = (char*) malloc (len+1);
+for (i=0, i<len; i++)
+cpy [i] = s [i];
+cpy [len] = 0;
+return cpy;
+
+void doSomething () {
+char* x;
+x = copy ("Hello World");
+printf ("%s", x);
+}
+
+}
+Explain in plan English what the bug is and how you would fix it (without changing the semantics of copy).
+
+5
+
+9 (10 marks)
+
+Writing Assembly Code. Write SM213 assembly code that implements the following C program. Use
+labels for static addresses but do not include variable label declarations (i.e. “.long” lines). Show only the code for
+these two procedures. Do not implement a return from callReplace(); simply halt at the end of that procedure.
+Do not use the stack. Comment every line.
+int* a;
+int searchFor, replaceWith, size, i;
+void replace() {
+for (i=0; i<size; i++)
+if (a[i]==searchFor)
+a[i]=replaceWith;
+}
+
+void callReplace() {
+replace();
+// halt; do not return
+}
+
+6
+
+You may remove this page.
+
+These two tables describe the SM213 ISA. The first gives
+a template for instruction machine and assembly language and describes instruction semantics. It uses ’s’ and ’d’ to
+refer to source and destination register numbers and ’p’ and ’i’ to refer to compressed-offset and index values. Each
+character of the machine template corresponds to a 4-bit, hexit. Offsets in assembly use ’o’ while machine code stores
+this as ’p’ such that ’o’ is either 2 or 4 times ’p’ as indicated in the semantics column. The second table gives an
+example of each instruction.
+Operation
+load immediate
+load base+offset
+load indexed
+store base+offset
+store indexed
+halt
+nop
+rr move
+add
+and
+inc
+inc addr
+dec
+dec addr
+not
+shift
+
+Machine Language
+0d-- vvvvvvvv
+1psd
+2bid
+3spd
+4sdi
+F000
+FF00
+60sd
+61sd
+62sd
+63-d
+64-d
+65-d
+66-d
+67-d
+7dss
+
+branch
+branch if equal
+branch if greater
+jump
+get program counter
+jump indirect
+jump double ind, b+off
+jump double ind, index
+
+8-pp
+9rpp
+Arpp
+B--- aaaaaaaa
+6Fpd
+Cdpp
+Cdpp
+Edi-
+
+Operation
+load immediate
+load base+offset
+load indexed
+store base+offset
+store indexed
+halt
+nop
+rr move
+add
+and
+inc
+inc addr
+dec
+dec addr
+not
+shift
+
+Machine Language Example
+0100 00001000
+1123
+2123
+3123
+4123
+f000
+ff00
+6012
+6112
+6212
+6301
+6401
+6501
+6601
+6701
+7102
+71fe
+1000: 8003
+1000: 9103
+1000: a103
+b000 00001000
+6f31
+c104
+d102
+e120
+
+branch
+branch if equal
+branch if greater
+jump
+get program counter
+jump indirect
+jump double ind, b+off
+jump double ind, index
+
+Semantics / RTL
+r[d] ← vvvvvvvv
+r[d] ← m[(o = p × 4) + r[s]]
+r[d] ← m[r[b] + r[i] × 4]
+m[(o = p × 4) + r[d]] ← r[s]
+m[r[b] + r[i] × 4] ← r[s]
+(stop execution)
+(do nothing)
+r[d] ← r[s]
+r[d] ← r[d] + r[s]
+r[d] ← r[d] & r[s]
+r[d] ← r[d] + 1
+r[d] ← r[d] + 4
+r[d] ← r[d] − 1
+r[d] ← r[d] − 4
+r[d] ←!r[d]
+r[d] ← r[d] << ss
+(if ss is negative)
+pc ← (aaaaaaaa = pc + pp × 2)
+if r[r] == 0 : pc ← (aaaaaaaa = pc + pp × 2)
+if r[r] > 0 : pc ← (aaaaaaaa = pc + pp × 2)
+pc ← aaaaaaaa
+r[d] ← pc + (o = 2 × p)
+pc ← r[d] + (o = 2 × pp)
+pc ← m[(o = 4 × pp) + r[d]]
+pc ← m[4 × r[i] + r[d]]
+
+Assembly
+ld $vvvvvvvv,rd
+ld o(rs),rd
+ld (rb,ri,4),rd
+st rs,o(rd)
+st rs,(rb,ri,4)
+halt
+nop
+mov rs, rd
+add rs, rd
+and rs, rd
+inc rd
+inca rd
+dec rd
+deca rd
+not rd
+shl ss, rd
+shr -ss, rd
+br aaaaaaaa
+beq rr, aaaaaaaa
+bgt rr, aaaaaaaa
+j aaaaaaaa
+gpc $o, rd
+j o(rd)
+j *o(rd)
+j *(rd,ri,4)
+
+Assembly Language Example
+ld $0x1000,r1
+ld 4(r2),r3
+ld (r1,r2,4),r3
+st r1,8(r3)
+st r1,(r2,r3,4)
+halt
+nop
+mov r1, r2
+add r1, r2
+and r1, r2
+inc r1
+inca r1
+dec r1
+deca r1
+not r1
+shl $2, r1
+shr $2, r1
+br 0x1008
+beq r1, 0x1008
+bgt r1, 0x1008
+j 0x1000
+gpc $6, r1
+j 8(r1)
+j *8(r1)
+j *(r1,r2,4)
+7
+

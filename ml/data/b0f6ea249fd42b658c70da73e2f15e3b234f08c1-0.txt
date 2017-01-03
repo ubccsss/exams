@@ -1,0 +1,1335 @@
+https://web.archive.org/web/2222/http://www.cs.ubc.ca/~emtiyaz/papers/paper-aistats2012.pdf
+A Stick-Breaking Likelihood for Categorical Data Analysis with
+Latent Gaussian Models
+
+Mohammad Emtiyaz Khan1 , Shakir Mohamed1 , Benjamin M. Marlin2 and Kevin P. Murphy1
+1
+Department of Computer Science, University of British Columbia, Vancouver, Canada
+2
+Department of Computer Science, University of Massachusetts, Amherst, USA
+
+Abstract
+The development of accurate models and efficient algorithms for the analysis of multivariate categorical data are important and longstanding problems in machine learning and
+computational statistics. In this paper, we
+focus on modeling categorical data using Latent Gaussian Models (LGMs). We propose
+a novel stick-breaking likelihood function for
+categorical LGMs that exploits accurate linear and quadratic bounds on the logistic
+log-partition function, leading to an effective
+variational inference and learning framework.
+We thoroughly compare our approach to existing algorithms for multinomial logit/probit
+likelihoods on several problems, including inference in multinomial Gaussian process classification and learning in latent factor models. Our extensive comparisons demonstrate
+that our stick-breaking model effectively captures correlation in discrete data and is well
+suited for the analysis of categorical data.
+
+1
+
+Introduction
+
+The development of accurate models and efficient learning and inference algorithms for highdimensional, correlated, multivariate categorical data
+are important and long-standing problems in machine
+learning and computational statistics. They have applications for data analysis in a wide variety of areas such as discrete choice modeling in econometrics,
+analysis of survey responses in social science, medical
+diagnostics, and recommender systems.
+In this paper, we focus on the class of Latent GausAppearing in Proceedings of the 15th International Conference on Artificial Intelligence and Statistics (AISTATS)
+2012, La Palma, Canary Islands. Volume XX of JMLR:
+W&CP XX. Copyright 2012 by the authors.
+
+sian Models (LGMs), which model data distributions
+using Gaussian latent variables. LGMs include popular models such as factor analysis and probabilistic principal components analysis for continuous data
+(Knott and Bartholomew, 1999; Tipping and Bishop,
+1999), binary and multinomial factor analysis for discrete data (Wedel and Kamakura, 2001; Collins et al.,
+2002; Mohamed et al., 2008; Khan et al., 2010), and
+Gaussian process regression and classification (Nickisch and Rasmussen, 2008). LGMs allow for a principled handling of missing data and can be used for
+dimensionality reduction, data prediction and visualization.
+In the case of LGMs for categorical data, the two most
+widely used likelihoods are the multinomial-probit,
+and the multinomial-logit or softmax. The key difficulty with the LGM model class is that the latent variables must be integrated away in order to obtain the
+marginal likelihood needed to learn the model parameters. This integration can be performed analytically
+in Gaussian-likelihood LGMs such as factor analysis
+because the model is jointly Gaussian in the latent factors and the observed variables (Bishop, 2006). LGMs
+with logit and probit-based likelihoods lack this property, resulting in intractable integrals for the marginal
+likelihood.
+The main contribution of this paper is the development of a novel stick-breaking likelihood function for
+categorical data. The stick-breaking likelihood function is an alternative generalization of the binary logit
+likelihood to the case of categorical data. It is more
+amenable to the application of variational bounds
+than the traditional multinomial-logit construction,
+and is specifically designed to exploit recently proposed linear and quadratic bounds on the logistic-logpartition function developed by Marlin et al. (2011).
+These bounds are much more accurate than variational quadratic bounds used in previous work. We
+thoroughly compare our proposed framework to existing algorithms for both multinomial-probit and
+multinomial-logit likelihoods on several problems in-
+
+A Stick-Breaking Likelihood for Categorical Data Analysis with Latent Gaussian Models
+
+cluding inference in multinomial Gaussian process
+classification and learning in categorical factor models. Our results demonstrate that the proposed stickbreaking model effectively captures correlation in discrete data and is well suited for the analysis of categorical data.
+
+2
+
+Categorical Latent Gaussian Models
+
+For a generic latent Gaussian model, we consider N
+data instances, with a visible data vector yn and
+corresponding latent vector by zn , for the n’th observation. In general, yn and zn will have dimensions D and L, respectively. Each element of yn , denoted by ydn , can take values from a finite discrete
+set Sd = {C0 , C1 , C2 , . . . , CKd } where Ck is the k’th
+category. For simplicity, we assume that Kd = K, ∀d.
+In LGMs, the latent variables zn follow a Gaussian
+distribution with mean µ and covariance matrix Σ as
+shown in Eq. 1. The probability of each categorical variable ydn is parameterized in terms of the linear projection η dn as seen in Eqs. 2 and 3. Here,
+Wd ∈ R(K+1)×L is the factor loading matrix and
+w0d ∈ RK+1 is the offset vector, implying that η dn ∈
+RK+1 . The likelihood in Eq. 3 factorizes over data
+dimensions d. We consider the problem of choosing a
+parameterization for each likelihood term p(ydn |η dn )
+in the next section.
+p(zn |θ) = N (zn |µ, Σ)
+η dn = Wd zn + w0d
+p(yn |zn ) =
+
+D
+Y
+
+p(ydn |η dn ).
+
+(1)
+(2)
+(3)
+
+d=1
+
+We denote the set of parameters by θ =
+{µ, Σ, W, w0 }, where W and w0 are the sets containing Wd and w0d for all dimensions. To make the
+model identifiable, we set the last row of Wd and last
+element of w0d to zero. Also, the prior mean µ and
+the offset w0 are interchangeable in all the models so
+we use the mean only.
+Different models for categorical data can be obtained
+by restricting the above generic model in different
+ways. We obtain the categorical factor analysis (cFA)
+model by assuming that L ≤ DK and Σ is the identity
+matrix, while W and µ are unrestricted. Conversely,
+we obtain the categorical latent Gaussian graphical
+model (cLGGM) by assuming that L = DK and W
+is the identity matrix, while µ and Σ are unrestricted.
+We obtain a multi-class Gaussian process classification
+(mGPC) model by restricting N = 1 and W to be the
+identity matrix, and specifying µ and Σ using a kernel
+function that depends on features. In the mGPC case,
+D is the number of data points and the set of param-
+
+eters consists of the hyperparameters of the mean and
+covariance function.
+
+3
+
+Categorical Parameterizations
+
+There are many choices available for the categorical
+distribution p(y|η) in Eq. 3. We review two popular parameterizations: the multinomial-probit and
+multinomial-logit, and then introduce a new stickbreaking parameterization and discuss its properties.
+The form for the multinomial-probit function is given
+in Eq. 8 and makes use of auxiliary variables uj ∼
+N (uj |ηj , 1). The probability of each category is defined through an integral over the region Rk where
+auxiliary variable uk > uj for all j 6= k.
+K
+Y
+
+Z
+p(y = Ck |η) =
+
+p(uj |ηj )du
+
+(8)
+
+Rk j=0
+ηk
+
+e
+p(y = Ck |η) = PK
+
+j=0
+
+e ηj
+
+= exp [ηk − lse(η)]
+
+(9)
+
+The form of the multinomial-logit function is given
+in Eq. 9. It is defined
+Pusing the log-sum-exp (LSE)
+function lse(η) = log j exp(ηj ), and is the natural
+generalization of the binary logit function to three or
+more categories.
+The standard multinomial-logit construction is not the
+only way to extend the logit function to the case of
+multiple categories. We propose an alternative generalization of the logit function, which we refer to as the
+stick-breaking parameterization. The stick-breaking
+process is part of the more general framework of random allocation processes, and is very closely associated with Bayesian non-parametric methods, where it
+is used in constructive definitions of the Dirichlet process, for example Sethuraman (1994). In our stickbreaking parameterization, we use a logit function to
+model the probability of the first category as σ(η0 )
+where σ(x) = 1/(1 + exp(−x)). This is the first piece
+of the stick. The length of the remainder of the stick is
+(1 − σ(η0 )). We can model the probability of the second category as a fraction σ(η1 ) of the remainder of
+the stick left after removing σ(η0 ). We can continue in
+this way until we have defined all the stick lengths up
+to K. The last category then receives the remaining
+stick length, as seen below.
+p(y = C0 |η) = σ(η0 )
+Y
+p(y = Ck |η) =
+(1 − σ(ηj ))σ(ηk ), 0 < k < K
+j≤k−1
+
+p(y = CK |η) =
+
+K−1
+Y
+j=1
+
+(1 − σ(ηj ))
+
+(10)
+
+Mohammad Emtiyaz Khan, Shakir Mohamed, Benjamin M. Marlin and Kevin P. Murphy
+
+L(θ) =
+
+N
+X
+
+Z
+p(z|θ)p(yn |z)dz =
+
+log
+z
+
+n=1
+N
+X
+
+N
+X
+
+Z
+log
+
+q(z|γ n )
+L(θ) ≥ LJ (θ, γ) :=
+dz +
+− q(z|γ n ) log
+p(z|θ)
+z
+n=1
+=
+
+N
+X
+
+−DKL [q(z|γ n )||p(z|θ)] +
+
+n=1
+
+DKL (qn (z|γ n )||p(z|θ)) =
+
+z
+
+n=1
+
+Z
+
+D
+X
+
+q(z|γ n )
+
+p(z|θ)p(yn |z)
+dz
+q(z|γ n )
+
+Z
+q(z|γ n ) log p(yn |z)dz
+
+j≤k
+
+Models for multinomial regression have wide coverage in the statistics and psychology literature. Both
+the multinomial-probit and multinomial-logit links are
+used extensively (Albert and Chib, 1993; Holmes and
+Held, 2006; Vijverberg, 2000). These link functions do
+not assume any ordering of categories and it is understood that these parameterizations give similar performance and qualitative conclusions. On the other
+hand, inference with these link functions is difficult.
+Our stick-breaking construction simplifies the inference by constructing a categorical likelihood using
+simpler binary likelihood functions as shown in Eq.
+10. Each ηk can be interpreted as the log-ratio:
+ηk = log[p(y = Ck |η)/p(y > Ck |η)]. This implies
+that, given a particular ordering of categories, each ηk
+defines a decision boundary in the latent space z, that
+separates the k’th category from all categories j > k.
+If such a separation is difficult to attain given an ordering of categories, the stick-breaking likelihood may
+not give good predictions. In practice, such separability is easier to achieve in latent variable models such as
+ours. Our results on real-world datasets confirm this.
+The stick-breaking parameterization also has important advantages over the multinomial-logit model
+in terms of variational approximations.
+The
+multinomial-logit parameterization requires bounding
+the lse(η) function and, at present, it is not known how
+to obtain tight bounds on this function with more than
+two categories (Bouchard, 2007; Khan et al., 2010). As
+we can see in Eq. 11, the stick-breaking parameterization only depends on functions of the form log(1+eηj ),
+
+(5)
+
+z
+
+Eq(η|γ̃ dn ) [log p(ydn |η)]
+
+(6)
+
+d=1
+
+
+1
+− log |Vn Σ−1 | + tr(Vn Σ−1 ) + (mn − µ)T Σ−1 (mn − µ) − L
+2
+
+The probabilities (stick lengths) are all positive and
+sum to one; they thus define a valid probability distribution. We can also use a different function for
+σ(x) such as the probit function, but we use the logit
+function since it allows us to use efficient variational
+bounds. The stick-breaking parameterization can be
+written more compactly as shown in Eq. 11.
+X
+p(y = Ck |η) = exp[ηk −
+log(1 + eηj )]
+(11)
+
+(4)
+
+(7)
+
+known as the logistic log-partition function. In contrast to the multinomial-logit case, extremely accurate
+piecewise-linear and quadratic bounds are available for
+the logistic-log-partition function (Marlin et al., 2011).
+
+4
+
+Variational Learning and the
+Stick-Breaking Parameterization
+
+Parameter estimation is always problematic in LGMs
+that use non-Gaussian likelihoods due to the fact that
+the marginal likelihood contains intractable integrals.
+In this section, we derive a tractable variational lower
+bound to the marginal likelihood for categorical LGMs
+using the stick-breaking parameterization, exploiting
+the availability of very tight bounds on the logisticlog-partition function.
+We begin with the intractable log marginal likelihood
+L(θ) in Eq. 4 and introduce a variational posterior
+distribution q(z|γ n ) for each n. We use a Gaussian
+posterior with mean mn and covariance Vn . The full
+set of variational parameters is thus γ n = {mn , Vn }
+and we use γ to denote the set of all γ n .
+As log is a concave function, we obtain a lower
+bound LJ (θ, γ) using Jensen’s inequality, given by
+Eq. 5. The first term is simply the Kullback−Leibler
+(KL) divergence from the variational Gaussian posterior q(z|mn , Vn ) to the Gaussian prior distribution
+p(z|µ, Σ), and has a closed-form expression given by
+Eq. 7. In the second term, we substitute the likelihood
+definition from Eq. 3 and apply a change of variable
+from z to η to get Eq. 6. The new expectation is
+with respect to q(η|γ̃ dn ), where γ̃ dn = {m̃dn , Ṽdn },
+m̃dn = Wd mn + w0d , and Ṽdn = Wd Vn WdT .
+The lower bound LJ (θ, γ) is still intractable as the
+expectation of log p(ydn |η) is not available in closed
+form. To derive a tractable lower bound, we make use
+of piecewise linear/quadratic bounds for this expectation. For simplicity, we suppress the dependence on d
+and n and consider the log-likelihood of a scalar observation y given a predictor η ∼ q(η|γ̃) = N (η|m̃, Ṽ)
+
+A Stick-Breaking Likelihood for Categorical Data Analysis with Latent Gaussian Models
+
+with γ̃ = {m̃, Ṽ}. The log likelihood is shown in Eq.
+12. We see that the expectation of this term with
+respect to a Gaussian distribution is intractable due
+to the presence of log(1 + exp(ηj )) terms. We use
+the piecewise linear/quadratic upper bound of Marlin et al. (2011) to obtain a lower bound to the loglikelihood in Eq. 13.
+log p(y = Ck |η) = ηk −
+
+X
+
+log(1 + eηj )
+
+Algorithm 1 Generalized EM Algorithm for SB-LGM
+E-Step:
+D
+
+X
+∂LJ
+← −Σ−1 (mn − µ) +
+WdT gdn
+∂mn
+d=1
+
+1
+∂LJ
+←
+Vn−1 − Σ
+∂Vn
+2
+
+(12)
+
+j≤k
+
+≥ ηk −
+
+R
+XX
+
+I(tr−1 ,tr ) (ηj )[ar ηj2
+
++ br η j + c r ]
+
+(13)
+
+Here ar , br , cr are the parameters of r’th quadratic
+piece in the interval (tr−1 , tr ), R is the total number
+of pieces, and I(tr−1 ,tr ) (x) = 1 if x ∈ (tr−1 , tr ) and 0
+otherwise. We denote the parameters of the piecewise
+bound by α which can be computed beforehand by
+solving an optimization problem as shown by Marlin
+et al. (2011). The expectation of the lower bound with
+respect to a Gaussian is tractable as the expectation
+of each piece is just the expectation with respect to a
+truncated Gaussian distribution as shown in Eq. 14.
+We denote this lower bound by B(y, γ̃, α). Note that
+the bound only depends on the diagonal elements of
+Ṽ. We denote these by ṽ.
+Eq(η|γ̃) [log p(y = Ck |η)] ≥ B(y, γ̃, α)
+(14)
+Z
+R
+tr
+XX
+:= m̃k −
+(ar x2 + br x + cr )N (x|m̃j , ṽj )dx
+
+WdT diag(hdn )Wd
+
+d=1
+
+µ←
+
+N
+1 X
+mn
+N n=1
+
+Σ←
+
+N
+1 X
+Vn + (mn − µ)(mn − µ)T
+N n=1
+
+N
+X
+∂LJ
+←
+gdn mTn + 2Wdiag(hdn )V
+∂Wd
+n=1
+
+We denote these gradients by gdn := ∂B/∂ m̃dn and
+hdn := ∂B/∂ ṽdn .
+We give the gradients or closed form updates as appropriate in Algorithm 1. We use limited memory
+BFGS to perform the updates that require numerical optimization. The piecewise bound parameters α
+are computed in advance and are fixed during learning
+and inference.
+
+tr−1
+
+An important property of the piecewise bound is that
+its maximum error is bounded and can be driven to
+zero by increasing the number of pieces. This means
+that the lower bound in Eq. 14 can be made arbitrarily
+tight by increasing the number of pieces.
+4.1
+
++
+
+D
+X
+
+M-Step:
+
+j≤k r=1
+
+j≤k r=1
+
+
+−1
+
+A Generalized EM Algorithm
+
+We substitute Eq. 14 into Eq. 6 to obtain a final,
+tractable lower bound on LJ (θ, γ), which we denote
+by LJ (θ, γ). To learn the parameters, we optimize
+the lower bound with respect to the variational posterior parameters γ and model parameters θ. Some
+of the updates are not available in closed form and
+require numerical optimization, resulting in a generalized expectation-maximization algorithm. The generalized E-step requires numerically optimizing the variational posterior means and covariances. The generalized M-step consists of a mix of closed-form updates
+and numerical optimization. To derive the required
+gradients, we need the gradient of B(ydn , γ̃ dn , α) with
+respect to m̃dn and ṽdn , which are also available
+in closed-form (see Marlin et al. (2011) for details).
+
+4.2
+
+Computational Complexity
+
+The computation of gdn and hdn is O(DKN R). To
+compute the sum over d in the E and M-steps costs
+O(N DKL2 ) and inversion costs O(N L3 ). The total
+computational complexity of one iteration of our algorithm is O(DKN R + (DKL2 + L3 )N ). In the special
+case of multi-class Gaussian process classification, we
+have L = DK and N = 1 giving us complexity in
+O(D3 K 3 ) and a straightforward implementation will
+not be efficient. However, optimization can be made
+simpler by reparameterizing the covariance matrix as
+suggested in Opper and Archambeau (2009).
+
+5
+
+Related Work
+
+There is a great deal of related work on learning standard multinomial-probit and multinomial-logit LGMs.
+Moustaki and Knott (2000) describe an EM algorithm for learning in exponential family factor analysis (EFA). The integration of the latent variables is
+achieved by quadrature, limiting the applicability of
+this approach. Collins et al. (2002) describe an al-
+
+Mohammad Emtiyaz Khan, Shakir Mohamed, Benjamin M. Marlin and Kevin P. Murphy
+
+ternative method for learning EFA models based on
+an alternating optimization of the latent variables and
+parameters. This approach does not take into account
+the uncertainty in the latent variables and may not
+perform well in some cases (Khan et al., 2010). In addition, these estimation methods are not easily adapted
+to handling missing data, suffer from overfitting and
+can exhibit sensitivity to regularization.
+
+These exact probabilities remain intractable, but for
+small D we can compute them to reasonable accuracy
+using a Monte
+Carlo approximation to the integral,
+R
+p(y|θ) = p(y|z)N (z|µ, Σ)dz, where the likelihood
+is either the multinomial-logit or stick-breaking. The
+MATLAB code to reproduce the results in this section
+can be found online1 .
+
+Fully Bayesian approaches have been explored to overcome the above limitations. Albert and Chib (1993)
+describe Bayesian methods based on Gibbs sampling,
+but these do not scale to large-scale applications. Mohamed et al. (2008) describe a fully Bayesian approach for the exponential family factor analysis model
+based on Hybrid Monte Carlo. This approach can
+be quite accurate, but the sampler requires careful
+tuning. Holmes and Held (2006), Scott (2011), and
+Frühwirth-Schnatter and Frühwirth (2010) describe
+MCMC samplers using auxiliary variables for inference in multinomial-logit regression models. These
+methods generally tend to be slower than deterministic approaches, and it is usually difficult to assess
+their convergence.
+
+6.1
+
+The Integrated Nested Laplace Approximation
+(INLA) (Rue et al., 2009) can also be used, but
+this approach is limited to six or fewer parameters
+and is thus not suitable for most problems that we
+consider. Multi-class expectation propagation (EP) is
+described by Seeger and Jordan (2004), but has issues
+that we discuss in section 7. A variational Bayesian
+multinomial probit regression is described by Girolami
+and Rogers (2006), and uses the auxiliary variable
+representation of the probit function (Eq. 8), with a
+factorial representation for the posterior distribution.
+This model was shown to be effective compared to
+Gibbs sampling and Laplace approximations, but the
+factorial representation limits the effectiveness of the
+inference procedure as we show in this paper.
+Alternative local variational methods are described by
+Blei and Lafferty (2006); Khan et al. (2010), Braun
+and McAuliffe (2010), Bouchard (2007), and Ahmed
+and Xing (2007). These approaches are easy to generalize to different LGMs, and are amenable to developing efficient parameter learning algorithms. The key
+disadvantage is that the error due to the local approximation may result in a severe bias in the parameter
+estimates, as we show next.
+
+6
+
+Results
+
+We use plogit (y|θ) to refer to the exact probability of a
+data vector y under the multinomial-logit LGM with
+parameters θ. Similarly, we use pstick (y|θ) to refer to
+the exact probability under the stick-breaking LGM.
+
+Synthetic Data Experiments
+
+We generate data from a 2D categorical Latent Gaussian graphical model (cLGGM). A cLGGM is essentially a factor model in which L = DK and W is the
+identity matrix, while µ and Σ are unrestricted. We
+assume that both dimensions have K categories, giving us K 2 unique data cases. We set the true parameters θ ∗ to µ∗ = 0 and Σ∗ = 20cov(X) + IL , where
+X = [IK−1 IK−1 ]. This choice of Σ∗ forces both dimensions to take the same value, resulting in high correlation. We sample 106 data cases from the logit model to
+get an estimate of plogit (y|θ ∗ ). We estimate parameters θ̂ of logit and stick using this dataset. For the logit
+model, we use two versions of variational EM algorithms based on the Bohning bound (Khan et al., 2010)
+and the Blei bound (Blei and Lafferty, 2006) respectively. For the stick model, we use our proposed variational EM algorithm. We refer to these three methods
+as ‘logit-Bohning’, ‘logit-Blei’, and ‘stick-PW’ respectively. Note that since the data is generated from a
+multinomial-logit model, there is a modeling error for
+stick-PW in addition to the approximation in learning.
+We first compare results for K = 4 in Fig. 1(a)
+which shows the true plogit (y|θ ∗ ) as well as plogit (y|θ̂)
+for logit-blei and logit-Bohning, and pstick (y|θ̂) for
+stick-PW. We see that stick-PW obtains a very close
+probability distribution to the true distribution, while
+other methods do not. Figure 1(b) shows results for
+K = 4, 5, 6, 7, 8. Here we plot KL-divergence between
+the true distribution plogit (y|θ ∗ ) and the estimated
+distributions for each method. We see that our method
+consistently gives very low KL divergence values (the
+values for other methods are decreasing because the
+entropy of the true distribution decreases since we have
+set the multiplying constant in Σ∗ to 20 for all categories).
+6.2
+
+Multi-class Gaussian process
+classification
+
+In this section, our goal is to compare the marginal
+likelihood approximation and its suitability for parameter estimation. We consider a multi-class Gaussian
+process classification (mGPC) model since the number
+1
+
+www.cs.ubc.ca/∼emtiyaz/software/catLGM.html
+
+A Stick-Breaking Likelihood for Categorical Data Analysis with Latent Gaussian Models
+True Distribution
+
+0.3
+Stick−PW
+Logit−Blei
+Logit−Bohning
+
+0.2
+
+0.1
+
+0
+
+0.25
+
+0.1
+
+0
+0
+
+4
+
+8
+
+12
+
+16
+
+0
+
+4
+
+8
+
+12
+
+Data cases
+
+Data cases
+
+Logit−Blei
+
+Logit−Bohning
+0.2
+
+Probability
+
+0.2
+
+16
+
+0.1
+
+0
+4
+
+8
+
+12
+
+16
+
+0.1
+
+0.15
+
+0.05
+
+0
+
+0
+
+Data cases
+
+0.2
+
+0.1
+
+0
+0
+
+KL divergence
+
+Probability
+
+Probability
+
+0.2
+
+Probability
+
+KL div between true and estimated distribution
+
+Stick−PW
+
+4
+
+8
+
+12
+
+16
+
+Data cases
+
+(a)
+
+4
+
+5
+
+6
+
+7
+
+8
+
+Number of Categories
+
+(b)
+
+Figure 1: (a) Comparison of the true probability distribution to the estimated distributions on synthetic data
+with 4 categories. (b) KL divergence between the true and estimated distributions for different categories.
+of parameters is small, which makes it easier to investigate the approximation. We use hybrid Monte Carlo
+(HMC) sampling along with annealed importance sampling (AIS) to get the ‘true’ value of marginal likelihood. We present results for the multinomial-logit link
+function and refer to this as logit-HMC. We compare to
+the multinomial probit model of Girolami and Rogers
+(2006), which uses variational-Bayesian inference. For
+this method, we use the MATLAB code provided by
+the authors2 . We refer to this as the ‘probit-VB’ approach. We also compare to a multinomial-logit model
+learned using a variational EM algorithm based on
+the Blei bound proposed by Blei and Lafferty (2006)
+and the Bohning bound proposed in Bohning (1992).
+We refer to these models as the ‘logit-Blei’ and ‘logitBohning’ respectively.
+We apply the mGPC model to the forensic glass data
+set (available from the UCI repository) which has
+D = 214 data examples, K = 6 categories, and features x of length 8. We use 80% of the dataset for
+training and the rest for testing. We set µ = 0 and use
+a squared-exponential kernel, for which the (i, j)’th entry of Σ is defined as: Σij = −σ 2 exp[− 21 ||xi −xj ||2 /s].
+To compare the marginal likelihood, we fix θ which
+consists of σ and s and compute a posterior distribution (or draw samples from it), and an approximation
+to the marginal likelihood using one of the methods
+mentioned above. We compute the prediction error
+defined as − log2 p̃(ytest |θ, ytrain , xtrain , xtest ), where
+(ytrain , xtrain ) and (ytest , xtest ) are training and testing data, respectively. Here, p̃(ytest |·) is the marginal
+2
+We corrected a bug in this code for marginal likelihood
+computation. The corrected code can be found online.
+
+predictive distribution approximated using the Monte
+Carlo method.
+Figure 2 shows the contour plots for all the methods
+over a range of settings for the hyperparameter values
+of the Gaussian process. The top row shows the negative log marginal likelihood approximation and the
+bottom row shows the prediction error. The star indicates the hyperparameter value at the minimum of
+the negative log marginal likelihood. The first column
+is the ‘true’ marginal likelihood obtained by sampling
+for logit-HMC. This plot shows the expected behavior of the true marginal likelihood. As we increase
+σ 2 , we move from Gaussian-like posteriors to a posterior that is highly non-Gaussian. The posterior in
+the high σ 2 region is effectively independent of σ 2 and
+thus we see contours of marginal likelihood that remain constant (this has also been noted by Nickisch
+and Rasmussen (2008)). Importantly for model selection, there is a correspondence between the minimum
+value of the marginal likelihood (or evidence) and the
+region of minimum prediction error. Thus optimizing
+the hyperparameters and performing model selection
+by minimizing the marginal likelihood gives optimal
+prediction. In our experience, tuning HMC parameters is a tedious task for this model as these parameters depend on θ. In addition, convergence is difficult
+to assess. Both HMC and AIS samplers need to be
+run for many iterations to get reasonable estimates.
+Columns 2 and 3 show the log marginal likelihood and
+prediction for the Bohning bound, and Blei’s bound
+for the logit model. As we increase σ 2 , the posterior becomes highly non-Gaussian and the variational
+bounds strongly underestimate the marginal likelihood
+
+Mohammad Emtiyaz Khan, Shakir Mohamed, Benjamin M. Marlin and Kevin P. Murphy
+NegLogLik
+
+NegLogLik
+
+4
+
+NegLogLik
+
+4
+
+log(σ)
+
+260
+
+2
+
+260
+
+2
+
+200
+0
+
+2
+
+4
+
+200
+0
+
+PredError
+
+2
+
+1.9
+
+log(σ)
+
+2
+
+1.5
+
+1.1
+
+2
+
+4
+
+log(s)
+
+(a) Logit-HMC
+
+0.9
+
+200
+0
+
+1.9
+
+2
+
+2
+
+1.5
+
+1.1
+
+2
+
+4
+
+0.9
+
+log(s)
+
+200
+0
+
+1.9
+
+(b) Logit-Bohning
+
+2
+
+2
+
+1.5
+
+200
+0
+
+0
+
+1.1
+
+4
+
+log(s)
+
+0.9
+
+1.9
+
+4
+
+4
+
+1.9
+
+1.7
+2
+
+1.5
+
+1.7
+2
+
+1.5
+
+1.3
+0
+
+1.1
+
+0
+
+2
+
+4
+
+log(s)
+
+(c) Logit-Blei
+
+2
+
+PredError
+
+4
+
+1.3
+
+2
+
+230
+0
+
+4
+
+1.7
+
+0
+
+260
+
+2
+
+PredError
+
+4
+
+1.3
+0
+
+290
+
+230
+0
+
+4
+
+1.7
+
+0
+
+260
+
+2
+
+PredError
+
+4
+
+1.3
+0
+
+290
+
+230
+0
+
+4
+
+1.7
+
+0
+
+260
+
+2
+
+PredError
+
+4
+
+4
+
+290
+
+230
+0
+
+NegLogLik
+
+4
+
+290
+
+230
+0
+
+NegLogLik
+
+4
+
+290
+
+(d) Probit-VB
+
+0.9
+
+1.3
+0
+
+1.1
+
+0
+
+2
+
+4
+
+0.9
+
+log(s)
+
+(e) Stick-PW
+
+Figure 2: Comparison of methods using multi-class GP classification on the glass dataset. The top row shows the
+negative log marginal likelihood approximations and the bottom row shows the prediction errors. Each column
+is a different method. The first column can be considered as ground-truth.
+
+Table 1: Performance of methods at the best parameter setting (a star in Fig. 2)
+Method
+s
+σ
+negLogLik predError
+Logit HMC
+1
+2.5
+198.63
+0.92
+Logit-Boh
+1
+0.5
+239.28
+1.31
+.
+Logit-Blei
+1
+1
+208.26
+1.13
+Probit-VB
+0.5
+0
+203.59
+1.23
+Stick-PW
+0.5
+2
+194.16
+1.07
+
+in these regions (upper left corner of plots). The variational approximation also reduces the correspondence
+between the marginal likelihood and the test prediction, thus the minimum of the marginal likelihood is
+not useful in finding regions of low prediction error
+(high information score), resulting in suboptimal performance. The Blei-bound, being a tighter bound than
+the Bohning bound, provides improved marginal likelihood estimates as expected, and a better correspondence between the prediction error and the marginal
+likelihood. The 4th column is the behavior of the
+multinomial probit model and confirms the behavioral
+similarity of the logit and probit likelihoods.
+The behavior of the stick likelihood is shown in the
+5th column. The piecewise bound is highly effective
+for this model and the model provides good estimates
+even in the highly non-Gaussian posterior regions. An
+important appeal of this model is that the correspondence between the marginal likelihood and the prediction is better maintained than the logit or probit
+models, and thus parameters obtained by optimizing
+the marginal likelihood will result in good predictive
+performance.
+
+Performance of all methods at the best parameter setting is summarized in Table 1 showing the best parameter values, an approximation to the negative marginal
+log-likelihood, and prediction error.
+6.3
+
+Categorical Latent Gaussian Graphical
+Model (cLGGM)
+
+We compare Blei’s bound to our piecewise bound for a
+latent Gaussian graphical model, using the tic-tac-toe
+data set, which consists of 958 data examples with 10
+dimensions each. All dimensions have 3 categories except the last one which is binary (thus the sum of categories used in the cLGGM is 29). We use 80% for training and 20% for testing. The ASES data set consists
+of survey data from respondents in different countries
+(available online3 ). We select one country (UK) and
+only the categorical responses, resulting in 17 response
+fields from 913 people; 9 response fields have 4 categories and the remainder have 3 categories. We compute the imputation accuracy on the test data. Basically, we run inference on the test data using the estimated parameters and compute the predictive probability for each missing value. The prediction error is
+computed similar to Khan et al. (2010).
+Figure 3(a) shows the error versus time for one split,
+for the tic-tac-toe data. The plot shows that the stickPW is a better method to use, since it gives much
+lower error when the two methods are run for the same
+amount of time. Figure 3(b) compares the error of the
+Blei-bound and the piecewise bound for all 20 data
+splits used. For all splits, the points lie below the
+3
+
+www.cs.ubc.ca/∼emtiyaz/datasets.html
+
+A Stick-Breaking Likelihood for Categorical Data Analysis with Latent Gaussian Models
+Tic−Tac−Toe
+
+Error vs Time on Tic−Tac−Toe data
+
+ASES−UK
+1.4
+
+Logit−Blei
+Logit−PW
+
+1.45
+
+1.4
+
+1.4
+
+Error with PW
+
+Error with PW
+
+Error
+
+1.5
+
+1.2
+
+1.2
+1
+
+1.35
+2
+
+3
+
+10
+
+10
+
+4
+
+10
+
+Time (sec)
+
+1.2
+
+(a)
+
+1.4
+
+Error with Blei
+
+(b)
+
+1
+
+1.2
+
+1.4
+
+Error with Blei
+
+(c)
+
+Figure 3: Results on cLGGM model: (a) Imputation error vs time for tic-tac-toe data (b) Imputation error for
+different splits for tic-tac-toe data (c) Imputation error for different splits for ASES-UK data.
+diagonal line, indicating that the piecewise bound has
+better performance. We show a similar plot for the
+ASES data set in figure 3(c), which more markedly
+shows the improvement in prediction when using the
+piecewise bound over Blei’s bound.
+
+7
+
+Discussion and Conclusion
+
+We have presented a new stick-breaking latent Gaussian model for the analysis of categorical data. We
+also derived an accurate and efficient variational EM
+algorithm using piecewise linear and quadratic bounds.
+Due to the bounded error of the piecewise bounds, we
+are able to reduce the error in the lower bound to
+the marginal likelihood, up to the error introduced by
+Jensen’s inequality. This leads to accurate estimates
+of the marginal likelihood and parameters, resulting in
+improved prediction accuracy. In contrast, variational
+learning in existing logit/probit based LGMs gives
+poor parameter estimates due to inaccurate bounds for
+the log-sum-exp function. Our extensive comparison
+with existing logit/probit based LGMs demonstrated
+that the proposed stick-breaking model effectively captures correlation in discrete data and is well suited to
+the analysis of categorical data.
+A likelihood similar to our stick-breaking model has
+been proposed for probabilistic language modeling in
+Mnih and Hinton (2009) where the probability of a
+word is expressed as a product of sigmoids. A similar
+idea using a product of sigmoids has been applied by
+Bouchard (2007) to build efficient variational bounds
+for the log-sum-exp function.
+A popular alternative approach to ours is Expectation Propagation (EP) (Minka, 2001), which has been
+shown to give good performance for binary Gaussian
+process classification (Nickisch and Rasmussen, 2008).
+
+An extension of EP to multi-class Gaussian process
+classification for the multinomial-logit link is derived
+by Seeger and Jordan (2004), but they state that their
+approach is “fundamentally limited by the requirement of an efficient numerical integration in K dimensions” (Seeger and Jordan, 2004, §4.3.1). For the
+multinomial-probit link, this is not a limitation since
+the numerical integration can be done efficiently as described in Seeger et al. (2006). The EP updates, however, are usually complicated for these methods. A
+more important problem with EP is parameter learning in models, such as categorical factor analysis, for
+which we are not aware of any work. The difficulty
+in parameter learning with EP is discussed by Seeger
+and Jordan (2004, §5) in the context of multi-class
+Gaussian process classification. They suggest the use
+of a lower bound based on KL divergence, since an
+EP approximation is not easy to obtain in the multiclass case. This leads to a non-standard and usually
+non-descending optimization since the inference and
+learning steps do not optimize the same lower bound.
+These lower bounds are usually not convex, which further adds to the difficulty. Such a hybrid VB-EP is
+used by Rattray et al. (2009), who also discuss the
+difficulty in computing EP approximations for the parameter learning setting.
+Acknowledgments
+We thank Guillaume Bouchard (XRCE) for encouraging us to pursue the idea of the stick-breaking likelihood. SM is supported by the Canadian Institute
+for Advanced Research (CIFAR). We thank the reviewers for their valuable suggestions. This work was
+supported in part by the Institute for Computing, Information and Cognitive Systems (ICICS) at UBC.
+
+Mohammad Emtiyaz Khan, Shakir Mohamed, Benjamin M. Marlin and Kevin P. Murphy
+
+References
+A. Ahmed and E. Xing. On tight approximate inference of the logistic-Normal topic admixture model.
+In Proceedings of the International Conference on
+Artificial Intelligence and Statistics, 2007.
+
+T. Minka. A family of algorithms for approximate
+Bayesian inference. PhD thesis, MIT, 2001.
+A. Mnih and G.E. Hinton. A scalable hierarchical distributed language model. Advances in Neural Information Processing Systems, 21:1081–1088, 2009.
+
+J. Albert and S. Chib. Bayesian analysis of binary and
+polychotomous response data. Journal of the Americal Statistical Association, 88(422):669–679, 1993.
+
+S. Mohamed, K. Heller, and Z. Ghahramani. Bayesian
+Exponential Family PCA. In Advances in Neural
+Information Proceeding Systems, 2008.
+
+C. Bishop. Pattern recognition and machine learning.
+Springer, 2006.
+
+I. Moustaki and M. Knott. Generalized latent trait
+models. Psychometrika, 65(3):391–411, 2000.
+
+D. Blei and J. Lafferty. Correlated topic models. In Advances in Neural Information Proceeding Systems,
+2006.
+
+H. Nickisch and C.E. Rasmussen. Approximations for
+binary Gaussian process classification. Journal of
+Machine Learning Research, 9(10), 2008.
+
+D. Bohning. Multinomial logistic regression algorithm.
+Annals of the Institute of Statistical Mathematics,
+44:197–200, 1992.
+
+M. Opper and C. Archambeau. The variational Gaussian approximation revisited. Neural computation,
+21(3):786–792, 2009.
+
+G. Bouchard. Efficient bounds for the softmax and applications to approximate inference in hybrid models. In NIPS workshop on approximate inference in
+hybrid models, 2007.
+
+M. Rattray, O. Stegle, K. Sharp, and J. Winn. Inference algorithms and learning theory for Bayesian
+sparse factor analysis. Journal of Physics: Conference Series, 197(1):012002, 2009.
+
+M. Braun and J. McAuliffe. Variational inference for
+large-scale models of discrete choice. Journal of the
+American Statistical Association, 105(489):324–335,
+2010.
+
+H. Rue, S. Martino, and N. Chopin. Approximate
+Bayesian inference for latent Gaussian models using integrated nested Laplace approximations. Journal of Royal Statistical Society Series B, 71:319–392,
+2009.
+
+M. Collins, S. Dasgupta, and R.E. Schapire. A generalization of principal component analysis to the
+exponential family. In Advances in neural information processing systems, pages 617–624, 2002.
+
+S. L. Scott. Data augmentation, frequentist estimation, and the Bayesian analysis of multinomial logit
+models. Statistical Papers, 52(1):87–109, 2011.
+
+S. Frühwirth-Schnatter and R. Frühwirth. Data augmentation and MCMC for binary and multinomial
+logit models. Statistical Modelling and Regression
+Structures, pages 111–132, 2010.
+
+M. Seeger and M. I. Jordan. Sparse Gaussian process
+classification with multiple classes. Technical Report Department of Statistics TR 661, University of
+California, Berkeley, 2004.
+
+M. Girolami and S. Rogers. Variational Bayesian
+multinomial probit regression with Gaussian process priors. Neural Comptuation, 18(8):1790 – 1817,
+2006.
+
+M. Seeger, N. Lawrence, and R. Herbrich. Efficient nonparametric Bayesian modelling with sparse
+Gaussian process approximations. Technical report,
+Max Planck Institute, 2006.
+
+C. Holmes and L. Held. Bayesian auxiliary variable models for binary and multinomial regression.
+Bayesian Analysis, 1(1):145–168, 2006.
+
+J. Sethuraman. A constructive definition of Dirichlet
+priors. Statistica Sinica, 4:639–650, 1994.
+
+M. Khan, B. Marlin, G. Bouchard, and K. Murphy.
+Variational bounds for mixed-data factor analysis.
+In Advances in Neural Information Proceeding Systems, 2010.
+M. Knott and D.J. Bartholomew. Latent variable models and factor analysis. Number 7. 1999.
+B. Marlin, M. Khan, and K. Murphy.
+Piecewise bounds for estimating Bernoulli-logistic latent
+Gaussian models. In International Conference on
+Machine Learning, 2011.
+
+M. Tipping and C. Bishop. Probabilistic principal
+component analysis. Journal of Royal Statistical Society Series B, 21(3):611–622, 1999.
+P. M. Vijverberg. Betit: A family that nests probit
+and logit. Technical Report DP N 222, IZA, 2000.
+M. Wedel and W. Kamakura. Factor analysis with
+(mixed) observed and latent variables in the exponential family. Psychometrika, 66(4):515–530, December 2001.
+

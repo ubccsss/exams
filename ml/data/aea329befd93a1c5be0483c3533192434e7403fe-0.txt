@@ -1,0 +1,59 @@
+https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi/home/c/cs426/public_html/426-fall-2004/cs426_finalproject.pdf
+CPSC 426
+
+Assignment
+
+Final Project: 25%
+
+Due
+
+December 3, 2004
+
+For your final project, you are expected to work in pairs. Larger groups are acceptable, but will need to achieve more to show
+that everyone on the team made a good contribution. Solo projects are also acceptable, but you will be expected to do the same
+amount of work as a pair, so it may be twice as hard.
+The purpose of the final project is to demonstrate that you can independently learn about, understand, and implement advanced
+animation methods that have not been covered in the assignments. You must implement a method related to character animation (e.g. doing stuff with motion capture data, simulating Lagrangian dynamics, character skinning, flocking behaviour,
+inverse kinematics, etc.), and also a method related to passive animation (e.g. rigid body motion, other types of particle systems, deformable objects, water waves, etc.). Note that these lists aren’t necessarily exclusive: for example, you can argue
+that character skinning should count as passive animation, or that a deformable object whose deformation parameters you can
+control with motion curves is more like character animation.
+In addition to your notes from lectures, you may want to get ideas by looking through the course textbook, or through previous
+SIGGRAPH papers (you can browse online at the ACM Digital Library), or by coming to talk to me.
+Teams with more than two people will need to implement more methods, or argue that the methods they have chosen are hard
+enough that it counts for more.
+The showcase for what you choose to implement will either be a short film (think on the order of 10 seconds) or an interactive
+program (perhaps a game, but other possibilities exist—e.g. an interactive poser that does inverse kinematics and shows the
+results with skinning).
+You are allowed and even encouraged to use external libraries or code I’ve provided in the class, etc. but you must give credit
+for what you have used. Obviously, if an external library implements an animation method for you, you may not count that as
+one of your methods.
+
+1
+
+Proposal
+
+The first thing you need to do is figure out who is on your team. The second thing you need to do is figure out what you want
+to do, and make a proposal to me about it. By 4pm, Friday, November 12, you must finalize who is in your team, and you
+must have secured my approval for your project. You will lose marks for establishing this later.
+Note: your first proposal may not be acceptable. I may have to talk to you about modifying it to something more in line with
+the course, or something less ambitious. Do NOT leave this to the last day, as it could take some revisions to make this
+work.
+
+2
+
+Deliverables
+
+By midnight of December 3 you need to send the code you developed for the final project to the course account.
+You have two options for grading: either doing a short demo or doing a write-up. If your interactive program doesn’t compile
+and run on the Linux machines in CICSR or on a Mac OS X box, or your short film doesn’t play on my Mac (e.g. uses some
+proprietary Microsoft codec), then you will have to do the demo, and you are responsible for providing a machine on which
+you will do the demo (in CICSR building or nearby).
+For the demo: you need to set up an appointment with me (10 minutes should be sufficient) at some time to demonstrate your
+work. The appointment may be slightly after December 3 if scheduling it before then will not work. In the appointment you
+will run your program or show your movie, and explain what you did and how you did it.
+If you don’t do a demo: you need to email the course account with either a URL to the movie you made or with clear instructions
+on how to compile and run the interactive program you made. You also must submit a write-up, either in email or on paper,
+explaining what you did and how you did it.
+
+1
+

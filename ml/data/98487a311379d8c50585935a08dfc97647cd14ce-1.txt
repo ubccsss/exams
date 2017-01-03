@@ -1,0 +1,599 @@
+
+Author: Joanna
+Name:
+
+Student ID Number:
+
+Signature:
+
+CPSC 444 2010-11 (T2) Final Exam
+Department of Computer Science
+University of British Columbia
+J. McGrenere
+Exam Instructions (read carefully):
+1. Sign this page of the exam with your signature in the
+space provided on the upper left immediately.
+
+Question
+
+Points
+Possible
+
+2. Continue reading the instructions, but do not open the
+exam booklet until you are told to do so by a proctor.
+
+1
+
+10
+
+2
+
+8
+
+4. The exam is closed book. No aids are permitted,
+except for a simple non-programmable calculator.
+
+3
+
+8
+
+5. There are 10 questions on this exam, each worth the
+indicated number of points. Answer as many
+questions as you can.
+
+4
+
+8
+
+6. Keep your answers short and to the point (i.e., avoid
+any unnecessary details).
+
+5
+
+9
+
+7. Write all of your answers on these pages. If you need
+more space, there is blank space at the end of the
+exam. Be sure to indicate when a question is
+continued, both on the page for that question and on
+the continuation page. Do not write on the back of
+any page.
+
+6
+
+12
+
+7
+
+8
+
+8
+
+14
+
+9
+
+12
+
+10
+
+14
+
+Total
+
+103
+
+3. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+
+8. Interpret the exam questions as written. No questions
+will be answered by the proctor(s) during the exam
+period. State your assumptions if you are unsure
+about a question.
+9. You have 3 hours in which to work. Budget your time
+wisely.
+10. No one will be permitted to enter the exam room after
+one half-hour from the start time, or to leave during
+the first half-hour of the exam. In addition, no one
+can leave the exam room during the last ten minutes
+of the exam.
+
+CPSC 444 2010-11 (T2)
+
+1 of 15
+
+Mark
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #1 [10 points total]: True/False
+For each question, circle one of either true or false. You do not have to provide a justification for the answer
+you have given. [1 pt each]
+(a) One of the fundamental axioms in the social sciences, and anthropology in particular, is that what people
+say they do and what they actually do are not always the same.
+True
+
+False
+
+(b) Convenience sampling relies on participants referring others whom they think would be good candidates
+for the research.
+True
+
+False
+
+(c) With respect to the ethical treatment of subjects, subjects are allowed to quit a study at any time, even if
+they consented to participating for the full duration of the study.
+True
+
+False
+
+(d) Part way into term your professor broke her arm which caused her to miss one 444 lecture.
+True
+
+False
+
+(e) Symmetry, similarity, and connectedness are three of the gestalt laws.
+True
+
+False
+
+(f) In an F-statistic, if for a given experiment the probability of achieving the resulting F-value came out to
+.049, you would be able to reject the null hypothesis assuming a confidence interval of 95%.
+True
+
+False
+
+(g) According to McGuffin & Balakrishnan’s “Acquisition of Expanding Targets,” Fitts’s law can model
+and predict performance of widgets that dynamically grow in size as the user’s cursor approaches.
+True
+
+False
+
+(h) The core theory of colour vision (Opponent Process Theory) is that the human’s receptor signals are
+processed into two separate opponent channels in the early stages of neural processing.
+True
+
+False
+
+(i) According to the ethics guidelines used in CPSC 444, video captured during a user study can be given to
+other researchers to be used in another study.
+True
+
+False
+
+(j) When capturing video of users interacting with systems, it is best practice to use more than one type of
+light.
+True
+
+False
+
+CPSC 444 2010-11 (T2)
+
+2 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #2 [8 points total]: User Abilities – Memory
+(a) What are the two main differences between working memory and long-term memory? [2 pts]
+
+(b) Describe the interference model of forgetting and provide one example. [2 pts]
+
+(c) Name one form of sensory memory/buffer as described by the Dix et al. reading and provide one
+example. [2 pts]
+
+(d) What is prospective memory? Briefly explain why designing user interfaces to support prospective
+memory is important. [2 pts]
+
+CPSC 444 2010-11 (T2)
+
+3 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #3 [8 points total]: User Abilities – Visual Processing
+(a) Why is it discouraged to have bright red text on a bright blue background? What is a better combination?
+[2 pts]
+
+(b) It is supposedly difficult to see small blue objects (such as blue text). What is the basis of this claim? Is it
+true? (Explain your answer). [2 pts]
+
+(c) Assume you are designing an interface to visualize 5 categories of data. Which 5 colours would you
+choose to map to the 5 categories of data in order to maximize the separability of the different data
+categories? Explain your answer. [3 pts]
+
+(d) In pre-attentive processing, how does the number of distracters impact the time it takes to locate the
+target? [1 pts]
+
+CPSC 444 2010-11 (T2)
+
+4 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #4 [8 points total]: User Abilities – Motor Processing + Empirical Laws
+(a) Explain with reference to an empirical law discussed in class why it is faster to have a “reduced” toolbar
+that contains only the icons a user actually uses rather than a “full” toolbar (i.e., the default toolbar that
+contains all the icons). Assume that in the reduced toolbar all unused icons are removed, and all
+remaining icons stay in their original position. Name the law and describe it in plain language. [4 pts]
+Name the relevant empirical law [1 pt]: _______________________________
+Describe the law in plain language (you may provide the formula, but it is not necessary and this does
+not negate your need to describe the law in plain language) [1 pt]:
+
+Explain why it is faster to have only the icons a user actually uses on the toolbar [2 pts]:
+
+(b) In Fitts’s Law research, in order to compare the results of one experiment to the results of another
+experiment, it is necessary to normalize error rates. Explain why this is the case with respect to the
+speed-accuracy tradeoff. [2 pts]
+
+(c) Two novel input devices were evaluated in a Fitt’s Law experiment. Device A showed an index of
+performance of 10.4 and Device B’s was 5.8. Assuming a properly run and analyzed experiment, which
+device would you adopt (assuming you need to pick one of the two)? Explain your answer. [2 pts]
+
+CPSC 444 2010-11 (T2)
+
+5 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #5 [9 points total]: Experiment Design, Analysis, and Report Writing
+(a) A company that develops 3D modeling software for the film industry is testing out two prototype
+interfaces for a new quick-sketch application they are developing. One of the prototypes relies on a
+traditional mouse-and-keyboard interface while the other relies on a stylus (pen)-based interface. They
+hypothesized that the stylus interface would be faster than the mouse-and-keyboard interface.
+Unfortunately, after conducting a simple two condition experiment with 10 participants, where 5
+participants used one prototype, and 5 used the other, their statistical analysis found no statistically
+significant difference between the two interfaces.
+i.
+
+What valid conclusions can the company come to about the difference between their interface
+prototypes? Explain your answer. [2pts]
+
+ii.
+
+Identify two things that the company could do to make their future user studies comparing the
+two interfaces more statistically powerful. [2pts]
+
+(b) Your 444 assignment consisted of writing a report about a soft keyboard typing experiment. The
+following statements are related to that experiment. In which report section should each
+statement be found: Conditions, Discussion, Procedure, Results, or Tasks? [5 pts]
+i.
+
+“The finding that participants’ typing speed was faster on the alphabetic keyboard than
+keypad is consistent with MacKenzie et al.’s (1999) previous findings.” ______________
+
+ii.
+
+“Participants were shown a demonstration of the two layouts. Participants were then
+asked to complete a questionnaire on their typing experiences.” ______________
+
+iii.
+
+“Participants were given the same three sentences for each layout - one practice sentence
+followed by two sentences. None of the sentences contained capital letters, since one
+could not capitalize letters in the prototypes.” ______________
+
+iv.
+
+“No significant main effect of phone keypad experience on task completion times was
+found. In addition, no significant interaction of keyboard layout and phone keypad
+experience level on error rates was found.” ______________
+
+v.
+
+“We compared two soft keyboard layouts: the phone keypad layout and the alphabetic
+keyboard layout. These layouts are described next.” ______________
+
+CPSC 444 2010-11 (T2)
+
+6 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #6 [12 points total]: Field Study
+Current message boards at UBC (in places like the SUB and the bus loop) are a mess, and your interaction
+design consulting company suspects it might be easier if people could post to them electronically, perhaps
+in person using a smartphone as an input device, and/or remotely through a web interface. Before your
+company can move in this design direction, however, you need to better understand how message boards
+are currently being used. Your goal is to conduct an initial exploratory field study to gather information to
+clarify how message boards at UBC are being used.
+1. Provide two focal points for your initial study, and briefly justify each one. [6 pts]
+2. Provide three interview questions related to each focal point (6 questions in total). [6 pts]
+
+focal point #1:
+justification:
+
+question 1:
+
+question 2:
+
+question 3:
+
+focal point #2:
+justification:
+
+question 1:
+
+question 2:
+
+question 3:
+CPSC 444 2010-11 (T2)
+
+7 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #7 [8 points total]: Field Experiment
+(a) What is the main difference between a field experiment and a more general field study? [1 pt]
+
+(b) Relative to a laboratory experiment, what are three main advantages of a field experiment? [3 pts]
+
+(c) The field experiment from the McGrenere et al. paper “An Evaluation of a Multiple Interface Design
+Solution for Bloated Software” was discussed in class. Name two limitations to this study as it was
+conducted and briefly (in one or two sentences) provide alternative study designs that would address
+each of the limitations. [4 pts]
+
+CPSC 444 2010-11 (T2)
+
+8 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #8 [14 points total]: Using Video
+(a) Video can be a powerful tool in the early (formative) stages of interaction design, as demonstrated by
+Wendy Mackay’s “Using Video to Support Interaction Design”. Briefly describe three different ways
+that video can be used in early design stages, and explain why video is especially useful for each. [6
+pts]
+
+(b) What is the primary drawback to using video in these early stages of design? [1 pt]
+
+(c) Imagine that you have been hired to study the effectiveness of a new interactive table-top system (e.g., a
+smart table) in an architectural firm. The firm has the table installed in their primary meeting room and
+intends to use it for team reviews of architectural drawings. You are going to collect data from the first 6
+meetings that make use of the interactive table top, and are considering using video and/or field
+observations notes for data collection. List 3 pros and 3 cons of using video, relative to field observation
+notes, for this situation. Explain which technique (video and/or field observation) you would decide
+to use in the end. [7 pts]
+
+CPSC 444 2010-11 (T2)
+
+9 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #9 [12 points total]: Guest Lectures
+Parts a-b refer to Dr. Ron Rensink’s guest lecture.
+(a) Describe change blindness and give one way in which it is induced. [3 pts]
+
+(b) Describe one implication of change blindness for interface design. [1 pts]
+
+Parts c-d refer to Dr. Mike Wu’s guest lecture.
+(c) Briefly describe the study design used to evaluate the Family-Link Calendaring System. Provide one
+strength OR one limitation of this study design. [2 pts]
+
+(d) Describe one strength of the data analysis approach used. [2 pts]
+
+CPSC 444 2010-11 (T2)
+
+10 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Parts e-f refers to Dr. Roger Miller’s guest lecture.
+(e) In lay terms (i.e., non-legal terms), what is a patent? [2 pts]
+
+(f) Give one pro and one con to securing a patent? [2 pts]
+
+CPSC 444 2010-11 (T2)
+
+11 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #10 [14 points total]: Statistical Analysis
+A graphics company is trying out a new interactive technique for one of its 3D software packages. The
+company hopes that the new technique will improve performance (time and accuracy) for doing 3D
+manipulation tasks (tasks that are known to be time intensive and error prone). The company ran a controlled
+experiment to see if their new technique does in fact offer performance improvements. Given that there is
+some evidence that females and males differ in their visual-spatial abilities, gender was controlled for.
+2 Independent variables: (1) technique (new, status-quo; within subjects); (2) gender (male, female;
+between subjects)
+2 Dependent variables: (1) time (in seconds, lower is better); (2) accuracy (1-10 scale, higher is better)
+Study design: 10 males and 10 females each completed 5 tasks using each of the two techniques. (The order
+of seeing the software packages was properly counterbalanced.)
+Results: These two graphs show the means (across all 5 tasks) for each dependent measure:
+
+A 2-way ANOVA (technique X gender) was run for each of the dependent variables:
+time
+
+ANOVA
+Source of Variation
+Sample (gender)
+Columns (technique)
+Interaction
+Within
+Total
+
+SS
+20250
+37210
+45697.6
+297022
+
+df
+1
+1
+1
+36
+
+400179.6
+
+MS
+20250
+37210
+45697.6
+8250.611
+
+F
+2.454364
+4.509969
+5.538693
+
+P-value
+0.125948
+0.040638
+0.024181
+
+F crit
+4.113165
+4.113165
+4.113165
+
+MS
+1.6
+25.6
+0.1
+3.516667
+
+F
+0.454976
+7.279621
+0.028436
+
+P-value
+0.50429
+0.010548
+0.867032
+
+F crit
+4.113165
+4.113165
+4.113165
+
+39
+
+accuracy
+
+ANOVA
+Source of Variation
+Sample (gender)
+Columns (technique)
+Interaction
+Within
+Total
+
+SS
+
+df
+
+1.6
+25.6
+0.1
+126.6
+
+1
+1
+1
+36
+
+153.9
+
+39
+
+Provide you answer on following page.
+
+NO CREDIT GIVEN FOR ANYTHING WRITTEN ON THIS PAGE.
+CPSC 444 2010-11 (T2)
+
+12 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+
+Question #10 (continued)
+Your job is to explain and interpret these results.
+(a) For each dependent measure state all the effects tested and state which of those effects resulted in a
+significant finding. You must state your assumed confidence level. [6 pts]
+
+(b) Next, interpret these results by explaining what the graphics company can conclude from this study,
+both about the 3D manipulation techniques and about gender? [6 pts]
+
+(c) Assuming performance is the main determinant, should the company adopt the new technique? Explain
+your answer. [2 pts]
+
+CPSC 444 2010-11 (T2)
+
+13 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+Blank page for extra work
+
+CPSC 444 2010-11 (T2)
+
+14 of 15
+
+Final Exam (3 hours)
+
+Name:
+
+Student ID Number:
+Blank page for extra work
+
+CPSC 444 2010-11 (T2)
+
+15 of 15
+
+Final Exam (3 hours)
+

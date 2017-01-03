@@ -1,0 +1,193 @@
+
+CPSC 121 Midterm 2
+Friday November 13th, 2015
+Name:
+
+Student ID:
+
+Signature:
+
+Section (circle one): Morning Afternoon
+
+– You have 70 minutes to write the 6 questions on this examination.
+A total of 50 marks are available.
+– Justify all of your answers.
+
+Question Marks
+
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11in sheet of notes, and nothing else.
+
+1
+
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+
+3
+
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+5
+
+2
+4
+6
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her UBC card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 7
+[10] 1. For each of the following statements:
+• Rewrite the statement using predicate logic.
+• Write down ALL of the proof strategies (from the list given below), that are appropriate to use to prove the statement.
+Just use the LETTER for each strategy (do not write down the full name):
+A. Constructive or non-constructive direct proof of existence.
+B. Exhaustive proof.
+C. Direct proof by generalizing from a generic particular (i,e, let x be any non particular
+(unspecified). . . ).
+D. Proof by cases.
+E. Contrapositive proof.
+F. Antecedent assumption (called direct proof by Epp).
+G. Proof by contradiction.
+Note that you must NOT prove the statement. You just need to suggest all the proof strategies which can be used to prove it.
+[2] a. For any three integers a, b and c, if a divides b and b divides c then a divides c. Use
+Z to represent the set of integers, and predicate Divides(x, y) for “x divides y”.
+
+[2] b. For any positive real numbers x and y,
+all positive real numbers.
+
+x+y
+2
+
+≥
+
+√
+
+xy. Use R+ to represent the set of
+
+[2] c. There is a perfect square that is the sum of two perfect squares. Use Z to represent
+the set of integers, and predicate Square(n) for “n is a perfect square”.
+
+page 3 out of 7
+[2] d. For any integers n and m, n + m is odd if and only if n − m is odd. Use predicates
+Odd(x) for “x is odd” and Even(x) for “x is even”.
+
+[2] e. The product of a non-zero rational number x and an irrational number y is an irrational number. Use R for the domain of real numbers, and predicates Rational(x) for
+“x is rational” and Irrational(x) for “x is irrational”.
+
+[8] 2. Provide a formal proof (by using one formal rule of inference at a time and explicitly stating
+the rule that is used on the right side) for the following argument. You don’t need to rewrite
+the premises in the proof. Just continue with step 4.
+1. ∀x ∈ D, ∀y ∈ D, P (x) → (Q(y) ∧ R(x, y))
+2. ∀z ∈ D, ∼ Q(z) ∨ R(z, z)
+3. ∃u ∈ D, P (u)
+∴ ∃x ∈ D, R(x, x)
+
+page 4 out of 7
+[7] 3. Consider the following deterministic finite-state automaton, whose inputs are words written
+using uppercase letters (A through Z) only. The word “else” on an edge denotes every letter
+that does not appear on any other edge leaving from the same node as that edge (for instance,
+the word “else” on the edge that joins the top-left node to itself is the same as “A, . . . , D, F,
+G, H, J, K, M, . . . , Q, S, . . . , Z”).
+
+[4] a. Which of the following words will this finite-state automaton accept (circle one of
+Yes/No for each word)?
+• INDOLENT
+
+Yes
+
+No
+
+• RABBITS
+
+Yes
+
+No
+
+• LIKE
+
+Yes
+
+No
+
+• WATCHING
+
+Yes
+
+No
+
+• SIR
+
+Yes
+
+No
+
+• ELVIS
+
+Yes
+
+No
+
+• ON
+
+Yes
+
+No
+
+• TELEVISION
+
+Yes
+
+No
+
+[3] b. Describe as simply as you can the set of words that this finite-state automaton accepts.
+
+page 5 out of 7
+[11] 4. For each of the two following theorems, first translate the theorem into predicate logic, and
+then prove it using a proof technique of your choice.
+a. It is possible to find positive integers x, y and z such that x4 + y 3 = z 2 .
+
+b. If a, b and c are positive integers, and a divides both b + c and bc, then a divides
+b2 + c2 .
+
+page 6 out of 7
+[7] 5. Consider the following sequential circuit:
+
+Please observe that the registers labeled A, B and C initially contain the values 1, 0 and 0
+respectively.
+[3] a. What values will registers A and B contain five clock cycles later?
+
+[4] b. Let f (n) denote the value of register B after n clock cycles. Complete the circuit so
+that, after n clock cycles, register C contains the value f (1) + f (2) + · · · + f (n), that
+is, the sum of the values that register B held during the n clock cycles. For instance,
+if register B had values 1, 8 and 3 at the end of clock cycles 1, 2 and 3, then C would
+take on the values 1, 9 and 12.
+
+page 7 out of 7
+[7] 6. Suppose that we want to color the nodes (circles) in the following figure according to four
+rules:
+• Every node must be colored using one of the colors Red, Green and Blue.
+• Two nodes that are joined by a line must have different colors.
+• The node labeled “R” must be colored Red.
+• The node labeled “G” must be colored Green.
+
+Using a proof by contradiction, prove that every coloring that follows these four rules must
+use the color Green for at least one of the nodes labeled X1, X2, X3. Hint: if three nodes
+are all joined by a line to each other, then they will use three different colors.
+

@@ -1,0 +1,858 @@
+
+CPSC 320 Final Exam
+
+July 28, 2006
+
+Name: _____________________
+
+Student ID: __________________
+
+Signature: ___________________
+
+•
+
+You have 2.5 hours to write the 9 questions on this examination.
+A total of 43 marks are available.
+Question
+
+Possible
+
+1
+
+12
+
+You are allowed to bring in one double-sided letter size sheet of
+
+2
+
+3
+
+paper and nothing else.
+
+3
+
+5
+
+4
+
+2
+
+5
+
+5
+
+•
+
+Justify all of your answers.
+
+•
+•
+
+Keep your answers short. If you run out of space for a question,
+you have written too much.
+
+•
+
+6
+
+2
+
+The number in the square brackets next to the question number
+
+7
+
+10
+
+is the # of marks allocated for that question. Use these to help
+
+8
+
+2
+
+determine how much time you should spend on each question.
+
+9
+
+2
+
+Total
+
+43
+
+•
+
+Use the back of the pages for your rough work.
+
+•
+
+Good luck!
+
+Marks
+
+UNIVERSITY REGULATIONS:
+
+•
+
+Each candidate should be prepared to produce, upon request, his/her library card.
+
+•
+
+No candidate shall be permitted to enter the examination room after the expiration of one half hour or
+to leave during the rst half hour of the examination.
+
+•
+
+CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be immediately
+dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place or writing, or making use of, any books, papers or memoranda, electronic
+equipment, or other memory aid or communication devices, other than those authorized by the
+examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates.
+
+The plea of accident or
+
+forgetfulness shall not be received.
+
+•
+
+Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission
+of the invigilator.
+
+1
+
+1. [12] You are given an unlimited supply of coins with the values
+the number of unique ways that you can make
+
+s
+
+1¢, 2¢, . . . , k¢
+
+and are asked to count
+
+cents change. This question guides you to an ecient
+
+algorithm to solve this problem. Complete all parts, preferably in order (for your benet).
+Using
+
+1¢, 2¢, 3¢
+
+coins, there are three unique ways to make
+
+In particular, the combinations
+
+(1¢, 2¢)
+
+and
+
+(2¢, 1¢)
+
+(a) [2] What are the seven unique ways of making
+
+3¢
+
+change:
+
+(1¢, 1¢, 1¢), (1¢, 2¢),
+
+and
+
+(3¢).
+
+are not unique.
+
+6¢
+
+change using
+
+1¢, 2¢, 3¢
+
+coins?
+
+(1¢, 1¢, 1¢, 1¢, 1¢, 1¢), (1¢, 1¢, 1¢, 1¢, 2¢), (1¢, 1¢, 2¢, 2¢), (2¢, 2¢, 2¢), (1¢, 1¢, 1¢, 3¢), (1¢, 2¢, 3¢),
+(3¢, 3¢)
+
+and
+
+(b) [2] Let
+
+A[i]
+
+be the number of unique ways to make
+
+expression for the number of unique ways to make
+of
+
+s
+
+i
+
+A[i].
+
+bs/3c
+
+X
+j=0
+
+2
+
+1¢, 2¢ coins. Write an
+1¢, 2¢, 3¢ coins in terms
+
+cents change using
+
+cents change using
+
+A [s − 3j]
+
+(c) [3] Fill in the body of a recursive divide-and-conquer algorithm that answers the problem, How
+many unique ways are there to make
+
+s
+
+cents change using
+
+1¢, 2¢, . . . , k¢
+
+coins?. It make be as
+
+inecient as you like, so long as it is correct. Simpler is better.
+
+Algorithm RecChangeCount(s,k)
+if (k = 1) then return 1
+if (s = 0) then return 1
+return
+
+Pbs/kc
+j=0
+
+RecChangeCount(s − jk, k − 1)
+
+(d) [3] Write an iterative dynamic programming solution to this problem that lls in a table
+so that the answer is in
+
+A[s][k].
+
+for i ← 1 to k do
+A[0][i] ← 1
+for i ← 0 to s do
+A[s][1] ← 1
+for k0 ← 2 to k do
+for s0 ← 1 to s do
+A[s0 ][k 0 ] ← A[s0 ][k 0 − 1]
+for j ← 1 to bs0 /k0 c do
+A[s0 ][k 0 ] ← A[s0 ][k 0 ] + A[s0 − jk 0 ]
+
+3
+
+A[0 . . . s][1 . . . k]
+
+(e) [2] Write an iterative dynamic programming solution to the problem that lls in a table
+so that the answer is in
+
+A[s].
+
+Use at most
+
+Θ(1)
+
+A[0 . . . s]
+
+additional storage.
+
+for i ← 0 to s do
+A[i] ← 1
+for k0 ← 2 to k do
+for s0 ← s downto 0 do
+for j ← bs0 /k0 c downto 1 do
+A[s0 ] ← A[s0 ] + A[s0 − jk 0 ]
+
+2. [3] After computing the nal grades, I want to sort the class list by decreasing grade rst and by student ID in case of a tie. The list of possible grades is
+
+A+,A,A−,B+,B ,B−,C+,C ,C−,
+
+and
+
+D.
+
+What
+
+is the simplest, most ecient way to do this. You may use any of the algorithms that we covered in class.
+
+Mergesort by student ID and then bucket sort by grade. You could have radix sorted by student ID,
+digits of ID
+but for all reasonable class sizes 2
+= 28 = 256 is greater than the number of students in the
+class. So mergesort will be slightly faster.
+
+4
+
+3. [5] Perform the given operations on the given 2-3-4 tree using the algorithms from class (not the
+textbook). List the operations that you used (e.g. merge, split, and rotate), so that we can give you
+full marks. The correct result is not enough.
+(a) [2] insert 8
+
+4
+
+2
+
+6, 11, 13
+
+1
+
+3
+
+5
+
+7, 9, 10
+
+12
+
+14
+split 7, 9, 10 then insert 8 with 7
+
+split 6, 11, 13
+4, 11
+
+4, 11
+
+2
+
+6
+
+1
+
+3
+
+5
+
+2
+
+13
+
+7, 9, 10
+
+12
+
+14
+
+6, 9
+
+1
+
+3
+
+(b) [2] delete 1
+
+4
+
+2
+
+6, 8
+
+1
+
+3
+
+5
+
+7
+
+9
+merge 1 and 3, then delete 1
+
+rotate 6 through 4 to 2
+6
+
+6
+
+2, 4
+
+1
+
+3
+
+8
+
+5
+
+7
+
+4
+
+9
+
+2, 3
+
+8
+
+5
+
+7
+
+5
+
+9
+
+5
+
+7, 8 10
+
+13
+12
+
+14
+
+(c) [1] delete 6
+
+4
+
+2
+
+6, 8
+
+1
+
+3
+
+5
+
+7
+
+9
+
+delete 6’s predecessor 5; so merge 5 and 7;
+
+delete 5; replace 6 with 5
+
+4
+
+4
+
+8
+
+2
+
+1
+
+3
+
+5, 6, 7
+
+8
+
+2
+
+9
+
+1
+
+5, 7
+
+3
+
+9
+
+4. [2] How would you modify the dynamic programming solution to the Maximum Weighted Activity
+selection problem to work with intervals of negative weight?
+
+Eliminate
+
+all
+
+intervals
+
+of
+
+FastDPMaxActivitySelect
+
+non-positive
+
+weights
+
+because
+
+we
+
+needs no changes. All other versions do.
+
+6
+
+never
+
+want
+
+to
+
+select
+
+them.
+
+5. [5] If all edge weights in an undirected graph are
+
+1, 2, . . . , k
+
+where
+
+k
+
+is a small constant (say
+
+k < 100),
+
+what is the fastest that you can make Prim's run asymptotically? Justify your answer. Hint: ditch the
+heap.
+
+Instead of using a heap to keep track of the minimum cost edge to use to extend the tree, we use an
+array (indexed by cost) of lists (representing vertices to be added with that cost).
+To do a
+
+Q.deleteMin()
+
+we look at the lists in order from
+
+1...k
+
+to nd a non-empty list.
+
+As
+
+k
+
+is small and constant, this is a constant time operation. Using this data structure instead of a heap,
+the cost of adding and removing a vertex to the array of lists is constant.
+If we keep track of where a vertex is currently in a list (a bit of additional bookkeeping, but
+still constant time), the cost of updating the priority of a vertex is now
+the algorithm (using the analysis from class) is now
+
+O ([|E| + |V |] log |V |)
+
+6. [2] Show that
+
+using a heap.
+
+n ∈ O (n log n).
+
+lim
+
+n→∞
+So
+
+O (|V | + |E|),
+
+n
+1
+= lim
+=0
+n log n n→∞ log n
+
+n ∈ o (n log n).
+
+7
+
+O (1).
+
+So the total cost of
+
+which is asymptotically better than
+
+7. [10] You are given a
+column and the
+
+j
+
+th
+
+the top right corner
+
+n×n
+
+table
+
+M [1 . . . n] [1 . . . n]
+
+of real values, where
+
+M [i][j]
+
+is the value in the
+
+row (see below). We want to nd paths from the bottom left corner
+
+M [n][n].
+
+M [1][1]
+
+ith
+to
+
+Such paths move from cell to cell and are only allowed to travel to cells
+
+immediately above or to the left of the current cell.
+
+j
+
+2
+1
+
+2
+1
+
+4
+3
+
+1
+
+2
+i
+
+The gure above shows the only two such paths in a
+
+2×2
+
+grid.
+
+The cost of a path is the sum of
+
+the cells that the path visits. For example, the cost of the solid path is
+dotted path is
+
+1 + 3 + 4.
+
+Given
+
+M,
+
+1+2+4
+
+and the cost of the
+
+what is the cost of the cheapest such path?
+
+(a) [2] One greedy algorithm is to always move to the cheapest cell immediately above or to the left.
+Give a
+
+3×3
+
+example where this strategy fails.
+
+0
+
+0
+
+0
+
+1
+
+1
+
+5
+
+0
+
+0
+
+0
+
+(b) [5] Give an iterative dynamic programming solution to this problem using
+
+O n2
+
+
+
+additional stor-
+
+age. Explain what the values of your table represent.
+
+Let
+
+C[i][j] be the minimum cost to get from M [1][1] to M [i][j]. On such a path, we either go
+M [i − 1][j] or M [i][j − 1] to get to M [i][j] because we are only allowed to move left or
+If it was the latter, then the subpath from M [1][1] to M [i − 1][j] must have been minimal cost
+
+through
+up.
+
+because otherwise we could do better substituting a minimal cost path. Plus we can could use
+
+M [1][1] to M [i − 1][j] and move left to get a minimal cost path from
+M [1][1] to M [i][j]. This is the optimal substructure. A similar argument holds if we go through
+M [i][j − 1] on a cheapest path from M [1][1] to M [i][j].
+any minimal cost path from
+
+So
+
+
+M [1][1]
+
+
+
+C[1][j − 1] + M [1][j]
+C[i][j] =
+
+C[i − 1][1] + M [i][1]
+
+
+
+min {C[i − 1][j], C[i][j − 1]} + M [i][j]
+To ll the table
+
+for i ← 1 to n do
+for j ← 1 to n do
+C[i][j] ← expression above
+
+8
+
+if
+if
+if
+
+i = 1, j = 1
+i = 1, j 6= 1
+i 6= 1, j = 1
+
+otherwise
+
+(c) [3] We discussed several path nding algorithms in class which can be used to solve this problem.
+Choose the algorithm resulting in the asymptotically fastest solution, describe how you would use
+it, and give the asymptotic runtime of the solution in terms of
+
+n.
+
+There are a couple of solutions to this problem. What follows is not the simplest, but it is the
+most obviously correct.
+
+M [i][j] we introduce to vertices ini,j and outi,j . We introduce an edge beini,j and outi,j with cost M [i][j]. Traversing this edge corresponds to visiting the cell
+M [i][j]. Then for each outi,j we add an edge to ini+1,j with cost 0, which allows us to move left
+in the matrix. Similarly, for each outi,j we add an edge to ini,j+1 with weight 0, which allows us
+to move up. The shortest path in the matrix corresponds to a shortest path from in1,1 to outn,n
+For each cell
+tween
+
+and vice versa.
+Because the weight of an edge could have a negative value, we have to use Bellman-Ford.
+The number of vertices is
+
+O n2
+
+
+
+and the number of edges is
+
+However, the maximum number of vertices on such at path is
+edge
+
+4n
+
+times for a runtime of
+
+O n3
+
+
+
+
+
+O n2 , so the runtime is O n2 .
+4n, so it suces to consider every
+
+(that's a bonus, you're not expected to know that).
+
+9
+
+8. [2] Let
+
+T (n) = 3T
+
+ n 
+
+asymptotic bound on
+
+log2 3 < log2 4 = 2.
+
++ n2
+T (n).
+
+2
+
+So let
+
+for
+
+n>2
+
+and
+
+T (n) = 3
+
+ = log2 4 − log2 3.
+
+Then
+
+otherwise. Use the Master Theorem to get an
+
+f (n) = n2 ∈ Ω nlog2 3+
+
+
+
+. So we try to apply case
+
+3 of the master theorem.
+
+n
+b ≤ δf (n) for some δ <
+ 1.
+3
+2
+to get the regularity condition. Hence T (n) ∈ Θ n .
+4
+
+Case 3 requires a regularity condition:
+So let
+
+δ=
+
+9. [2] Convert the SAT instance
+
+
+
+af
+
+(x1 ∨ x2 ) ∧ (x1 ∨ x2 ∨ x3 )
+
+af
+
+n
+b
+
+
+
+=3
+
+
+n 2
+2
+
+= 34 n2 = 34 f (n).
+
+into a 3-colouring problem.
+
+N
+
+x1
+
+x1
+
+x2
+
+x3
+
+x2
+
+x3
+F
+
+T
+
+10
+

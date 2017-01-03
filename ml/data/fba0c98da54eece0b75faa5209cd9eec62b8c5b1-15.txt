@@ -1,0 +1,123 @@
+
+CPSC 320 Sample Midterm 2
+March 2011
+Name:
+Signature:
+
+Student ID:
+
+– You have 50 minutes to write the 4 questions on this examination.
+A total of 40 marks are available.
+– Justify all of your answers.
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11in sheet of notes, and nothing else.
+
+Question
+
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+
+2
+
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+4
+
+Marks
+
+1
+3
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her library card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 5
+[16] 1. Short Answers
+[4] a. Your boss asks you to design a divide-and-conquer algorithm to solve a problem
+whose input is an array of measurements that contain temperature data. What are the
+two main issues that you need to determine in order to design this algorithm?
+
+[4] b. In the Disjoint Sets data structure used by Kruskal’s minimum spanning tree algorithm, why does the union operation insert the root with the smaller rank as a child
+of the root with the larger rank, rather than the other way around?
+
+[4] c. Using the method of your choice, give a tight bound on the function T (n) described
+by the recurrence relation
+
+
+T (n) =
+
+6T (n/3) + 4n2
+17
+
+if n ≥ 13
+if n ≤ 12
+
+page 3 out of 5
+[4] d. When should we use amortized analysis?
+
+[6] 2. Write a recurrence relation that describes the worst-case running time of the following algorithm as a function of n. Note: I do not believe that this algorithm computes anything
+useful, so don’t waste any time trying to understand what it does.
+Algorithm Walrus(A, first, n)
+if (n < 4) then
+return n + 1
+endif
+i ← 0
+sum ← 0
+while (i*i < n) do
+sum ← sum + A[i * i]
+i ← i + 1
+endwhile
+j ← 1
+B ← new array
+while (j < n) do
+append A[j] to B
+j ← 2 * j
+endwhile
+x ← Walrus(A, first + n/4, n/2)
+return x * sum * Walrus(B, 0, length[B])
+
+page 4 out of 5
+[8] 3. A Computer Science researcher has designed a new data structure called a mélèze that supports operations insert, findSmallestGap and removeElement, and decides to
+use amortized analysis to determine the worst-case running time of a sequence of n operations on an initially empty mélèze. She defines a potential function Φ for mélèzes, such
+that Φ(T ) ≥ 0 for every mélèze T , and such that Φ(T ) = 0 if the mélèze T is empty. After
+analyzing the running times of the three operations, she has learned that
+• An insert operation on a mélèze with n elements takes time log n, and increases
+the mélèze’s potential by log n.
+• A findSmallestGap operation on a mélèze with n elements takes time x + log2 n,
+where x is the number of elements examined by the operation. The potential of the
+mélèze goes down by x − 2.
+• A removeElement operation takes time log n, and increases the mélèze’s potential
+by 3.
+Give as tight a bound as possible on the worst-case running time of a sequence of n operations on an initially empty mélèze.
+
+page 5 out of 5
+[10] 4. Using recursion trees, prove tight upper and lower bounds on the function T (n) defined by
+
+
+T (n) =
+
+4T (n − 2) + 6T (n − 3) + 3n
+1
+
+if n ≥ 3
+if n ≤ 2
+
+Your grade will depend on the quality of the bounds you provide (that is, showing that
+T (n) ∈ Ω(1) and T (n) ∈ O(100n ), while true, will not give you many marks).
+

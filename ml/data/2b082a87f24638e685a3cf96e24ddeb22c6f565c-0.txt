@@ -1,0 +1,3691 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs314/vjan2013/slides/finalreview-4x4.pdf
+University of British Columbia
+CPSC 314 Computer Graphics
+Jan-Apr 2013
+
+Final
+
+Final Emphasis
+• covers entire course
+• includes material from
+before midterm
+
+• exam notes
+• exam will be timed for 2.5 hours, but reserve
+entire 3-hour block of time just in case
+• closed book, closed notes
+• except for 2-sided 8.5”x11” sheet of
+handwritten notes
+
+Tamara Munzner
+
+Final Review
+http://www.ugrad.cs.ubc.ca/~cs314/Vjan2013
+
+• post-midterm topics:
+•
+•
+•
+•
+•
+
+• transformations,
+viewing/picking
+
+• but heavier weighting
+for material after last
+midterm
+
+• ok to staple midterm sheet + new one back to
+back
+
+•
+•
+•
+•
+•
+
+• calculator: a good idea, but not required
+• graphical OK, smartphones etc not ok
+
+• IDs out and face up
+
+Studying Advice
+
+2
+
+Reading from OpenGL Red Book
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+• do problems!
+• work through old homeworks, exams
+
+•
+•
+•
+
+1: Intro *
+2: Misc Math *
+3: Raster Algs *
+
+•
+•
+
+•
+•
+
+4: Ray Tracing *
+5: Linear Algebra *
+• except for 5.4
+6: Transforms *
+• except 6.1.6
+7: Viewing *
+8: Graphics Pipeline *
+
+•
+
+10: Surface Shading *
+
+•
+
+•
+
+•
+
+• only section Object Selection Using the Back Buffer
+
+5
+
+Review: Rendering Capabilities
+
+lighting/shading
+advanced rendering
+collision
+rasterization
+hidden surfaces /
+blending
+textures/procedural
+clipping
+color
+curves
+visualization
+
+• Q1b, Q1c,
+
+• antialiasing
+• Q1d, Q1l, Q12
+
+• animation
+• image-based rendering
+• Q1g
+
+• scientific visualization
+• Q14
+3
+
+•
+•
+
+through 3.3
+
+•
+•
+•
+
+11: Texture Mapping *
+13: More Ray Tracing *
+• only 13.1
+12: Data Structures *
+• only 12.2-12.4
+15: Curves and Surfaces *
+17: Computer Animation *
+•
+
+•
+•
+
+8.1 through 8.1.6, 8.2.3-8.2.5,
+8.2.7, 8.4
+
+•
+
+Review – Fast!!
+
+only 17.6-17.7
+
+21: Color *
+22: Visual Perception *
+• only 22.2.2 and 22.2.4
+27: Visualization *
+
+6
+
+7
+
+Review: Rendering Pipeline
+
+Review: OpenGL
+
+Geometry
+Database
+
+Scan
+Conversion
+
+www.siggraph.org/education/materials/HyperGraph/shutbug.htm
+
+Texturing
+
+Review: 2D Rotation From Trig Identities
+
+& x'# &cos(( ) ' sin (( )# & x #
+$ y '! = $ sin (( ) cos(( ) ! $ y !
+% " %
+"% "
+
+(x′, y′)
+(x, y)
+
+θ
+
+
+
+Blending
+
+Framebuffer
+
+counterclockwise, RHS
+
+θ
+13
+
+• main loop not under your control
+
+void display()
+{
+glClearColor(0.0, 0.0, 0.0, 0.0);
+glClear(GL_COLOR_BUFFER_BIT);
+glColor3f(0.0, 1.0, 0.0);
+glBegin(GL_POLYGON);
+glVertex3f(0.25, 0.25, -0.5);
+glVertex3f(0.75, 0.25, -0.5);
+glVertex3f(0.75, 0.75, -0.5);
+glVertex3f(0.25, 0.75, -0.5);
+glEnd();
+glFlush();
+}
+10
+
+x′ = x cos(θ) - y sin(θ)
+y′ = x sin(θ) + y cos(θ)
+
+(x, y)
+
+Depth
+Test
+
+Clipping
+
+9
+
+Review: 2D Rotation
+
+(x′, y′)
+
+Lighting
+
+Perspective
+Transform.
+
+x = r cos (φ)
+y = r sin (φ)
+x′ = r cos (φ + θ)
+y′ = r sin (φ + θ)
+
+• vs. procedural
+
+• control flow through event callbacks
+• redraw the window now
+• key was pressed
+• mouse moved
+
+• callback functions called from main loop
+when events occur
+• mouse/keyboard state setting vs. redrawing
+11
+
+x'
+
+B
+
+φ
+
+• push points to right in proportion to height
+y
+
+y
+& x '#
+
+x
+
+(x,y)
+
+A
+
+x
+
+& 1
+
+=
+x $% y '!" $% 0
+
+x
+
+x'= A " B
+A = x cos"
+
+shx # & x # &0#
++
+1 !" $% y !" $%0!"
+
+• reflect across x axis
+• mirror
+
+!
+
+!
+14
+
+Review: Shear, Reflection
+• shear along x axis
+
+x' = x cos ! " y sin !
+y ' = x sin ! + y cos !
+
+θ
+Substitute…
+x ′ = x cos(θ) - y sin(θ)
+y ′ = x sin(θ) + y cos(θ)
+
+12
+
+Review: 2D Rotation: Another Derivation
+(x′,y′)
+
+Trig Identity…
+x′ = r cos(φ) cos(θ) – r sin(φ) sin(θ)
+y′ = r sin(φ) cos(θ) + r cos(φ) sin(θ)
+
+8
+
+Review: Event-Driven Programming
+
+• pipeline processing, set state as needed
+Model/View
+Transform.
+
+4
+
+Reading from Shirley: Foundations of CG
+
+1: Introduction to OpenGL
+2: State Management and Drawing Geometric Objects
+3: Viewing
+4: Display Lists
+5: Color
+6: Lighting
+9: Texture Mapping
+12: Selection and Feedback
+13: Now That You Know
+
+• Appendix: Basics of GLUT (Aux in v 1.1)
+• Appendix: Homogeneous Coordinates and Transformation
+Matrices
+
+Sample Final
+• solutions now posted
+• Spring 06-07 (label was off by one)
+• note some material not covered this time
+• projection types like cavalier/cabinet
+
+x
+15
+
+x
+
+& x (# & 1
+$ y (! = $ 0
+% " %
+
+0 # & x # & 0#
++
+' 1!" $% y !" $%0!"
+16
+
+Review: 2D Transformations
+matrix multiplication
+
+Review: Linear Transformations
+
+& x ' # & a 0# & x #
+$ y '! = $ 0 b ! $ y !
+% " %
+"% "
+scaling matrix
+
+Review: Affine Transformations
+
+• linear transformations are combinations of
+
+matrix multiplication
+& x'# &cos(( ) ' sin (( )# & x #
+$ y '! = $ sin (( ) cos(( ) ! $ y !
+% " %
+"% "
+
+•
+•
+•
+•
+
+rotation matrix
+
+shear
+scale
+rotate
+reflect
+
+& x'# &a b # & x #
+$ y '! = $ c d ! $ y !
+% " %
+"% "
+
+• linear transformations
+• translations
+
+x' = ax + by
+y ' = cx + dy
+
+• properties of linear transformations
+vector addition
+& x # &a # & x + a # & x'#
+$ y ! + $b ! = $ y + b ! = $ y '!
+% " % " %
+" % "
+
+(x′,y′)
+(x,y)
+
+( a, b)
+
+•
+•
+•
+•
+•
+•
+
+&a b # & x # & x'#
+$ c d ! $ y ! = $ y '!
+%
+"% " % "
+
+satisifes T(sx+ty) = s T(x) + t T(y)
+origin maps to origin
+lines map to lines
+parallel lines remain parallel
+ratios are preserved
+closed under composition
+
+Review: 3D Shear
+•
+
+• use 4x4 matrices for 3D transformations
+translate(a,b,c)
+
+& x' # &a
+#& x#
+$ y '! $
+!$ y!
+b
+$ !=$
+!$ !
+$ z' ! $
+!$ z !
+c
+$ ! $
+!$ !
+1
+1
+% " %
+" %1 "
+
+Rotate( x,! )
+& x' # &1
+$ y '! $ cos(
+$ !=$
+$ z ' ! $ sin (
+$ ! $
+%1 " %
+
+•
+
+scale(a,b,c)
+
+' sin (
+cos(
+
+& cos (
+$
+$
+$' sin (
+$
+%
+
+sin (
+1
+cos (
+
+general shear
+
+#
+!
+!
+!
+!
+1"
+
+&cos(
+$ sin (
+$
+$
+$
+%
+
+' sin (
+cos(
+
+#
+!
+!
+!
+1
+!
+1"
+
+Review: Interpreting Transformations
+
+w=1
+
+!
+
+!
+
+(1,1)
+
+intuitive?
+
+left to right: changing coordinate system
+
+•
+
+y
+19
+
+x
+
+•
+
+homogenize to convert homog. 3D
+point to cartesian 2D point:
+• divide by w to get (x/w, y/w, 1)
+• projects line to point onto w=1 plane
+• like normalizing, one dimension up
+when w=0, consider it as direction
+• points at infinity
+• these points cannot be homogenized
+• lies on x-y plane
+
+(0,0,0) is undefined
+
+20
+
+Review: Composing Transformations
+
+p'= TRp
+• right to left
+• interpret operations wrt fixed coordinates
+• moving object
+
+h
+1
+0
+0
+
+0
+0
+1
+0
+
+0%
+'
+0'
+0'
+'
+1&
+
+"1
+$
+0
+shearAlongXinDirectionOfZ(h) = $
+$0
+$
+#0
+
+0 h 0%
+'
+1 0 0'
+0 1 0'
+'
+0 0 1&
+
+"1
+$
+h
+shearAlongYinDirectionOfX(h) = $
+$0
+$
+#0
+
+0
+1
+0
+0
+
+0
+0
+1
+0
+
+'
+0
+!'
+0'
+'
+1&
+
+0%
+
+"1
+$
+0
+shearAlongYinDirectionOfZ(h) = $
+$0
+$
+#0
+
+0
+1
+0
+0
+
+0
+h
+1
+0
+
+0%
+'
+0'
+0'
+'
+1&
+
+"1
+$
+0
+shearAlongZinDirectionOfX(h) = $
+$h
+$
+#0
+
+0
+1
+0
+0
+
+0
+0
+1
+0
+
+0%
+'
+!
+0'
+0'
+'
+1&
+
+"1
+$
+0
+shearAlongZinDirectionOfY(h) = $
+$0
+$
+#0
+
+0
+1
+h
+0
+
+0
+0
+1
+0
+
+0%
+'
+0'
+0'
+'
+1&
+
+• left to
+!right
+
+OpenGL pipeline ordering!
+
+• interpret operations wrt local coordinates
+• changing coordinate system
+• OpenGL updates current matrix with postmultiply
+• glTranslatef(2,3,0);
+• glRotatef(-90,0,0,1);
+• glVertexf(1,1,1);
+
+Ta Tb = Tb Ta, but Ra Rb != Rb Ra and Ta Rb != Rb Ta
+•
+•
+•
+•
+
+22
+
+translations commute
+rotations around same axis commute
+rotations around different axes do not commute
+rotations and translations do not commute
+
+• specify vector last, in final coordinate system
+• first matrix to affect it is specified second-to-last
+
+23
+
+24
+
+!
+
+Review: General Transform Composition
+
+right to left: moving object
+
+translate by (-1,0)
+(2,1)
+
+w
+
+&x#
+$ y!
+$ !
+%$ 1 "!
+
+origin does not necessarily map to origin
+lines map to lines
+parallel lines remain parallel
+ratios are preserved
+closed under composition
+
+•
+
+x y
+( , )
+w w
+
+• which direction to read?
+
+"1
+$
+0
+shearAlongXinDirectionOfY(h) = $
+$0
+$
+#0
+
+!
+
+!
+
+& x ' w#
+$ y ' w!
+$
+!
+%$ w "!
+
+Review: Composing Transformations
+
+& 1 hyx hzx 0#
+$hxy 1 hzy 0!
+!
+shear (hxy, hxz, hyx, hyz, hzx, hzy ) = $
+$ hxz hyz 1 0!
+$
+!
+0
+0 1"
+% 0
+
+/w
+
+( x, y , w)
+
+• to avoid ambiguity, always say "shear along <axis> in direction of <axis>"
+
+21
+
+p'= TRp
+
+c #& x #
+f !! $$ y !!
+1 !" $% w!"
+
+"x-shear" usually means shear along x in direction of some other axis
+• correction: not shear along some axis in direction of x
+
+Rotate( z ,! )
+
+Rotate( y,! )
+#& x#
+!$ y!
+!$ !
+!$ z !
+!$ !
+1" % 1 "
+
+& x'# & a b
+$ y '! = $d e
+$ ! $
+$% w !" $% 0 0
+
+18
+
+Review: 3D Homog Transformations
+
+a# & x #
+& x' # &1
+$ y '! $ 1
+b !! $$ y !!
+$ !=$
+$ z' ! $
+1 c!$ z !
+$ ! $
+!$ !
+1" %1 "
+%1 " %
+
+•
+•
+•
+•
+•
+
+cartesian
+
+homogeneous
+
+• properties of affine transformations
+
+17
+
+translation multiplication matrix??
+
+Review: Homogeneous Coordinates
+
+• affine transforms are combinations of
+
+Review: Arbitrary Rotation
+(bx, by, bz, 1)
+
+Y
+
+• transformation of geometry into coordinate
+system where operation becomes simpler
+• typically translate to origin
+
+Y
+
+X
+
+Z
+
+Z
+
+• arbitrary rotation: change of basis
+
+• perform operation
+
+Review: Transformation Hierarchies
+(ax, ay, az, 1)
+
+X
+
+• transforms apply to graph nodes beneath them
+• design structure so that object doesn t fall apart
+• instancing
+
+(cx, cy, cz, 1)
+
+• given two orthonormal coordinate systems XYZ and ABC
+• A’s location in the XYZ coordinate system is (ax, ay, az, 1), ...
+
+(1,1)
+
+OpenGL
+
+• same relative position between object and
+basis vectors
+
+• transformation from one to the other is matrix R whose
+columns are A,B,C:
+
+• transform geometry back to original
+coordinate system
+
+25
+
+"a x
+
+$
+a
+R( X ) = $ y
+$ az
+$
+#0
+
+26
+
+bx
+
+cx
+
+by
+
+cy
+
+bz
+
+cz
+
+0
+
+0
+
+0%"1%
+'$ '
+0'$0'
+= ( a x , ay , a z ,1) = A
+0'$0'
+'$ '
+1&#1&
+
+28
+
+!
+
+Review: Matrix Stacks
+
+Review: Display Lists
+• precompile/cache block of OpenGL code for reuse
+
+• OpenGL matrix calls postmultiply matrix M onto current
+matrix P, overwrite it to be PM
+•
+•
+•
+•
+
+C
+
+C
+
+C
+
+C
+
+B
+
+B
+
+B
+
+A
+
+A
+
+A
+
+A
+
+P1
+
+• but cannot change contents, not parametrizable
+
+• good for static objects redrawn often
+• display lists persist across multiple frames
+• interactive graphics: objects redrawn every frame from
+new viewpoint from moving camera
+
+glPushMatrix()
+
+• can be nested hierarchically
+
+glScale3f(2,2,2)
+
+• snowman example
+
+glTranslate3f(1,0,0)
+DrawSquare()
+
+• 3x performance improvement, 36K polys
+
+glPopMatrix()
+29
+
+• http://www.lighthouse3d.com/opengl/displaylists
+
+30
+
+Review: Transforming Normals
+• cannot transform normals using same
+matrix as points
+
+P3
+
+N = ( P2 ! P1 ) " ( P3 ! P1 )
+
+• good for multiple instances of same object
+
+DrawSquare()
+
+B
+
+N
+
+• exact optimizations depend on driver
+
+D = C scale(2,2,2) trans(1,0,0)
+D
+
+• polygon:
+
+• usually more efficient than immediate mode
+
+or can save intermediate states with stack
+no need to compute inverse matrices all the time
+modularize changes to pipeline state
+avoids accumulation of numerical errors
+C
+
+Review: Normals
+
+• nonuniform scaling would cause to be not
+perpendicular to desired plane!
+
+P2
+
+• assume vertices ordered CCW when viewed
+from visible side of polygon
+• normal for a vertex
+N
+• specify polygon orientation
+• used for lighting
+• supplied by model (i.e., sphere),
+or computed from neighboring polygons
+
+P' = MP
+N ' = QN
+
+P
+N
+
+given M,
+what should Q be?
+
+T
+
+( )
+
+Q = M !1
+31
+
+inverse transpose of the modelling transformation
+32
+
+Review: Camera Motion
+
+Review: Constructing Lookat
+
+• rotate/translate/scale difficult to control
+• arbitrary viewing position
+
+• translate from origin to eye
+• rotate view vector (lookat – eye) to w axis
+• rotate around w to bring up into vw-plane
+
+• eye point, gaze/lookat direction, up vector
+y
+
+y
+
+lookat
+x
+
+WCS
+
+Pref
+up
+
+eye
+
+VCS
+
+z
+
+eye
+
+Peye
+
+u
+
+33
+
+34
+
+P(x,y,z)
+P(x ,y ,z )
+z
+
+homogeneous
+coords
+
+&1
+$0
+$0
+$%0
+
+0 0
+1 0
+0 1
+0 1d
+
+vy
+
+wy
+
+vz
+
+wz
+
+0
+
+0
+
+Review: Graphics Cameras
+
+0%
+'
+0'
+0'
+'
+1&
+
+• real pinhole camera: image inverted
+
+ux
+
+uy
+
+uz
+
+vx
+
+vy
+
+vz
+
+wx
+
+wy
+
+wz
+
+0
+
+0
+
+0
+
+#
+!e • u % % ux
+'
+!e • v ' !% vx
+' =%
+!e • w ' % wx
+'
+1 & %$ 0
+
+uy
+
+uz
+
+vy
+
+vz
+
+wy
+
+wz
+
+0
+
+0
+
+uy
+
+uz
+
+vy
+
+vz
+
+wy
+
+wz
+
+0
+
+0
+
+0#
+0!
+0!
+0!"
+
+z
+
+x
+
+z=-far
+
+x=right
+
+VCS
+
+x
+
+y=bottom
+
+z=-far
+y
+
+z=-near
+
+• orthographic camera
+y
+
+(1,1,1)
+
+• center of projection at
+infinity
+• no perspective
+convergence
+38
+
+z
+
+(-1,-1,-1)
+
+x
+
+Review: Field-of-View Formulation
+
+• our formulation allows asymmetry
+
+Frustum
+
+-z
+
+y
+
+(-1,-1,-1)
+
+x=right
+x
+
+x
+
+z=-far
+
+y=bottom
+
+z
+
+0
+
+#
+0 !
+!
+0 !
+!
+' 2 fn !
+f 'n!
+0 "!
+
+0 0
+1 0
+0 1
+0 0
+
+x=left
+
+width 1 # & width
+' !$
+2
+2
+2
+height 1 ! $
+' !$ 0
+2
+2 !$
+depth ! $
+0
+!$
+2
+1
+"! %$ 0
+
+y
+(1,1,1)
+
+y
+
+y
+
+1
+
+z
+
+(-1,-1,-1)
+x
+
+y=bottom z=-near
+x=right
+
+z=-far
+
+x
+
+-1
+45
+
+2
+top ' bot
+
+0
+
+0
+
+'2
+far ' near
+
+0
+
+0
+
+39
+
+40
+
+Review: Separate Warp From Homogenization
+viewing
+VCS
+
+x
+
+V2C
+
+clipping
+CCS
+
+projection
+transformation
+alter w
+
+C2N
+
+normalized
+device
+NDCS
+
+perspective
+division
+/w
+
+• distort such that orthographic projection of
+distorted objects is desired persp projection
+
+z=d
+
+z=0
+
+Z
+
+42
+
+0
+height
+2
+0
+0
+
+0
+0
+depth
+2
+0
+
+1
+
+#
+0!
+&1 0
+!$
+0 ! $0 ' 1
+! $0 0
+0 ! $0 0
+!%
+1"!
+
+0
+0
+1
+0
+
+& width( x N + 1) ' 1 #
+!
+0# & x N # $
+2
+$
+!
+0!! $$ y N !! $ height (' y N + 1) ' 1!
+=$
+2
+!
+0! $ z N !
+depth
+(
+z
++
+1
+)
+!
+N
+!$ ! $
+1" % 1 " $
+!
+2
+1
+%$
+"!
+
+Display z range is 0 to 1.
+glDepthRange(n,f) can constrain
+further, but depth = 1 is both
+max and default
+0 x
+500
+0 y
+height
+viewport
+
+x
+
+NDC
+-1
+
+right + left #
+right ' left !
+!
+top + bot !
+'
+!
+top ' bot ! P
+far + near !
+'
+!
+far ' near !
+!
+1
+"!
+
+'
+
+z=-near
+
+z=α z=d
+
+fovy/2
+
+z=-f
+
+reminder:
+NDC z range is -1 to 1
+
+NDCS
+
+0
+
+• warp requires only standard matrix multiply
+
+Review: N2D Transformation
+&
+$1
+& xD # $
+$ y D ! $0
+$ !=$
+$ zD ! $
+$% 1 !" $0
+%$0
+
+0
+
+• w is changed
+z=-n
+
+Review: Perspective Derivation
+
+y=top
+
+(1,1,1)
+z
+
+z
+
+Z
+41
+
+2
+&
+$ right ' left
+$
+$
+0
+$
+P' = $
+$
+0
+$
+$
+$
+0
+%$
+
+NDCS
+y=top
+
+x=left
+
+x
+
+h
+
+fovx/2
+
+α
+
+Right Eye
+
+VCS
+
+• scale, translate, reflect for new coord sys
+
+w
+
+0
+
+image
+plane
+36
+
+• render all scenes with orthographic projection!
+• aka perspective warp
+
+x
+
+Left Eye
+
+r +l
+r 'l
+t +b
+t 'b
+' ( f + n)
+f 'n
+'1
+
+center of
+projection
+
+• warp perspective view volume to orthogonal
+view volume
+
+• determines FOV in other direction
+• also set near, far (reasonably intuitive)
+
+• view vector not perpendicular to view plane
+
+0
+
+eye
+point
+
+Review: Orthographic Derivation
+
+Review: Projection Normalization
+
+• FOV in one direction + aspect ratio (w/h)
+
+• why bother? binocular stereo
+
+2n
+t 'b
+
+computer graphics camera: convenient equivalent
+
+!ex " ux + !ey " uy + !ez " uz &
+(
+!ex!" vx + !ey " vy + !ez " vz (
+(
+!ex " wx + !ey " wy + !ez " wz (
+( 35
+1
+'
+
+• scale, translate, reflect for new coord sys
+
+x=right
+
+VCS
+
+y=bottom z=-near
+
+NDCS
+
+Review: Asymmetric Frusta
+
+& 2n
+$r ' l
+$
+$ 0
+$
+$ 0
+$
+$
+% 0
+
+
+
+y=top
+
+x=left
+y
+
+x=left
+y
+
+37
+
+• shear
+• scale
+• projection-normalization
+
+0 0 "e &
+x(
+1 0 "e (
+y
+0 1 "e (
+z(
+0 0 1 '
+
+#1
+0&
+%
+(
+0( "1 %0
+T =
+%0
+0(
+%
+(
+1'
+$0
+
+eye
+point
+
+image
+plane
+
+y=top
+
+VCS
+
+& x #
+$ y !
+$ z !
+%$ z / d "!
+
+wx
+
+Review: Orthographic Derivation
+
+orthographic view volume
+
+perspective view volume
+
+z =d
+& x #
+$z/d !
+$
+!
+$ y !
+$
+!
+$z/d !
+$
+!
+$ d !
+%
+"
+
+"
+$
+$
+M
+=
+W 2V $
+$
+$
+#
+
+Review: From VCS to NDCS
+
+y!d
+y' y
+= ! y' =
+d z
+z
+x!d
+z' = d
+x' =
+z
+
+similar triangles
+y
+
+# ux
+%
+v
+R" 1 = % x
+%w x
+%
+$0
+
+• MW2V=(MV2W)-1=R-1T-1
+
+up
+
+w
+
+vx
+
+• invert for
+! gluLookAt:
+! go from world to camera!
+view
+
+Peye
+
+Review: Basic Perspective Projection
+
+"ux
+0 0 e %
+x'
+$
+u
+1 0 e '
+y R=$ y
+$uz
+0 1 e '
+z'
+$
+#0
+0 0 1&
+
+• we derived position of camera as object in world
+
+Pref
+v
+
+"1
+$
+0
+T= $
+$0
+$
+#0
+
+• MV2W=TR
+
+lookat
+x
+
+WCS
+
+view
+
+z
+
+Review: V2W vs. W2V
+
+300
+
+width
+
+43
+
+Review: Projective Rendering Pipeline
+following pipeline from top/left to
+glVertex3f(x,y,z)
+bottom/right: moving object POV
+object
+world
+viewing
+alter w
+O2W WCS
+W2V
+V2C
+VCS
+glFrustum(...)
+OCS
+modeling
+transformation
+
+viewing
+transformation
+
+glTranslatef(x,y,z)
+glRotatef(a,x,y,z)
+....
+
+gluLookAt(...)
+
+OCS - object coordinate system
+
+C2N
+
+/w
+
+perspective
+division
+
+NDCS - normalized device coordinate system
+DCS - device coordinate system
+
+Review: OpenGL Example
+object
+OCS
+
+O2W
+
+modeling
+transformation
+
+CCS
+
+normalized
+
+VCS
+
+device
+DCS
+
+OCS1
+
+WCS
+
+47
+
+44
+
+go back from end of pipeline to beginning: coord frame POV!
+
+clipping
+CCS
+
+glutInitWindowSize(w,h)
+device
+N2D
+WCS - world coordinate systemglViewport(x,y,a,b)
+NDCS
+viewport
+VCS - viewing coordinate system
+transformation
+
+CCS - clipping coordinate system
+46
+
+projection
+transformation
+
+• clip after warp, before divide
+• division by w: homogenization
+
+OCS2
+
+world
+WCS
+
+W2V
+
+viewing
+transformation
+
+viewing
+VCS
+
+V2C
+
+projection
+transformation
+
+clipping
+CCS
+
+glMatrixMode( GL_PROJECTION );
+glLoadIdentity();
+gluPerspective( 45, 1.0, 0.1, 200.0 );
+glMatrixMode( GL_MODELVIEW );
+glLoadIdentity();
+glTranslatef( 0.0, 0.0, -5.0 ); V2W
+glPushMatrix()
+• transformations that
+glTranslate( 4, 4, 0 ); W2O
+glutSolidTeapot(1);
+are applied to object
+glPopMatrix();
+first are specified
+glTranslate( 2, 2, 0); W2O
+last
+48
+glutSolidTeapot(1);
+
+Review: Coord Sys: Frame vs Point
+
+Review: Coord Sys: Frame vs Point
+
+read down: transforming
+read up: transforming points,
+between coordinate frames, up from frame B coords to
+from frame A to frame B
+frame A coords
+OpenGL command order
+DCS
+
+D2N
+N2V
+
+N2D
+
+normalized device
+
+glFrustum(...)
+
+VCS
+
+V2W
+
+viewing
+
+WCS
+
+world
+
+glRotatef(a,x,y,z)
+
+W2O
+
+OCS
+
+O2W
+
+object
+
+glVertex3f(x,y,z)
+
+V2N
+W2V
+
+gluLookAt(...)
+
+• points/objects: W2V
+
+• bounding extents
+
+• point is transformed from world to view coords when
+multiply by gluLookAt matrix
+
+• redraw in selection mode
+
+• H2 uses the object/pipeline POV
+• Q1/4 is W2V (gluLookAt)
+• Q2/5-6 is V2N (glFrustum)
+• Q3/7 is N2D (glViewport)
+
+• equivalent to casting pick “tube”
+• store keys, depth for drawn objects in hit list
+
+• backbuffer coding
+
+• examine hit list
+
+pipeline interpretation
+49
+
+Review: Hit List
+
+• assign (hierarchical) integer key/name(s)
+• small region around cursor as new viewport
+
+y
+VCS
+x
+
+• takes you from view to world coordinate frame
+
+display
+
+Review: Select/Hit Picking
+
+• manual ray intersection
+
+• coordinate frames: V2W
+
+glViewport(x,y,a,b)
+
+NDCS
+
+Review: Picking Methods
+
+• is gluLookat viewing transformation V2W or W2V?
+depends on which way you read!
+
+50
+
+Post-Midterm Material
+
+51
+
+Review: Light Sources
+
+• geometry: positions and directions
+
+• point at infinity: (x,y,z,0)T
+
+• standard: world coordinate system
+• effect: lights fixed wrt world geometry
+
+• point lights
+
+• alternative: camera coordinate system
+
+• finite position: (x,y,z,1)T
+
+• depth lies in the z-buffer range [0,1]
+• multiplied by 2^32 -1 then rounded to nearest int
+
+52
+
+Review: Light Source Placement
+
+• directional/parallel lights
+
+• glSelectBuffer(buffersize, *buffer)
+• where to store hit list data
+• on hit, copy entire contents of name stack to output buffer.
+• hit record
+• number of names on stack
+• minimum and maximum depth of object vertices
+
+• usually use frontmost, but up to application
+
+• effect: lights attached to camera (car headlights)
+
+• spotlights
+• position, direction, angle
+
+• ambient lights
+53
+
+Review: Reflectance
+
+Review: Reflection Equations
+l
+
+• specular: perfect mirror with no scattering
+• gloss: mixed, partial specularity
+• diffuse: all directions with equal energy
++
+
++
+
+54
+
+Idiffuse = kd Ilight (n • l)
+
+=
+
+Review: Lighting
+• lighting models
+
+full Phong lighting model
+
+• ambient
+
+• combine ambient, diffuse, specular components
+# lights
+
+n shiny
+
+" I (k
+
+Itotal = k a Iambient +
+
+i
+
+d
+
+(n • l i ) + k s (v • ri )
+
+n shiny
+
+!
+
+Ispecular = k sIlight (h • n)
+
+i=1
+
+I total = k a I ambient +
+
+n shiny
+
+!
+h n v
+
+h = (l + v) /2
+l
+
+57
+
+• normals don’t matter
+
+)
+
+• Lambert/diffuse
+• angle between surface normal and light
+
+• Blinn-Phong lighting
+
+R = 2 ( N (N · L)) – L
+
+# lights
+
+specular + glossy + diffuse =
+reflectance distribution
+
+56
+
+Review: Reflection Equations
+
+n
+θ
+
+Ispecular = k sIlight (v • r)
+
+55
+
+! I (k
+i
+
+d
+
+(n • l i ) + k s (h • n i )
+
+nshiny
+
+• Phong/specular
+
+)
+
+• surface normal, light, and viewpoint
+
+i=1
+
+• don’t forget to normalize all lighting vectors!! n,l,r,v,h
+58
+
+59
+
+60
+
+!
+
+Review: Shading Models
+
+Review: Non-Photorealistic Shading
+
+Review: Specifying Normals
+
+1+ n " l
+,c = k wc w + (1# kw )c c
+• cool-to-warm shading: kw =
+2
+(e
+"
+n
+)(e
+"
+n
+• draw silhouettes: if
+0
+1 ) # 0, e=edge-eye vector
+
+• flat shading
+• for each polygon
+• compute Phong lighting just once
+
+• draw creases: if (n0 " n1 ) # threshold
+
+• Gouraud shading
+
+!
+standard
+
+• compute Phong lighting at the vertices
+• for each pixel in polygon, interpolate colors
+
+• OpenGL state machine
+
+• reflection (chrome/mirror)
+• refraction (glass)
+Eye
+• shadows
+
+• uses last normal specified
+• if no normals specified, assumes all identical
+glNormal3f(1,1,1);
+glVertex3f(3,4,5);
+glNormal3f(1,1,0);
+glVertex3f(10,5,2);
+
+with edges/creases
+
+!
+
+• reflection, refraction
+• if another object is hit, recurse to
+find its color
+
+• per-face normals
+
+• Phong shading
+• interpolate normal
+• perform Phong lighting
+
+• cast ray from intersection point to
+light source, check if intersects
+another object
+
+• normal interpreted as direction from vertex location
+• can automatically normalize (computational cost)
+61
+
+http://www.cs.utah.edu/~gooch/SIG98/paper/drawing.html
+
+62
+
+glEnable(GL_NORMALIZE);
+
+Reflected
+Ray
+
+Shadow
+Rays
+
+• shadow
+
+glNormal3f(1,1,1);
+glVertex3f(3,4,5);
+glVertex3f(10,5,2);
+
+• for each pixel in polygon
+
+Light
+Source
+
+Image Plane
+
+• one primary ray per pixel
+• spawn secondary rays
+
+• per-vertex normals
+
+!
+cool-to-warm
+
+Review: Recursive Ray Tracing
+• ray tracing can handle
+
+63
+
+• termination criteria
+• no intersection (ray exits scene)
+• max bounces (recursion depth)
+• attenuated below threshold
+
+Refracted
+Ray
+
+64
+
+Review: Reflection and Refraction
+• reflection: mirror effects
+• perfect specular reflection
+
+• refraction: at boundary
+• Snell s Law
+
+n
+
+d
+
+c1 sin !1 = c2 sin ! 2
+
+•
+•
+•
+•
+•
+
+!1
+!2
+
+Review: Subsurface Scattering
+
+• capture indirect diffuse-diffuse light exchange
+• model light transport as flow with conservation of energy until
+convergence
+• view-independent, calculate for whole scene then browse from any
+viewpoint
+• divide surfaces into small patches
+• loop: check for light exchange between all pairs
+• form factor: orientation of one patch wrt other patch (n x n matrix)
+
+• issues:
+
+! !
+
+• light ray bends based on
+refractive indices c1, c2
+
+Review: Radiosity
+
+Review: Ray Tracing
+
+n
+
+generation of rays
+intersection of rays with geometric primitives
+geometric transformations
+lighting and shading
+efficient data structures so we don’t have to
+test intersection with every object
+
+• light enters and leaves at different
+locations on the surface
+• bounces around inside
+
+• technical Academy Award, 2003
+• Jensen, Marschner, Hanrahan
+
+[IBM]
+
+t
+65
+
+Review: Non-Photorealistic Rendering
+• simulate look of hand-drawn sketches or
+paintings, using digital models
+
+66
+
+Review: Collision Detection
+
+escience.anu.edu.au/lecture/cg/GlobalIllumination/Image/discrete.jpg
+
+escience.anu.edu.au/lecture/cg/GlobalIllumination/Image/continuous.jpg
+
+67
+
+Review: Collision Proxy Tradeoffs
+
+• boundary check
+
+68
+
+Review: Spatial Data Structures
+uniform grids
+
+BSP trees
+
+bounding volume hierarchies
+
+kd-trees
+
+octrees
+
+OBB trees
+
+• collision proxy (bounding volume) is piece of geometry used
+to represent complex object for purposes of finding collision
+• proxies exploit facts about human perception
+
+• perimeter of world vs. viewpoint or objects
+• 2D/3D absolute coordinates for bounds
+• simple point in space for viewpoint/objects
+
+• we are bad at determining collision correctness
+• especially many things happening quickly
+
+• set of fixed barriers
+• walls in maze game
+• 2D/3D absolute coordinate system
+
+• set of moveable objects
+• one object against set of items
+• missile vs. several tanks
+
+• multiple objects against each other
+www.red3d.com/cwr/npr/
+
+Sphere
+
+• punching game: arms and legs of players
+• room of bouncing balls
+69
+
+Review: Scan Conversion
+
+• display coordinates required to provide scale for
+discretization
+
+• we're moving horizontally along x direction (first octant)
+• only two choices: draw at current y value, or move up vertically
+to y+1?
+• candidates
+• top pixel: (x+1,y+1)
+• bottom pixel: (x+1, y)
+• midpoint: (x+1, y+.5)
+
+below: top pixel
+
+• check if midpoint above or below line
+• below: pick top pixel
+• above: pick bottom pixel
+
+• key idea behind Bresenham
+
+above: bottom pixel
+
+• reuse computation from previous step
+• integer arithmetic by doubling values
+73
+
+Review: Scanline Algorithms
+
+y
+5=0
+P
+
+2
+4
+
+P
+
+• origin: P1, basis vectors: (P2-P1) and (P3-P1)
+
+P = (1-β γ)P1 + βP2+γP3
+P(x,y)
+
+PL
+
+α + β+ γ = 1
+0 <= α, β, γ <= 1
+
+PR
+
+P2
+77
+
+• draw edges of polygon
+• use flood-fill to draw interior
+
+75
+
+P = αP1 + βP2+γP3
+P3
+
+78
+
+72
+
+• simple algorithm
+y=y0;
+dx = x1-x0;
+dy = y1-y0;
+d = 2*dy-dx;
+incKeepY = 2*dy;
+incIncreaseY = 2*dy-2*dx;
+for (x=x0; x <= x1; x++) {
+draw(x,y);
+if (d>0) then {
+y = y + 1;
+d += incIncreaseY;
+} else {
+d += incKeepY;
+}
+
+(α,β,γ) =
+(0,0,1)
+
+Review: Computing Barycentric
+Coordinates
+(α,β,γ) =
+
+• 2D triangle area
+
+P1 (1,0,0)
+
+• half of parallelogram area
+• from cross product
+
+(α,β,γ) =
+P1 (1,0,0)
+
+γ=1
+
+76
+
+A = ΑP1 +ΑP2 +ΑP3
+
+γ=0
+
+P = P1 + β(P2-P1)+γ(P3-P1)
+
+P1
+
+3
+
+1
+
+72
+
+Review: Flood Fill
+
+• non-orthogonal coordinate system based on triangle
+itself
+
+• then interpolate quantity as a function of x
+
+• parity test: draw pixel if edgecount is odd
+• optimization: only loop over axis-aligned
+bounding box of xmin/xmax, ymin/ymax
+
+71
+
+Review: Barycentric Coordinates
+
+• interpolate quantity along L and R edges,
+as a function of y
+
+• set pixels inside polygon boundary along
+horizontal lines one pixel apart vertically
+
+decreasing cost of (overlap tests + proxy update)
+
+74
+
+Review: Bilinear Interpolation
+
+• scanline: a line of pixels in an image
+
+Convex Hull
+
+Review: Bresenham Reuse Computation, Integer Only
+
+• check if midpoint between two possible pixel centers above or
+below line
+
+• given vertices in DCS, fill in the pixels
+
+6-dop
+
+increasing complexity & tightness of fit
+70
+
+Review: Midpoint Algorithm
+
+• convert continuous rendering primitives into discrete
+fragments/pixels
+
+OBB
+
+AABB
+
+α=0
+
+P3
+
+α = ΑP1 /A
+
+(α,β,γ) =
+(0,0,1)
+
+P3
+
+AP2
+
+AP3
+AP1 P
+P2 (α,β,γ) =
+(0,1,0)
+
+P
+
+β=0
+
+P2
+
+β=1
+
+(α,β,γ) =
+(0,1,0)
+
+α=1
+79
+
+β = ΑP2 /A
+weighted combination of three points
+
+γ = ΑP3 /A
+80
+
+Review: Painter s Algorithm
+
+Review: BSP Trees
+
+Review: BSP Trees
+
+• draw objects from back to front
+• problems: no valid visibility order for
+
+• preprocess: create binary tree
+
+3
+
+1
+
+8
+7
+
+81
+
+82
+
+Review: Depth Test Precision
+
+Review: Integer Depth Buffer
+• reminder from picking: depth stored as integer
+
+• reminder: perspective transformation maps
+eye-space (view) z to NDC z # )
+,&
+
+• depth lies in the DCS z range [0,1]
+• format: multiply by 2^n -1 then round to nearest int
+• where n = number of bits in depth buffer
+
+Ex
++ Az.(
+%"+
+-(
+#E 0 A 0 &#x& #Ex + Az& % * z
+%
+(% ( %
+( % ) Fy
+,(
+% 0 F B 0 (%y( = %Fy + Bz( = %"+* z + Bz.-(
+% 0 0 C D(% z ( % Cz + D ( %
+)
+D, (
+%
+(% ( %
+(
+$ 0 0 "1 0 '$1' $ "z ' % "+* C + z .- (
+%
+(
+1
+#
+&
+$
+'
+• thus zNDC = "%%C + D ((
+zeye '
+$
+
+83
+
+84
+
+Review: Image Space Algorithms
+
+• determine visibility on object or polygon level
+
+• perform visibility test for in screen coordinates
+• limited to resolution of display
+• Z-buffer: check every pixel independently
+
+• performed late in rendering pipeline
+
+• after clipping
+• painter’s algorithm
+• BSP trees
+86
+
+87
+
+Review: Alpha and Premultiplication
+•
+
+• polygon outside the field of view / frustum
+
+•
+
+• solved by clipping
+
+88
+
+Review: Complex Compositing
+• foreground color A, background color B
+• how might you combine multiple elements?
+
+specify opacity with alpha channel α
+• α=1: opaque, α=.5: translucent, α=0: transparent
+how to express a pixel is half covered by a red object?
+• obvious way: store color independent from transparency (r,g,b,α)
+
+• Compositing Digital Images, Porter and Duff, Siggraph '84
+• pre-multiplied alpha allows all cases to be handled simply
+
+• intuition: alpha as transparent colored glass
+
+• polygon is backfacing
+
+• 100% transparency can be represented with many different RGB values
+
+• pixel value is (1,0,0,.5)
+• upside: easy to change opacity of image, very intuitive
+• downside: compositing calculations are more difficult - not associative
+
+• solved by backface culling
+
+eye
+
+87
+
+• requires depth-sorting
+
+• why might a polygon be invisible?
+
+• polygon is occluded by object(s) nearer the viewpoint
+• solved by hidden surface removal
+
+NDCS
+
+4 3
+
+Review: Object Space Algorithms
+
+Review: Invisible Primitives
+
+z eye
+
+6
+
+9N F
+
+• explicitly compute visible portions of polygons
+
+N = number of bits of Z precision
+a = zFar / ( zFar - zNear )
+b = zFar * zNear / ( zNear - zFar )
+z = distance from the eye to the object
+
+85
+
+y
+
+5 N F 1 2
+
+F
+
+• at frame beginning, initialize all pixel depths
+to ∞
+• when rasterizing, interpolate depth (Z)
+across polygon
+• check Z-buffer before storing pixel color in
+framebuffer and storing depth in Z-buffer
+• don’t write pixel if its Z value is more distant
+than the Z value already stored there
+
+• early in pipeline
+
+• small numbers near, large numbers far
+
+VCS
+
+NN
+
+• resolution independent
+
+• consider depth from VCS: (1<<N) * ( a + b / z )
+
+Review: Back-face Culling
+
+F F
+
+F
+
+N
+
+• using camera coordinates
+
+• 24 bit depth buffer = 2^24 = 16,777,216 possible
+values
+
+•
+•
+•
+•
+
+N
+
+9
+
+6
+
+F
+
+N
+
+5
+
+4
+
+2
+
+! • depth buffer essentially stores 1/z
+• high precision for near, low precision for distant
+!
+
+• augment color framebuffer with Z-buffer or
+depth buffer which stores Z value at each
+pixel
+
+• viewpoint dependent: check which side of plane
+viewpoint is on at each node
+• draw far, draw object in question,
+N
+F
+draw near
+
+• recursive spatial partition
+• viewpoint independent
+
+• intersecting polygons
+• cycles of non-intersecting polygons possible
+
+Review: Z-Buffer Algorithm
+
+• runtime: correctly traversing this tree enumerates
+objects from back to front
+
+• elegant way: premultiply by α so store (αr, αg, αb,α)
+• intuition: alpha as screen/mesh
+
+y
+
+z
+
+works to cull if
+
+•
+•
+•
+•
+
+NZ > 0
+89
+
+Review: Texture Coordinates
+
+• pixel value is (.5, 0, 0, .5)
+• upside: compositing calculations easy (& additive blending for glowing!)
+91
+• downside: less intuitive
+
+90
+
+(1,0)
+
+(1,1)
+
+(0,0)
+
+(0,1)
+
+(0,1)
+
+(1,1)
+
+(0,.5)
+
+• tiling
+• clamping
+• functions
+
+(.25,.5)
+
+• replace/decal
+• modulate
+• blend
+
+• or other surface property
+
+• specified by programmer or artist
+
+glTexCoord2f(s,t)
+glVertexf(x,y,z,w)
+
+(4,0)
+
+(4,4)
+
+glTexCoord2d(4, 4);
+glVertex3d (x, y, z);
+
+(0,0)
+(0,0)
+
+93
+
+Review: Texture
+• action when s or t is outside [0…1] interval
+
+texture
+image
+
+glTexCoord2d(1, 1);
+glVertex3d (x, y, z);
+
+• use interpolated (s,t) for texel lookup at each pixel
+• use value to modify a polygon’s color
+
+92
+
+Review: Fractional Texture Coordinates
+
+Review: Tiled Texture Map
+
+• texture image: 2D array of color values (texels)
+• assigning texture coordinates (s,t) at vertex with
+object coordinates (x,y,z,w)
+
+RGB specifies how much color object contributes to scene
+alpha specifies how much object obscures whatever is behind it (coverage)
+alpha of .5 means half the pixel is covered by the color, half completely transparent
+only one 4-tuple represents 100% transparency: (0,0,0,0)
+
+(1,0)
+
+(0,0)
+
+• texture matrix stack
+
+(.25,0)
+
+glMatrixMode( GL_TEXTURE );
+
+(0,4)
+94
+
+95
+
+96
+
+Review: MIPmapping
+
+Review: Environment Mapping
+
+Review: Bump Mapping: Normals As Texture
+
+• image pyramid, precompute averaged versions
+
+• create illusion of complex
+geometry model
+• control shape effect by
+locally perturbing surface
+normal
+
+• sphere mapping: texture is distorted fisheye view
+• point camera at mirrored sphere
+• use spherical texture coordinates
+
+98
+
+With MIP-mapping
+
+Review: Perlin Noise
+
+Review: Procedural Modeling
+
+• coherency: smooth not abrupt changes
+• turbulence: multiple feature sizes
+
+function marble(point)
+x = point.x + turbulence(point);
+return marble_color(sin(x))
+
+• generate image of surrounding
+• map to object as texture
+
+Without MIP-mapping
+
+97
+
+Review: Perlin Noise: Procedural Textures
+
+• cheap way to achieve reflective effect
+
+99
+
+Review: Language-Based Generation
+
+• textures, geometry
+
+• L-Systems
+
+• nonprocedural: explicitly stored in memory
+• compute something on the fly
+• not load from disk
+
+• often less memory cost
+• visual richness
+
+Review: Fractal Terrain
+• 1D: midpoint displacement
+
+• F: forward, R: right, L: left
+• Koch snowflake:
+F = FLFRRFLF
+• Mariano’s Bush:
+F=FF-[-F+F+F]+[+F-F-F]
+
+• procedural approach
+
+100
+
+• divide in half, randomly displace
+• scale variance by half
+
+• 2D: diamond-square
+• generate new value at midpoint
+• average corner values + random displacement
+
+• angle 16
+
+• scale variance by half each time
+
+• adaptable precision
+
+• noise, fractals, particle systems
+101
+
+Review: Particle Systems
+
+http://spanky.triumf.ca/www/fractint/lsys/plants.html
+
+102
+
+Review: Clipping
+
+• changeable/fluid stuff
+
+Review: Clipping Lines To Viewport
+
+• life cycle
+• generation, dynamics, death
+
+• rendering tricks
+
+• outcodes
+• 4 flags encoding position of a point relative to
+top, bottom, left, and right boundary
+
+• OC(p1)== 0 &&
+OC(p2)==0
+• trivial accept
+
+• avoid hidden surface computations
+
+• (OC(p1) &
+OC(p2))!= 0
+• trivial reject
+105
+
+Review: Polygon Clipping
+
+106
+
+Review: Sutherland-Hodgeman Clipping
+• for each viewport edge
+
+• not just clipping all boundary lines
+
+107
+
+Review: Sutherland-Hodgeman Clipping
+
+1010
+
+1000
+
+p3
+
+p1
+0010
+
+1001
+
+0000
+
+y=ymax
+
+0001
+
+p2
+0110
+0100
+0101
+x=xmax
+x=xmin
+
+y=ymin
+108
+
+Review: RGB Component Color
+• simple model of color using RGB triples
+• component-wise multiplication
+
+• edge from p[i-1] to p[i] has four cases
+
+• clip the polygon against the edge equation for new vertex list
+• after doing all edges, the polygon is fully clipped
+
+• may have to introduce new line segments
+
+104
+
+http://www.gameprogrammer.com/fractal.html
+
+Review: Cohen-Sutherland Line Clipping
+
+• combining trivial accepts/rejects
+• trivially accept lines with both endpoints inside all edges
+of the viewport
+• trivially reject lines with both endpoints outside the same
+edge of the viewport
+• otherwise, reduce to trivial cases by splitting into two
+segments
+
+• analytically calculating the portions of
+primitives within the viewport
+
+• fire, steam, smoke, water, grass, hair, dust,
+waterfalls, fireworks, explosions, flocks
+
+103
+
+• decide what to add to output vertex list
+
+• (a0,a1,a2) * (b0,b1,b2) = (a0*b0, a1*b1, a2*b2)
+inside
+
+outside
+
+inside
+
+outside
+
+inside
+
+p[i-1]
+
+outside
+
+p[i]
+
+inside
+
+p[i]
+
+outside
+
+p[i-1]
+
+• for each polygon vertex
+• decide what to do based on 4 possibilities
+
+p[i]
+
+• is vertex inside or outside?
+• is previous vertex inside or outside?
+109
+
+p[i] output
+110
+
+p[i-1]
+i output
+
+p[i]
+
+p[i-1]
+no output
+
+• why does this work?
+
+i output
+p[i] output
+111
+
+• must dive into light, human vision, color spaces
+
+112
+
+Review: Trichromacy and Metamers
+
+Review: Measured vs. CIE Color Spaces
+
+Review: Chromaticity Diagram and Gamuts
+• plane of equal brightness showing chromaticity
+• gamut is polygon, device primaries at corners
+
+• three types of cones
+• color is combination
+of cone stimuli
+
+Review: RGB Color Space (Color Cube)
+• define colors with (r, g, b)
+amounts of red, green, and blue
+• used by OpenGL
+• hardware-centric
+
+• defines reproducible color range
+
+• metamer: identically
+perceived color
+caused by very
+different spectra
+
+• RGB color cube sits within CIE
+color space
+•
+
+measured basis
+• monochromatic lights
+• physical observations
+• negative lobes
+
+• subset of perceivable colors
+• scale, rotate, shear cube
+
+• transformed basis
+• “imaginary” lights
+• all positive, unit area
+• Y is luminance
+
+113
+
+114
+
+Review: HSV Color Space
+
+115
+
+Review: HSI/HSV and RGB
+
+Review: YIQ Color Space
+
+• HSV/HSI conversion from RGB
+
+• hue: dominant wavelength, color
+• saturation: how far from grey
+• value/brightness: how far from black/
+white
+• cannot convert to RGB with matrix
+alone
+
+• color model used for color TV
+
+• hue same in both
+• value is max, intensity is average
+
+1
+&
+[( R ' G ) + ( R ' B)] #! if (B > G),
+$
+2
+H = cos $
+!
+2
+$ ( R ' G ) + ( R ' B)(G ' B) ! H = 360 " H
+%
+"
+'1
+
+•HSI:
+
+117
+
+•HSV:
+
+•
+•
+•
+•
+
+116
+
+Review: Color Constancy
+
+I
+
+• automatic white balance from change in
+illumination
+• vast amount of processing behind the scenes!
+• colorimetry vs. perception
+
+Q
+
+Y is luminance (same as CIE)
+I & Q are color (not same I as HSI!)
+using Y backwards compatible for B/W TVs
+conversion from RGB is linear
+0.11 # & R #
+&Y # &0.30 0.59
+$ I ! = $0.60 ' 0.28 ' 0.32! $G !
+$ ! $
+!$ !
+%$Q "! %$ 0.21 ' 0.52 0.31 "! %$ B "!
+
+min(R,G,B)
+R+G+ B
+I=
+!
+I
+3
+min(R,G,B) V = max(R,G,B)
+S = 1"
+V
+S = 1"
+
+• green is much lighter than red, and red lighter
+than blue
+
+118
+
+119
+
+120
+
+!
+
+Review: Splines
+• spline is parametric
+curve defined by control
+points
+• knots: control points
+that lie on curve
+• engineering drawing:
+spline was flexible
+wood, control points
+were physical weights
+
+!
+Review: Hermite Spline
+
+!
+
+Review: Bézier Curves
+
+Review: Basis Functions
+• point on curve obtained by multiplying each control
+point by some basis function and summing
+
+• four control points, two of which are knots
+
+• user provides
+
+• more intuitive definition than derivatives
+
+• endpoints
+• derivatives at endpoints
+
+• curve will always remain within convex hull
+(bounding region) defined by control points
+1.2
+
+A Duck (weight)
+
+1
+
+0.8
+
+0.4
+
+0.2
+
+0
+
+-0.2
+
+-0.4
+
+Ducks trace out curve
+121
+
+Review: Comparing Hermite and Bézier
+Bézier
+
+Hermite
+
+1
+
+1
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+x1
+x0
+x'1
+x'0
+
+0.8
+0.6
+0.4
+
+122
+
+Review: Sub-Dividing Bézier Curves
+
+P1
+
+0.2
+-0.2
+
+0
+
+M12
+
+Review: Continuity
+
+• can find the point on Bézier curve for any parameter
+value t with similar algorithm
+
+M012
+
+M0123
+
+P2
+
+P1
+
+M12
+
+M123
+
+M01
+
+• continuity definitions
+
+• C0: share join point
+• C1: share continuous derivatives
+• C2: share continuous second derivatives
+
+P2
+M23
+
+M23
+
+124
+
+• piecewise Bézier: no continuity guarantees
+
+• for t=0.25, instead of taking midpoints take points 0.25 of the
+way
+
+B0
+B1
+B2
+B3
+
+0
+
+-0.4
+
+123
+
+Review: de Casteljau s Algorithm
+
+• find the midpoint of the line joining M012, M123.
+call it M0123
+
+1.2
+
+1.2
+
+x1
+x0
+x'1
+x'0
+
+0.6
+
+t=0.25
+M01
+
+P0
+125
+
+P0
+
+P3
+126
+
+P3
+demo: www.saltire.com/applets/advanced_geometry/spline/spline.htm
+
+127
+
+128
+
+Review: B-Spline
+
+Review: Visual Encoding
+
+• C0, C1, and C2 continuous
+• piecewise: locality of control point influence
+
+Review: Channel Ranking By Data Type
+
+marks: geometric primitives
+points lines
+areas
+
+attributes
+position
+
+• not all channels separable
+• attributes
+
+size
+grey level
+texture
+color
+
+• parameters
+control mark
+appearance
+• separable
+channels
+flowing from
+retina to brain
+color
+location
+
+orientation
+shape
+129
+
+Review: Preattentive Visual Channels
+• color alone, shape alone: preattentive
+
+Semiology of Graphics. Jacques Bertin, Gauthier-Villars 1967, EHESS 1998
+
+130
+
+[Mackinlay, Automating the Design of Graphical131
+Presentations of Relational Information, ACM
+TOG 5:2, 1986]
+
+Review: InfoVis Techniques
+
+Beyond 314: Other Graphics Courses
+• 424: Geometric Modelling
+
+• 3D often worse then 2D for abstract data
+
+• was offered this year
+
+• perspective distortion, occlusion
+• transform, use linked views
+
+• 426: Computer Animation
+• will be offered next year
+
+• animation often worse than small multiples
+• combined color and shape: requires attention
+
+•
+•
+•
+•
+•
+
+• search speed linear with distractor count
+
+• aggregation and filtering
+• focus+context
+[Christopher Healey, [www.csc.ncsu.edu/faculty/healey/PP/PP.html]
+
+133
+
+• dimensionality reduction
+• parallel coordinates
+
+Review: Integral vs. Separable Channels
+
+134
+
+514: Image-Based Rendering - Heidrich
+526: Algorithmic Animation - van de Panne
+530P: Sensorimotor Computation - Pai
+533A: Digital Geometry – Sheffer
+547: Information Visualization - Munzner
+135
+
+color
+motion
+
+color
+shape
+
+size
+orientation
+
+x-size
+y-size
+
+red-green
+yellow-blue
+
+[Colin Ware, Information Visualization:
+Perception for Design. Morgan Kaufmann
+1999.]
+
+132
+

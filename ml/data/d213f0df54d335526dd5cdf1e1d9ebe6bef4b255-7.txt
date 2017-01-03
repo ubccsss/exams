@@ -1,0 +1,616 @@
+
+CPSC 213, Winter 2014, Term 1 — Some More Sample Midterm Questions
+Date: October 2014; Instructor: Mike Feeley
+
+This was a closed book exam. No notes. No electronic calculators. This sample combines questions
+from multiple exams and so a real exam will have fewer total questions.
+Answer in the space provided. Show your work; use the backs of pages if needed. There are 15
+questions on 8 pages, totaling 79 marks. You have 50 minutes to complete the exam.
+
+Q1
+
+/2
+
+Q2
+
+/4
+
+Q3
+
+/4
+
+Q4
+
+/6
+
+STUDENT NUMBER:
+
+Q5
+
+/6
+
+NAME:
+
+Q6
+
+/3
+
+Q7
+
+/8
+
+Q8
+
+/ 10
+
+Q9
+
+/5
+
+Q10
+
+/3
+
+Q11
+
+/3
+
+Q12
+
+/3
+
+Q13
+
+/3
+
+Q14
+
+/9
+
+Q15
+
+/ 10
+
+Total
+
+/ 79
+
+SIGNATURE:
+
+1 (2 marks) Memory Alignment. The memory address 0x2018 is aligned for certain byte size accesses but not to
+others. List all power-of-two sizes for which it is aligned and carefully justify your answer.
+
+2 (4 marks)
+
+Pointer Arithmetic. Without using the [] array syntax (i.e., using only pointer arithmetic) and without
+introducing any additional variables, finish implementing this function that copies the first n integers of array from
+into array to.
+void copy (int* from, int* to, int n) {
+
+}
+
+3 (4 marks)
+
+Dynamic Allocation. A dangling pointer exits when a program retains a reference to dynamically
+allocated memory after it has been freed/reclaimed. A memory leak exists when a program fails to free/reclaim
+dynamically allocated memory that it is no longer needed by the program.
+
+3a Carefully explain the most serious symptom of a dangling-pointer bug.
+
+3b Carefully explain the most serious symptom of a memory-leak bug.
+
+3c Does Java’s garbage collector completely eliminate the dangling-pointer bug? Justify your answer carefully.
+
+3d Does Java’s garbage collector completely eliminate the memory-leak bug? Justify your answer carefully.
+
+4 (6 marks)
+
+Global Arrays. In the context of the following C declarations:
+
+int a[10];
+int *b;
+Indicate what, if anything, about the following expressions can not be computed statically. Be precise.
+
+4a a[3]
+2
+
+4b &a[3]
+
+4c b[3]
+
+5 (6 marks)
+
+Instance Variables. In the context of the following C declarations:
+
+struct S {
+int i,j;
+};
+
+struct S a;
+struct S* b;
+
+Indicate what, if anything, about the following expressions can not be computed statically. Be precise.
+
+5a &a.i
+
+5b &b->i
+
+5c (&b->j)-(&b->i)
+
+6 (3 marks)
+
+Memory Endianness Examine this C code.
+
+char a[4];
+*((int*) (&a[0])) = 1;
+Carefully explain how this code can be used to determine the endianness of the machine on which it runs, recalling
+that on a Big Endian machine, the high-order (most-significant) byte of a number has the lowest address.
+
+7 (8 marks)
+
+Consider the following C declarations.
+
+struct S {
+int
+i;
+int
+j[10];
+struct S* k;
+};
+
+int
+int*
+int
+struct S
+struct S*
+
+a[10];
+b;
+c;
+d;
+e;
+3
+
+For each of the following questions indicate the total number of memory references (i.e., distinct loads and/or stores)
+required to execute the listed statement. Justify your answers carefully.
+
+7a a[3] = 0;
+
+7b a[c] = 0;
+
+7c b[c] = 0;
+
+7d d.i = 0;
+
+7e d.j[3] = 0;
+
+7f e->i = 0;
+
+7g d.k->i = 0;
+
+7h e->k->i = 0;
+
+8 (10 marks)
+
+Reading Assembly Code. Consider the following snippet of SM213 assembly code.
+
+4
+
+foo: ld $s,
+
+r0
+
+#
+
+ld 0(r0), r1
+
+#
+
+ld 4(r0), r2
+
+#
+
+ld 8(r0), r3
+
+#
+
+ld $0,
+
+r0
+
+#
+
+not
+
+r1
+
+#
+
+inc
+
+r1
+
+#
+
+bgt
+
+r3, L1
+
+#
+
+br
+
+L9
+
+#
+
+ld
+
+(r2), r4
+
+#
+
+add
+
+r1, r4
+
+#
+
+beq
+
+r4, L2
+
+#
+
+br
+
+L3
+
+#
+
+L2:
+
+inc
+
+r0
+
+#
+
+L3:
+
+dec
+
+r3
+
+#
+
+inca
+
+r2
+
+#
+
+br
+
+L0
+
+#
+
+j
+
+(r6)
+
+#
+
+L0:
+
+L1:
+
+L9:
+
+8a Carefully comment every line of code above.
+8b Give precisely-equivalent C code.
+
+8c The code implements a simple function. What is it? Give the simplest, plain English description you can.
+
+9 (5 marks)
+
+Pointers in C Consider the follow declarations in C.
+
+int a[10] = 0,2,4,6,8,10,12,14,16,18; // a[i] = 2*i;
+int* b
+= &a[4];
+int* c
+= a+4;
+5
+
+Answer the following questions. Show your work for the last question.
+
+9a What is the type of the variable a?
+9b What is the value of b[4]?
+9c What is the value of c[4]?
+9d What is the value of *(a+4)?
+9e What is the value of b-a?
+9f What is the value of *(&a[3] + *(a+(&a[3]-&a[2])))?
+
+10 (3 marks)
+
+Mystery Variable 1 This code stores 0 in a variable.
+
+ld $0, r0
+st r0, 8(r5)
+Carefully, precisely, and succinctly describe this variable (just the one in which the 0 is stored).
+
+11 (3 marks)
+ld
+ld
+ld
+st
+
+Mystery Variable 2 This code stores 0 in a variable.
+$0, r0
+$3, r1
+$0x1000, r2
+r0, (r2, r1, 4)
+
+Carefully, precisely, and succinctly describe this variable (just the one in which the 0 is stored).
+
+12 (3 marks)
+ld
+ld
+ld
+ld
+st
+
+Mystery Variable 3 This code stores 0 in a variable.
+$0, r0
+$3, r1
+$0x1000, r2
+(r2), r2
+r0, (r2, r1, 4)
+
+Carefully, precisely, and succinctly describe this variable (just the one in which the 0 is stored).
+
+13 (3 marks)
+
+Mystery Variable 4 This code stores 0 in a variable.
+6
+
+ld
+ld
+ld
+st
+
+$0, r0
+$0x1000, r2
+(r2), r2
+r0, 8(r2)
+
+Carefully, precisely, and succinctly describe this variable (just the one in which the 0 is stored).
+
+14 (9 marks)
+
+Dynamic Storage
+
+14a Carefully explain how a C program can create a dangling pointer and what bad thing might happen if it does.
+
+14b Carefully explain how a C program can create a memory leak and what bad thing might happen if it does.
+
+14c Can either or both of these two problems occur in a Java program? Briefly explain.
+
+15 (10 marks)
+
+Implement the following in SM213 assembly. You can use a register for c instead of a local variable.
+Comment every line.
+int len;
+int* a;
+int countNotZero () {
+int c=0;
+while (len>0) {
+len=len-1;
+if (a[len]!=0)
+c=c+1;
+}
+return c;
+}
+
+7
+
+You may remove this page.
+
+These two tables describe the SM213 ISA. The first gives
+a template for instruction machine and assembly language and describes instruction semantics. It uses ’s’ and ’d’ to
+refer to source and destination register numbers and ’p’ and ’i’ to refer to compressed-offset and index values. Each
+character of the machine template corresponds to a 4-bit, hexit. Offsets in assembly use ’o’ while machine code stores
+this as ’p’ such that ’o’ is either 2 or 4 times ’p’ as indicated in the semantics column. The second table gives an
+example of each instruction.
+Operation
+load immediate
+load base+offset
+load indexed
+store base+offset
+store indexed
+halt
+nop
+rr move
+add
+and
+inc
+inc addr
+dec
+dec addr
+not
+shift
+
+Machine Language
+0d-- vvvvvvvv
+1psd
+2bid
+3spd
+4sdi
+F000
+FF00
+60sd
+61sd
+62sd
+63-d
+64-d
+65-d
+66-d
+67-d
+7dss
+
+branch
+branch if equal
+branch if greater
+jump
+get program counter
+jump indirect
+jump double ind, b+off
+jump double ind, index
+
+8-pp
+9rpp
+Arpp
+B--- aaaaaaaa
+6Fpd
+Cdpp
+Cdpp
+Edi-
+
+Operation
+load immediate
+load base+offset
+load indexed
+store base+offset
+store indexed
+halt
+nop
+rr move
+add
+and
+inc
+inc addr
+dec
+dec addr
+not
+shift
+
+Machine Language Example
+0100 00001000
+1123
+2123
+3123
+4123
+f000
+ff00
+6012
+6112
+6212
+6301
+6401
+6501
+6601
+6701
+7102
+71fe
+1000: 8003
+1000: 9103
+1000: a103
+b000 00001000
+6f31
+c104
+d102
+e120
+
+branch
+branch if equal
+branch if greater
+jump
+get program counter
+jump indirect
+jump double ind, b+off
+jump double ind, index
+
+Semantics / RTL
+r[d] ← vvvvvvvv
+r[d] ← m[(o = p × 4) + r[s]]
+r[d] ← m[r[b] + r[i] × 4]
+m[(o = p × 4) + r[d]] ← r[s]
+m[r[b] + r[i] × 4] ← r[s]
+(stop execution)
+(do nothing)
+r[d] ← r[s]
+r[d] ← r[d] + r[s]
+r[d] ← r[d] & r[s]
+r[d] ← r[d] + 1
+r[d] ← r[d] + 4
+r[d] ← r[d] − 1
+r[d] ← r[d] − 4
+r[d] ←!r[d]
+r[d] ← r[d] << ss
+(if ss is negative)
+pc ← (aaaaaaaa = pc + pp × 2)
+if r[r] == 0 : pc ← (aaaaaaaa = pc + pp × 2)
+if r[r] > 0 : pc ← (aaaaaaaa = pc + pp × 2)
+pc ← aaaaaaaa
+r[d] ← pc + (o = 2 × p)
+pc ← r[d] + (o = 2 × pp)
+pc ← m[(o = 4 × pp) + r[d]]
+pc ← m[4 × r[i] + r[d]]
+
+Assembly
+ld $vvvvvvvv,rd
+ld o(rs),rd
+ld (rb,ri,4),rd
+st rs,o(rd)
+st rs,(rb,ri,4)
+halt
+nop
+mov rs, rd
+add rs, rd
+and rs, rd
+inc rd
+inca rd
+dec rd
+deca rd
+not rd
+shl ss, rd
+shr -ss, rd
+br aaaaaaaa
+beq rr, aaaaaaaa
+bgt rr, aaaaaaaa
+j aaaaaaaa
+gpc $o, rd
+j o(rd)
+j *o(rd)
+j *(rd,ri,4)
+
+Assembly Language Example
+ld $0x1000,r1
+ld 4(r2),r3
+ld (r1,r2,4),r3
+st r1,8(r3)
+st r1,(r2,r3,4)
+halt
+nop
+mov r1, r2
+add r1, r2
+and r1, r2
+inc r1
+inca r1
+dec r1
+deca r1
+not r1
+shl $2, r1
+shr $2, r1
+br 0x1008
+beq r1, 0x1008
+bgt r1, 0x1008
+j 0x1000
+gpc $6, r1
+j 8(r1)
+j *8(r1)
+j *(r1,r2,4)
+8
+

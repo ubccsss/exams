@@ -1,0 +1,871 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca:80/~cs344/current-term/resources/oldexams/cpsc444old-2000w2-midterm1-sample-soln.pdf
+Name: ________MARKING_KEY__________
+
+Signature: __________________________
+
+Student ID Number: _________________
+
+Fire Alarm Code: __________________
+
+CPSC 444 2000-2001 (T2) First Midterm Exam
+Department of Computer Science
+University of British Columbia
+K. S. Booth
+Exam Instructions (Read Carefully)
+1.
+
+2.
+
+3.
+
+4.
+
+Sign the first page of the exam with your
+Signature in the space provided on the upper
+left immediately.
+Continue reading the instructions, but do not
+open the exam booklet until you are told to
+do so by a proctor.
+Print your Name and Student Identification
+Number on every page in the space provided
+at the top of each page before you start the
+exam.
+Cheating is an academic offense. Your
+signature on the exam indicates that you
+understand and agree to the University’s
+policies regarding cheating on exams.
+
+Question
+
+Mean
+
+SD
+
+Max
+
+1(a)
+
+11.4
+
+0.7
+
+12
+
+1(b)
+
+9.6
+
+1.6
+
+12
+
+2
+
+9.9
+
+3.3
+
+13
+
+3
+
+10.3
+
+3.8
+
+14
+
+4(a)-(k)
+
+19.7
+
+4.2
+
+24
+
+5.
+
+Please read the entire exam before answering
+any of the questions.
+
+4(l)-(w)
+
+18.4
+
+4.0
+
+24
+
+6.
+
+There are four questions on this exam, each
+worth the indicated number of marks.
+Answer as many questions as you can.
+
+Name & ID
+
+1.0
+
+0.2
+
+1
+
+7.
+
+Write all of your answers on these pages. If
+you need more space, there is blank space at
+the end of the exam. Be sure to indicate
+when a question is continued, both on the
+page for that question and on the continuation
+page.
+
+Total
+
+80.1
+
+9.8
+
+100
+
+8.
+
+Interpret the exam questions as written. No
+questions will be answered by the proctor(s)
+during the exam period.
+
+9.
+
+The exam is closed book. There are no aids
+permitted, except for a calculator.
+
+10. You have 70 minutes in which to work.
+Budget your time wisely.
+11. In the event of a fire alarm during the exam,
+enter the four-character code provided by the
+proctor(s) in the space on the upper right,
+then gather your belongings and exit the
+room, handing your exam to a proctor as you
+exit.
+12. No one will be permitted to leave the exam
+room during the last ten minutes of the
+exam.
+
+CPSC 444 2000-2001 (T2)
+
+− 1 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #1 [24 marks total]
+This question tests your knowledge of the eight usability factors discussed in the textbook.
+
+(a) [12 marks] Name the eight usability factors and give a brief description of each one.
+Speed of performance is how long it takes to complete the activity using
+the system, and thus determines how many people may be required if there
+is a time limit for when it needs to be finished. This interacts with
+the next two factors.
+Incidence of errors is both the probability of errors occurring, and
+also the severity of the errors (a large number of minor errors may not
+be as bad as even a few major errors). A high incidence of errors means
+slower overall performance.
+Ability to recover from errors is the ease with which users can correct
+mistakes or slips that they make. Included in this is a concern for how
+easily it will be for users to recognize that they have made an error.
+Difficulty in recovering from errors slows down users; complete
+inability to recover means the user has to start over.
+Ease of learning to use the system is the amount of training required to
+use the system. This costs money if employees are being trained (they
+are being paid while they learn). Even when non-employees are trained
+because the trainers are being paid and other resources may also be
+required. For casual or novice users, there may be no opportunity for
+training, so they have to be able to learn it on their own as they use
+the system.
+Retention of learned skills is important because re-training (or
+refresher courses) costs money. Many systems are not used on a regular
+basis by all users, but those users still need to understand how to use
+the system each time they do use it. Transfer of skills from and to
+other systems is related to this, and thus adherence to guidelines or
+standards helps promote retention of learned skills.
+Ability to customize the system is important because many systems are
+used for a variety of tasks in many different situations, each with
+their own requirements.
+Different users often have quite different
+personal styles and preferences for doing the same tasks, which should
+be supported by allowing users to adapt the system to their style.
+Ease of reorganizing activities affects how the activities that are
+supported by the system can be modified and still be supported by the
+system. This is in a sense a measure of how generalizable the system’s
+capabilities are, as opposed to how specialized the system is to a
+specific process for accomplishing certain goals. A good system can be
+used to support other activities if those are reorganized to use the
+system.
+Users’ satisfaction is sometimes difficult to measure because it is
+subjective and often intangible, but it is very important.
+It can
+easily be the critical factor in the success of a system; even if the
+system scores high on all of the other factors, if users do not like it,
+it may not get used. This is often what is meant by the over-used term
+‘‘user friendly’’.
+
+CPSC 444 2000-2001 (T2)
+
+− 2 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+(b) [12 marks] Consider a computer system designed to support the human activity of voting, as in the
+recent Canadian and U.S. elections. There are various stakeholders. List at least three sets of
+stakeholders and discuss the relative importance to each set of stakeholders of each of the eight
+usability factors by giving a ranking of high, medium, or low importance. Give a short (one or two
+sentences) justification for all 24 of your rankings (three sets of stakeholders times eight rankings
+each).
+Voters want to know that they can recover from errors. They do not want
+to spend any time learning the system. They probably would prefer that
+errors be infrequent, but recovery is more important than incidence of
+errors because they want to be absolutely certain that their votes are
+counted correctly.
+Most of the other factors are probably low in
+priority, although speed of performance might be an issue if it causes
+long delays while waiting to vote.
+
+Candidates (and their parties) are most concerned about errors because
+they have no control over how they are handled, but also would like to
+ensure that recovery is possible so they are corrected when they do
+occur. Concerns about speed of performance are similar to those for
+voters, since most candidates probably feel that their supporters will
+all turn out to vote, so they don’t want them leaving the polls due to
+long lines.
+Users’ satisfaction may be a concern, although the
+candidates might also have a cynical view that their supporters will
+vote no matter what, but other candidates’ supporters may not!
+
+Election officials and workers have a primary responsibility to ensure
+that the election runs smoothly, and is perceived to run smoothly, so
+they will put speed of performance, incidence of errors, recovery from
+errors, ease of learning, and retention of learned skills as high
+priority because of these affects how well the voting process proceeds.
+Customization, reconfigurability, and users’ satisfaction would all be
+secondary concerns because they make it easier to administer elections,
+but these are of lesser priority.
+Speed of performance definitely
+affects cost (elections have to take place in a single day, so if they
+are slow, more workers and more equipment may need to be deployed, which
+costs money).
+
+Courts are charged with ensuring that elections are run honestly. Their
+main concern is with the prevention of errors, with speed of
+performance, recovery from errors, ease of learning, and retention of
+learned skills all secondary and of interest only because they
+contribute to a more reliable process. Issues such as customization,
+reconfigurability, and users’ satisfaction are really no concern to the
+courts.
+
+CPSC 444 2000-2001 (T2)
+
+− 3 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+(continue your answer to Question 1(b) on this page)
+\ Stakeholders
+Factors
+Performance
+Errors
+Recovery
+Learning H
+Retention
+Customization
+Reconfigurability
+Satisfaction
+
+Voters
+H/M
+H/M
+H
+L/M
+L/M
+L
+L/M/H
+
+Candidates
+& Parties
+
+Election
+Workers
+
+Courts
+
+M
+H
+H
+M
+L/M
+M
+L
+L/M/H
+
+H
+H
+H
+H
+H
+M
+M
+M
+
+M
+H
+M
+M
+M
+L
+L
+L
+
+It is important to recognize that ‘errors’ refers to errors made by
+users and not errors made by the system, which is a legitimate concern,
+but not one of the usability factors. HCI limits its attention to the
+design of systems that reduce and hopefully minimize the likelihood of
+human error. Other subfields of computer science worry about system
+errors.
+While there is some justification for including the people who build the
+system as stakeholders, this is not usually done. Those who administer
+or operate the system are stakeholders (and these are included above, as
+part of the election workers).
+Those who design and build the system are presumably supposed to take
+their direction from the various stakeholders rather than have their own
+priorities for usability factors. If they do their jobs correctly, they
+will properly assess the priorities of the various stakeholders and
+design accordingly, thereby assuring a successful system and thus they
+will achieve their goals.
+A Note About Marking: This question is clearly rather subjective.
+The
+marking scheme was thus fairly flexible, with most students getting a
+mark in the range 9-10 if there answers were generally plausible.
+
+CPSC 444 2000-2001 (T2)
+
+− 4 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #2 [13 marks total]
+This question tests your knowledge of keystroke-level model and Fitts’s law.
+
+In lecture we discussed the example of a microwave oven for which it might be faster to
+heat water for 11 seconds than to heat water for 10 seconds.
+Suppose that the microwave oven has a control panel that looks like the layout on the
+right, with all of the keys 1.0 cm in width and centered 2.0 cm apart from each other in
+both the horizontal and vertical directions. (Note that the START key is actually three
+times wider than the others, but because all movement to it is ‘‘up’’, its effective width is
+still just 1.0 cm like all the other keys).
+
+START
+1 2 3
+4 5 6
+7 8 9
+0
+
+The time required to strike a key in the keystroke-level model is 0.5 sec, which is an average that includes
+both the time to move to the position of the key and the time to strike the key. A more accurate model
+would take into account the variation in positioning time using Fitts’s law. The formula
+T = 0. 25 + K log2 (2 A/W + 1) assumes that a single key press takes 0.25 sec plus the amount of time to reposition from the previous key to the new key. The textbook gives an estimate of 100 msec for the constant
+K in the formula.
+a) According to this formula, does hitting the key sequence 1-0-START take less time or more time than
+the key sequence 1-1-START using this key layout?
+b) What is the difference in time for the two sequences?
+c) Is it faster to heat water for 11 sec or 10 sec using this microwave oven? Show your work. Use the
+following table of logarithms and square roots, or you may use a calculator.
+√ n
+1
+0.0000
+1.0000
+2
+1.0000 1.4142
+3
+1.5850 1.7321
+4
+2.0000 2.0000
+5
+2.3219 2.2361
+6
+2.5850 2.4495
+7
+2.8074 2.6458
+8
+3.0000 2.8284
+9
+3.1699 3.0000
+10 3.3219 3.1623
+11 3.4594 3.3166
+12 3.5850 3.4641
+13 3.7004 3.6056
+14 3.8074 3.7417
+15 3.9069 3.8730
+16 4.0000 4.0000
+17 4.0875 4.1231
+18 4.1699 4.2426
+19 4.2479 4.3589
+20 4.3219 4.4721
+n
+
+log2 n
+
+CPSC 444 2000-2001 (T2)
+
+a) Obviously, without needing any calculation,
+1-0-START takes longer than 1-1-START because the
+number of keys is the same but movement is more.
+b) To compute the difference, we need only consider
+movement times for the 2nd and 3rd buttons in each
+sequence; everything else is the same. The formula
+given above for Fitts’s Law yields:
+2 ⋅ 2√
+2⋅8
+10
++ 1) + K log2 (
++ 1)
+1
+1
+= K (log2 13. 6 + log2 17)
+
+T 1→0→START = K log2 (
+
+= K (3. 77 + 4. 09) = K ⋅ 7. 86 = 786 msec
+2⋅0
+2⋅2
++ 1) + K log2 (
++ 1)
+1
+1
+= K (log2 1 + log2 5)
+
+T 1→1→START = K log2 (
+
+= K (0. 00 + 2. 32) = K ⋅ 2. 32 = 232 msec
+1-0-START takes 786 − 232 = 554 msec longer.
+c) The time to heat water is the sum of the time to
+hit the keys and the time spent heating. Heating
+for 10 sec is still about half a second faster than
+heating for 11 sec, even though hitting the keys
+does take longer for the 10-second heating.
+
+− 5 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #3 [14 marks total]
+This question tests your knowledge of Norman’s seven-stage model of task performance in which the
+two categories of mental activity execution and evaluation are present.
+
+List the seven stages in Donald Norman’s model and give a brief explanation of each.
+Establishing the goal to be achieved using the system.
+EXECUTION
+Forming the intention for action that will achieve the goal that was
+established.
+Specifying the action sequence corresponding to the intention that was
+formed.
+Executing the action sequence through physical/cognitive activity.
+EVALUATION
+Perceiving the system state that results from the action sequence.
+Interpreting the state of the system as perceived, usually by noting the
+change in the perceived state from what it was prior to the action and
+deducing from this how the actual state has changed. Even if perception
+is accurate, this stage can be faulty if the user does not have a good
+understanding of the system.
+Evaluating the system state with respect to the goal and intentions to
+determine if the goal has been achieved, or if a new subgoal needs to be
+established.
+Physical activity is required in addition to mental activity only to
+execute the action sequence and in perception (especially haptic
+perception). The other stages only require mental activity.
+The difference between the user’s intention and the user’s evaluation is
+the expectation that needs to be fulfilled by further activity.
+Norman defines the difference between how users think of their goals and
+how those goals are realized physically in the system as presenting
+designers with a cognitive ‘gulf’ that should be minimized by making
+users’ conceptual models match as closely as possible the actual system
+model.
+A Note About Marking: Some people confused the activity above as being part
+of the design process. Norman’s model is about how people carry out any
+type of activity, but mostly short-term activities (such as buying a
+Coke or getting money from an ATM).
+All of the steps are either
+cognitive (taking place in the person’s mind as he or she does the
+activity), or are perceptual or motor activity in support of that
+cognitive activity.
+The theory does apply to longer-term activities
+(such as the design process), but it’s introduction in the textbook is
+for the purpose of identifying a particular way in which people perform
+tasks, not higher-level processes.
+
+CPSC 444 2000-2001 (T2)
+
+− 6 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #4 [48 marks − 2 marks each]
+This question tests your general knowledge of the concepts and terminology introduced in the course.
+
+The following terms or people’s names are possible answers for the questions on subsequent pages. Use
+the number corresponding to a term or name below as an answer in the space provided if you think it is the
+best match for one of the concepts or definitions on subsequent pages. Each answer may be used once,
+more than once, or not at all.
+
+(1)
+
+back
+
+(22)
+
+low-angle
+
+(2)
+
+built-in
+
+(23)
+
+medium shot
+
+(3)
+
+chest level
+
+(24)
+
+Nelson, Ted
+
+(4)
+
+close-up shot
+
+(25)
+
+NLS
+
+(5)
+
+composite video
+
+(26)
+
+NTSC video
+
+(6)
+
+crane
+
+(27)
+
+pan
+
+(7)
+
+dolly
+
+(28)
+
+process
+
+(8)
+
+dynamic model
+
+(29)
+
+PZM
+
+(9)
+
+empirical law
+
+(30)
+
+S-video
+
+(10)
+
+Engelbart, Douglas
+
+(31)
+
+situated action
+
+(11)
+
+ethnography
+
+(32)
+
+step
+
+(12)
+
+explanatory theory
+
+(33)
+
+SVHS
+
+(13)
+
+eye level
+
+(34)
+
+system
+
+(14)
+
+fill
+
+(35)
+
+task
+
+(15)
+
+Fitts, Paul
+
+(36)
+
+theory of social behavior
+
+(16)
+
+head shot
+
+(37)
+
+tilt
+
+(17)
+
+high-angle
+
+(38)
+
+tool
+
+(18)
+
+hip level
+
+(39)
+
+truck
+
+(19)
+
+key
+
+(40)
+
+VHS
+
+(20)
+
+lavalier
+
+(41)
+
+Xanadu
+
+(21)
+
+long shot
+
+(42)
+
+zoom
+
+CPSC 444 2000-2001 (T2)
+
+− 7 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+For each statement below, write the number of the term listed on the previous page that best fits into the
+missing space marked by ********* in the sentence.
+
+[2 marks each]
+_27_ (a)
+
+A camera movement in which the camera rotates left or right on the tripod is a pan.
+
+__6_ (b)
+
+A camera movement in which the camera and tripod move up or down is a crane.
+
+__7_ (c)
+
+A camera movement in which the camera and tripod move closer or farther (‘‘in’’ or ‘‘out’’)
+from the subject is called a dolly.
+
+_17_ (d)
+
+A high-angle shot visually diminishes or weakens the subject.
+
+__3_ (e)
+
+A convention that viewers are usually familiar with is that chest level is the normal angle for a
+shot.
+
+_30_ (f)
+
+With a Hi-8 camera, the best video signal will usually be obtained using a S-video cable to
+connect to an external VCR.
+
+_33_
+
+Alternate answer: SVHS for 1 mark(s).
+
+_40_ (g)
+
+The usual video tape format used for home VCRs is VHS.
+
+_21_ (h)
+
+During the videotaping of an interview, a long shot might be used at first as an ‘‘establishing
+shot’’, but usually would not be used again during the rest of the interview.
+
+_23_
+
+Alternate answer: medium shot for 1 mark(s).
+
+_27_
+
+Alternate answer: pan for 1 mark(s).
+
+_29_ (i)
+
+During the videotaping of an interview, if only a single microphone is being used, it would
+often be a PZM microphone because this picks up both people’s voices fairly well.
+
+_20_
+
+Alternate answer: lavalier for 1 mark(s).
+
+__2_ (j)
+
+During the videotaping of an interview, the worst sound quality is usually obtained using a
+built-in microphone because it picks up sound from all over the room and does not focus on
+just the people’s voices.
+
+_19_ (k)
+
+In a three-point lighting system the key light provides the most light on the subject’s face.
+
+_14_ (l)
+
+In a three-point lighting system the fill light is used to reduce shadows on portions of the
+subject’s face.
+
+CPSC 444 2000-2001 (T2)
+
+− 8 of 9 −
+
+First Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+[2 marks each]
+_15_ (m)
+
+The psychologist Fitts, Paul made the discovery in the 1950s that human movement for
+repetitive tapping tasks follows a simple law that allows the movement time to be predicted
+from the distance to the target and the width of the target.
+
+_10_ (n)
+
+The electrical engineer Engelbart, Douglas and his colleagues invented the first computer
+mouse in the 1960s.
+
+_25_ (o)
+
+One of the first demonstrations of hypertext was NLS, which was implemented at SRI
+(Stanford Research Institute) in the 1960s.
+
+_24_ (p)
+
+Nelson, Ted coined the term ‘‘hypertext’’ in the 1960s.
+
+_28_ (q)
+
+A process is a linked series of human activities, distributed over time and possibly involving a
+number of people.
+
+_32_ (r)
+
+A step is the smallest unit of human activity, and is a component of more complex units of
+human activity.
+
+_31_ (s)
+
+Lucy Suchman used the term situated action to draw attention to the way in which the
+surrounding circumstances affect the courses of action that people take.
+
+_38_ (t)
+
+Technology designed to support a task is called a tool.
+
+_34_ (u)
+
+Technology designed to support a process is called a system.
+
+__9_ (v)
+
+The formula T = log2 (n + 1) is an example of a empirical law.
+
+_36_ (w)
+
+The observation that the gaze direction of the listener in a conversation can affect the speaker
+is an example of a theory of social behavior.
+
+_12_
+
+Alternate answer: explanatory theory for 1 mark(s).
+
+_11_ (x)
+
+ethnography is a collection of research methods often used in anthropology and sociology to
+produce an understanding of complex human activity.
+
+CPSC 444 2000-2001 (T2)
+
+− 9 of 9 −
+
+First Midterm Exam (70 minutes)
+

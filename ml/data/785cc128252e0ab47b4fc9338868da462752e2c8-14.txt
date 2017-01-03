@@ -1,0 +1,742 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca:80/~cs344/current-term/resources/oldexams/cpsc444old-2000w2-midterm2-sample-soln.pdf
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Signature: __________________________
+
+Fire Alarm Code: __________________
+
+CPSC 444 2000-2001 (T2) Second Midterm Exam
+Department of Computer Science
+University of British Columbia
+K. S. Booth
+Exam Instructions (Read Carefully)
+1.
+
+2.
+
+3.
+
+4.
+
+Question
+
+Sign the first page of the exam with your
+Signature in the space provided on the upper
+left immediately.
+Continue reading the instructions, but do not
+open the exam booklet until you are told to
+do so by a proctor.
+Print your Name and Student Identification
+Number on every page in the space provided
+at the top of each page before you start the
+exam.
+Cheating is an academic offense. Your
+signature on the exam indicates that you
+understand and agree to the University’s
+policies regarding cheating on exams.
+
+Mean
+
+SD
+
+Max
+
+1(a-b)
+
+6.9
+
+1.1
+
+8
+
+1(c-d)
+
+7.5
+
+1.0
+
+8
+
+2(a)
+
+7.0
+
+1.4
+
+8
+
+2(b)
+
+8.4
+
+1.0
+
+9
+
+2(c)
+
+4.2
+
+1.7
+
+6
+
+9.8
+
+2.3
+
+12
+
+5.
+
+Please read the entire exam before answering
+any of the questions.
+
+3
+
+6.
+
+There are four questions on this exam, each
+worth the indicated number of marks.
+Answer as many questions as you can.
+
+4(a-l)
+
+21.7
+
+2.5
+
+24
+
+7.
+
+Write all of your answers on these pages. If
+you need more space, there is blank space at
+the end of the exam. Be sure to indicate
+when a question is continued, both on the
+page for that question and on the continuation
+page.
+
+4(m-x)
+
+18.0
+
+5.3
+
+24
+
+1.0
+
+0.0
+
+1
+
+84.5
+
+9.6
+
+100
+
+8.
+
+Interpret the exam questions as written. No
+questions will be answered by the proctor(s)
+during the exam period.
+
+9.
+
+The exam is closed book. There are no aids
+permitted, except for a calculator.
+
+Name & ID
+Total
+
+10. You have 70 minutes in which to work.
+Budget your time wisely.
+11. In the event of a fire alarm during the exam,
+enter the four-character code provided by the
+proctor(s) in the space on the upper right,
+then gather your belongings and exit the
+room, handing your exam to a proctor as you
+exit.
+12. No one will be permitted to leave the exam
+room during the last ten minutes of the
+exam.
+
+CPSC 444 2000-2001 (T2)
+
+− 1 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #1 [16 marks total]
+This questions tests your knowledge of GOMS techniques as discussed in Chapter 8.
+
+In class and in the text we used GOMS to analyze the task of making text bold face in a word processor,
+such as MS Word. There are four parts of the GOMS model. In the spaces provided below and on the next
+page, name each of the four parts, give a description of each part, and provide an example of each part as it
+would be used to analyze the task of making text bold face in MS Word. Treat the cases for boldfacing a
+few letters within a word, one entire word, and multiple consecutive words.
+(a) Part: Goals
+Description: Goals define the end-state that the user is trying to
+achieve. Top-level goals are subdivided into subgoals, corresponding
+to the division of a task into subtasks.
+Example: There is a two-level hierarchy of goals for the boldfacing
+task.
+Main goal − turn desired text to bold
+Subgoal-1 − specification of text to turned to bold
+Subgoal-2 − change the specified text to bold
+(b) Part: Operators
+Description: Operators are the basic actions available to the user for
+performing a task.
+Example: For the boldfacing task the basic operators
+fundamental actions with the mouse and keyboard:
+
+are
+
+the
+
+click down, click up, and move the mouse, along with
+type a key on the keyboard.
+
+CPSC 444 2000-2001 (T2)
+
+− 2 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+(Continue your answer to Question #1 here for the final two parts of GOMS.)
+
+(c) Part: Methods
+Description: Methods are sequences of operators (or procedures)
+accomplishing a goal. Compound operations are methods.
+
+for
+
+Example: There are two sets of methods, one for specifying text and
+one for changing it to boldface:
+The sequence double-click (click down, click up, click down, click up
+all in rapid succession) specifies a full word.
+The sequence click down, move mouse pointer, click up specifies the
+text between the click-down point to the click-up point.
+The sequence control-B changes the specified text to boldface, and so
+does move mouse to BOLD-button, click up/down. Two longer sequences
+are move to FORMAT menu, click down, move to FONT, click up, move to
+dialogue box, double-click on BOLD and a similar sequence that ends
+with click down/up on BOLD, move mouse pointer to OK and click
+down/up or with typing "ENTER" on the keyboard instead of the final
+click down/up.
+(d) Part: Selection rules
+Description: Selection rules are invoked when there is a choice of
+methods to accomplish a goal. Selection rules often have criteria to
+determine which method will be invoked under various circumstances.
+Example: For the boldfacing task a selection rule based on a criteria
+of fastest is best would select double-click to specify a full work,
+but would use click-up/move/click-down for both of the other types of
+text (less than a single word and more than a single word).
+Similarly, either typing control-B or moving to the BOLD-button will
+be faster than the other two methods. Which is fastest will depend on
+the homing time to switch the hands to the keyboard from the mouse,
+and the position-dependent movement time to reach the BOLD-button
+(Fitts’s Law).
+
+CPSC 444 2000-2001 (T2)
+
+− 3 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #2 [23 marks total]
+This question tests your knowledge of the requirements definition as it pertains to interactive systems,
+which was discussed in Chapter 7.
+
+(a) [8 marks] Identify the two main groups of stakeholders who read requirements. For each group,
+include a list of stakeholders in that group, and briefly describe the reasons that each stakeholder in
+the group has for reading the requirements.
+Group 1: Clients are composed of:
+users need to know how the system will support their activities.
+managers of the users also need to know that the system will support
+their activities, and that their employees will be able to use it.
+trainers need to know what skills will be required of users and what
+support features and documents will be provided with the system to
+assist with training.
+marketeers need to know that the system will meet the needs of
+customers (current or future).
+purchasers/buyers need to know what activities will be supported and
+what performance can be expected.
+
+Group 2: developers are composed of:
+Designers need to know what to specify in their designs, and how the
+designs will be evaluated (i.e., what performance targets have been
+set).
+implementers need to know what to build and how it will be tested.
+marketeers need to know that the system will meet the needs of
+customers (current or future).
+testers, documenters, and quiality control engineers need to know the
+standards to which the system is to be built.
+
+CPSC 444 2000-2001 (T2)
+
+− 4 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+(b) [9 marks] List the three different contexts in which the development process can take place, identify
+the relative degree of formality and detail normally present in requirements for each of the three
+contexts, and identify the key stakeholders and their roles for each context.
+Context 1:
+Perhaps the most common context these days is the product
+organization (companies such as Adobe, Alias|wavefront, or Microsoft)
+that are developing new systems for commercial sale. Especially when
+the applications involve novel applications, there may be only very
+sketch requirements documents to start with, with much of the detail
+evolving as a result of experience gained with early prototypes and
+initial versions of the product as they are shipped to customers.
+The clients are often a marketing team within the company, because
+users and other stakeholders are not yet identified, although
+whenever possible the marketing team will try to work with current
+customers or known early adopters.
+The developers are a team of
+designers and builders (programmers). Examples are Adobe Acrobat for
+distributing documents, Alias|wavefront Maya for 3D animation, and
+Microsoft Excel for financial and accounting spreadsheets.
+Context 2:
+Within a user organization systems may be developed ‘in house’ for
+internal use. The requirements documents are often fairly informal
+and less detailed, because there is an expectation that they will
+evolve during the course of the project. Both the clients and the
+developers work in the organization. Most often the clients are a
+committee of management and users, and the developers are an in-house
+software development team. An example of this would be Air Canada’s
+Gemini system for airline reservations, which was originally
+developed for use by Air Canada and its affiliates, and later sold as
+a product to other airlines.
+Context 3:
+Contract development requires the most formality and detail in
+requirements documents because the clients are usually a user
+organization and the developers are an outside contractor hired
+specifically to design and implement the system, primarily to write
+the software. The requirements are often prepared by a third- party
+organization, such as a management consultant, hired specifically for
+that task. An example is the UBC Financial Management System, which
+was developed by PeopleSoft under contract to UBC.
+
+CPSC 444 2000-2001 (T2)
+
+− 5 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+(c) [6 marks] Discuss the differences between validation and verification of requirements by giving
+definitions for each and relating them to the problem statement, the requirements documents, and
+the prototypes that may be built as part of the design process.
+Validation: This is often referred to as ‘building the right system’, in
+other words a requirements document that defines a system that will
+resolve the situation of concern that is part of the problem
+statement. Both analytical and and empirical techniques, although
+analytical techniques are preferred because they are often faster
+and can be used without having to build prototypes.
+When purely
+analytical techniques cannot be used, empirical testing using
+prototypes may be needed.
+This is the case most often when
+performance levels are being checked and there is no predictive model
+to estimate performance based solely on the design. In all cases the
+goal is to demonstrate that the system specified in the requirements
+document will resolve the situation of concern.
+
+Verification: This is often referred to as ‘building the system right’,in
+other words a system that matches the requirements document.
+Standard verfication and testing techniques from software engineering
+can be used to verify correctness of the system (functional
+requirements), but performance requirements usually require testing
+(empirical studies). Usually this are done with the specification
+for
+the
+system
+(a
+detailed
+description
+that
+reduces
+the
+implementation to routine engineering tasks), or in some cases the
+actual system, although prototypes can be used if there is reason to
+believe that the final system will have similar performance. It is
+always important to state requirements in such a way that they can be
+verified. Valid requirements that cannot be verified are of no use
+in the design process.
+
+CPSC 444 2000-2001 (T2)
+
+− 6 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #3 [12 marks total]
+This questions tests your knowledge of the ethical requirements for research involving human subjects.
+
+(a) Who provides approval when Requests for Ethical Review are submitted at UBC?
+A university committee of researchers administered through the Office
+of Research Services, which reports to the Vice President Research.
+(b) How long does it typically require to obtain ethics approval once the appropriate forms and
+attachments have been submitted?
+Four to six weeks is the normal time required. The committee meets
+on a regular basis, so it depends a lot on when the request is
+submitted relative to the meeting schedule.
+(c) List two types of documents that may need to accompany the forms requesting ethical approval.
+There are many documents that may need to be submitted as
+attachments: samples of consent forms, questionnaires advertisements
+for subjects, approval certificates from external agencies, special
+deception forms describing any information that will be withheld from
+subjects and the debriefing process that will take place after the
+study, telephone contact forms, and samples of authorization and
+release forms for videotaping subjects.
+(d) List three specific types of information that subjects have a right to know prior to their providing
+informed consent to participate in a study.
+The principle of informed consent holds that subjects have a right to
+know and understand the purpose of the study, the procedures that
+will be followed in the study, any payment or other consideration
+they will receive for participating, the degree of confidentiality of
+any information about them that is collected, and contact information
+for obtaining more information about the study or to file any
+complaints they may have about the conduct of the study. They also
+have right to know any risks or discomfort involved, and that they
+have the right to withdraw at any time.
+(e) What are the two types of release/authorization that may have to be obtained when videotaping of
+subjects is performed?
+Permission must be obtained to record video information about
+subjects, which includes the use of the video for purposes of
+analysis in the study.
+Separate permission is usually required to present the video either
+for purposes of training (such as in courses) or dissemination of the
+results of the research (such as at academic or professional
+conferences), and this must include a right to approve any editting.
+(f) Do experiments conducted by students in a course using other students in the course as their subjects
+require submission of an ethics request?
+No, ethics approval is not required in this case, although the
+instructor for the course does need to file an annual summary of the
+instructions provided to students.
+
+CPSC 444 2000-2001 (T2)
+
+− 7 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+Question #4 [48 marks − 2 marks each]
+This question tests your general knowledge of the concepts and terminology introduced in the course.
+
+The following terms or people’s names are possible answers for the questions on subsequent pages. Use
+the number corresponding to a term or name below as an answer in the space provided if you think it is the
+best match for one of the concepts or definitions on subsequent pages. Each answer may be used once,
+more than once, or not at all.
+
+(1)
+
+Chi Omega
+
+(17)
+
+key press
+
+(2)
+
+Chi-square test
+
+(18)
+
+keystroke level analysis
+
+(3)
+
+cognitive breakdown
+
+(19)
+
+mental preparation
+
+(4)
+
+cognitive unit
+
+(20)
+
+null hypothesis
+
+(5)
+
+cognitive walkthrough
+
+(21)
+
+participatory
+
+(6)
+
+construct
+
+(22)
+
+performance
+
+(7)
+
+draw straight-line segments
+
+(23)
+
+point with mouse
+
+(8)
+
+ecological
+
+(24)
+
+prototype
+
+(9)
+
+experimental hypothesis
+
+(25)
+
+response by the system
+
+(10)
+
+exploratory learning
+
+(26)
+
+statistical
+
+(11)
+
+external
+
+(27)
+
+system model
+
+(12)
+
+face
+
+(28)
+
+t-test
+
+(13)
+
+functional
+
+(29)
+
+type I
+
+(14)
+
+heuristic evaluation
+
+(30)
+
+type II
+
+(15)
+
+home hands
+
+(31)
+
+WIMP
+
+(16)
+
+internal
+
+(32)
+
+Xanadu
+
+CPSC 444 2000-2001 (T2)
+
+− 8 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+For each statement below, write the number of the term listed on the previous page that best fits into the
+missing space marked by
+in the sentence.
+
+[2 marks each]
+_14_ (a)
+
+A team of evaluators, usually three to five people, is employed in heuristic evaluation using a
+process of aggregation to produce a comprehensive list of problems.
+
+_10_ (b)
+
+The theory of exploratory learning has four components: goal setting, exploration, selection,
+and assessment.
+
+__5_ (c)
+
+cognitive walkthrough is a usability analysis method based on this four-component theory
+(goal setting, exploration, selection, and assessment).
+
+_18_ (d)
+
+keystroke level analysis is a usability analysis method based on GOMS.
+
+_13_ (e)
+
+Requirements that specify the activities or tasks that the system is supposed to support are
+functional requirements.
+
+_22_ (f)
+
+Requirements that set targets for levels of user activity (such as speed, error rate, error
+recovery) that the system is supposed to enable are performance requirements.
+
+_18_ (g)
+
+keystroke level analysis is a special case of GOMS that was devised by Card, Moran and
+Newell (1983).
+
+_17_ (h)
+
+The symbol K was used by Card, Moran and Newell for their key press operator.
+
+_25_ (i)
+
+The symbol R(t) was used by Card, Moran and Newell for their response by the system
+operator.
+
+_19_ (j)
+
+The symbol M was used by Card, Moran and Newell for their mental preparation operator.
+
+__4_ (k)
+
+Card, Moran and Newell proposed that all but the first M in a string of MK operators be
+deleted if the string is a cognitive unit.
+
+_24_ (l)
+
+Because many aspects of usability are hard to define in words, we sometimes include a
+prototype in the requirements document, even though it may have been built using totally
+different software than what will be used for the finals system.
+
+CPSC 444 2000-2001 (T2)
+
+− 9 of 10 −
+
+Second Midterm Exam (70 minutes)
+
+Name: ________MARKING_KEY__________
+
+Student ID Number: _________________
+
+[2 marks each]
+_11_ (m)
+
+In an empirical study external validity asks whether the results generalize.
+
+_26_ (n)
+
+In an empirical study statistical validity asks whether the results might be just a fluke.
+
+__6_ (o)
+
+In an empirical study construct validity asks whether we are measuring what we think we are
+measuring.
+
+_16_ (p)
+
+In an empirical study internal validity asks whether there are logical or causal relationships
+among what we are measuring.
+
+__8_ (q)
+
+In an empirical study ecological validity asks whether the results are realistic.
+
+_12_ (r)
+
+In an empirical study face validity is another name for asking whether the results are realistic.
+
+_20_ (s)
+
+When we conduct an experiment and measure a dependent variable, we almost always see
+differences in measurements across experimental conditions. The null hypothesis is that any
+such differences are due entirely to variations among the population, and not to our deliberate
+change in the experimental conditions.
+
+__9_ (t)
+
+The experimental hypothesis is that our change in the experimental conditions has had an
+effect, which is reflected in our measurements.
+
+_30_ (u)
+
+A type II error occurs when we fail to observe a difference in the means when sampling from
+two distinct populations that have population means that differ − we don’t find something that
+really is there.
+
+_29_ (v)
+
+type I error occurs when we observe a difference in the sample means even though we are
+sampling from the same population − we find something that is not there.
+
+_28_ (w)
+
+A t-test is a statistical test that can be used to determine how likely it is that two samples with
+different sample means are actually different.
+
+__2_ (x)
+
+A Chi-square test is a statistical test that can be used to determine how likely it is that a
+questionnaire or survey has correctly identified people’s preferences among a set of design
+options.
+
+CPSC 444 2000-2001 (T2)
+
+− 10 of 10 −
+
+Second Midterm Exam (70 minutes)
+

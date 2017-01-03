@@ -1,0 +1,111 @@
+
+CPSC 320 Sample Midterm 2
+November 2012
+Name:
+
+Student ID:
+
+Signature:
+– You have 50 minutes to write the 5 questions on this examination.
+A total of 40 marks are available.
+– Justify all of your answers.
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11in sheet of notes, and nothing else.
+
+Question
+1
+2
+
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+Marks
+
+3
+4
+5
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her UBC card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 5
+[12] 1. Short answers
+[3] a. When should you use the “guess and test” method to solve a recurrence relation?
+
+[3] b. The Prim-Jarnı́k minimum spanning tree algorithm maintains a value Cost(v) for
+each vertex v that is still in the heap. What does this value represent?
+
+[3] c. Does amortized analysis help us design better algorithms and data structures? Explain why or why not.
+
+[3] d. For each positive integer n, there are graphs G with n vertices and Θ(n2 ) edges such
+that Kruskal’s algorithm will look at every edge of G, and hence run in Θ(n2 log n)
+time. Describe what such a graph might look like.
+
+page 3 out of 5
+[8] 2. You have been asked to prove that an arbitrary sequence of n grow and cut operations on
+√
+a Bosquet data structure runs in O(n n) time. You thus define a potential function Φ,
+and then work on computing the amortized costs of the grow and cut operations.
+[4] a. The running time of a grow operations is x + 5, where x is the number of trees
+involved in the operation (each Bosquet consists of a number of trees). Knowing
+that the amortized cost of a grow operation is in O(1), what can you say about the
+impact of the grow operation on the Bosquet’s potential?
+
+[4] b. Determine the amortized cost of a cut operation as precisely as possible from the
+information given above.
+
+[5] 3. Describe in words a sequence of 2n − 1 operations on a Disjoint Sets data structure such
+that a subsequent find operation will run in Θ(log n) time, even if path compression is
+used. Hint: start by calling makeSet n times.
+
+page 4 out of 5
+[7] 4. Write a recurrence relation that describes the worst-case running time of the following algorithm as a function of n. Note: I do not believe that this algorithm computes anything
+useful, so don’t waste any time trying to understand what it does.
+Algorithm Elephant(A, first, n)
+if n < 3 then
+return (A[first] + A[first + n - 1]) / 2
+x ← Elephant(A, first + n/3, 2*n/3)
+while (n >
+n ← n /
+x ← x +
+first ←
+endwhile
+return x
+
+1) do
+2
+Elephant(A, first, n) * Elephant(A, first + n, n)
+first + n/2
+
+page 5 out of 5
+[8] 5. Prove an upper bound on the function T (n) defined by
+
+
+T (n) =
+
+T (3n/4) + T (n/2) + 3T (n/4) + n2
+1
+
+if n ≥ 4
+if n ≤ 3
+
+Your grade will depend on the quality of the bounds you provide (that is, showing that
+T (n) ∈ Ω(1) and T (n) ∈ O(100n ), while true, will not give you many marks).
+

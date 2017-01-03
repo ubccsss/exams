@@ -1,0 +1,281 @@
+
+CPSC 121 Sample Midterm
+October 2008
+[12] 1. After the midterm, several friends are thinking about going to see a movie, either Death at
+a Funeral or Rendition. Let
+a
+e
+p
+v
+w
+d
+r
+
+=
+=
+=
+=
+=
+=
+=
+
+Alice wants to go to the movie
+Ebert wants to go to the movie
+Peter wants to go to the movie
+Volkov wants to go to the movie
+Wolfgang wants to go to the movie
+The movie is Death at a Funeral
+The movie is Rendition
+
+The table below contains various English sentences, predicates, and logic circuits. Each
+sentence, truth value of an expression, or output of a circuit describes a set of conditions
+where Wolfgang will go to a movie (that is, “w”). Identify those that are equivalent to each
+other. You will find 3 groups of two table entries that are equivalent, and two entries that are
+equivalent to no other entry. You should write your answer in the form “A ≡ B, C ≡ D,
+E ≡ F , G and H are unpaired.”
+Write your answers below (continue at the top of the next page). You should give a short
+justification (one or two sentences) for each pairing. Do not spend more than 15 minutes
+on this question, unless you have already completed the rest of the examination.
+
+A.
+
+a
+p
+e
+v
+
+w
+
+B.
+
+a
+p
+e
+v
+
+w
+
+C.
+
+Wolfgang will go to a movie if and
+only if at least three of the other four
+people want to go to it.
+
+D.
+
+Wolfgang will go if and only if that
+makes the number of people in the
+group even.
+
+E.
+
+Wolfgang will only go to Death at
+a Funeral with Peter or to Rendition
+with Alice.
+
+F.
+
+(d ∧ p) ∨ (r ∧ a)
+
+G.
+
+(p ∧ ∼ a) ∨ (v ∧ ∼ e)
+
+H.
+
+((a ∨ e) ∧ (v ∨ p)) ∨
+((a ∨ v) ∧ (e ∨ p))
+
+page 2
+
+Solution :
+• E matches F: this is a direct English translation.
+• B matches G: the circuit outputs the value ∼ (∼ (∼ a ∧ p)∧ ∼ (∼ e ∧ v)). By
+DeMorgan’s law and the double negation law, this is the same as (∼ a ∧ p) ∨ (∼ e ∧ v),
+which is the same as the proposition in G by the commutative law.
+• A matches D: the only way for the output of the circuit to be true is if either 1 or 3 of
+the four inputs is/are true. Thus Wolfgang will go if either 1 or 3 other people go, i.e.
+if (and only if) this makes the total number of people even.
+• C and H are unmatched.
+[12] 2. Because he was busy grading a Computer Science midterm, Steve was unable to attend the
+department’s Halloween party. He managed to obtain some information by talking to people
+who attended the party. Unfortunately, their memories were rather imprecise, and so all that
+Steve learned was the following:
+• Either Ujjal or Wolfgang came dressed as a werewolf.
+• Either Ronald or Stéphanie was dressed as a dragon.
+• Priscilla and Quirinius both left early.
+• If Ujjal came dressed as a werewolf, then Ronald came dressed as a dragon and Tom
+was dressed as a giant snake.
+• If Ronald was dressed as a dragon, then Quirinius did not leave early.
+• Tom was disguised as a giant snake if and only if neither Ronald nor Stéphanie was
+disguised as a dragon.
+[4] (a) Rewrite each of these statements using propositional logic. Make sure to define the
+propositions you are using (that is, state something like: “u: Ujjal came dressed as
+a werewolf” before writing the proposition ∼u).
+Solution : We will use the following propositions (I have ordered them alphabetically, but there was no need for you to do that):
+p
+q
+r
+s
+t
+u
+w
+
+:
+:
+:
+:
+:
+:
+:
+
+Priscilla left early
+Quirinius left early
+Ronald was dressed as a dragon
+Stéphanie was dressed as a dragon
+Tom was dressed as a giant snake
+Ujjal was dressed as a werewolf
+Wolfgang was dressed as a werewolf
+
+page 3
+Given that, the statements can be rewritten as:
+1. u ∨ w
+2. r ∨ s
+3. p ∧ q
+4. u → (r ∧ t)
+5. r →∼ q
+6. t ↔∼ r∧ ∼ s
+[8] (b) Using your answer from part (a), known logical equivalences, and the rules of inference, prove that Wolfgang was dressed as a werewolf.
+Solution :
+7.
+8.
+9.
+10.
+11.
+12.
+
+Here is one possible proof:
+q
+simplification from 3
+∼∼ q
+by the double-negation law
+∼r
+modus tollens from 5 and 8
+∼ (r ∧ t) using the definition of ∧ from 9
+∼u
+modus tollens from 4 and 10
+w
+disjunctive syllogism from 1 and 11
+
+[6] 3. Let G be the set of all games of the Vancouver Canucks in the 2008/2009 Hockey season,
+and F be the set of all hockey fans. Furthermore, suppose we have a predicates Saw(x,y)
+that is true if fan x saw game y (in person, or on TV). You may assume that “first game”
+and “last game” are element of G that correspond to the first and last games of the Canucks’
+season respectively.
+[3] (a) Translate into English the proposition
+∃g ∈ G ∀x ∈ F Saw(x, g) ∨ Saw(x, last game)
+Solution : Here are a couple of possible answers:
+There is a specific game played by the Vancouver Canucks with the property that every hockey fan saw either that game or the Canuck’s last game
+of the season, or both.
+and
+There is a game played with the Vancouver Canucks with the property that
+everybody who did not see that game saw the Canuck’s last game of the
+season.
+[3] (b) Write the statement “Every fan who saw at least two different games saw the first
+game of the season” using predicate logic.
+Solution : Here is one possible solution:
+∀x ∈ F
+
+(∃g1 ∈ G ∃g2 ∈ G Saw(x, g1) ∧ Saw(x, g2) ∧ g1 6= g2) →
+Saw(x, first game)
+
+page 4
+Note that the parentheses on the left-hand side of the implication were required
+(removing them changes the meaning of the proposition).
+[11] 4. Number representation
+[3] a. Explain briefly why almost all modern computers represent integers using two’s complement representation, instead of setting aside one bit to use as a sign (with 0 representing +, and 1 representing −).
+Solution : The main reason is that using two’s complement notation allows us to
+implement addition and subtraction of both unsigned and signed integers using one
+circuit. If we instead used a separate sign bit, then addition and subtraction (or even
+addition of numbers with different signs) would need to use completely different
+circuits.
+[8] b. Design a circuit that takes as input a four-bit unsigned integer a3 a2 a1 a0 , and outputs
+1 if that integer is divisible by 3. Show your work: we need to understand how you
+designed your circuit and why you believe it computes the correct answer. Hint: do
+not try to implement binary division. Instead, use the fact that there are only a few
+values for which your circuit should output 1.
+A working circuit will be worth at least 6 marks out of 8. To get full marks, your
+circuit will also need to be reasonably elegant (a solution with only 7 gates exists).
+Solution : The only four-bit unsigned integers that are divisible by 3 are 0 (0000),
+3 (0011), 6 (0110), 9 (1001), 12 (1100) and 15 (1111). One way to design the circuit
+would be to test for each possibility independently, and then combine them using an
+OR gate:
+
+a3
+
+on
+off
+
+a2
+
+on
+off
+
+a1
+
+on
+off
+
+a0
+
+on
+off
+
+page 5
+A more elegant solution would be to observe that the bit patterns listed above have
+at least one of the following two properties (and are the only bit patterns that satisfy
+one or both of them):
+• The first two bits are the same, and so are the last two bits.
+• The middle two bits are the same, and so are the “outside” two bits.
+This leads us to the following more elegant solution:
+a3
+
+on
+off
+
+a2
+
+on
+off
+
+a1
+
+on
+off
+
+a0
+
+on
+off
+
+[11] 5. Consider the following theorem:
+No matter what positive real number c we pick, there will be some positive integer n for which 3n > c2n .
+[3] a. Translate this theorem into predicate logic (that is, using predicates and quantifiers).
+Solution : ∀c ∈ R+ ∃n ∈ Z+ 3n > c2n .
+[8] b. Prove the theorem using a direct proof.
+Solution : This theorem contains a universal quantifier, with an existential quantifier
+nested inside it. Hence, we start by considering an unspecified positive real number
+c. Now, we need to show how to choose a value of n for which 3n > c2n .
+Scratch work (not part of the answer as such, but you might have scribbled that on
+the back of the page): we want 3n > c2n . That will be satisfied as long as 3n /2n > c.
+That is, as long as (3/2)n > c, which means n > log3/2 c.
+Back to the proof: pick any integer n larger than log3/2 c (for instance, 1 + ⌈log3/2 c⌉
+would do). Then (3/2)n > c, which means that 3n > c2n .
+[8] 6. Using an indirect proof, prove that the equation ax + b = c (where a, b, c are real numbers,
+and a 6= 0) has only a single solution for x.
+Solution : We use a proof by contradiction. Suppose to the contrary that there are values of
+a, b and c, with a 6= 0, for which the equation ax + b = c has at least two different solutions
+x1 and x2 for x. Then ax1 + b = c and ax2 + b = c. This means that ax1 + b = ax2 + b,
+and hence that ax1 = ax2 . Since a 6= 0, it therefore follows that x1 = x2 . However this
+contradicts our assumption that x1 6= x2 . This means that the original theorem must be true.
+

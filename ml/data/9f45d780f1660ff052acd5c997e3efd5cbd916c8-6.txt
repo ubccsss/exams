@@ -1,0 +1,106 @@
+
+Author: G. Tsiknis
+Midterm Solutions
+
+Question 1.
+a.
+b.
+c.
+d.
+e.
+f.
+g.
+h.
+
+False. We don’t always desire our DB to be in BCNF
+False. Weak entities do not have a key. They depend on other entities.
+True
+False. In any table, each attribute functionally depends on the key.
+True
+True
+True
+False. TRC and DRC are stronger that RA
+
+Question 2
+a.
+i) The ISA relationship must be disjoint.
+B and C must have the same attributes.
+ii) The ISA relationship must be total.
+b. The set of the common attributes of R1 and R2 (A, D) is a key for R2.
+Proof:
+1.
+2.
+3.
+
+AÆ C
+A, D Æ C, D
+A, D Æ E
+
+given
+1, augmentation
+2, C, D Æ E, transitivity
+
+c.
+i) The company should be an attribute of the customer, assuming each customer works for a
+single company. We don’t need to keep any information for each company.
+ii) The loan should be a separate entity set associated with a customer through a relationship .
+Reasons:
+• A customer may have more than one loans.
+• A loan has additional information on its own.
+
+Question 3
+a.
+
+1. phn
+2. pname, address
+
+b
+Patient ( phn, pname, address, illness, ward )
+Test ( testname, labtype, dname, specialization )
+Test includes the Authorizes relationship set.
+Doctor ( dname, specialization )
+Had ( phn, testname, date, result )
+c.
+•
+•
+•
+
+The only table that is not in BCNF is the Patient table.
+FD illness Æ ward violates BCNF.
+We split the table into
+Patient ( phn, pname, address, illness )
+IllnessWard (illness, ward )
+
+Question 4
+a.
+
+π sId (σhCity = “Vancouver” (Hotel )) - π hId ( σ year = 2005 ( Booking ))
+NOTE: The following is WRONG:
+
+π sId (σhCity = “Vancouver” ∧
+
+year ≠ 2005
+
+( Booking ZY Hotel ))
+
+Any hotel which has a booking for a year other than 2005 will be included in the result even if the
+same hotel HAS another booking for 2005!
+
+Page 2
+
+b.
+
+π gId, hId (σtype = “suite” (Booking ZY Room )) / πhId (σhCity = “Vancouver” (Hotel ) )
+NOTE: Again, the following is WRONG:
+
+πgId (σtype = “suite” ∧hCity = “Vancouver” (Booking ZY Room ZY Hotel ) )
+This returns any guest who has booked a suite in some hotel in Vancouver.
+
+c.
+{ t | ∃ h ∈ Hotel ( t.hId = h.hId ∧ t.hName = h.hName ∧
+∀ g ∈ Guest ∃ b∈ Booking ( h.hId = b.hId
+
+∧ g.gId = b.gId ∧ b.year =2004 ) ) }
+
+Page 3
+

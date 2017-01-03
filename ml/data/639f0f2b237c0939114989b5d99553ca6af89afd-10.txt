@@ -1,0 +1,207 @@
+
+CPSC 121 Midterm 1
+Thursday, February 3rd, 2011
+[1] 1. Do you want your tutorial attendance to count toward your grade? If you answer ‘yes’, then
+1% of your final course mark will be based on your tutorial attendance (# attended divided
+by total number minus 2, but no more than full credit). Online quizzes would be worth only
+5% rather than 6%. If you answer ‘no’, then tutorial attendance is worth nothing in your
+mark, and online quizzes remain a full 6% of your final course mark.
+[6] 2. Translate the following statements from English into propositional logic. Give an appropriate definition for any variables you use. No variable is allowed to correspond to a proposition that contains logical operators (for instance, for part (a), you can not use “r: Either
+I wear my wedding ring on my left hand or I wear it on my right hand”). You may circle
+portions of the printed statement and write the variable name beside the circle to reduce
+writing time.
+[2] a. Either I wear my wedding ring on my left hand or I wear it on my right hand
+Solution : We define
+l: I wear my wedding ring on my left hand.
+r: I wear my wedding ring on my right hand.
+and then we can write l ⊕ r.
+[2] b. Naomi did not like the movie, but she really liked the popcorn.
+Solution : We define
+m: Naomi liked the movie.
+p: Naomi liked the popcorn.
+and then we can write ∼ m ∧ p.
+[2] c. If a voting system is Pareto efficient and exhibits Independence of Irrelevant Alternatives, then it must be a dictatorship.
+Solution : We define
+p: A voting system is Pareto efficient.
+i: A voting system exhibits Independence or Irrelevant Alternatives.
+d: A voting system is a dictatorship.
+and then we can write (p ∧ i) → d.
+[6] 3. Translate the following statements from propositional logic back into English. Use the
+following definitions:
+w: Werewolves are better than ghosts.
+s: Steve is a werewolf.
+r: Werewolves are real.
+
+g: Ghosts are better than werewolves.
+p: Patrice is a ghost.
+
+page 2
+[2] a. w ⊕ g
+Solution : Either werewolves are better than ghosts, or ghosts are better than werewolves, but not both.
+[2] b. s → (r ∧ w)
+Solution : If Steve is a werewolf, then werewolves are real and are better than
+ghosts.
+[2] c. p ↔ g
+Solution : Patrice is a ghost if and only if they are better than werewolves.
+[7] 4. Determine what the following four premises:
+w⊕g
+s → (r ∧ w)
+p↔g
+w
+indicate about the truth of p (whether Patrice is a ghost!). That is, prove p, prove ∼p, or
+show that both are consistent with the premises. You may skip steps involving only the
+commutative, associative, and double negation laws, but you should show all other steps.
+You need not write the names of the rules you use.
+Note: you may use any of the following logical equivalences for exclusive OR and the
+biconditional, but no others. If you would like to refer to them, use the names E1 to E4.
+E1 : x ⊕ y ≡ (x ∧ ∼ y) ∨ (∼ x ∧ y)
+E2 : x ⊕ y ≡ (x ∨ y) ∧ ∼ (x ∧ y)
+
+E3 : x ↔ y ≡ (x → y) ∧ (y → x)
+E4 : x ↔ y ≡ (x ∧ y) ∨ (∼ x ∧ ∼ y)
+
+Solution : First let us number the premises:
+1.
+2.
+3.
+4.
+
+w⊕g
+s → (r ∧ w)
+p↔g
+w
+
+And now we can prove the following:
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+
+(w ∨ g) ∧ ∼ (w ∧ g)
+∼ (w ∧ g)
+∼w ∨ ∼g
+w →∼g
+∼g
+(p → g) ∧ (g → p)
+p→g
+∼p
+
+E2 from (1).
+simplification from (5).
+DeMorgan’s law from (6).
+Definition of → from (7).
+Modus ponens from (4) and (8).
+E3 from (1).
+Simplification from (10).
+Modus tollens from (9) and (11).
+
+page 3
+Hence Patrice is not a ghost1 .
+[9] 5. Translate the following three circuits into propositional logic statements. (Do not simplify
+the propositional logic statements; leave them in the same form as the circuits.)
+[2] a.
+
+Solution : output ≡ p ∧ q.
+[3] b.
+
+Solution : output ≡ ∼ p ∧ (p ∨ q).
+[4] c.
+
+Solution : output ≡ ∼ ((∼ p ∧ r) ∨ (p ∧ ∼ q) ∨ (p ∧ ∼ r)).
+[6] 6. Consider the following circuit:
+
+[1] a. Write the logical expression that corresponds to this circuit. (Do not simplify the
+propositional logic statement; leave it in the same form as the circuit.)
+Solution : output ≡ ∼∼∼∼∼ p.
+[1] b. Now simplify this logical expression as much as possible.
+Solution : output ≡ ∼ p.
+[1] c. Draw the circuit corresponding to the simpler expression.
+1
+
+To his wife’s relief
+
+page 4
+Solution :
+[3] d. What does our model of combinational circuits (i.e., propositional logic) fail to account for that causes these two circuits to behave differently?
+Solution : Propositional logic does not explain the fact that the output of the original circuit will take longer to react to a change in the input then the output of the
+simplified circuit, because it does not model gate delays.
+[6] 7. Consider the following predicates:
+
+V(x,y): person x voted for person y during the last elections.
+E(x,y): person x likes to eat food y.
+
+where the domain for people and foods are denoted by P and F respectively. Translate each
+of the following quantified statements into English:
+[2] a. ∀x ∈ P, V (x, “Stephen Harper”) → E(x, “Carrots”)
+Solution : “Every person who voted for Stephen Harper likes carrots.”
+[2] b. ∃x ∈ F, ∀y ∈ P, V (y, “Michael Ignatieff”) →∼ E(y, x)
+Solution : “There is a food that everyone who voted for Michael Ignatieff does not
+like.”
+[2] c. ∀x ∈ P, ∃y ∈ F, E(x, y) ∧ ∼ E(“Jack Layton”, y)
+Solution : “Every person likes some food that Jack Layton does not like.” Note that
+this proposition is false if we assume that Jack Layton is a person, since if it were
+true, there would be a food that Jack Layton both likes and dislikes. However that
+does not make our translation incorrect.
+[6] 8. Prove that ∼ q ∨ ∼ (p ∨ r) ≡ ∼ (p ∧ q) ∧ (q → ∼ r) using logical equivalences (NOT
+truth tables). You may skip steps involving only the commutative, associative, and double
+negation laws, but you should show all other steps. You need not write the names of the
+rules you use.
+Solution :
+∼(p ∧ q) ∧ (q → ∼r) ≡ (∼ p∨ ∼ q) ∧ (q → ∼r)
+
+by the DeMorgan’s law.
+
+≡ (∼ p∨ ∼ q) ∧ (∼ q∨ ∼r) by the definition of →.
+≡ ∼ q ∨ (∼ p∧ ∼ r)
+
+by the commutative and distributive laws.
+
+≡ ∼ q∨ ∼ (p ∨ r)
+
+by the DeMorgan’s law.
+
+page 5
+[12] 9. This question considers the problem of determining whether an unsigned binary integer x
+is divisible by another unsigned binary integer y (recall that x is divisible by y if x/y is an
+integer). Assume for this question that no integer is divisible by 0, and that 0 is divisible by
+every other integer.
+[4] a. Build a circuit that takes a 3-bit unsigned binary number x and determines whether
+it is divisible by 2. You may use inverters (NOT gates), and AND, OR, NAND, and
+NOR gates with any number of inputs.
+Solution :
+
+[4] b. Build a circuit that takes a 3-bit unsigned binary number x and determines whether
+it is divisible by 3. You may use inverters (NOT gates), and AND, OR, NAND, and
+NOR gates with any number of inputs.
+Solution :
+
+[4] c. Complete the following circuit that takes a 3-bit unsigned binary number x and a 2bit unsigned binary number y and determines whether x is divisible by y. Assume the
+“divisible by 2” and “divisible by 3” subcircuits work (correctly) as described in the
+previous two problems. If you use one of these, represent it by a rectangle containing
+the label db2 or db3.
+(Reminder: assume for this question that no integer is divisible by 0, and that 0 is
+divisible by every other integer.)
+Solution :
+
+page 6
+
+[6] 10. The human ear can detect sounds that range from frequencies of about 20 Hz to about 20000
+Hz. However, it takes larger absolute differences in frequency toward the higher frequency
+values for us to differentiate between sounds. For example, the difference between 40 Hz
+and 80 Hz is MUCH clearer than the difference between 10000 Hz and 10040 Hz, even
+though both are 40 Hz apart.
+A friend proposes to represent the frequency of a sound (which is intended to be used for
+playing that sound to a human) as a 12-bit signed binary number.
+Explain at least two different important problems with this representation choice.
+Solution : First, there was no reason to use a signed integer, since frequencies can not be
+negative. Using an unsigned binary number thus doubles the number of frequencies that can
+be represented.
+Second, because we have more difficulty differentiating higher frequencies, we should use
+a non-linear scale, where the gap between two consecutive binary integers gets bigger as the
+values of the integers grow. For instance, the integers 0 to 100 might represent frequencies
+0 to 100, the integers 101 to 200 might represent frequencies 102 to 300, etc.
+

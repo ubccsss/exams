@@ -1,0 +1,114 @@
+
+CPSC 320 Sample Midterm 2
+March 2014
+Name:
+
+Student ID:
+
+Signature:
+– You have 50 minutes to write the 5 questions on this examination.
+A total of 40 marks are available.
+– Justify all of your answers.
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11in sheet of notes, and nothing else.
+
+Question
+1
+2
+
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+Marks
+
+3
+4
+5
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her UBC card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 5
+[10] 1. State whether each of the following statements is true or false. Justify each of your answers
+briefly.
+[3] a. If a recurrence relation can be solved using the Master theorem, then it can also be
+solved using recursion trees.
+
+[3] b. When we create a new node in a skip list, we choose the level of the new node
+uniformly and at random between 1 and the maximum level used for the skip list
+(that is, it has equal probabilities of having height 1, 2, 3, etc).
+
+[4] c. Explain the best way to find a tight upper bound on the solution of the recurrence
+relation
+
+
+T (n) =
+
+4T (n/2 + 3) + 5n2 log n
+Θ(1)
+
+if n ≥ 8
+if n < 7
+
+and state what you believe the upper bound to be (you do not need to prove your
+upper bound).
+
+page 3 out of 5
+[5] 2. Randomized Caching
+[2] a. How does the randomized caching algorithm discussed in class choose an item to
+evict when a cache miss occurs?
+
+[3] b. Why does the probability of a cache miss for the ith request for a recurring unmarked
+item increase with i?
+
+[7] 3. Describe an efficient divide and conquer algorithm that takes as input a sorted array A of
+real numbers, and returns a binary search tree of minimum height that contains the elements
+of the array. If you want, you can add parameters other than the array A to your function.
+
+page 4 out of 5
+[8] 4. Prove an upper bound on the function T (n) defined by
+
+
+T (n) =
+
+2T (n/2) + T (2n/3) + 2T (n/6) + n2
+1
+
+if n ≥ 6
+if n ≤ 5
+
+Your grade will depend on the quality of the bound you provide (that is, showing that T (n) ∈
+O(100n ), while true, will not give you many marks).
+
+page 5 out of 5
+[10] 5. You are asked to design a data structure that supports the following two operations on a set
+S:
+• Insert(S, x): adds the element x to S.
+• Delete-Larger-Half(S): deletes the largest d|S|/2e elements of S.
+After pondering the problem for a few hours, you decide to store the elements of S in an
+ArrayList, since it supports Θ(1) insert operations.
+Note that parts (a) and (b) are independent, and you can do them in either order.
+[4] a. Explain how to implement Delete-Larger-Half(S) in Θ(|S|) worst-case time.
+Hint: your first step should be to use an algorithm from one of the assignments.
+
+[6] b. Prove that the worst-case running time of a sequence of n operations, starting with
+an empty set, is in O(n). Hint: use Φ(Si ) = u|Si | for some constant u (that you can
+choose later on).
+

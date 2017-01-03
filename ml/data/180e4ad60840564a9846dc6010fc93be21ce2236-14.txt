@@ -1,0 +1,307 @@
+
+Author: Steve Wolfman
+Information you may find useful
+Powers of two
+29
+512
+
+28
+256
+
+27
+128
+
+26
+64
+
+Hexadecimal digits
+Binary
+Decimal
+representation representation
+0000
+0
+0001
+1
+0010
+2
+0011
+3
+0100
+4
+0101
+5
+0110
+6
+0111
+7
+1000
+8
+1001
+9
+1010
+10
+1011
+11
+1100
+12
+1101
+13
+1110
+14
+1111
+15
+
+25
+32
+
+24
+16
+
+Hexadecimal
+representation
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+A
+B
+C
+D
+E
+F
+
+23
+8
+
+22
+4
+
+21
+2
+
+20
+1
+
+Problem 1: Multiple Choice – circle the correct answer [6 marks]
+i.
+
+Which of the following is true about vector images? Peerwise question #2371054
+a. Vector images are usually significantly bigger in size than raster images, even in compressed
+forms.
+b. It is harder for a computer to convert a bitmap image to a vector image than it is to convert a
+vector image to a bitmap image.
+c. Shading effects, shadows and colors cannot be added in vector images.
+d. Vector images support special effects filters that posterize and blur an image.
+
+ii.
+
+Given the transactions below, what is the support of Keyboard and Mouse and the confidence of
+Keyboard  Mouse? Lightly modified from Peerwise question #2362815
+T1: Desktop, Mouse, Keyboard, Monitor
+T2: Laptop, Keyboard，Mouse
+T3: Keyboard, Mouse, Monitor
+T4: Desktop, Mouse
+T5: Laptop, Keyboard
+T6: Laptop，Monitor
+T7: Desktop, Laptop, Mouse
+a. Support = 3/7; Confidence = 3/4
+b. Support = 3/7; Confidence = 2/5
+c. Support = 3/7; Confidence = 3/5
+d. Support = 3/4; Confidence = 3/7
+e. Support = 3/5; Confidence = 3/7
+
+iii.
+
+Using the very simplistic entropy measure that we discussed in class, which of these decision
+trees about studying for a test has the least entropy? Modified from Peerwise question: 2362286
+
+a.
+
+b.
+
+c.
+
+d.
+
+e.
+
+iv.
+
+Computer animation for movies like Frozen
+a. Is done using a vector based representation
+b. Is coded using JavaScript
+c. Requires a lot of code to understand how light works
+d. Requires so much work to make backgrounds that the backgrounds can’t change much
+
+v.
+
+Computer scientists think that online elections are a good idea
+a. True
+b. False
+
+vi.
+
+The percentage of women earning bachelor degrees in computer science in the US and Canada
+since 1970 has generally
+a. Steadily increased
+b. Steadily decreased
+c. First gone down, then gone up
+d. First gone up, then gone down
+
+Problem 2: Apriori Algorithm [3 marks]
+Given the following dataset:
+T1
+ABCD
+T2
+ABEF
+T3
+BCEF
+T4
+CDEF
+And a minimum support threshold of 3
+a. Is {E, F} a frequent itemset?
+
+Yes
+
+b. Is {A, B} a frequent itemset?
+No
+
+c. Explain why we do not need to consider the itemset {A, B, C} when we are constructing frequent
+itemsets of size 3 with the a priori algorithm.
+For {A, B, C} to occur frequently, we need {A, B} to occur frequently. Therefore, because {A, B} is
+not a frequent itemset, {A, B, C} can not be a frequent itemset.
+
+Problem 3: Number conversion [4 marks]
+a. [2 marks] Translate the following binary number to hexadecimal 1010101010100101110111101
+
+Correct answer: 1554BBD
+In order to do this problem correctly, you must start from the right and chunk into four digit groups.
+1 0101 0101 0100 1011 1011 1101
+1 5
+5
+4
+B
+B D
+A common mistake is to start from the left hand side without checking to make sure that there are a multiple of
+four digits like so:
+1010 1010 1010 0101 1101 1110 1
+In this case, we would expect the answer to start with:
+A
+A
+A 5 D
+E ???
+This is wrong. You have to divide numbers up starting at the one’s place, not just wherever the top digit
+happens to end.
+One point deducted for this mistake or other minor errors.
+b. [2 marks] Translate the following decimal number to binary: 336
+Correct answer: 101010000
+
+# to convert
+
+336
+
+80
+
+80
+
+16
+
+16
+
+0
+
+0
+
+0
+
+0
+
+place value
+
+256
+(28)
+
+128
+(27)
+
+64
+(26)
+
+32
+(25)
+
+16
+(24)
+
+8
+(23)
+
+4
+(22)
+
+2
+(21)
+
+1
+(20)
+
+# left over
+
+80
+
+80
+
+16
+
+16
+
+0
+
+0
+
+0
+
+0
+
+0
+
+binary #
+
+1
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+Problem 5: Artificial Intelligence [3 marks]
+
+a.
+
+[1 marks] Give a brief definition of what is required of a computer for it to pass the Turing Test:
+
+To pass the Turing Test, a computer needs to be able to convince a “judge” via text that is a human. It does not
+have to be able to speak.
+
+b. [2 marks] Could Eliza, the computer therapy program from lab, pass the Turing Test? Why or why not?
+
+No. Eliza could not pass the Turing Test because it could not convince people that it was a human.
+Grading: one point for yes or no, one point for reason.
+

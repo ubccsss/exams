@@ -1,0 +1,24 @@
+
+Sample midterm
+1. How to check, in O(V+E), whether there are two paths in an undirected graph from s to t that do not
+share a vertex other than s or t?
+2. Given a collection of coin values and a maximum number of coins that you are allowed to use, give
+an algorithm to calculate all the possible values you can make. For instance, if you have the coin
+values 1, 5 and you are allowed to use a maximum of 2 coins, the following values can be made:
+1 - 1*1
+2 - 1*2
+5 - 5*1
+
+6 - 5*1 + 1*1
+10 - 5*2
+
+The running time of your algorithm should be O(N*A*V), where:
+-N is the number of coins in the set
+-A is the number of coins you are allowed to use
+-V is the maximum value that can be achieved
+3. Give an algorithm to count the number of positive divisors of a positive integer.
+a) Give a O(sqrt(n)) time algorithm
+b) Give a faster than O(sqrt(n)) algorithm that is allowed to assume that the list of smallest X primes
+has already been precomputed, for an arbitrary value of X.
+4. http://online-judge.uva.es/p/v103/10306.html
+

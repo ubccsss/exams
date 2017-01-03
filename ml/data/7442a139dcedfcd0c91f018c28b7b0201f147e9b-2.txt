@@ -1,0 +1,1605 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca:80/~cs344/current-term/resources/oldexams/cpsc444old-2002w1-final.pdf
+Author: Karon
+Name:
+
+Student ID Number:
+
+Signature:
+
+CPSC 444 2002-‘03 (T1) Final Exam
+Department of Computer Science
+University of British Columbia
+K. MacLean
+Exam Instructions (read carefully):
+1. Sign the first page of the exam with your signature in
+the space provided on the upper left immediately.
+2. Continue reading the instructions, but do not open
+the exam booklet until you are told to do so by a
+proctor.
+3. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+4. The exam is closed book. There are no aids
+permitted, except for a calculator.
+
+Question
+
+Points
+Possible
+
+1
+
+16
+
+2
+
+16
+
+3
+
+28
+
+4
+
+27
+
+5
+
+15
+
+6
+
+10
+
+7
+
+18
+
+8
+
+16
+
+9
+
+20
+
+10
+
+18
+
+11
+
+16
+
+Total
+
+200
+
+Mark
+
+5. No one will be permitted to leave the exam room
+during the last ten minutes of the exam.
+
+CPSC 444 2002-‘03 (T1)
+
+1 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Peer Review
+DO NOT PROCEED BEYOND THIS PAGE UNTIL INSTRUCTED
+Read instructions carefully before beginning the peer review:
+•
+
+Be objective, fair and honest.
+
+•
+
+Mark each teammate independently; there is no limit to the “marks” you can hand out.
+
+•
+
+Four criteria for your marks are provided, including an “overall / other” criteria in which you can either
+make an overall assessment, or assess an aspect not otherwise mentioned. If you are marking another
+aspect (“other”) please identify it in the space below the table.
+
+•
+
+In computing an individual’s peer score, criteria will be weighted equally and input from all teammates
+will be averaged.
+
+•
+
+If you give any mark of -1 or lower, please comment further in the space below the table,
+identifying the teammate by name.
+
+•
+
+Your responses will be confidential. Each team member will receive their averaged score, plus any
+comments (typed), with no names attached.
+
+•
+
+You must complete the evaluation. Blank or incomplete evaluations will be counted against your final
+exam score.
+-2
+-1
+0
+1
+2
+inadequate marginal acceptable
+good
+excellent
+
+Enter your team number, and each teammate’s name in the left column, printing clearly; then enter a
+mark of [2 to –2] under each of the criteria in the remaining four columns for each teammate.
+
+Team number: ___
+Teammate name ↓
+
+(a)
+Positive attitude
+
+(b)
+Did his/her share
+of the work in a
+timely manner
+
+(c)
+Contributed ideas
+and/or leadership
+
+(d)
+Overall / Other
+(if “other”,
+identify below)
+
+Justify any low marks (-1 or -2). State teammate’s name first, and continue on back of this sheet if necessary.
+
+CPSC 444 2002-‘03 (T1)
+
+2 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #1 [16 points total]: Theories of Human Performance
+(a) “Spotlight” and “FINST” are two theories of how ___attention ___ works.
+Describe each, highlighting the difference between the two. [5 pts]
+
+The “spotlight” theory of attention is based on a unitary locus of attention that the user controls by
+scanning through space.
+The “FINST” theory (Fingers of Instantiation), is based a set number (4-7) of attentional tokens
+which are “indexed” by having a FINST assigned to them.
+1 pt for “attention”, 2 pts for getting key aspects of each of the theories right.
+
+(b) Name three principal types of human memory, writing them into the 3 boxes below. Name the
+mechanisms by which information moves among the different memory types, and indicate these
+information pathways using arrows between the boxes. A point will be subtracted for each incorrectly
+drawn arrow. [11 pts]
+
+sensory
+(or echoic / iconic / haptic)
+attention
+short-term (or working)
+rehearsal
+long-term
+
+1 pt for each correctly named type of memory (3 pts), 2 pts for each correctly named mechanism; and
+correctly drawn arrow (8 pts). Subtract points for an incorrectly drawn arrow.
+
+CPSC 444 2002-‘03 (T1)
+
+3 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #2 [16 points total]: Communication and Collaboration
+Some important social aspects of group problem-solving include
+•
+
+proximity and awareness of the presence, participation and activities of all members of the group;
+
+•
+
+simultaneous access of all members of the group to artifacts that store information, help to express
+ideas, or mediate interaction;
+
+•
+
+facilitation of turn-taking.
+
+You are designing a system that will support realtime web conferencing among project team members
+working for a large but geographically distributed company. Users will access the tool from their desktop
+computers. Due to the remote location of many of the company’s offices, streaming video and audio
+through the computer interface cannot technically be supported, nor is a simultaneous telephony (voice)
+hookup feasible. Viable candidates for communication include any computer-based communication with
+relatively low throughput requirements - e.g. text, simple graphics or snapshots and sounds.
+
+(a) List two kinds of constraints being imposed on this design. [4 pts]
+1.
+
+Technological
+
+2.
+
+Social
+
+(b) Given these constraints, describe a mechanism by which two of these aspects of group problem solving
+might be addressed (1-2 sentences each). Address both what the feature is, and how it addresses that
+aspect of concern. The first one is completed as an example. [6 pts per mechanism]
+
+Aspect
+
+Design Mechanism
+
+Proximity /
+Awareness
+
+An icon or avatar on the screen represents each remote member of the conference,
+which moves about or changes state in response to the number of exchanges that
+individual has made in the last 5 minutes. The icon thus displays some measure of that
+individual’s participation in the conversation.
+
+Simultaneous
+access
+
+Turn-taking
+
+E.g. a shared sketchpad is visible in a window to all conference participants. If one
+user draws on the sketchpad, this information is updated immediately in the view seen
+by all the others.
+
+E.g., only one member is able to draw on the sketchpad at once. The avatar of the
+current “sketcher” is highlighted in the other members’ view, so they know who is
+drawing. To request permission to sketch, a non-drawing member clicks on the
+highlighted icon, and this appears as a blinking avatar in the active sketcher’s
+display. To grant permission to sketch, the active sketcher clicks on the requestor’s
+avatar, thus relinquishing control over the sketch.
+
+CPSC 444 2002-‘03 (T1)
+
+4 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #3 [28 points total]: Design Process
+You’ve been given the challenge of designing the web-conferencing system described in the previous
+question. You need to plan the process you will take, to get from the general situation of concern (as
+stated in previous question) to a fully functional prototype approved by all critical stakeholders. Given the
+time scale and resources allocated to the task, you decide to take a formative approach.
+
+On the following page, diagram 6-10 steps of a possible design process which encompass the following:
+• Include the points at which you propose to include users, a
+justification for doing so, and how;
+
+Step i: : activity
+[description of step]
+
+• Indicate with arrows where you are likely to iterate on stages in
+the design, as demonstrated in diagram at right.
+• For each step, state the primary activity of that step (e.g.
+“prototype functional flow” or “evaluate appearance
+prototype”), AND describe the activity and its objectives in
+more detail (one sentence).
+
+Iterate
+
+Step i+1: activity
+[description of step]
+Step i+2: activity
+[description of step]
+
+• For prototyping and evaluation steps, the activity description
+should include the general type of prototype you would expect to build or the type of study you’d
+conduct, based on the information you expect to need at that point.
+There is no single correct answer to this question, although there are some key steps that should not be
+omitted. Sequencing and to some degree inclusion can vary (and does, in the real world), depending on
+constraints and the nature of the problem. Credit will be given for reasonable and well-justified answers; and
+for completeness of the overall process. [28 pts]
+Answer on following page. No credit will be given for marks on this page.
+Answer should include the following elements:
+-
+
+[4 pts] Near the beginning, some form of pre-design observation and data gathering
+
+-
+
+[4 pts] Multiple prototyping / evaluation pairs (at least 2), in reference to formative approach
+
+-
+
+[6 pts] Mention of different and appropriate types of prototypes (e.g. appearance / functional)
+and evaluation methods (e.g. informal – such as questionnaires, focus groups, interview;
+observation methods; and formal - controlled.)
+
+-
+
+[4 pts] Iteration, demonstrated by arrows as above, and probably following the outcome of an
+evaluation step
+
+-
+
+[5 pts] Overall completeness
+
+-
+
+[5 pts] Overall sensibility of approach
+
+CPSC 444 2002-‘03 (T1)
+
+5 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #3 (continued)
+Diagram your design process on this page.
+
+CPSC 444 2002-‘03 (T1)
+
+6 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #4 [27 points total]: Evaluation Methods
+Below are several scenarios where some type of evaluation is called for. For each, discuss the following in
+the corresponding boxes below. As usual, there is more than one good answer to each part (there are also a
+lot of not-very-good answers).
+1. What is an important, generally stated experiment question that urgently needs to be answered? [3
+pts each]
+2. What type of study or other exposure would most appropriately address this question? State
+whether you need formal or informally obtained data, as well as experiment technique chosen from
+those mentioned in class. Justify your response in 1-2 sentences. [3 pts each]
+3. What kind of prototype, setup or environment do you need in order to do this study, if any?
+Describe its key capabilities as well as its ideal user group in 1-2 sentences (e.g. “Appearance
+mockup which demonstrates the handheld communicator’s overall size, styling and button locations;
+users are 10-14-year old girls). [3 pts each]
+
+Scenario A: You have just been put in charge of a design team in the early stages of developing a
+concept for an onboard automobile navigation system. The leading approach employs an LCD screen in
+the center console that shows location obtained through an onboard GPS (global positioning satellite)
+overlaid on an area map. Technologically, the most feasible candidates for input mechanism seem to be
+voice, touchscreen and a multi-purpose knob. Your marketing people tell you your target customer is aged
+55-70, male and in a middle-income bracket. This is a new demographic for the company, which has
+always focused on the low-end market. Before you came, the team had never heard of “user-centered
+design”, and Marketing thinks it means keeping current on Car & Driver1 editorials.
+
+1.
+
+Possible good questions: Does the customer want a navigation system? What performance
+capabilities or limitations therein does this demographic have? What else is the customer doing
+when driving a car?
+Bad question: What’s the difference in performance among the candidates for input mechanism?
+(we aren’t ready for that yet).
+
+2.
+
+Types of studies: just about any informal pre-design user study can probably fit some aspect of this
+need. E.g. ethnographic (although there may not be time for that) contextual inquiry, observation of
+how drivers use maps in cars now, questionnaire/focus group, even general performance capability.
+
+3.
+
+Kinds of prototypes: Some types of study would not need a specially built prototype, however all
+would benefit from some kind of prop or environment. E.g. a car equipped with a camera in which
+subjects can be studied while driving and navigating; or an appearance mockup of several initial
+concepts that would be shown in a focus group to gauge interest.
+Users will be members of the target demographic.
+
+1
+
+Car & Driver is a popular driving magazine
+
+CPSC 444 2002-‘03 (T1)
+
+7 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Scenario B: You are halfway through the design of a new campus-wide electronic vending machine
+system at UBC. Users may purchase vending card credits, usable via a magnetic card at any vending
+machine location, and manage their account online. An earlier survey has demonstrated widespread
+support among UBC students for this approach, especially if a wider selection of merchandise may be
+purchased in this way. The detail design of the vending machine interface is well underway, and you’ve
+been asked to start on the online part. One of your team members thinks it should include a clickable map
+of where the machines are located, their current contents and a way to request new contents as well as
+personal account management. Another is full of ideas about how this system should be linked to
+students’ university Ids and/or copycards. There are many, many other ideas from the team. At this point,
+you’re not sure what functions the online access should include or what it should look like.
+
+1.
+
+Possible good questions: How much functionality should the online access include? Should it be
+simple or comprehensive? How much complexity is the user willing to deal with? What functions
+are most important to the user, and will they be likely to access from a website? Given several
+alternative design “looks” and layouts, which seem most preferable to the user?
+Bad question: Any kind of performance-related question, or anything based on a detailed or
+functional mockup. Not ready for that yet. Also, not interested in what’s for sale in the vending
+machines, or in general support of idea of vending machines and method of payment (have
+addressed that already in previous survey).
+
+2.
+
+Types of studies: optimal studies for most of above questions are sitting on border between predesign familiarization and evaluation of early prototypes. For example, questionnaires, surveys and
+focus groups; and/or observation while using informal mockups of several design approaches.
+
+3.
+
+Kinds of prototypes: needed only for a study that asks for responses to informal mockups (e.g.
+observation or focus groups). Probably no special setups required. Users should be UBC
+inhabitants who indicated greatest support on the original surveys (since they’re most likely to be
+using it).
+
+Scenario C: Your company produces the #1-selling personal financial accounting software in North
+America. Your main product has over the years become a massive program with a huge number of
+functions, and a redesign is needed for the next product release (on a tight timeline) to make it easier for
+novices to use while maintaining the overall functionality for expert users. A large number of approaches
+have been storyboarded; the design team has merged these into three concrete and quite different design
+proposals.
+1.
+
+Possible good questions: Which of the three general approaches is going to result in the most usable
+design for novices, as measured by learnability, errors, number of functions accessible, etc..
+
+2.
+
+Types of studies: Depending on details of question, this could be a controlled study, some type of
+informal approach (e.g. observation while using prototypes, or possibly (not so good) a focus group.
+Bad answer: CW / HE aren’t too good since design team and expert user are not likely to be ideal
+for simulating novice user behavior.
+
+3.
+
+Kinds of prototypes: definitely need prototypes here. If a controlled performance study or
+observation while using, need a functional mockup. Alternatively, an appearance mockup or paper
+prototype for a focus group, but this is a less preferred approach.
+
+CPSC 444 2002-‘03 (T1)
+
+8 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #5 [15 points total]: Modeling User Activity
+The “GOMS” method, or keystroke-level analysis, is one way of obtaining an empirically based dynamic
+model. Given the following task, two action sequences for accomplishing this task, and the empirically
+derived data provided on the following page, predict the following:
+(a) How many seconds (to 1 decimal point accuracy) will each sequence require to execute? Show your
+work below (next to action sequence description) to get partial credit for an incorrect answer. [8 pts]
+Sequence 1:
+
+Sequence 2:
+
+4.36 sec
+
+4.18 sec
+
+2 pts given for getting Seq 2 > Seq 1; 3 pts per correct value
+(b) What is the problem with the slower sequence (i.e., what makes it slower)? [2 pts]
+Sequence 1 is slightly slower even though fewer individual keystrokes are required, because it
+requires an additional mouse movement: at 1.1 seconds, this is a pretty slow operation.
+(c) Propose another action sequence that would be faster than either of these. How long will it take? [5 pts]
+Points given for any reasonable response; [3 pts for describing a plausible action, 2 pts for giving
+correct time]. For example: double-click on the whole word then retype it (1P+4B+8K =
+1.1+0.4+8x0.28 = 3.74
+
+Task: Rename a file in a File Manager window in a Microsoft Windows desktop. Make the following
+assumptions for both action sequences:
+• One file is to be to be renamed.
+• The File Manager window is on top
+• File name is visible and can be pointed to
+• Original name is “exam2.doc” and new name is “midterm2.doc”
+• Hand starts and ends on mouse
+• User is average non-professional typist (40 wpm)
+Action sequence 1: Select “exam” and then type “midterm”. The exact sequence is:
+1. place cursor before “e”
+2. press and hold mouse button
+3. drag cursor to after “m”
+4. release mouse button
+5. type “midterm” (7 characters)
+
+P
+B
+P
+B
+7xK
+
+Total time = 2P + 2B + 7K=
+2x1.1 + 2x0.1 + 7x0.28= 4.36 sec
+
+Action sequence 2: Place cursor between “m” and “2”, backspace to start of word then type “midterm”. The
+exact sequence is:
+1. place icon between “m” and “2”
+2. backspace to start (4x)
+3. type “midterm” (7 characters)
+CPSC 444 2002-‘03 (T1)
+
+P
+4xK
+7xK
+9 of 22
+
+Total time = 1P + 11K =
+1x1.1 + 11x0.28 = 4.18 sec
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Information for Question #5
+NO CREDIT GIVEN FOR ANYTHING WRITTEN ON THIS PAGE.
+EXAM CONTINES ON FOLLOWING PAGE.
+Empirically derived Operators & Times – source: Kieras, 1993
+K - Keystroke (.12 - 1.2 sec; 0.28 recommended for most users). This operator is pressing a key
+or button on the keyboard. Pressing the SHIFT or CONTROL key counts as a separate keystroke.
+Different experience levels have different times for the K operator:
+•
+
+Expert typist (90 wpm):
+
+0.12 sec
+
+•
+
+Average skilled typist (55 wpm):
+
+0.20 sec
+
+•
+
+Average nonprofessional typist (40 wpm):
+
+0.28 sec
+
+•
+
+Worst typist (unfamiliar with keyboard):
+
+1.20 sec
+
+T(n) - Type a sequence of n characters on a keyboard (n × K sec). This operator is simply a
+shorthand for a series of K operators, and would normally be used only when the user is typing a
+string of characters that is a single "chunk," such as a filename.
+P - Point with mouse to a target on the display (1.1 sec). This operator represents the action of
+moving the mouse to point the cursor to a desired place on the screen. The actual time required can
+be determined from Fitt's law.
+B - Press or release mouse button (0.1 sec). This is a highly practiced, very rapid movement. Use
+0.1 sec for pushing the button down or letting it up.
+BB - Click mouse button (0.2 sec). Pushing and releasing the mouse button rapidly, as in a
+selection click, counts as two B operators, for a total of 0.2 sec.
+H - Home hands to keyboard or mouse (0.4 sec). Since the targets are pretty large, and the
+movement well practiced, moving the hand between keyboard and mouse, and vice-versa, is
+relatively fast.
+M - Mental act of routine thinking or perception (0.6 - 1.35 sec; use 1.2 sec). The M operator is
+intended to represent routine thinking, not complex, lengthy, problem-solving, racking the brain, or
+creative meditations. In a variety of routine computer usage tasks such as word processing and
+spreadsheet usage, these routine pauses are fairly uniform in length, justifying the simplifying
+assumption that all Ms take the same amount of time, around one sec.
+
+CPSC 444 2002-‘03 (T1)
+
+10 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #6 [10 points total]: Goal-oriented action
+Norman’s model of goal-oriented action consists of 7
+stages that span 3 kinds of activities (goal setting,
+execution and evaluation), listed in the box on the right.
+
+1. Establishing the goal to be achieved
+2. Forming the intention for action to
+achieve goal
+3. Specifying the action sequence
+corresponding to the intention
+
+Two major points of Norman’s model are that
+(a) There are perceptual “gulfs” to be crossed as the user
+proceeds from goal setting to execution, and from
+execution to evaluation of his/her action – i.e. the user
+has to figure out how to get from one action stage to
+the next.
+(b) Users often iterate in this process.
+
+4. Executing the action sequence
+5. Perceiving the system state
+6. Interpreting the perceived system state
+7. Evaluating the system state with respect
+to the goal and the intentions
+
+Below is a description of a user proceeding through a task that should be familiar to you. Please state what
+Samantha (the user in the example) might do to cross each gulf. There are multiple good answers.
+Samantha Serious, a student in CPSC 444, is trying to figure out when the first deliverable for the term
+project is due, and what exactly it includes. She hasn’t yet explored the Project page of the 444 website,
+so doesn’t know for certain what she’ll find there; however, she has looked at the schedule page and
+downloaded lecture notes from it. She starts now at the main (syllabus) page of the site.
+
+Note: Do not feel you have to refrain from criticizing the 444 website in answering this question - base your
+answer on your own experience as a user of the site.
+For each of the following, answer in about one sentence:
+(a) What is Samantha’s goal? [1 pts]
+Goal is to determine when the first deliverable for the term project is due.
+
+(b) How might Samantha “cross the gulf” between goal and execution? That is, after looking over the
+syllabus, what action might she decide on (specify) to move closer to her goal? [3 pts]
+A couple of possible answers: she might remember that she saw something about due-dates on
+the schedule page (which she’s already examined), and go there by clicking on the Schedule navbar and scroll through the page looking for the information; or, she might elect to try going
+directly to the projects page using the project nav bar button and scrolling through that page.
+(c) How might Samantha “cross the gulf” between execution and evaluation? That is, once executed,
+how will she decide whether the action stated in (b) accomplished her goal? [3 pts]
+She would simply ascertain whether the information she needs is found there. This is a matter of
+perception and interpretation (Norman’s steps 5 and 6); i.e. no action taken.
+
+(d) Let’s say she determines that the action stated in (c) failed to accomplish her goal. What might she
+do next? What step in Norman’s model does this correspond to? [3 pts]
+She might decide she needs to go somewhere else in the site to find all the details she needs (for
+example, date is on the schedule page, but details are a couple of layers down in the project
+page). She thus iterates all the way back to Norman’s steps 1 (establishes a new goal), and on
+through steps 2-7. Alternatively, she might just give up at this point!
+CPSC 444 2002-‘03 (T1)
+
+11 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #7 [18 points total]: Persuasion
+Briefly describe a product or website that employs the technique of “macrosuasion”. It can be a real existing
+product/site, or a fictitious one (i.e. you can make it up for the purpose of this question). The topic of
+macrosuasion may be anywhere on the spectrum of conventional / serious to radical / absurd; but it must do a
+good job of illustrating the concept. Do not use any of the examples shown in class; no credit will be
+given for them.
+(a) What is the product/site’s name or title? If you’re not sure of the actual name, approximate it; and of
+course make up the name of a fictitious product/site. [1 pts]
+Examples from class included: Baby Think It Over, QuitSmoking,, HygieneGuard (or something like
+that)
+(b) State the intent or goal of the product/site’s macrosuasion, in about one sentence. [4 pts]
+Baby Think It Over: persuade teenagers to not engage in practices that might result in their having to
+care for a baby before they’re ready to.
+
+(c) List two mechanisms by which the product/site attempts to achieve this goal. Use about one sentence
+to describe each mechanism. [6 pts]
+1. Produces a doll that cries all the time, which the teenager needs to carry around with her/him;
+for use by high school educators
+2. Training materials for instructor to use
+
+Next, you will briefly describe a product or website which uses (somewhere within it) the technique of
+“microsuasion”. Again, you may use either real or fictitious sites or products. Do not use any of the
+examples (applications or mechanisms) shown in class; no credit will be given for them.
+(d) What is the site’s or application’s general function? (Your answer should be at the level of “a web
+search engine”, “personal accounting software”, “internet chat room”, etc.) [1 pts]
+An example from class: ebay customer rating system
+(e) State the intent or goal of the site’s microsuasion, in about one sentence. [3 pts]
+Persuade customers to be responsible purchases / sellers, i.e. follow through on their stated
+commitments.
+(f) Describe the microsuasive element, using about one sentence. [3 pts]
+Shows colored stars and numbers next to customer’s profile whose value indicates their record.
+
+CPSC 444 2002-‘03 (T1)
+
+12 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #8 [16 points total]: Questionnaires
+On the next page is an example of a not particularly well-designed questionnaire, along with a note on its
+purpose and how it is to be administered.
+(a) List 4 problems with the questionnaire and its administration in the left column of the table below.
+Identify the concern specifically: e.g. where relevant, identify location directly on questionnaire by
+circling and annotating, then referring to this annotation in the table. Note that problems may extend
+beyond the text and appearance of the questionnaire itself. There are more than 4 problems to be found.
+[2 pts per problem correctly identified]
+(b) For each problem identified, describe a remedy. For example, suggest improved language,
+methodology or inclusion of missing elements. [2 pts per remedy]
+One problem and a possible remedy are filled in as an example.
+
+PROBLEM
+
+REMEDY
+
+Irrelevant questions: e.g. (f)“How much time did
+you spend parking?” It is unlikely that this matters
+in terms of choice of kiosk vs. traditional purchase
+method.
+
+Eliminate irrelevant questions and replace with
+others that would lend more insight on the
+questionnaire’s purpose.
+
+1.
+
+2.
+
+3.
+
+4.
+
+CPSC 444 2002-‘03 (T1)
+
+13 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Example Problems & Remedys (other reasonable answers accepted):
+
+PROBLEM
+
+REMEDY
+
+Invasive, private information requested which is
+not needed (name and address)
+Informative, non-obtrusive profiling info (such as
+age range, computer experience etc) is not
+requested
+Ambiguous question (rating scale unclear): “How
+often do you buy movie tickets?”
+Non-representative set of respondents. It isn’t
+being offered to those who have chosen not to use
+the kiosk.
+Moviegoers are here to have fun. They might be
+unwilling to fill out a long free-text section (process
+confusing) .
+Doesn’t say what to do with the questionnaire when
+it’s been completed.
+
+CPSC 444 2002-‘03 (T1)
+
+14 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Questionnaire for Question #8
+The following questionnaire is intended to determine how well a recently redesigned movie-ticketpurchase kiosk, which allows moviegoers to avoid standing in line for a human salesperson, is
+succeeding in attracting new users. The kiosk is located immediately outside the theatre. A theatre
+employee hands the questionnaire to individuals just after they have completed a credit card purchase
+using the kiosk.
+
+Luna Cinema is eager to have your participation in this survey to rate your satisfaction with the new Luna
+Cinema Ticket Kiosk. Since you have just purchased a ticket using this system, we hope you will spend a
+few minutes telling us how you liked it.
+
+(a) Your full name:
+(b) Your mailing address:
+(c) How often do you buy movie tickets? Circle one:
+1. Very Often
+2. Often
+3. Sometimes
+
+4. Rarely
+
+5. Never
+
+(d) How much money do you typically spend on a movie ticket?
+(e) For how many people did you purchase tickets tonight?
+(f) How much time did it take you to finding parking tonight?
+1. >20 minutes
+2. 10-20 minutes
+3. 0-10 minutes
+
+4. Found parking
+immediately
+
+5. Didn’t drive
+
+(g) How fast was this process relative to purchasing your ticket(s) through a salesperson? Circle one:
+1. Much slower
+2. A little slower 3. About the same
+4. A little faster
+5. Much faster
+(h) Did you find the process confusing in any way?
+If so, how?
+
+Luna Cinema thanks you very much for your participation! Enjoy your movie.
+
+CPSC 444 2002-‘03 (T1)
+
+15 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #9 [20 points total]: Experiment Design
+A graphical driving simulator intended for driver training has been “improved” (we hope) by adding haptic
+force feedback in the steering wheel. The driving student now feels bumps when he drives over or
+collides with obstacles, and resistance when he turns too sharply. He also feels vibrations when he drives
+over the speed limit (it is a simulation of an older car which does not like to move very fast). As with the
+previous design, he also has visual feedback in the form of a graphical display of a road and obstacles
+and signage.
+
+Design a controlled experiment to test whether this addition of force feedback improves the tendency of
+the driving student to drive safely during the simulation, by defining each of the following experiment
+components. Note that there are many possible experiments; we are looking for reasonable answers.
+
+(a) Hypotheses [4 pts]
+Experimental:
+
+e.g., Haptic feedback reduces the number of driving errors that the
+driver makes during the simulation.
+Note: must state a measurable performance parameter. Any
+reasonable one accepted.
+
+Null:
+
+Haptic feedback has no effect on the number of driving errors made
+during the simulation.
+
+(b) Ideal subject pool [2 pts]:
+
+At least two possibilities: novice drivers and “problem drivers” – e.g.
+those with poor driving records.
+
+(c) Experiment task. Be concise
+but specific; include relevant
+details relating, for example, to
+test environment the subject
+will encounter, and how you
+will appropriately motivate the
+subject. [5 pts]
+
+e.g., Drive a test route with and without haptic force feedback. The
+test route should include a variety of obstacles and posted speed
+limits. The subject will be directed to complete the test course as
+quickly as possible while driving safely.
+
+(d) Independent variable [2 pts]:
+
+Presence or absence of haptic feedback as described above
+
+(e) Dependent variable [2 pts]:
+
+1. Time taken to complete course
+2. Number of safety-related errors made (e.g. speed limit exceeded,
+center line crossed, etc).
+
+(f) Possible nuisance variable (list
+one) [2 pts]:
+
+e.g., whether subject has had past experience with haptic feedback in
+driving games, or with this simulator in general. Also driving history
+in general.
+
+(g) Randomization (at least 2
+ways) [2 pts]:
+
+- Order of presentation of haptic / no haptic condition
+- Order of types of obstacles presented during driving task
+- Individual differences
+
+(h) Analysis (type of t-test) [1 pt]:
+CPSC 444 2002-‘03 (T1)
+
+Paired comparison (to deal with individual differences)
+16 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #10 [18 points total]: Statistical Analysis
+For this question, you will carry out a simple t-test on the provided data and make an experimental
+conclusion.
+Sam Sleepresearcher hypothesizes that people who are allowed to sleep for only four hours will do
+significantly better on a user interface test of a web search function than those who are allowed to sleep
+for eight hours. He brings sixteen participants into his lab and randomly assigns them to one of two
+groups. In one group he has participants sleep for eight hours and in the other group he has them sleep
+for four. The next morning he administers the SPAT (Sam's Performance Ability Test) to all participants,
+wherein each participant must find as many specified items on the web as possible within a time limit
+using the provided search tool.
+
+The data provided on the following page are subject performances on the SPAT. They range from 1-9 with
+high scores representing better performance.
+In computing your t-statistic,
+•
+
+Show all intermediate steps, making use of blank columns in the data table as needed (be sure to label
+any column used).
+
+•
+
+For this particular problem, choose appropriately from among the following formulas and use the table of
+t-values that follows:
+
+s2
+
+=
+
+t
+
+=
+
+sed
+
+=
+
+SS =
+sd
+
+=
+
+SS
+N −1
+X1 − X 2
+sed
+s12 s22
++
+N1 N2
+
+∑ (X
+
+i
+
+− X )2
+
+s2
+
+Provide answer and show all work on following page.
+
+CPSC 444 2002-‘03 (T1)
+
+17 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #10 (continued)
+8 hours sleep
+(Group A)
+
+4 hours sleep
+(Group B)
+
+Data
+
+Data
+
+5
+
+6
+
+7
+
+1
+
+5
+
+4
+
+3
+
+6
+
+5
+
+5
+
+3
+
+4
+
+4
+
+1
+
+9
+
+2
+
+(a) What is t? [8 pts]
+(b) How many degrees of freedom does this t-statistic have? [2 pts]
+(c) Can Sam accept his hypothesis? Use the table on next page, and justify answer quantitatively. [6 pts]
+
+CPSC 444 2002-‘03 (T1)
+
+18 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #10 (solution)
+8 hours sleep
+(Group A)
+
+4 hours sleep
+(Group B)
+
+raw
+
+r-MA
+
+(r-MA)2
+
+raw
+
+r- MB
+
+(r-MB)2
+
+5
+
+-0.13
+
+0.02
+
+6
+
+2.38
+
+5.64
+
+7
+
+1.88
+
+3.52
+
+1
+
+-2.63
+
+6.89
+
+5
+
+-0.13
+
+0.02
+
+4
+
+0.38
+
+0.14
+
+3
+
+-2.13
+
+4.52
+
+6
+
+2.38
+
+5.64
+
+5
+
+-0.13
+
+0.02
+
+5
+
+1.38
+
+1.89
+
+3
+
+-2.13
+
+4.52
+
+4
+
+0.38
+
+0.14
+
+4
+
+-1.13
+
+1.27
+
+1
+
+-2.63
+
+6.89
+
+9
+
+3.88
+
+15.02
+
+2
+
+-1.63
+
+2.64
+
+MA=5.13
+
+SSA=28.88
+
+MB=3.63
+
+SSB=29.88
+
+df=7
+
+s2=
+SSA /7=
+
+df=7
+
+s2=
+SSB /7=
+
+t=
+
+(a) What is t? [8 pts]
+
+4.125
+
+X A − XB
+s A2 sB2
++
+N A NB
+
+=
+
+5.13 − 3.63
+4.125 4.268
++
+8
+8
+
+4.268
+
+= 1.464
+
+1.464
+
+(b) How many degrees of freedom does this t-statistic have? [2 pts]
+
+14
+
+(d) Can Sam accept his hypothesis? Use the table on next page, and justify answer quantitatively. [8 pts]
+No, hypothesis is rejected. Looking here for numerical values for the following:
+what’s the largest value of p that permits rejection? 0.05 (2 pts)
+Critical value of t at that p and type of test? 2.145
+
+(2 pts)
+
+−> 1.464 < 2.145 −> can’t reject null hypothesis
+
+(4 pts)
+
+CPSC 444 2002-‘03 (T1)
+
+19 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+df
+
+Critical Values of Student's t (2-tailed)
+
+p ->
+
+0.20
+
+0.10
+
+0.05
+
+0.02
+
+0.01
+
+0.001
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+80
+
+3.078
+1.886
+1.683
+1.533
+1.476
+1.440
+1.415
+1.397
+1.383
+1.372
+1.363
+1.356
+1.350
+1.345
+1.341
+1.337
+1.333
+1.330
+1.328
+1.325
+1.323
+1.321
+1.319
+1.318
+1.316
+1.315
+1.314
+1.313
+1.311
+1.310
+1.31
+1.303
+1.301
+1.299
+1.297
+1.296
+1.295
+1.294
+1.293
+1.292
+
+6.314
+2.920
+2.353
+2.132
+2.015
+1.943
+1.895
+1.860
+1.833
+1.812
+1.796
+1.782
+1.771
+1.761
+1.753
+1.746
+1.740
+1.734
+1.729
+1.725
+1.721
+1.717
+1.714
+1.711
+1.708
+1.706
+1.703
+1.701
+1.699
+1.697
+1.69
+1.684
+1.679
+1.676
+1.673
+1.671
+1.669
+1.667
+1.665
+1.664
+
+12.706
+4.303
+3.182
+2.776
+2.571
+2.447
+2.365
+2.306
+2.262
+2.228
+2.201
+2.179
+2.160
+2.145
+2.131
+2.120
+2.110
+2.101
+2.093
+2.086
+2.080
+2.074
+2.069
+2.064
+2.060
+2.056
+2.052
+2.048
+2.045
+2.042
+2.030
+2.021
+2.014
+2.009
+2.004
+2.000
+1.997
+1.994
+1.992
+1.990
+
+31.821
+6.965
+4.542
+3.747
+3.365
+3.143
+2.998
+2.896
+2.821
+2.764
+2.718
+2.681
+2.650
+2.624
+2.602
+2.583
+2.567
+2.552
+2.539
+2.528
+2.518
+2.508
+2.500
+2.492
+2.485
+2.479
+2.473
+2.467
+2.462
+2.457
+2.438
+2.423
+2.412
+2.403
+2.396
+2.390
+2.385
+2.381
+2.377
+2.374
+
+63.657
+9.925
+5.841
+4.604
+4.032
+3.707
+3.499
+3.355
+3.250
+3.169
+3.106
+3.055
+3.012
+2.977
+2.947
+2.921
+2.898
+2.878
+2.861
+2.845
+2.831
+2.819
+2.807
+2.797
+2.787
+2.779
+2.771
+2.763
+2.756
+2.750
+2.724
+2.704
+2.69
+2.678
+2.668
+2.660
+2.654
+2.648
+2.643
+2.639
+
+636.619
+31.598
+12.941
+8.610
+6.859
+5.959
+5.405
+5.041
+4.781
+4.587
+4.437
+4.318
+4.221
+4.140
+4.073
+4.015
+3.965
+3.922
+4.883
+3.850
+3.819
+3.792
+3.767
+3.745
+3.725
+3.707
+3.690
+3.674
+3.659
+3.646
+3.591
+3.551
+3.520
+3.496
+3.476
+3.460
+3.447
+3.435
+3.425
+3.416
+
+CPSC 444 2002-‘03 (T1)
+
+20 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+
+Question #11 [16 points total + 5 extra credit]: Physical Interfaces
+(a) What’s the functional difference between a “button” and a “handle”-type physical computer interface?
+What kind of control activity does each lend itself well to? [4 pts]
+Buttons are for initiating something automatic; handles are for maintaining close control.
+Alternatively: buttons are for discrete actions, handles are for continuous actions.
+2 pts for defining each of buttons and handles in one of the above 2 ways.
+(b) Give 3 examples of computer-supported interfaces or functions of interfaces that are well suited to
+button-like interaction. [6 pts]
+1.
+2.
+3.
+Any kind of discrete control. E.g. typing, punching calculator buttons, power switch, “send” button
+on an online form.
+(c) Give 3 examples of computer-supported interfaces or functions of interfaces that are well suited to
+handle-like interaction. [6 pts]
+1.
+2.
+3.
+Any kind of continuous control. E.g., drawing / sculpting with a computer-based application, musical
+instrument (computer generated music).
+EXTRA CREDIT [1-5 pts]
+Suggest an example (other than those shown in class) of a useful physical metaphor that could be
+implemented in a haptic interface. For example, mentioned in class where the debit card whose “weight” you
+could feel when you swiped it, representing the amount of money in the account; and the “clutched film reel”
+metaphor for browsing streaming media such as video. Partial credit will be given according to the quality
+and innovativeness of the idea. This is a shameless ploy to exploit the creative brains in this class for
+research ideas. If I think it’s really good and original, I’ll ask you for permission to implement the metaphor
+in my research lab – and if it still seems good after prototyping, credit you appropriately in any publications
+which result.
+
+CPSC 444 2002-‘03 (T1)
+
+21 of 22
+
+Final Exam (2.0 hours)
+
+Name:
+
+Student ID Number:
+Blank page for extra work
+
+CPSC 444 2002-‘03 (T1)
+
+22 of 22
+
+Final Exam (2.0 hours)
+

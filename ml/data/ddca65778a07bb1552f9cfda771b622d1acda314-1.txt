@@ -1,0 +1,186 @@
+
+CpSc 448B
+
+Final Exam
+
+Dec. 14, 2010
+12:00 noon – 2:30 pm
+
+Graded on a scale of 100 points (yes, I know that there is 1 extra point built-in; it’s extra credit!).
+Bug-bounties are in effect.
+0. (2 points) Write your solutions to this question on the spaces provided and on your exam book:
+(a) (1 point) What is your name?
+(b) (1 point) What is your student number?
+1. (16 points) Give a 2-4 sentence answer to each question below:
+(a) (4 points) What is the zero-one principle?
+(b) (4 points) What is the role of λ in the CTA model?
+(c) (4 points) What is a barrier?
+(d) (4 points) What is the difference between task and data parallelism?
+2. (35 points) The following questions pertain to the Berkeley EECE technical report: The Landscape of Parallel
+Computing Research: A View from Berkeley. Answer each question with one or two paragraphs.
+(a) (7 points) What is the difference between a multi-core and a many-core processor? Which approach does
+Landscape promote and why?
+(b) (7 points) What are the 13 Dwarfs? What is the main property of a computation that classifies it as one
+dwarf or another?
+(c) (7 points) What role does Landscape propose that psychology should have in parallel programming and
+why?
+(d) (7 points) Does Landscape believe that CPU cores should exploit instruction-level parallelism (ILP) by
+continuing earlier trends of increasing the issue-width of superscalar architectures? State three reasons
+that they give for their recommendation.
+(e) (7 points) What is an autotuner? What role do the authors of Landscape envision for autotuners for the
+development of parallel software?
+3. (24 points)
+(a) (4 points) What is an “empty/full” variable (e.g. in Peril-L)?
+(b) (16 points) Figures 1, 2, and 3 sketch an implementation of empty/full variables using pthreads. The
+methods ef create and ef destroy create and free empty/free variables. The method ef set sets
+the value of an empty/free variable, and the method ef get returns the value of an empty/free variable.
+Complete the definition of struct EmptyFull (Figure 1), and the functions ef create (Figure 1),
+ef set (Figure 2), and ef get (Figure 2). Note that I have provided more blank lines in the figures than
+I used in my implementation – you don’t have to use up all of the blank lines.
+(c) (4 points) Consider a situation where an empty/full variable is initially empty, three different threads
+attempt to set the variable, and then two other threads attempt to read the value of the variable. Briefly
+describe what happens.
+
+4. (24 points) Figure 4 shows Peterson’s mutual exclusion algorithm. To prove that Peterson’s algorithm guarantees mutual exclusion, we can use the invariant:
+I ≡
+∀θ ∈ {0, 1}.
+flag[θ] = (pc[θ] ∈ {5, 6, 7, 8})
+∧ (pc[θ] = 7) ⇒ (¬flag[!θ] ∨ (turn = θ) ∨ (pc[!θ] = 5))
+(a) (16 points) Figures 5 and 6 sketch a proof that I is an invariant of Peterson’s algorithm. Fill in the missing
+steps. You may write write on the figures and include them with your solutions to the other problems.
+(b) (4 points) Write a predicate, M , that specifies mutual exclusion for the code from Figure 4. Prove that
+Peterson’s algorithm guarantees mutual exclusion by showing I ⇒ M .
+(c) (4 points) Consider a variation of Peterson’s algorithm that exchanges the statements at lines 4 and 5.
+Show that this version does not guarantee mutual exclusion.
+
+References
+[Pet81] Gary L. Peterson. Myths about the mutual exclusion problem. Information Processing Letters, 12(3):115–
+116, 1981.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include "empty full.h"
+#define TRUE 1
+#define FALSE 0
+
+/* See Figure 3 */
+
+struct EmptyFull {
+void *value;
+int full;
+
+};
+EmptyFull ef create(void) {
+EmptyFull ef = (EmptyFull)malloc(sizeof(struct EmptyFull));
+ef->value = NULL;
+ef->full = FALSE;
+
+return(ef);
+}
+void ef destroy(EmptyFull ef) {
+You don’t need to write anything for this function.
+}
+
+Figure 1: Write your implementation of an Empty/Full variable here and on Figure 2
+
+void ef set(EmptyFull ef, void *value) {
+
+}
+void *ef get(EmptyFull ef) {
+
+}
+Figure 2: Write your implementation of an Empty/Full variable here and on Figure 1
+
+typedef struct EmptyFull *EmptyFull;
+extern
+extern
+extern
+extern
+
+EmptyFull ef create(void);
+void ef destroy(EmptyFull ef);
+void ef set(EmptyFull ef, void *value);
+void *ef get(EmptyFull ef);
+Figure 3: empty full.h
+
+INITIALLY: (flag[0] = false) && (flag[1] = false) && (turn = 0);
+ASSUME: The “user” code at lines 3 and 7 does not change the values of flag or turn.
+1:
+2:
+3:
+4:
+5:
+6:
+7:
+8:
+9:
+10:
+
+forall(θ in (0..1)) {
+/*
+while(true) {
+this process does some work;
+flag[θ] = true;
+/*
+turn = !θ;
+/*
+while(flag[!θ] && turn
+critical section;
+flag[θ] = false;
+}
+}
+
+create two threads */
+
+indicate intention to enter critical region */
+yield if contested */
+!= θ);
+/* spinning wait */
+
+Note: the “!” in !θ is the logical negation operator from C. In particular, !0 is 1 and !1 is 0.
+Figure 4: Peterson’s Mutual Exclusion Algorithm [Pet81].
+
+Let
+
+I1 ≡ ∀θ ∈ {0, 1}. flag[θ] = (pc[θ] ∈ {5, 6, 7, 8}
+Q(θ) ≡ (pc[θ] = 7) ⇒ (¬flag[!θ] ∨ (turn = θ) ∨ (pc[!θ] = 5))
+I2 ≡ ∀θ ∈ {0, 1}. Q(θ)
+Note that I = I1 ∧ I2 . We’ll first show that I1 is an invariant by itself. Then, we’ll show that I1 ∧ I2 is an invariant.
+Proof that I1 is an invariant of Peterson’s algorithm:
+• I1 holds initially because flag[0] and flag[1] are both false and pc[0] and pc[1] are both initially set to 1.
+• If pc[θ] = 1, then executing the statement leaves the flag variables unchanged.
+Because I1 held before executing the statement, it will continue to hold after executing the statement.
+• If pc[θ] ∈ {2, 3}, then
+
+• If pc[θ] = 4, then executing the statement sets flag[θ] = true and pc[θ] = 5 which establishes the clause
+flag[θ] = (pc[θ] ∈ {5, 6, 7, 8})
+The clause
+flag[!θ] = (pc[!θ] ∈ {5, 6, 7, 8})
+holds after executing the statement because
+
+• If pc[θ] ∈ {5, 6, 7}, then
+
+• If pc[θ] = 8, then
+
+• If pc[θ] = 9, then executing the statement just sets pc[θ] = 3 which preserves I1 .
+Figure 5: Proof of Invariant I (part 1, to be completed by you for question 4a)
+
+Now, we’ll show that I1 ∧ I2 is an invariant. Because we just showed that I1 is an invariant, we can assume that it
+holds before and after each statement. We just need to show that if I1 ∧ I2 hold before executing a statement, then I2
+will hold after executing the statement.
+I2 holds initially because
+
+If pc[θ] ∈ {1, 2, 3, 7, 9}, then executing the statement doesn’t change flag or turn, and it doesn’t set either pc value
+to 7. By the assumption that I2 held before executing the statement, it will continue to hold afterwards.
+If pc[θ] = 4, then the clause Q(θ) holds after executing the statement because pc[θ] = 5. The clause Q(!θ) also
+holds because pc[θ] = 5. Thus, I2 holds after executing the statement.
+If pc[θ] = 5, then,
+
+If pc[θ] = 6, then upon exiting the while loop, pc[θ] = 7, and either flag[!θ] = false or turn = θ. Thus, Q(θ)
+holds. Furthermore, we know that pc[!θ] 6= 7 because
+
+If pc[θ] = w, then after executing the statement, pc[θ] = 9 which establishes Q(θ) and flag[θ] = false which
+establishes Q(!θ).
+Figure 6: Proof of Invariant I (part-2, to be completed by you for question 4a)
+

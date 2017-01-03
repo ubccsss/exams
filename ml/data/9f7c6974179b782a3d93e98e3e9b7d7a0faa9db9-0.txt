@@ -1,0 +1,415 @@
+https://web.archive.org/web/2222/http://www.cs.ubc.ca/~tmm/courses/547-14/projects/paul/finalpresentation.pdf
+a
+
+b
+
+Visualizing character set collocations
+in ancient Chinese literature
+Paul Bucci
+
+What is CERC?
+Cultural Evolution of Religion Research Consortium,
+
+under the Centre for Human Evolution, Cognition and Culture
+
+Corpus
+A set of ancient Chinese texts organized by genre
+
+...
+Classics
+
+History
+
+Etymology
+
+Medicine
+
+Math
+
+Character classes
+Sets of characters organized by concept
+Gods = {天,帝 . . .}
+Reward = {償,勞,胙,賞,賜,酬 . . .}
+...
+provided by the Cultural Evolution of
+
+Religion Research Consortium (CERC) lab.
+
+jiaoshiyilin
+
+乾道陟石阪胡言連蹇。譯瘖且聾莫使
+道 通 。 請 謁 不 行 求 事 無 功 。坤 招 殃 來
+
+Task
+Identify characters in text
+from each class and calculate
+distances between them
+
+螫 害 我 邦 國 病 在 手 足 不 得 安 息 。屯 陽
+孤亢極多所恨惑車傾蓋亡身常憂惶乃
+得 其 願 雌 雄 相 從 。蒙 鴶 鵴 鳲 鳩 專 一 無
+尤 。 君 子 是 則 長 受 嘉 福 。需 目 瞤 足 動
+喜 如 其 願 舉 家 蒙 寵 。訟 罷 馬 上 山 絕 無
+水 泉 。 喉 焦 唇 乾 舌 不 能 言 。師 倉 盈 庾
+憶宜稼黍稷。國家富有人民蕃息。
+比 中 夜 狗 吠 盜 在 墻 外 。 神明 祐 助 銷 散
+皆 去 。小 畜 据 斗 運 樞 順 天 無 憂 。 與 樂
+並居。乾道陟石阪胡言連蹇。譯瘖且
+
+Gods = {天,帝 . . .}
+Reward = {償,勞,胙,賞,賜,酬 . . . }
+
+聾 莫 使 道 通 。 請 謁 不 行 求 事 無 功 。坤
+招殃來螫害我邦國病在手足不得安息
+。屯 陽 孤 亢 極 多 所 恨 惑 車 傾 蓋 亡 身 常
+
+Gods
+
+jiaoshiyilin
+
+乾道陟石阪胡言連蹇。譯瘖且聾莫使
+道 通 。 請 謁 不 行 求 事 無 功 。坤 招 殃 來
+
+Task
+Identify characters in text
+from each class and calculate
+distances between them
+
+螫 害 我 邦 國 病 在 手 足 不 得 安 息 。屯 陽
+孤亢極多所恨惑車傾蓋亡身常憂惶乃
+得 其 願 雌 雄 相 從 。蒙 鴶 鵴 鳲 鳩 專 一 無
+尤 。 君 子 是 則 長 受 嘉 福 。需 目 瞤 足 動
+喜 如 其 願 舉 家 蒙 寵 。訟 罷 馬 上 山 絕 無
+水 泉 。 喉 焦 唇 乾 舌 不 能 言 。師 倉 盈 庾
+憶宜稼黍稷。國家富有人民蕃息。
+比 中 夜 狗 吠 盜 在 墻 外 。 神明 祐 助 銷 散
+皆 去 。小 畜 据 斗 運 樞 順 天 無 憂 。 與 樂
+並居。乾道陟石阪胡言連蹇。譯瘖且
+
+Gods = {天,帝 . . .}
+Reward = {償,勞,胙,賞,賜,酬 . . . }
+
+聾 莫 使 道 通 。 請 謁 不 行 求 事 無 功 。坤
+招殃來螫害我邦國病在手足不得安息
+。屯 陽 孤 亢 極 多 所 恨 惑 車 傾 蓋 亡 身 常
+
+Gods
+
+Reward
+
+jiaoshiyilin
+
+乾道陟石阪胡言連蹇。譯瘖且聾莫使
+道 通 。 請 謁 不 行 求 事 無 功 。坤 招 殃 來
+
+Task
+Identify characters in text
+from each class and calculate
+distances between them
+
+螫 害 我 邦 國 病 在 手 足 不 得 安 息 。屯 陽
+孤亢極多所恨惑車傾蓋亡身常憂惶乃
+得 其 願 雌 雄 相 從 。蒙 鴶 鵴 鳲 鳩 專 一 無
+尤 。 君 子 是 則 長 受 嘉 福 。需 目 瞤 足 動
+喜 如 其 願 舉 家 蒙 寵 。訟 罷 馬 上 山 絕 無
+水 泉 。 喉 焦 唇 乾 舌 不 能 言 。師 倉 盈 庾
+憶宜稼黍稷。國家富有人民蕃息。
+比 中 夜 狗 吠 盜 在 墻 外 。 神明 祐 助 銷 散
+皆 去 。小 畜 据 斗 運 樞 順 天 無 憂 。 與 樂
+並居。乾道陟石阪胡言連蹇。譯瘖且
+
+Gods = {天,帝 . . .}
+Reward = {償,勞,胙,賞,賜,酬 . . . }
+
+聾 莫 使 道 通 。 請 謁 不 行 求 事 無 功 。坤
+招殃來螫害我邦國病在手足不得安息
+。屯 陽 孤 亢 極 多 所 恨 惑 車 傾 蓋 亡 身 常
+
+Gods
+
+Reward
+
+jiaoshiyilin
+
+乾道陟石阪胡言連蹇。譯瘖且聾莫使
+道 通 。 請 謁 不 行 求 事 無 功 。坤 招 殃 來
+
+Task
+Identify characters in text
+from each class and calculate
+distances between them
+
+螫 害 我 邦 國 病 在 手 足 不 得 安 息 。屯 陽
+孤亢極多所恨惑車傾蓋亡身常憂惶乃
+得 其 願 雌 雄 相 從 。蒙 鴶 鵴 鳲 鳩 專 一 無
+尤 。 君 子 是 則 長 受 嘉 福 。需 目 瞤 足 動
+喜 如 其 願 舉 家 蒙 寵 。訟 罷 馬 上 山 絕 無
+水 泉 。 喉 焦 唇 乾 舌 不 能 言 。師 倉 盈 庾
+憶宜稼黍稷。國家富有人民蕃息。
+比 中 夜 狗 吠 盜 在 墻 外 。 神明 祐 助 銷 散
+皆 去 。小 畜 据 斗 運 樞 順 天 無 憂 。 與 樂
+並居。乾道陟石阪胡言連蹇。譯瘖且
+
+Gods = {天,帝 . . .}
+Reward = {償,勞,胙,賞,賜,酬 . . . }
+
+聾 莫 使 道 通 。 請 謁 不 行 求 事 無 功 。坤
+招殃來螫害我邦國病在手足不得安息
+。屯 陽 孤 亢 極 多 所 恨 惑 車 傾 蓋 亡 身 常
+
+Data generated
+A .csv with collocation
+data for a focal and
+comparison class
+
+Number of
+collocations
+that occur
+within
+x characters
+
+Number of
+occurences of
+focal class
+elements in
+text
+
+data.csv
+
+Genre
+
+Text
+
+Focal
+
+Compare
+
+1
+
+...
+
+50
+
+Sentence
+
+Focal Count
+
+Date
+
+Classics
+
+jiaoshiyilin
+
+Gods
+
+Reward
+
+2
+
+...
+
+125
+
+23
+
+413
+
+400 BCE
+
+Classics
+
+jiaoshiyilin
+
+Gods
+
+Punishment
+
+0
+
+...
+
+22
+
+13
+
+89
+
+30 CE
+
+Classics
+
+jiaoshiyilin
+
+Reward
+
+Punishment
+
+5
+
+...
+
+938
+
+165
+
+1278
+
+200 BCE
+
+Number of
+collocations
+that occur
+within a
+sentence
+
+Interesting statistics
+• Frequency of in-sentence collocations.
+How often do we see these words linked in a sentence?
+
+• Frequency of collocations within a window of k characters.
+How often do we see these words near each other?
+
+• Conditional probability of focal class to
+occur within k characters of comparison class.
+
+How likely are two characters to be collocated given the number
+of occurences?
+
+• What happens if we bin the above by genre? Time frame?
+An arbitrary selection of texts?
+
+Interface overview
+
+Fold
+
+Workflow
+
+Text selection
+
+Influence
+Focal
+Compare
+
+Text
+Select
+
+Collocation
+strength
+over time
+
+Conditional
+probability
+evolution and
+compare
+
+Strength of collocations
+between focal and every
+comparison class
+Three encodings
+x-pos = strength by proximity
+y-pos = strength by sentence
+Angle = ratio difference
+
+Collocation counts by text (also in-sentence)
+
+Collocation counts by proximity
+
+Demo
+
+Process
+• Iteration via in-depth conversations with CERC contact.
+Involved in every step from planning to evaluation.
+
+• Some critique for interaction and encoding.
+Presentation at VIVA lab, discussion.
+
+• Libraries are amazing and also sometimes terrifying.
+Had to switch from a Python-only system to D3 in the
+front and Python in the (far) back.
+
+• Reception
+
+Works for mid-stage questions, proof-of-concept for CERC,
+seems relatively scalable, shows value of vis for CERC
+
+Critique and future plans
+• Are these the most elegant encodings?
+Room for a more creative approach, but tradeoff is with ease-of-use.
+
+• Resources are limited.
+Not enough pixels, but also direction and hierarchy have limitations.
+
+• Requires a very specific type of CSV.
+
+But that might be a strength, or at least, an avenue for a strength.
+
+• Future work
+
+Scalability, efficiency...back-end integration? Not so sure.
+Hosting? Customizable probability functions?
+Generalizability : is there any reason we couldn’t do Shakespeare?
+
+data.csv
+
+Genre
+
+Text
+
+Focal
+
+Compare
+
+1
+
+...
+
+50
+
+Sentence
+
+Focal Count
+
+Date
+
+Classics
+
+jiaoshiyilin
+
+Gods
+
+Reward
+
+2
+
+...
+
+125
+
+23
+
+413
+
+400 BCE
+
+Classics
+
+jiaoshiyilin
+
+Gods
+
+Punishment
+
+0
+
+...
+
+22
+
+13
+
+89
+
+30 CE
+
+Questions?
+

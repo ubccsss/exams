@@ -1,0 +1,339 @@
+
+Author: Hazra
+THE UNIVERSITY OF BRITISH COLUMBIA
+CPSC 304: MIDTERM EXAMINATION
+SET A
+OCTOBER 2016
+General Instructions
+1. This is a closed book, closed notes exam. There are total 12 pages. Answer all
+questions in the space provided. Two pages of extra answer space have been
+provided at the back in case you run out of space while answering. If you run out
+of space, be sure to make a “forward reference” to the page number where your
+answer continues.
+2. Write your name, student ID, and signature in ink (pen). You may use a pencil to
+write your solutions.
+3. Answer all the questions on this paper. You have 75 minutes (1 hour and 15
+minutes) to write this examination.
+4. The marks for each question are given in []. Please take this into account when
+pacing yourself
+5. Cheating is an academic offense. Your signature below indicates that you
+understand and agree to the UBC’s policies regarding cheating on exams.
+
+Student Name: _______________________
+
+Student ID: __________________
+
+PLEASE SIGN HERE: ______________________________
+
+Question
+
+Mark
+
+Max
+
+Ques 1
+
+4
+
+Ques 2
+
+6
+
+Ques 3
+
+3
+
+Ques 4
+
+5
+
+Ques 5
+
+6
+
+Ques 6
+
+15
+
+Ques 7
+
+6
+
+Ques 8
+
+9
+
+Total
+
+54
+
+1
+
+This page is intentionally left blank.
+
+2
+
+Ques 1. What does the term data independence mean, and why is it an important goal? [4
+marks]
+
+Ques 2. Consider the below ER diagram. The ER diagram represents the buying and selling
+of the house. Provide answers to the questions based on the diagram [6 Marks]
+
+3
+
+(a)
+
+If we delete the builder from the database, then what would happen to the houses
+that the builder had built? Justify your argument.
+
+(b)
+
+If we delete the realtor that sold a house, do we need to delete that house as well?
+Why or why not?”
+
+4
+
+Ques 3. Answer the following multiple-choice questions. [3 Marks]
+a. Suppose that a1 and a2 are the only entities of A, b1 and b2 are the only entities of B, and c1
+and c2 are the only entities of C. Which of the following relationship sets for R and S are possible
+according to the diagram, where T = {(e1,f1)} means a relationship between e1 and f1 exists
+in relationship set T
+
+A.
+B.
+C.
+D.
+E.
+
+R = {}; S = {}
+R = {(a1,b1)}, S = {(b2,c2)}
+R = {(a1,b1), (a1,b2)}; S = {(b1,c1), (b2,c2)}
+R = {(a1, b2)}; S = {(b1,c2), (b2, c1), (b1,c1)}
+None of the above
+
+b. How many tables will we need to store the info provided by the following diagram?
+
+A.
+B.
+C.
+D.
+E.
+
+4
+5
+6
+7
+Some other number
+
+5
+
+a. c. Consider the below table definition, in which numbers denote line numbers. Which of the following
+is not a legal addition?
+CREATE TABLE Emps (
+(1) id INT,
+(2) sin INT,
+(3) name CHAR(20),
+(4) managerID INT );
+A. Add PRIMARY KEY before the comma on line (1), add FOREIGN KEY (managerID) REFERENCES
+Emps(id) before the ) on line (4).
+B. Add PRIMARY KEY before the comma on line (1), add FOREIGN KEY (managerID) REFERENCES
+Emps(sin) before the ) on line (4).
+C. Add, PRIMARY KEY (id, sin), and FOREIGN KEY (id, sin) REFERENCES Emps(id, sin) before the )
+on line (4).
+D. All are legal
+E. None are legal
+
+Ques 4. Transform the ER diagram into a relational schema. State any assumptions that
+you make – but your assumptions cannot contradict the facts given. You only need to show
+the schema. (Use underline to show primary key and circle to show foreign key constraints)
+[5 Marks]
+
+6
+
+Ques 5. Consider the two tables shown below. The TerID column in the SALES_REP relation
+is a foreign key referring to the primary key column TerID in the TERRITORY relation.
+[6 Marks]
+SALES_REP
+TERRITORY
+SRID
+SRName
+TerID
+TerID
+TerName
+1
+Joe
+E
+E
+East
+2
+Sue
+E
+W
+West
+3
+Meg
+C
+S
+South
+4
+Bob
+S
+N
+North
+5
+Joe
+N
+C
+Central
+6
+Pat
+N
+7
+Lee
+N
+8
+Joe
+E
+a. If a DBMS enforces a DELETE CASCADE option on the referential integrity constraint
+between SALES_REP and TERRITORY, show the records in tables SALES_REP and
+TERRITORY after a user tries to delete the second record (W, West) from TERRITORY.
+
+7
+
+b. If a DBMS enforces a DELETE RESTRICT option on the referential integrity constraint
+between SALES_REP and TERRITORY, show the records in tables SALES_REP and
+TERRITORY after a user tries to delete the fourth record (N, North) from TERRITORY.
+
+Ques 6. Midtown Memorial Patients Drug Dispense Database keeps track of the
+following information. Create an ER diagram based on the requirements [15
+marks].
+
+
+For each patient it keeps track of a unique patient identifier, patient birthdate,
+gender and the patient age which is derived from patient birthdate.
+
+
+
+For each nurse it keeps track of a unique nurse ID and the nurse name.
+
+
+
+For each ingredient it keeps track of the unique ingredient identifier and the
+ingredient name.
+
+
+
+For each drug it keeps track of a unique drug ID, the drug name and the drug
+coating type.
+
+
+
+For each drug intake event by a patient it keeps track of the drug intake event
+number (unique within a patient, but different patients could have the same
+drug intake event number for their separate drug intake events), the drug
+intake event date and the time.
+
+
+
+Each ingredient must be contained in at least one drug, but it may be contained
+in many drugs. Every drug can contain many ingredients, but they must contain
+at least one. For every instance of an ingredient contained in a drug it keeps
+track of the dosage of the ingredient in the drug.
+
+
+
+Each drug must be included in at least one drug intake event, but it may be
+included in many. Each drug intake event must include at least one drug, but it
+may include many.
+
+
+
+For each instance of a drug included in a drug intake event it keeps track of the
+quantity.
+
+8
+
+
+
+Each nurse can administer several drug intake events, but it does not have to
+administer any. Each drug intake event must be administered by one nurse.
+
+
+
+When a nurse administers the event, a supervisor must supervise her work in
+the event. The supervisor can be identified by a name.
+
+
+
+Each drug intake event is related to one patient. A patient can have many drug
+intake events, but they may not have any.
+
+9
+
+Ques 7. Consider the two tables T1 and 2. Show the results of the following
+relational algebra operations: [6 Marks]
+
+Table T1
+P
+10
+15
+25
+a) T1 ⋈
+
+Q
+A
+B
+C
+
+T1.P=T2.B
+
+Table T2
+A
+10
+25
+10
+
+R
+5
+8
+6
+
+B
+b
+c
+b
+
+C
+6
+3
+5
+
+T2
+
+b) T1 ∩ T2
+
+Ques 8. Consider the following schema
+Student (StudID, name, address, gender, major)
+Course (CNo, CName)
+Enrolled (StudID,CNo)
+where the primary keys are underline. Give an expression in the relational
+algebra to express each of the following queries: [9 Marks]
+
+10
+
+a. List course numbers for which no student is enrolled.
+
+b. List ids of the students who are enrolled in ‘Database’ or ‘Data Mining’ course.
+
+c. List the name of the courses and the student ids in which all ‘COMP’ major
+students are enrolled.
+
+Relax! You reached the end! Submit your answer booklet!
+
+11
+
+This space is intentionally left blank. You can use it to answer questions or
+as scratch paper
+
+12
+

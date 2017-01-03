@@ -1,0 +1,357 @@
+
+Author: G. Tsiknis
+The University of British Columbia
+Computer Science 121
+Midterm 1
+October 9, 2015
+Circle your Section:
+Section 101, Instructor: George Tsiknis
+
+Section 102, Instructor: Patrice Belleville
+
+Time: 70 minutes
+
+Total marks: 60
+
+Name
+(PRINT)
+
+Student No
+(Last)
+
+(First)
+
+Signature
+
+This examination has 8 pages. Check that you have a complete
+paper.
+This is a closed book exam. You may use the formula sheet which
+you have brought with you, but no other books or notes. You
+cannot use a calculator.
+Answer all the questions on this paper.
+
+MARKS
+1
+2
+3
+4
+5
+6
+
+Give very short but precise answers. Always use point form
+where it is appropriate.
+
+7
+
+Work fast and do the easy questions first. Leave some time to
+review your exam at the end.
+
+9
+
+The marks for each question are given in []. Use this to manage
+your time.
+Good Luck
+
+8
+Total
+
+Name:____________________________________ St. No:____________________
+Page 2 of 8
+1. [4] Is the following statement is a tautology, a contradiction or neither? Justify your answer using a
+method of your choice.
+(( p q)  ~p) ~q
+
+2. [6] Translate the following sentences into propositional logic using the following variables with the
+given meaning:
+w = the weather improves
+g = we run out of gas
+d = we will get to our destination
+t = we will be late
+
+a. Unless the weather does not improve or we run out of gas, we will get to our destination,
+but we will be late. (recall p unless q means if ~q then p)
+
+b. Assuming that we will not run out of gas, if the weather improves, we will get to our
+destination but we will be late.
+
+Name:____________________________________ St. No:____________________
+Page 3 of 8
+
+3. [5] Write a short propositional logic expression that corresponds to the following truth table (i.e.
+defines the value of s based on p, q and r):
+p
+q
+r
+s
+F
+F
+F
+T
+F
+F
+T
+T
+F
+T
+F
+F
+F
+T
+T
+T
+T
+F
+F
+F
+T
+F
+T
+F
+T
+T
+F
+F
+T
+T
+T
+T
+Expression:
+
+4. [7] Prove the following equivalence:
+p  ~q)  ~p  p  q
+Use a formal logical equivalence proof showing the equivalence rule that is applied at each
+step.
+
+Proof:
+
+rule applied
+
+Name:____________________________________ St. No:____________________
+Page 4 of 8
+5. [8]
+
+Consider the following digital circuit:
+
+This circuit is input/output equivalent to another one that uses exactly one logical gate with two
+inputs. Show the simpler circuit by answering the following:
+a. [2] Write a propositional logic expression which is the direct translation of this circuit to
+propositional logic. Do not simplify your expression.
+
+b. [4] Using a sequence of logical equivalences (showing the rules as well), simplify this
+expression to one that has only two propositional variables.
+
+c.
+
+[2] Finally draw the circuit corresponding to the simplified expression.
+
+Name:____________________________________ St. No:____________________
+Page 5 of 8
+6. [8] Number representation
+The following table shows the first few powers of 2, and may be helpful for this question:
+power
+0
+
+2
+
+value
+1
+
+power
+6
+
+2
+
+1
+
+2
+
+2
+
+2
+
+4
+
+2
+
+3
+
+8
+
+2
+
+4
+
+16
+
+2
+
+5
+
+32
+
+2
+
+2
+2
+2
+2
+2
+
+value
+64
+
+power
+12
+
+2
+
+7
+
+128
+
+2
+
+8
+
+256
+
+2
+
+9
+
+512
+
+2
+
+10
+
+1,024
+
+2
+
+11
+
+2,048
+
+2
+
+value
+4,096
+
+13
+
+8,192
+
+14
+
+16,384
+
+15
+
+32,768
+
+16
+
+65,536
+
+20
+
+1,048,576
+
+a. [2] What is the binary representation of the (signed) decimal value 120 using 8 bits?
+
+b. [2] What decimal value is represented by the 6-bit unsigned binary number 110110?
+
+c. [2] What decimal value is represented by the 6-bit signed binary number 110110?
+
+d. [2] What is the binary representation of the (signed) decimal value -64 using 8 bits?
+
+Name:____________________________________ St. No:____________________
+Page 6 of 8
+7. [8]Circuit Design 1
+Design a 3-inputs minority circuit. This circuit has three inputs x, y and z, and should output True if
+at most one of x, y, z is true. The circuit should output False if two or more of x, y, z are true.
+
+Name:____________________________________ St. No:____________________
+Page 7 of 8
+8. [6] Consider the following propositional logic proof. At each step indicate the missing part, which is
+either the conclusion of a rule or the rule that is used for the step (and the statements the rule is applied
+to) .
+
+1.
+
+p q
+
+premise
+
+
+
+qr
+
+premise
+
+3.
+
+put
+
+premise
+
+4.
+
+~q  (w  u)
+
+premise
+
+5.
+
+~r
+
+premise
+
+6.
+
+~q
+
+7.
+
+_______________
+
+____________
+1, 6, elimination
+
+8.
+9.
+
+____________
+u
+
+10.
+11.
+
+8, specialization
+___________
+
+t
+
+3, 10, modus ponens
+
+Name:____________________________________ St. No:____________________
+Page 8 of 8
+9.[8] Consider the following definitions:
+ PM: the set of all Canadian prime ministers.
+ C(x): x is/was a member of the Conservative Party.
+ F(x): x likes fishing
+ L(x): x is/was a member of the Liberal Party.
+ W(x): x is a woman.
+a) Translate each of the following English statements into predicate logic.
+i. Every Canadian prime minister is/was member of either the Liberal or the Conservative
+Party.
+
+ii. Every woman who is/was prime minister of Canada is/was a member of the conservative
+Party.
+
+b) Translate each of the following predicate logic statements into English.
+i. ~ (xPM, L(x)  C(x))
+
+ii. xPM, (~W(x)  L(x))  ~F(x)
+

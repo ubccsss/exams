@@ -1,0 +1,160 @@
+
+CPSC 320 Sample Midterm 1
+October 2012
+Name:
+
+Student ID:
+
+Signature:
+
+– You have 50 minutes to write the 5 questions on this examination.
+A total of 40 marks are available.
+– Justify all of your answers.
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11in sheet of notes, and nothing else.
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+Question
+
+Marks
+
+1
+2
+3
+4
+5
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her library card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 5
+[13] 1. Short answers
+[3] a. How does Dijkstra’s algorithm choose the next vertex to add to the tree it is constructing?
+
+[3] b. Explain using a single, short sentence why the Gale-Shapley stable matching algorithm terminates after at most n2 iterations, where n is the number of men (and
+women).
+
+[3] c. We use decision trees to prove lower bounds on the worst-case running time of algorithms for a given problem. What does the number of leaves of the decision tree for
+an input size n represent?
+
+[4] d. Is the tree returned by Huffman’s algorithm balanced (that is, does it have depth in
+O(log n) where n is the size of the alphabet)? If so, explain why briefly. If not,
+explain the main factor that determines the shape of the tree.
+
+page 3 out of 5
+[5] 2. Consider the function f : N → R+ defined by
+f (n) =
+
+
+
+4n3
+if n is even
+.
+n3 /9 if n is odd
+
+Choose a function g : N → R+ that is as simple as possible, and such that f ∈ Θ(g), and
+then prove that f ∈ Θ(g).
+
+[5] 3. Consider four functions f , g, h, i : N → R+ . Let r , s : N → R+ be the functions defined
+by
+r (n) = f (n) · h(n)
+s(n) = g(n) · i(n)
+Prove that if f ∈ Ω(g) and h ∈ Ω(i), then r ∈ Ω(s).
+
+page 4 out of 5
+[6] 4. Show the tree constructed by Dijkstra’s algorithm for the graph in the following figure by
+darkening the edges of the graph that belong to the tree. Use vertex S as the source vertex.
+Label each edge of the tree by a number that indicates the order in which the edges were
+added to the tree (so the first edge added will be labeled “1”, the second edge added will be
+labeled “2”, etc). Fill in the table below with the cost associated with each node of the heap
+during each iteration of the algorithm.
+7
+9
+
+V2
+
+6
+
+1
+
+15
+
+3
+
+1
+V3
+
+5
+
+2
+
+V1
+
+S
+
+12
+
+V4
+3
+
+V5
+V6
+
+9
+
+5
+
+Iterations
+1
+S
+V1
+V2
+V3
+V4
+V5
+V6
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+page 5 out of 5
+[11] 5. You live on the edge of a forest and, due to a forest fire, you have been placed on evacuation
+alert. While you are waiting to hear whether or not you will need to leave your home, you
+decide to load your car with as many of your belongings as possible, so as not to lose them
+if your home catches fire. Suppose that the total available space in your car is S, that you
+own objects O1 , . . . , On , and that object Oi has value vali and takes space spacei in your
+car.
+[8] a. Describe a greedy algorithm that you can use to select the objects that you will load
+into your car, with the objective of maximizing the total value of the objects you are
+taking with you. Your algorithm does not need to always succeed at maximizing the
+total value of the objects selected, but it should make a good attempt at it.
+
+[3] b. Analyze the worst-case running time of your algorithm as a function of n.
+

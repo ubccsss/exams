@@ -1,0 +1,808 @@
+
+Author: Joanna
+Name:
+
+Student ID Number:
+
+Signature:
+
+CPSC 444 2006-07 (T2) Final Exam
+Department of Computer Science
+University of British Columbia
+J. McGrenere
+Exam Instructions (read carefully):
+1. Sign the first page of the exam with your signature in
+the space provided on the upper left immediately.
+
+Question
+
+Points
+Possible
+
+1
+
+10
+
+2
+
+4
+
+3
+
+4
+
+4
+
+6
+
+5. There are 12 questions on this exa, each worth the
+indicated number of points. Answer as many
+questions as you can.
+
+5
+
+6
+
+6. Keep your answers short and to the point (i.e.,
+avoid any unnecessary details).
+
+6
+
+12
+
+7
+
+4
+
+8
+
+3
+
+2. Continue reading the instructions, but do not open
+the exam booklet until you are told to do so by a
+proctor.
+3. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+4. The exam is closed book. There are no aids
+permitted, except for a simple non-programmable
+calculator.
+
+7. Write all of your answers on these pages. If you need
+more space, there is blank space at the end of the
+exam. Be sure to indicate when a question is
+continued, both on the page for that question and on
+the continuation page. Do not write on the back of
+any page.
+8. Interpret the exam questions as written. No questions
+will be answered by the proctor(s) during the exam
+period. State your assumptions if you are unsure
+about a question.
+
+9
+
+12
+
+10
+
+12
+
+9. You have 2.5 hours in which to work. Budget your
+time wisely.
+
+11
+
+12
+
+12
+
+15
+
+Total
+
+100
+
+10. No one will be permitted to enter the exam room after
+one half-hour from the start time, or to leave during
+the first half-hour of the exam. In addition, no one
+can leave the exam room during the last ten minutes
+of the exam.
+
+CPSC 444 2006-07 (T2)
+
+1 of 16
+
+Mark
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #1 [10 points total]: True/False
+For each question, circle one of either true or false. You do not have to provide a justification for the answer
+you have given. [1 pt each]
+(a) When the system image closely matches the system model, conceptual mismatches are rare.
+True
+
+False
+
+(b) Designing better error messages and feedback for the user helps to bridge the gulf of execution.
+True
+
+False
+
+(c) Contextual inquiry is an evaluation methodology that involves interviewing users.
+True
+
+False
+
+(d) The Apple Lisa was the first computer based on usability engineering that was a commercial success.
+True
+
+False
+
+(e) The most effective way to reduce nervousness when giving a presentation is to memorize the
+presentation.
+True
+
+False
+
+(f) In a Fitts’ Law model, the index of performance can be calculated two different ways (through a direct
+division of mean scores and through linear regression), which both yield the same result.
+True
+
+False
+
+(g) In an F-statistic, if for a given experiment the probability of achieving the resulting F-value came out to
+.079, you would be able to reject the null hypothesis assuming a confidence interval of 95%.
+True
+
+False
+
+(h) With respect to McGrath’s taxonomy of 8 different research strategies, McGrenere et al.’s study
+evaluating the prototype MSWord Personal would best be described as a “Field Study.”
+True
+
+False
+
+(i) According to Dmitry Nekrasovski, one of the biggest challenges of doing interaction design in industry is
+selling the value of this work to clients/others.
+True
+
+False
+
+(j) Wendy Mackay’s “Using Video to Support Interaction Design” showed that video was not particularly
+effective for brainstorming design ideas.
+True
+
+False
+
+CPSC 444 2006-07 (T2)
+
+2 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #2 [4 points total]: Presentation Skills
+(a) Based on what you learned in preparing for and in observing other student presentations (both in the
+design competition and the presentation tutorial), identify four distinct non-content-specific things
+that influence the effectiveness of a presentation. [4 pts]
+1.
+2.
+3.
+4.
+
+Question #3 [4 points total]: Empirical Laws
+(a) Explain with reference to an empirical law discussed in class why it is faster to execute a command to
+warm an item in the microwave for 33 seconds, than it is to execute a command for 30 seconds, for the
+given microwave touch keypad shown below. Make sure to name the law and describe the law in plain
+language. [4 pts]
+
+7
+
+8
+
+9
+
+4
+
+5
+
+6
+
+1
+
+2
+
+3
+
+0
+
+START
+
+Name the relevant empirical law: _______________________________
+Describe the law in plain language (you may provide the formula, but it is not necessary and this does
+not negate your need to describe the law in plain language):
+
+Explain why it is faster to use 33 seconds than 30 seconds:
+
+CPSC 444 2006-07 (T2)
+
+3 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #4 [6 points total]: User Abilities
+You are redesigning the project below, involving a large-screen display, to be installed at the downtown
+headquarters of a bank, for the general public to experience the “joy” of real-time stock trading.
+48 popular stocks and their prices are displayed on a 4 x 3 meter screen in real-time. Customers stand 2-3
+meters away and use a handheld device to buy and sell stocks.
+A section of the prototype display is shown below. When a price goes up (above start-of-day price), it is
+displayed in green; when it goes down (below start-of-day price), it turns red. Everything is on a vivid blue
+background, and all colours have the same brightness.
+
+Stock symbol
+
+SIRI
+
+MSFT
+
+INTC
+
+CSCO
+
+Current price
+
+6.90
+
+39.81
+
+23.01
+
+19.80
+
+dn 2.11
+
+up 0.29
+
+dn 0.47
+
+up 0.07
+
+ORCL
+
+SUNW
+
+CMGI
+
+AMAT
+
+13.21
+
+5.30
+
+2.34
+
+17.27
+
+up 0.15
+
+dn 0.01
+
+dn 0.34
+
+dn 0.29
+
+Price change
+since trading
+opened today
+
+Black text
+Green text
+Red text
+
+Blue background
+JDSU
+
+SCON
+
+BIOM
+
+YHOO
+
+3.08
+
+1.17
+
+2.54
+
+37.05
+
+up 0.006
+
+up 0.16
+
+dn 0.48
+
+dn 0.03
+
+(whole display)
+Actual size is an 8×6 grid (4×3 m)
+
+Users must be able to recognize price changes and make trades quickly. It is particularly important to know
+when a price is up for the day, and it suddenly goes down below the start-of-day price, and vice versa. It is
+also helpful to know prices that are way up or down compared to their start-of-day price. Unfortunately, the
+current design does not adequately draw the user’s attention to the price changes.
+(a) When a price changes, the text label changes between “up” and “dn”. Drawing from your knowledge of
+visual perception, give one reason why this change doesn’t draw the user’s attention. [1 pts]
+
+(b) Price changes are also shown in different colours, and we learned that colour changes can be effective for
+drawing the user’s attention. However, this design suffers from several problems related to the use of
+colour. Identify two of them. [2 pts]
+
+CPSC 444 2006-07 (T2)
+
+4 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #4 (continued)
+(c) Propose a better way of indicating price changes to the user, taking into account the trade-offs against
+obtrusiveness and annoyance to the user. Unfortunately, because the display is in a public area, sound
+notification isn’t feasible. [3 pts]
+
+Question #5 [6 points total]: Design and Evaluation in Ubiquitous Computing
+(a) Briefly describe three ways in which evaluating a mobile UbiComp application (such as the one you
+developed in your project) in a usability lab study is more challenging than evaluating a desktop
+application (such as a word processor or spreadsheet) in the lab. [3 pts]
+
+(b) Briefly describe three main challenges inherent in designing and prototyping an application for a smart
+phone as compared to a desktop application. [3 pts]
+
+CPSC 444 2006-07 (T2)
+
+5 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #6 [12 points total]: HCI Research – CSCW
+(a) Identify the two primary dimensions of groupware and each of their subcomponents by filling out the
+following diagram. In each quadrant provide 1 example of a system that is appropriate to that quadrant.
+You may use generic system names (e.g., email) or specific system names (e.g., Microsoft Outlook). [5
+pts]
+
+Dimension 2: _________________________.
+
+B: ________________
+
+D: _________________________
+
+A:________________
+
+Dimension 1: _________________________
+
+C: _________________________
+
+(b) Guest lecturer Kori Inkpen described a body of research that is focused on one of these quadrants. Which
+is it? [1 pt]
+
+CPSC 444 2006-07 (T2)
+
+6 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #6 (continued)
+(c) In "The Mechanics of Collaboration" Gutwin and Greenberg discuss several mechanics which affect
+collaboration. One of these is coordination of action.
+Choose one of the technologies that your 444 team used to support collaboration during your group
+project (e.g. MSN Messenger, Google Documents, emailing Word documents back and forth, cell phone
+communication, etc.) and discuss how well it worked (or didn't work) for coordination of action in
+terms of each of the authors' three evaluation criteria (effectiveness, efficiency, satisfaction). [6 pts]
+Collaboration technology used: _________________________
+Coordination of action – effectiveness:
+
+Coordination of action – efficiency:
+
+Coordination of action – satisfaction:
+
+CPSC 444 2006-07 (T2)
+
+7 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #7 [4 points total]: HCI Research – Information Visualization
+(a) According to guest lecturer Tamara Munzner, what is the current thinking in the information
+visualization community on the usability of 2D versus 3D visualization techniques? [2 pts]
+
+(b) Tamara Munzner described a tradeoff between information density and getting lost. What is that
+tradeoff? [2 pts]
+
+Question #8 [3 points total]: History of HCI
+Describe Alan Kay’s role in designing what is known today as the personal computer. In addition, explain
+how designing for children factored into his philosophy of design. [3 pts]
+
+CPSC 444 2006-07 (T2)
+
+8 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #9 [12 points total]: Design & Evaluation Theory
+(a) Which type of validity is best preserved and is least preserved for each of qualitative field studies and
+controlled experimental studies. Justify each of your answers in one short sentence/phrase. [6 pts]
+Qualitative field studies:
+Best preserved: _________________________
+
+Least preserved: ________________________
+
+Controlled experimental studies:
+Best preserved: _________________________
+
+Least preserved: ________________________
+
+(b) What is the fundamental message of McGrath’s article on “Methodology Matters”? You need to refer to
+generalizability, precision, and realism in your answer. [4 pts]
+
+(c) What is the practical implication of this for HCI researchers? [2 pts]
+
+CPSC 444 2006-07 (T2)
+
+9 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #10 [12 points total]: Field Methods
+Imagine that you are consulting for a company that is designing the "electronic classroom of the future."
+Before designing this new technology, you have recommended that they gain a comprehensive and clear
+understanding of how current e-classrooms operate – both in terms of infrastructure (whiteboards, furniture,
+electronic projection etc.) and human interaction (teachers and students). You have been hired to conduct an
+initial exploratory field study to gather information for your client.
+1. Provide two focal points for your initial study, and briefly justify each one. [6 pts]
+2. Provide three questions related to each focal point (8 questions in total). [6 pts]
+focal point #1:
+justification:
+
+question 1:
+
+question 2:
+
+question 3:
+
+focal point #2:
+justification:
+
+question 1:
+
+question 2:
+
+question 3:
+
+CPSC 444 2006-07 (T2)
+
+10 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #11 [12 points total]: Statistical Analysis
+Buggy Inc. is a company that specializes in the development of visual debugging interfaces for large,
+complex software engineering projects. They recently developed a software package (called Bug-free) that
+uses an innovative scheme to highlight syntax errors in code. Because their package has the exact same
+functionality as a software package sold by one of their competitors (called Debugger), they ran a
+controlled experiment to see which of the two software packages is more usable. They hoped to show
+that their package is more usable than their competitor’s for both novices and experts, but suspected it may
+only be the case for novices. The study compared how rapidly users can find syntactic errors in their code
+and how quickly their interface allows them to make corrections.
+2 Independent variables: (1) software package (Bug-free, Debugger; within subjects); (2) user expertise
+(novice, expert; between subjects)
+2 Dependent variables: (1) time to find errors; (2) time to fix errors
+Study design: 10 novices and 10 experts each completed 5 tasks in each of the two software packages. (The
+order of seeing the software packages was fully counterbalanced.)
+Results: These two
+graphs show the
+mean
+completion
+times (across all 5
+tasks)
+for
+each
+dependent measure:
+
+Mean tim e to fix errors (s)
+
+Mean tim e to find errors (s)
+750
+
+750
+
+700
+
+700
+
+650
+
+650
+
+600
+
+expert
+novice
+
+550
+
+600
+expert
+
+550
+
+novice
+
+500
+
+500
+Bug-free
+
+Bug-free
+
+Debugger
+
+Debugger
+
+A 2-way ANOVA (software package X expertise) was run for each of the dependent measures:
+Time to find errors
+
+ANOVA
+Source of Variation
+Sample (expertise)
+Columns (package)
+Interaction
+Within
+Total
+
+SS
+33524.1
+92929.6
+518.4
+377851
+
+df
+1
+1
+1
+36
+
+504823.1
+
+MS
+33524.1
+92929.6
+518.4
+10495.86
+
+F
+3.19403
+8.853928
+0.049391
+
+P-value
+0.08233
+0.005199
+0.825383
+
+F crit
+4.113165
+4.113165
+4.113165
+
+MS
+49773.03
+5880.625
+442.225
+9539.169
+
+F
+5.217752
+0.616471
+0.046359
+
+P-value
+0.028358
+0.437498
+0.83074
+
+F crit
+4.113165
+4.113165
+4.113165
+
+39
+
+Time to fix errors
+
+ANOVA
+Source of Variation
+Sample (expertise)
+Columns (package)
+Interaction
+Within
+Total
+
+SS
+49773.03
+5880.625
+442.225
+343410.1
+399506
+
+df
+1
+1
+1
+36
+39
+
+Provide you answer on following page.
+
+NO CREDIT GIVEN FOR ANYTHING WRITTEN ON THIS PAGE.
+CPSC 444 2006-07 (T2)
+
+11 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #11 (continued)
+(a) Your job is to explain and interpret these results. For each dependent measure state all the effects tested
+and which resulted in a significant finding. You must state your assumed confidence level. [6 pts]
+
+(b) Next, interpret these results by explaining what Buggy Inc. can conclude from this study, both about the
+software packages and about user expertise? [6 pts]
+
+CPSC 444 2006-07 (T2)
+
+12 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #12 [15 points total]: Design Process
+Together with a few friends, you’ve come up with what you believe is a really neat and novel design idea,
+namely a public electronic message board. Current message boards (in places like the UBC sub and bus
+loop) are a mess, and you think it would be easier if people could post to them in person, perhaps using a
+cellphone or PDA as an input device, and/or remotely through a web interface. The goal is to design an
+easy to use large screen public message board.
+You need to plan the process you will take, to get from the general design idea (just described) to a fully
+functional prototype approved by all critical stakeholders. Given that you have approximately 3 months for
+this task and a small team who are all trained in HCI techniques, you decide to take a user-centered
+design approach.
+
+On the following page, diagram 6-10 steps of a possible design process that encompasses the following:
+• Include the points at which you propose to
+include users, a justification for doing so, and how;
+
+Step i:
+[description of step]
+
+• Indicate with arrows where you are likely to iterate
+on stages in the design, as demonstrated in diagram
+at right.
+• For each step, state the primary activity of that step
+(e.g. “prototype functional flow” or “evaluate
+appearance prototype”), AND describe the activity
+and its objectives in more detail (one sentence),
+AND state the output of that step.
+• For prototyping and evaluation steps, the activity
+description should include the general type of
+prototype you would expect to build or the type of
+study you’d conduct, based on the information
+you expect to need at that point.
+
+output of step i
+
+Iterate
+
+Step i+1
+[description of step]
+output of step i+1
+
+output of step i+2
+
+Step i+2
+[description of step]
+
+There is no single correct answer to this question, although there are some key steps that should not be
+omitted. Sequencing and to some degree which steps are included can vary (and does, in the real world),
+depending on constraints and the nature of the problem. Credit will be given for reasonable and well-justified
+answers; and for completeness of the overall process. [15 pts]
+
+Provide you answer on following page.
+
+NO CREDIT GIVEN FOR ANYTHING WRITTEN ON THIS PAGE.
+
+CPSC 444 2006-07 (T2)
+
+13 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #12 (continued)
+Diagram your design process on this page.
+
+CPSC 444 2006-07 (T2)
+
+14 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+Blank page for extra work
+
+CPSC 444 2006-07 (T2)
+
+15 of 16
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+Blank page for extra work
+
+CPSC 444 2006-07 (T2)
+
+16 of 16
+
+Final Exam (2.5 hours)
+

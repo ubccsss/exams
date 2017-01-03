@@ -1,0 +1,306 @@
+
+CPSC 121 Midterm 2
+Monday, November 7th, 2011
+Name:
+Student ID:
+Signature:
+Your signature acknowledges your understanding of and agreement to the rules below.
+Question Marks
+– You have 110 minutes to write the 13 questions on this examination. A total of 80 marks are available.
+
+1
+
+– You may have as an aide up to 3 textbooks and a 3 inch stack of
+paper notes and nothing else. No electronic devices allowed; so,
+no cell phones and no calculators.
+
+3
+
+– Keep your answers short. If you run out of space for a question,
+you have likely written too much.
+
+6
+
+2
+4
+5
+7
+
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you plan your use of time on the exam.
+– Clearly indicate your answer to each problem. If your answer is
+not in the provided blank, then indicate where the answer is, and
+at the answer’s location indicate the question it addresses.
+– Good luck!
+
+8
+9
+10
+11
+12
+13
+Total
+
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her UBC card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 14
+This page left intentionally (almost) blank.
+If you write answers here (or anywhere other than their intended location), mark them clearly,
+indicate which question they respond to, and indicate at the provided solution blank for that
+question where you wrote your solution.
+
+page 3 out of 14
+[6] 1. Prove or disprove each of the following statements. (Your proof/disproof should be very
+brief!)
+[3] a. ∀x ∈ Z, (x > 18 ∧ x < 22 ∧ Odd(x)) → Prime(x).
+The statement is (circle one):
+Proof/Disproof:
+
+TRUE
+
+FALSE
+
+[3] b. ∀x ∈ Z, (x > 2 ∧ x < 6 ∧ Odd(x)) → Prime(x).
+The statement is (circle one):
+Proof/Disproof:
+
+TRUE
+
+FALSE
+
+[7] 2. Consider the following theorem: Any real number can be added to some real number to
+equal 121.
+[2] a. Translate this theorem into predicate logic.
+
+[5] b. Prove the theorem. (Your proof should be in the style we have learned in CPSC 121,
+though it will likely be brief.)
+
+page 4 out of 14
+[3] 3. Move the negation on the following statement “inward” as much as possible. When you’re
+done, negation(s) should appear only on predicates—e.g., ∼ M (a, b) or b 6= c—and not on
+quantifiers or parenthesized expressions.
+∼ ∃a ∈ Z, Foo(a) ∧ (∀b ∈ Z+ , ab < a + b).
+
+[3] 4. Apply the contrapositive equivalence rule to the following statement. Again, in your result,
+move all negations inward as much as possible.
+∀x ∈ D, (∃y ∈ E, P (x, y) ∧ Q(y)) → R(x).
+
+page 5 out of 14
+[8] 5. Let V be the set of voters. Let C be the set of candidates. Let Prefers(v, c1 , c2 ) mean voter
+v prefers candidate c1 to candidate c2 . Let Beats(c1 , c2 ) mean candidate c1 beats candidate
+c2 in the election. (Do not assume Prefers(v, c, c) or Beats(c, c) is always false for any
+voter v and candidate c.)
+[4] a. Translate this statement to predicate logic: If every voter prefers one candidate to a
+second different candidate, then the second one cannot beat the first in the election.
+
+[4] b. Define a predicate Mid(v, c) meaning voter v prefers some other candidate to c but
+also prefers c to some third candidate.
+
+Mid(v, c) ≡
+
+[2] 6. In proving the following theorem with direct proof techniques, you would choose values for
+y and z. Which of a, b, and c can y’s and z’s values depend on?
+Theorem: ∀a ∈ A, ∀b ∈ B, ∃y ∈ Y, P (a, b, y)∧∀c ∈ C, (Q(y, c) → ∃z ∈ Z, R(b, c, z, y)).
+y’s value can depend on: (circle ALL correct answers)
+
+a
+
+b
+
+c
+
+NONE OF THESE
+
+z’s value can depend on: (circle ALL correct answers)
+
+a
+
+b
+
+c
+
+NONE OF THESE
+
+page 6 out of 14
+[5] 7. For each of the following theorems, write the letter of EVERY method from the following
+list that could be a promising FIRST step in proving the theorem.
+List of methods:
+(A) Witness proof (constructive/non-constructive proof of existence)
+(B) Exhaustive proof.
+(C) “Without loss of generality” proof (generalizing from the generic particular)
+(D) Antecedent assumption.
+(E) Proof by contradiction.
+(∀x ∈ D, P (x)) → q
+∀z ∈ R+ , ∃y ∈ R, y < z ∧ M (y, z).
+∃q ∈ S, K(q)∨ ∼ R(q).
+∀x ∈ C, ∀y ∈ D, A(x, y), where C is the set of students in CPSC 121 this term.
+
+[6] 8. For each of the following theorems, indicate the most complete “direct” proof approach—no
+proof by contradiction, no use of logical equivalences—that you can by writing the letters
+of the techniques from the previous problem in the order you would use them. Ignore any
+blanks you don’t need.
+So, for a proof that starts as a witness proof, then uses “without loss of generality” twice,
+and then antecedent assumption: write A in blank #1, C in blanks #2 and #3, D in blank #4,
+and nothing in blank #5.
+Theorem: ∀z ∈ Z+ , ∃p ∈ S, Q(z, p).
+Strategy steps: #1
+
+#2
+
+#3
+
+#4
+
+#5
+
+Theorem: ∀x ∈ Z, (∃y ∈ Z, Froogly(x, y)) → (∃z ∈ Z+ , Froogly(x, z) → x > z).
+Strategy steps: #1
+
+#2
+
+#3
+
+#4
+
+#5
+
+Theorem: If the product of two integers has the “silly nonsense words” property, then the
+two integers are flibbergybooooodifilcullayploo.
+Strategy steps: #1
+
+#2
+
+#3
+
+#4
+
+#5
+
+page 7 out of 14
+[4] 9. After a traumatic head injury—received while working as an international logic spy—you
+discover the following partial proof on the back of your hand. Write out the theorem the
+proof addresses in as much detail as possible.
+Without loss of generality, let x be a positive integer. We now consider the
+contrapositive of the remaining theorem. Assume R(x) holds. Let y = 5x. We
+now show that S(x, y) holds but S(y, x) does not. We proceed by. . . [further
+notes obscured by either blood or ketchup]
+
+[4] 10. We used a multiplexer to build a latch, a circuit capable of loading and storing a value.
+Consider the following proposed design for a different latch. The latch’s intended semantics
+are: (1) When G is 1, the latch loads a new value from D (outputting that value). (2) When
+G is 0 the latch stores the negation of the value it loaded from D.
+
+Does this circuit work correctly? Briefly justify your answer.
+
+page 8 out of 14
+[13] 11. Consider the following DFA:
+
+1
+
+1
+3
+
+1
+0
+
+0
+0
+
+2
+
+0
+
+1
+
+0
+
+1
+
+[2] a. Circle all of the following inputs that will be accepted by this DFA:
+the empty string
+
+0100
+
+1011000
+
+00
+
+1
+
+000000
+
+0000001
+
+[3] b. Clearly and concisely describe the language accepted by this DFA.
+
+[2] c. Fill in the following truth table indicating what the next state of the DFA should be
+after receiving an input in state 2. For this and subsequent parts, s0 is the first (leftmost) bit of the state number. s1 is the second (right-most) bit of the state number.
+input
+1
+0
+
+s0
+
+s1
+
+page 9 out of 14
+[4] d. Complete the following circuit implementing this DFA. Note that we have implemented circuits for states 0 and 1; you need only complete states 2 and 3.
+
+[2] e. Finally design a circuit that, given the state of the DFA as input, determines whether
+the DFA is in an accepting state.
+
+page 10 out of 14
+[6] 12. Consider the following sequential circuit that stores an unsigned 3-bit value:
+
+As shown, the circuit stores the number 4, with b0 = 1, b1 = 0, b2 = 0. Complete the
+following table indicating what state the circuit will be in for the next three clock ticks. The
+table shows how the circuit reached the point where it stores 4, starting from storing 0.
+After 0 ticks:
+After 1 tick:
+After 2 ticks:
+After 3 ticks:
+After 4 ticks:
+After 5 ticks:
+After 6 ticks:
+
+0
+1
+2
+4
+
+page 11 out of 14
+[13] 13. Prove the following theorem: If an integer greater than 1 divides two positive integers a and
+b, then a and b both divide some integer less than ab (the product of a and b).
+Your proof should be in the style we have learned in CPSC 121.
+Reminder: p divides q exactly when there is an integer k such that pk = q.
+
+page 12 out of 14
+This page left intentionally (almost) blank.
+If you write answers here (or anywhere other than their intended location), mark them clearly,
+indicate which question they respond to, and indicate at the provided solution blank for that
+question where you wrote your solution.
+
+page 13 out of 14
+This page left intentionally (almost) blank.
+If you write answers here (or anywhere other than their intended location), mark them clearly,
+indicate which question they respond to, and indicate at the provided solution blank for that
+question where you wrote your solution.
+
+page 14 out of 14
+This page left intentionally (almost) blank.
+If you write answers here (or anywhere other than their intended location), mark them clearly,
+indicate which question they respond to, and indicate at the provided solution blank for that
+question where you wrote your solution.
+

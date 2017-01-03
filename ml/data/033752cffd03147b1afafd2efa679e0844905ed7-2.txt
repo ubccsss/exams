@@ -1,0 +1,748 @@
+
+CPSC 340 Final (Fall 2015)
+
+Name:
+
+Student Number:
+
+Please enter your information above, turn off cellphones, space yourselves out throughout the room, and
+wait until the official start of the exam to begin. You can raise your hand to ask a question, and please
+look up occasionally in case there are clarifications written on the projector (the time remaining will also be
+written on the projector). You are welcome to (quietly) leave early if you finish early.
+The final consists of 9 questions, and they will all be equally weighted in the marking scheme. Note that
+some question have multiple parts, written as (a), (b), (c) and (d). Clearly mark where you are answering
+each part, show your work/reasoning for each part, and make sure to check that you answered all parts
+before handing in your final.
+Good luck!
+
+1
+
+Training/Validation/Testing
+
+You are asked by a client to build a system that solves a binary classification problem. They give you 3000
+training examples and a set of 100 features for each example. You have been assured that the examples have
+been generated in way that makes them IID, and the examples have been given to you sorted based on the
+values of the first feature. The client not only wants an accurate model, but they want an estimate of the
+accuracy of the final model.
+Assume that the data is stored in 3000 by 100 matrix X, and the labels are stored in a 3000 by 1 vector y.
+As in the assignments, assume that you have a ‘model’ function that depends on a parameter ‘k’ with the
+following interface:
+• model = train(X,y,k);
+
+% Train model on {X, y} with parameter k
+
+• yhat = predict(model,Xhat);
+
+% Predicts using the model on Xhat.
+
+Assume that k can take any integer value from 1 to 10.
+Give pseudo-code for a training/validation/testing procedure that:
+(a) Chooses a good value of ‘k’.
+(b) Reports an unbiased estimate of the accuracy of the final model.
+
+1
+
+Answer:
+Since the examples were sorted, you first need to randomize the order of the examples. One way to do this
+is to place the rows of X in a random order, re-ordering y using the same order.
+Next split the examples into a training, validation, and testing set. For example, you could use the first
+1000 random examples as the training set (Xtrain, ytrain), the next 1000 fas the validation set (Xvalidate,
+yvalidate), and the final 1000 as the testing set (Xtest, ytest). If you did not place the examples in a random
+order, you could choose these three sets randomly from the examples, but ensuring that there is no overlap
+between the three sets.
+For each value of k from 1 to 10, perform the following:
+• model = train(Xtrain,ytrain,k).
+• yhat = predict(model,Xvalidate).
+• err(k)= sum of elements where yhat does not equal yvalidate.
+Set k to be the minimum of err(k) across k.
+(It’s ok if they used cross-validation instead of a training/validation set.)
+To report the estimated accuracy of the final model:
+• yhat = predict(model,Xtest).
+• accuracy = sum of elements where yhat equals ytest, divided by length of ytest.
+
+2
+
+2
+
+KNN, Naive Bayes, and Softmax
+
+Consider the dataset below, which has 10 training examples and 2 features:
+ 
+
+
+1
+0 1
+1
+1 0
+ 
+
+
+1
+1 0
+ 
+
+
+2
+1 1
+ 
+
+
+2
+1 1
+ 
+
+
+X=
+ , y = 2 .
+0
+0
+ 
+
+
+3
+1 0
+ 
+
+
+3
+1 0
+ 
+
+
+3
+1 1
+3
+1 0
+Suppose that you want to classify the following test example:
+
+
+x̂ = 1 1 .
+(a) What class label would we assign to the test example if we used a k-nearest neighours
+classifier, with k = 3 and the Euclidean distance measure?
+(b) What class label would we assign to the test example under a naive Bayes model? (Show
+your work.)
+(c) Suppose we fit a multi-class linear classifier using the softmax loss, and we obtain the
+following weight matrix:
+
+
++2 +2 +3
+W =
+−1 +2 −1
+Under this model, what class label would we assign to the test example? (Show your work.)
+
+3
+
+Answer:
+(a) There are three training examples that have a distance of zero to the test example. Two out of three of
+them have the label ‘2’, so we would classify the example as a ‘2’.
+(b) By counting we have
+p(y = 1) = 3/10
+p(y = 2) = 3/10
+p(y = 3) = 4/10
+p(x1 = 1|y = 1) = 2/3
+p(x2 = 1|y = 1) = 1/3
+p(x1 = 1|y = 2) = 2/3
+p(x2 = 1|y = 2) = 2/3
+p(x1 = 1|y = 3) = 1
+p(x2 = 1|y = 3) = 1/4.
+Putting these together we get
+p(y = 1|x1 = 1, x2 = 1) ∝ p(y = 1)p(x1 = 1|y = 1)p(x2 = 1|y = 1) = (3/10)(2/3)(1/3) = 0.06̄
+p(y = 2|x1 = 1, x2 = 1) ∝ p(y = 2)p(x1 = 1|y = 2)p(x2 = 1|y = 2) = (3/10)(2/3)(2/3) = 0.13̄
+p(y = 3|x1 = 1, x2 = 1) ∝ p(y = 3)p(x1 = 1|y = 3)p(x2 = 1|y = 3) = (4/10)(1)(1/4) = 0.10
+
+So we would classify the example as a ‘2’.
+(c) This model bases its decision of maximizing the inner-product, wcT x̂.
+For class 1 we have
+w1T x̂ = (+2)1 + (−1)1 = 1.
+For class 2 we have
+w2T x̂ = (+2)1 + (+2)1 = 4.
+For class 3 we have
+w3T x̂ = (+3)1 + (−1)1 = 2.
+So this model would also predict ‘2’.
+
+4
+
+3
+
+Parametric vs. Non-Parametric
+
+Make a table with a column labeled ‘parametric’ and a column labeled ‘non-parametric’. Place each of the
+following methods into one of the columns:
+• Mean of a list of numbers.
+• Scatterplot.
+• Depth-10 decision trees.
+• 3-nearest neighbours.
+• Naive Bayes with 1000 variables.
+• Random forests with 10 random trees of depth 10.
+• K-means with 5 means.
+• Density-based clustering.
+• Linear regression with linear basis.
+• Linear regression with RBF basis.
+• Principal component analysis.
+• Non-negative matrix factorization.
+• Sammon mapping.
+• Neural networks.
+
+5
+
+Parametric
+Mean of a list of numbers
+Depth-10 decision trees
+Naive Bayes with 1000 variables
+Random forests with 10 random trees of depth 10
+K-means with 5 means
+Linear regression with linear basis
+Principal component analysis
+Non-negative matrix factorization
+Neural network
+
+Non-parametric
+Scatterplot
+3-nearest neighbours
+
+Density-based clustering
+Linear regression with RBF basis
+Sammon mapping
+
+6
+
+4
+
+L1-Regularized Latent-Factor Model
+
+We have a matrix X, where we have observed a subset of its individual elements. Let R be the set of indices
+(i, j) where we have observed the element xij . We want to build a model that predicts the missing entries,
+so we use a latent-factor model with an L1-regularizer on the coefficients W and a separate L2-regularizer
+on the coefficients Z,
+argmin
+
+
+d
+n
+X 1
+X
+X
+
+
+T
+2
+(xij − wj zi ) + λW
+[kwj k1 ] + λZ
+kzi k2 ,
+2
+j=1
+i=1
+
+W ∈Rk×d ,Z∈Rn×k (i,j)∈R
+
+where the regularization parameters satisfy λW > 0 and λZ > 0.
+(a) What is the affect of λW on the sparsity of the parameters W and Z? What is the effect of
+λZ on the sparsity of W and Z?
+(b) What is the affect of λZ on the two parts of the fundamental trade-off in machine learning?
+What is the effect of k on the two parts?
+(c) Would the answers to (b) change if λW = 0?
+(d) Suppose each element of the matrix X is either +1 or −1 and our goal is to build a model
+that makes the sign of wjT zi match the sign of xij . Write down a (continuous) objective function
+that would be more suitable.
+
+7
+
+Answer:
+(a)
+1. As λW increases, W will become more sparse.
+2. The sparsity of the matrix Z is not affected by λW .
+3. The sparsity of W and Z are not affected by λZ .
+(b)
+1. As λW increases, there is a heavier bias towards zero and the training error will go up. However, the
+training error will become a better approximation of the test error
+2. As k increases, the model becomes more complicated so the training error will go down. However, the
+training error will become a worse approximation of the test error.
+(c)
+1. The effect of k would stay the same, since increasing it still allows more complicated models.
+2. If λZ = 0, then we have no constraints on Z. This means we could cancel out any decrease in W by
+increasing Z. Thus, λW no longer directly affects the fundamental trade-off.
+(d)
+In this setting, it would make more sense to do something like the logistic loss,
+argmin
+
+X 
+
+W ∈Rk×d ,Z∈Rn×k (i,j)∈R
+
+k
+n
+X
+X
+
+
+
+log(1 + exp(−xij wjT zi ) + λW
+[kwj k1 ] + λZ
+kzi k2 ,
+j=1
+
+but the regularizers can stay the same.
+
+8
+
+i=1
+
+5
+
+Label Propagation
+
+Consider a transductive learning setting where we have a set of labelled examples yi ∈ {−1, +1} for i ranging
+from 1 to n. We also have a set of t unlabeled examples that we would like to label. While we do not have
+features for any examples, we are given weights wij indicating how strongly we prefer unlabeled example i
+to have the same label as labeled example j, and another set of weights vij indicating how strongly we prefer
+unlabeled example i to have the same label as unlabeled example j. We’ll assume that vij = vji and vii = 0.
+To find the labels of the unlabeled examples, a standard label propagation objective is
+n
+t
+t
+t
+t
+X
+ 1X
+
+ λX
+1 XX
+ŷ 2 .
+wij (yj − ŷi )2 +
+vij (ŷj − ŷi )2 +
+2 i=1 j=i+1
+2 i=1 i
+ŷ1 ∈R,ŷ2 ∈R,...,ŷt ∈R 2 j=1 i=1
+
+argmin
+
+The regularization term encourages the predictions to be close to 0, so that the model becomes less confident
+in the labels of examples where we have to propagate labels quite far to reach them. Although we can fit
+this model with gradient descent, a standard approach to fitting it is by cycling through each of the ŷi and
+updating them to their optimal value given the values of the remaining ŷj for j 6= i.
+(a) Derive the partial derivative of this objective function with respect to a particular ŷi .
+(b) Derive the optimal value of a particular ŷi , given the values of the remaining ŷj for j 6= i.
+(c) Describe a procedure for selecting a good value of λ.
+
+9
+
+Answer:
+(a) We have that
+n
+t
+X
+X
+∂
+=
+[−wij (yj − ŷi )] +
+[−vij (ŷj − ŷi )] + λŷi ,
+∂ ŷi
+j=1
+j=1
+
+where we’ve used that (ŷi − ŷi ) = 0 and the symmetry vij = vji .
+(b) We notice that this is a leasts squares problem in disguise. Equating the partial derivative to zero and
+moving terms not depending on ŷi to one side we have
+n
+X
+j=1
+
+[wij ŷi ] +
+
+t
+n
+t
+X
+X
+X
+[vij ŷi ] + λŷi =
+[wij yj ] +
+[vij ŷj ].
+j=1
+
+j=1
+
+j=1
+
+Taking ŷi outside the sums on the right and then solving for it gives
+Pn
+Pt
+j=1 [wij yj ] +
+j=1 [vij ŷj ]
+ŷi = Pn
+Pt
+j=1 [wij ] +
+j=1 [vij ] + λ
+(Basically, we take a weighted combination of our neighbours and normalize by the weights plus some extra
+amount λ that moves ŷi closer to zero.)
+(c) To select λ, you could use part of the labeled data as a validation set or you could do cross-validation
+with the labeled set. You would then do label propagation with this bigger set of unlabeled examples and
+choose the λ that best predicts the labeled examples that were moved to the unlabeled set.
+
+10
+
+6
+
+Outlierness Ratio
+
+In class we defined an ‘outlierness’ ratio of an example xi ∈ Rd for i = 1 to n. This ratio depends on the
+k-nearest neighbours, Nk (xi ), and the average distance to these k-nearest neighbours
+Dk (xi ) =
+
+1
+k
+
+X
+
+kxi − xj k.
+
+j∈Nk (xi )
+
+Given these definitions, the ‘outlierness’ ratio is defined by the quantity
+O(xi ) =
+
+1
+k
+
+P
+
+Dk (xi )
+,
+j∈Nk (xi ) Dk (xj )
+
+which roughly measures whether xi is further away from its neighbours than its neighbours are from their
+neighbours (we’ll assume that no points have the exact same distance from each other).
+(a) If we want to compute this measure for a single example xi , what is the cost of computing
+this measure in O() notation in terms of n, d, and k (give your reasoning)?
+(b) Consider the case where you don’t have explicit xi values, but you instead have an undirected graph defined on the examples, and each edge in the graph has a similarity score in the
+range (0, 1] between examples. Describe how you could define something like the outlierness
+ratio in this setting. (You can assume that the graph is connected, but you should not assume
+that each point has at least k neighbours in the graph.)
+
+11
+
+Answer:
+(a) Computing the distance between two points costs O(d). Computing the distance of xi to each of the n
+points thus costs O(nd). Given these distances, we can find the k-nearest neighbours in O(n) using the select
+algorithm and we can compute Dk (xi ) given their distances in O(k). Since k ≤ n, we so far have O(nd).
+We next need to find the nearest neighbours and compute Dk (xj ) for each of the k neighbours. Following
+the reasoning above, this costs O(ndk). Given these values we can compute O(xi ) in O(k) so the total cost
+is O(ndk).
+(b) There are many possible answers here, but they need to address two issues.
+The first is how to use a similarity score rather than a distance score. There are many possible ways to
+address this, but an obvious one is to take the inverse of the similarity score (highly-similar objects have a
+distance of 1, dissimilar objects get larger distances). Another obvious one would be to change the definition
+of the outlierness socre to directly work with similiarites, maybe doing something like
+P
+1
+j∈Nk (xj ) Sk (xj )
+k
+,
+O(i) =
+Sk (i)
+where Sk (i) is the average similarity of i to its k-nearest neighbours.
+The second issue is how to define the k-nearest neighbours, and the similarity/distance of objects not directly
+connected in the graph.
+If you convert to distances, an obvious way is to approximate the geodesic distance is by finding the shortest
+paths in the graph. You could then use the k-nearest neighbours according to the geodesic distance to
+compute the outlierness ratio.
+If you modify the outlierness score to use similarities, then a logical approach might be to find the shortest
+path where you multiply the similarities along the path (rather than adding distances). You could then use
+the k−nearest neighbours according to this similarity to compute the outlierness ratio.
+
+12
+
+7
+
+Principal Component Analysis
+
+Consider the following dataset, containing 5 examples with 2 features each:
+x1
+-2
+-1
+0
+1
+2
+
+x2
+-1
+0
+1
+2
+3
+
+(a) What is the first principal component?
+(b) What is the (L2-norm) reconstruction error of the point (3,3)? (Show your work.)
+(c) What is the (L2-norm) reconstruction error of the point (3,4)? (Show your work.)
+
+13
+
+Answer:
+(a) We do not need to center the first variable but we need to center the second one. The mean of the second
+variable is 1 so the centered data looks like this:
+x1
+-2
+-1
+0
+1
+2
+
+x2
+-2
+-1
+0
+1
+2
+
+We see that all the centered variables lie along the x2 = x1 . The direction of this line is p
+(1, 1), butpsince we
+normalize theqprincipal components to have a distance of one the first PC is W1 = (1/ (2), (1/ (2))) so
+p
+√
+√
+√
+that W1 = (1/ 2)2 + (1/ 2)2 = 1/2 + 1/2 = 1.
+(b) To get the low-dimensional representation, we first subtract the means and then multiply by Wc ,
+√
+√
+√
+z = (3 − 0)/ 2 + (3 − 1)/ 2 = 5/ 2.
+To go back to the original space, we multiply this by Wc and add back the means:
+√
+√
+5
+x̂ = √ (1/ 2, 1/ 2) + (0, 1) = (5/2, 7/2) = (2.5, 3.5),
+2
+so the reconstruction error is
+p
+p
+√
+(2.5 − 3)2 + (3 − 3.5)2 = 1/4 + 1/4 = 1/ 2.
+(c)
+
+√
+√
+√
+z = (3 − 0)/ 2 + (4 − 1)/ 2 = 6/ 2.
+√
+√
+6
+x̂ = √ (1/ 2, 1/ 2) + (0, 1) = (6/2, 8/2) = (3, 4),
+2
+
+which is the same as the original point so the reconstruction error is 0.
+
+14
+
+8
+
+Poisson Regression
+
+Suppose we have a set of training examples (xi , yi ) and we want to fit a linear model of the form yi ≈ wT xi .
+However, we do not want to use the squared error since the values in yi represents counts (like ‘number of
+Facebook likes’). So instead we assume that yi follows a Poisson distribution with a mean of exp(wT xi ),
+p(yi |wT xi ) =
+
+exp(yi wT xi ) exp(− exp(wT xi ))
+.
+yi !
+
+We want to find the w that maximizes these probabilities assuming that our examples are IID,
+argmax
+w∈Rd
+
+n
+Y
+
+p(yi |wT xi ).
+
+i=1
+
+(a) Show how finding w corresponds to minimizing an additive loss function,
+argmin
+w∈Rd
+
+n
+X
+
+f (yi , wT xi ),
+
+i=1
+
+and derive the form of this loss function (simplifying as much as possible).
+(b) If the largest value of yi in the training set is k, what is the cost of evaluating this objective
+function in terms of n, d, and k?
+(c) Given the parameters w and the features x̂ for a new example, derive an efficient algorithm
+for finding a value of c that maximizes p(ŷ = c|wT x̂).
+(Hint: try to discover the relationship between p(ŷ = c|wT x̂) and p(ŷ = c − 1|wT x̂).)
+
+15
+
+Answer:
+(a) We can transform the product into a sum by taking the log, giving
+argmax
+w∈Rd
+
+n
+X
+
+log p(yi |wT xi , b),
+
+i=1
+
+and by taking the negative we get a minimization problem
+argmin −
+w∈Rd
+
+n
+X
+
+log p(yi |wT xi , b),
+
+i=1
+
+Plugging in the definition of p we get
+argmin −
+w∈Rd
+
+n
+X
+
+yi wT xi − exp(wT xi ) − log(yi !).
+
+i=1
+
+Notice that the last term does not depend on w so we can ignore it, giving us
+argmin
+w∈Rd
+
+n
+X
+(−yi wT xi + exp(wT xi )).
+i=1
+
+(b) The dominant cost is the n inner products of size d, so the cost is O(nd), there is no dependence on k.
+(c) First compute λ = wT xi , which costs O(d) and is the bottleneck. We have that
+exp(cλ) exp(− exp(λ))
+c!
+exp((c − 1)λ + λ) exp(− exp(λ))
+=
+(c − 1)!c
+exp(λ)
+= p(yi = c − 1|λ)
+.
+c
+
+p(yi = c|λ) =
+
+If exp(λ) > c then p(yi = c|λ) > p(yi = c − 1|λ) and if exp(λ) < c then p(yi = c|λ) < p(yi = c − 1|λ), so we
+can to take the maximum among the two integers that surround exp(λ), which can be found in O(1). This
+gives a total cost of O(d).
+
+16
+
+9
+
+Stochastic Gradient
+
+Using the L2-regularized logistic loss to fit a binary classifier corresponds to solving the optimization problem
+argmin
+w∈Rd
+
+n
+X
+
+[log(1 + exp(−yi wT xi ))] +
+
+i=1
+
+λ T
+w w.
+2
+
+Using f (w) to denote the objective function, the gradient of the objective function can be written in the
+form
+n
+X
+λ
+∇f (w) =
+[g(xi , w)xi + w].
+n
+i=1
+for a function g that returns a scalar given the training example xi and parameter vector w. The cost of
+computing g is O(m) if xi has m non-zero values, since it requires multiplying each non-zero element of xi
+by the corresponding element of w, so in the worst case computing g costs O(d).
+(a) Write pseudo-code doing an iteration of stochastic gradient on this model with a constant
+step-size α. What is the cost of performing an iteration of stochastic gradient in terms of n
+and d? (You can assume that generating a random number between 1 and n costs O(1).)
+(b) How does the cost per iteration in part (a) change if each xi has at most m non-zeroes?
+(c) Show how we can reduce the cost in part (b) by representing w as the product of a scalar
+β and a vector v, so that w = βv.
+
+17
+
+Answer:
+(a)
+First, generate a random integer i between 1 and n.
+Next, compute g(xi , wt ) for the random example i.
+Update the parameters based on the gradient of that particular example,
+wt+1 = wt − α(g(xi , wt )xi +
+
+λ
+w).
+n
+
+The first step costs O(1) by the assumption in the question. The second step costs O(d) in the worst case,
+and updating the parameter costs O(d) too. This gives a total cost of O(d).
+(b)
+Stochastic gradient: The cost of computing g(xi , wt ) is now O(m). However, since w will in general be dense
+the cost of the update remains O(d). Thus, sparsity does not help and the cost remains O(d).
+(c)
+Let’s re-write the update in the form
+wt+1 =
+
+
+1−
+
+αλ
+n
+
+
+
+wt − αg(xi , wt )xi ,
+
+or written in two steps as
+wt+1/2 =
+
+
+1−
+
+αλ
+n
+
+
+
+wt ,
+
+wt+1 = wt+1/2 − αg(xi , wt )xi .
+Now consider using the representation β t v t = wt . To update to wt+1/2 we can use
+
+
+αλ
+t+1/2
+βt,
+β
+= 1−
+n
+and v t+1/2 = v t .
+To update to wt+1 we can use β t+1 = β t+1/2 and use
+v t+1 = v t+1/2 −
+
+αg(xi , β t v t )
+xi .
+β t+1/2
+
+The two steps now cost O(m).
+
+18
+

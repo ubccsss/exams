@@ -1,0 +1,182 @@
+https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi/home/p/p2n8/cs304/project-final/CPSC304FINALPROJECTFILES.pdf
+University of British Columbia, Department of Computer Science
+
+CPSC 304
+Winter ​
+2015​Term ​
+2
+Project Part ​
+4 (Final Project)
+Group Members:
+
+Name
+
+Student
+Number
+
+Email Address
+Unix ID
+
+Jannina Valencia
+
+22191118
+
+d6p8
+
+vmjannina@gmail.com
+
+Chiming Yee
+
+36523124
+
+p2n8
+
+chrisyee@live.com
+
+Michael Cao
+
+37899127
+
+f2r8
+
+michael.cao@alumni.ubc.ca
+
+Ju Hwan (Jeff) Seo
+
+35788116
+
+h3g8
+
+jhseo.sk@gmail.com
+
+By typing our names and student numbers in the above table, we certify that the work in the attached assignment was
+performed solely by those whose names and student IDs are included above.
+In addition, we indicate that we are fully aware of the rules and consequences of plagiarism, as set forth by the
+Department of Computer Science and the University of British Columbia.
+
+1
+
+THE FILES
+All files are contained within GitHub, with the repository name ​
+Transit­Database.
+http://www.ugrad.cs.ubc.ca/~h3g8/main/
+
+PROJECT ACCOMPLISHMENT
+The project was able to allow the user to view the added or updated information in the database using a table,
+but also allowed the user to perform different queries (insert, update, assign vehicles, delete, join, etc). This project also
+allowed the user to view error message clearly. On the part of the manager user, it was able to view the Employee
+information.
+
+DESCRIPTION OF FINAL SCHEMA
+There have been a few changes on our final schema, where we used ‘number’ instead of ‘int’ and ‘varchar2()’
+instead of ‘char()’. This is because the values that we tend to input may be of varying length and may not be consistent
+(for varchar2 vs. char), and since ‘int’ gets stored as ‘number’ anyways, we just used number plus the fact that ‘int’ is
+constrained versus number (this also makes ‘int’ slower as it may require rounding off to whole numbers, if
+necessary).In addition, we added a few more tables (Make, Reads, Follows, Rides and OperatedBy) in order to enhance
+or enrich the data and the possible queries we might have, and so that we can also clearly define which gets access to
+what database object in the relation.
+
+SQL QUERIES USED
+
+SELECTION/PROJECTION
+SELECT username
+FROM manager;
+SELECT vehicleID, capacity
+FROM vehicles;
+JOIN
+SELECT enames.sin, vnames.vid
+FROM Employee
+INNER JOIN OperatedBy
+ON enames.sin = vnames.sin
+ORDER BY enames.sin;
+DELETE
+DELETE FROM Employee
+WHERE SIN = 34254;
+
+2
+
+UPDATE
+UPDATE Employee
+SET Phone = 7786564321, jobt =’manager’
+WHERE SIN = 345212;
+NESTED AGGREGATION WITH GROUP BY
+select(max(avg(wage)))
+from Employee
+group by jobt;
+AGGREGATION
+select min(cost)
+from vehicles
+where vmode LIKE '%bus%';
+
+LIST OF FUNCTIONAL DEPENDENCIES
+
+Employee table
+For every unique SIN and username, there is a
+corresponding value associated with it
+(password/wage/job type and work schedule)
+● SIN, username → password
+● SIN, username → wage
+● SIN, username → jobt
+● SIN, username → works
+Manager
+For every unique SIN, there is a username associated
+with it.
+● SIN → username
+Schedule
+Every transit ID is associated with a specific destination
+Transit ID and associated arrival and departure time
+gives a corresponding travel time.
+● transitID → destination
+● transitID, arrivals → departures
+● transitID, arrivals, departures → traveltime
+Vehicles
+Vehicle ID is associated with a certain number of people
+that can fit in it as well as what model it is.
+Vehicle ID and capacity or vehicle ID and mode of
+transportation has a certain cost associated with it.
+● vid → capacity
+
+Customer
+A customer’s username and phone number or its address
+has a corresponding credit value.
+● username, pnumber → credit
+● username, address → credit
+Make
+A unique SIN is associated with either the username or
+the transitID
+● SIN → username
+● SIN → transitID
+Reads
+A user (given his/her username) gets access to the
+transit’s schedule using a certain transitID
+● 'username → transitID
+Follows
+A certain vehicle ID corresponds to a transit ID in order
+for the user to follow its schedule.
+● vid → transitID
+Rides
+There is a vehicle ID in the “Rides” table that is
+associated with a username (a user) who rides a transit
+● vid → username
+OperatedBy
+A vehicle ID is assigned to an employee (using his/her
+SIN) and username
+
+3
+
+●
+●
+●
+●
+
+vid, vmodel → age
+vid → vmode
+vid, vmode → cost
+vid, capacity → cost
+
+●
+
+SIN → vid
+
+4
+

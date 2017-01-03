@@ -1,0 +1,462 @@
+
+CPSC 314, Final Exam
+17 Apr 2007, 8:30am-11:00am
+Closed book, one double-sided sheet of handwritten notes allowed. Nonprogrammable calculators allowed. No other electronic
+devices (programmable calculators, phones, PDAs, etc) allowed, cell phones and pagers must be turned off. Answer the
+questions in the space provided. If you run out of room for an answer, continue on the back. Place your photo ID face up on
+your desk. Do not open the packet until told to do so.
+You may keep your notes sheet, no need to turn it in with the exam.
+Rules Governing Formal Examinations
+The following are the rules governing formal examinations:
+• Each candidate must be prepared to produce, upon request, a Library/AMS card for identification.
+• Candidates are not permitted to ask questions of the invigilators, except in cases of supposed errors or ambiguities in
+examination questions.
+• No candidate shall be permitted to enter the examination room after the expiration of one-half hour from the scheduled
+starting time, or to leave during the first half hour of the examination.
+• Candidates suspected of any of the following, or similar, dishonest practices shall be immediately dismissed from the
+examination and shall be liable to disciplinary action.
+– Having at the place of writing any books, papers or memoranda, calculators, computers, audio or video cassette
+players or other memory aid devices, other than those authorized by the examiners.
+– Speaking or communicating with other candidates.
+– Purposely exposing written papers to the view of other candidates. The plea of accident or forgetfulness shall not
+be received.
+• Candidates must not destroy or mutilate any examination material; must hand in all examination papers; and must not
+take any examination material from the examination room without permission of the invigilator.
+I understand and accept the above rules:
+Name:
+Signature:
+Student Number:
+
+Page
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+Total
+
+Points Earned
+
+1
+
+Points Possible
+16
+12
+19
+9
+16
+12
+15
+14
+9
+8
+30
+160
+
+1. (12 pts) True/false: mark the following statements as true or false
+• The homogeneous points (3,4,7,6) and (3,4,8,6) map to the same Cartesian point.
+• In a blueprint made with a cavalier projection, lines converge to two vanishing points.
+• In a blueprint made with an isometric projection, lengths can be usefully measured directly because they are are all
+drawn to the same scale.
+• High pass filtering causes blur.
+• Perlin noise has structure at multiple scales.
+• Taking subsurface scattering into account when rendering makes human skin look more realistic.
+• Image-based rendering uses volumetric grids.
+• A ray tracer for an image of 16 by 16 pixels will require 256 primary rays.
+• The location of vertices can change as the result of vertex shader operations.
+• A pixel shader could support Phong shading.
+• The OpenGL select buffer contains the objects drawn in the small viewport around the cursor location, sorted from
+back to front in depth.
+• Supersampling is a good antialiasing strategy to reduce the jagginess of an image.
+
+2. (4 pts) Specify the coordinates of point P with respect to coordinate frames A and B.
+
+Aj
+
+Ai
+Bj
+
+Bi
+
+P
+
+j
+i
+
+2
+
+3. (12 pts) For each equation below, sketch the new location L’ of the L shape on the grid and provide the OpenGL sequence
+needed to carry out those operations. Use the function drawL(), which draws an L shape with the lower left corner at
+the current origin as shown below. You may assume the matrix mode is GL MODELVIEW and that the stack has been initialized with glLoadIdentity(). For reference, the OpenGL command syntax is glRotatef(angle,x,y,z),
+glTranslatef(x,y,z), glScalef(x,y,z).
+drawL();
+
+y
+
+5
+4
+3
+2
+1
+x
+0 1 2 3 4 5
+
+
+
+0
+ −1
+A=
+ 0
+0
+
+
+
+1 0 0
+
+0 0 0 
+,B = 
+
+
+0 1 0
+0 0 1
+
+1
+0
+0
+0
+
+0
+1
+0
+0
+
+0
+0
+1
+0
+
+
+
+2
+
+0 
+,C = 
+
+
+0
+1
+
+a) L’ = ABC L
+
+1
+0
+0
+0
+
+0
+2
+0
+0
+
+0
+0
+1
+0
+
+
+
+0
+
+0 
+,D = 
+
+
+0
+1
+
+b) L’ = ACD L
+
+y
+
+y
+
+5
+4
+3
+2
+1
+x
+0 1 2 3 4 5
+
+5
+4
+3
+2
+1
+x
+0 1 2 3 4 5
+
+c) L’ = BAB L
+
+d) L’ = DBAD L
+
+y
+
+y
+
+5
+4
+3
+2
+1
+x
+0 1 2 3 4 5
+
+5
+4
+3
+2
+1
+x
+0 1 2 3 4 5
+
+3
+
+1
+0
+0
+0
+
+0
+1
+0
+0
+
+0
+0
+1
+0
+
+
+0
+−1 
+
+0 
+1
+
+4. (1 pt) If a light of color (0.2, 1.0, 0.8) shines on a surface with ambient color (0.5, 0.5, 0.5), what is the resulting color
+triplet?
+
+5. (3 pts) Compute the normal for the triangle (2, 4, 1, 1), (0, 5, -2, 1), (-1, 2, 3, 1).
+
+6. (15 pts) The color Lc of light L is (.9,.9,.9). Its location is (0,3,0). The eye point E is at (3,1,0). The specular coefficient
+ks is (.8,.8,.1),and nshiny is 5. Compute the specular color of the surface at a point P = (3,3,0) with the normal (-.707,
+.707, 0), showing your work. Use the Blinn-Phong model:
+Ispec = Lc (ks (h · n)shiny ))
+
+4
+
+7. (9 pts) A cube has 6 faces and 8 vertices. The complete cost of computing Phong lighting at a point is L. The cost of
+barycentric interpolation is I. Assume that all vertices and faces will be rendered, and that there are P pixels in total that
+need shading. Each quadrilateral face is processed individually during scan conversion. The model has precomputed
+normals at the vertices of the model which are already normalized.
+The cost of a component-wise multiplication is C, the cost of a dot product is D, and the cost of exponentiation is E. The
+cost of normalizing a vector is N. The cost of adding or subtracting vectors, or multiplying a vector by a scalar, is A. The
+cost of a cross product is X. The cost of scalar-scalar multiplication is S.
+a) Give the cost of flat shading the entire model in terms of the quantities above.
+
+b) Give the cost of Gouraud shading the entire model in terms of the quantities above.
+
+c) Give the cost of Phong shading the entire model in terms of the quantities above.
+
+5
+
+8. (16 pts) Clip the line going through the points A=(-1,-2) and B=(5,4) to the viewport with corners (0,0) and (5,3) using
+the Cohen-Sutherland clipping algorithm. The order in which you should encode the outcodes is top, bottom, left, right:
+
+
+1010 1000 1001
+ 0010 0000 0001 
+0110 0100 0101
+a) Show the full configuration after clipping against the top of the box with a sketch, including any new points you may
+need to create. If you need to create new points, give them names in alphabetical order (C, D, E, ...). Compute the exact
+coordinates of any new points that result from intersecting lines. (Provide the final values as decimal numbers if you have
+a calculator.) Show your intermediate work, including outcodes for vertices.
+b) Same as above, after clipping against the left edge.
+c) Same as above, after clipping against the right edge.
+d) Same as above, after clipping against the bottom edge of the box.
+
+6
+
+9. (12 pts) Clip the triangle with points A = (-1.5, .1), B = (.5, -.5), C = (0,1.5) against the box (-1,-1), (1,-1), (1,1), (-1,1).
+Use the Sutherland-Hodgeman algorithm to clip the polygon.
+a) Give the vertex list after clipping against the top edge, and draw a sketch showing the configuration including the
+location of any new points you may need to create. If you need to create new points, give them names in alphabetical order
+(D, E, F, ...). Use the same labels for the new points in your sketch and in the vertex list. Show your intermediate work,
+in terms of inside/outside checks for each vertex pair. You do not need to compute exact values of the the intersection
+points.
+b) Same as above, after clipping against the bottom edge.
+c) Same as above, after clipping against the right edge.
+d) Same as above, after clipping against the left and final edge of the box.
+
+7
+
+10. (15 pts) Build a BSP tree for the following scene using the polygons (shown as line segments). The cutting plane induced
+by a polygon should just extend along the line itself. The labelled side of the polygon should be the right child in the tree,
+and the unlabelled side should be the left child.
+
+C
+
+V2
+
+B
+D
+
+E
+
+V1
+A
+
+a) Give the BSP tree with the single root node of polygon A, and sketch the entire scene with the addition of the new
+cutting plane.
+b) Same as above, after adding polygon B.
+c) Same as above, after adding polygon C.
+d) Same as above, after adding polygon D.
+e) Same as above, after adding polygon E.
+f) Traverse your BSP tree to produce a painter’s algorithm ordering from eye point V1. Show your work at each step in
+the traversal, starting from the root of the BSP tree.
+g) Same as above, instead using eye point V2.
+
+8
+
+11. (5 pts) You are raytracing a scene with only a single light source L from the eye point E. There is no ambient light. The
+grey objects are completely opaque. Sketch on the diagram below the regions where there is no illumination.
+
+L
+E
+
+12. (4 pts) You have a checkerboard image where each square is 5x5 pixels. How close together would your sample points
+be at the Nyquist Rate?
+
+13. (1 pt) Why was the Z-buffer an impractical approach to visibility in the 1960’s? Answer briefly.
+
+14. (4 pts) Sketch the 1D isosurface at iso-value 9 for the 2D density function below.
+
+6
+
+4
+
+−5
+
+3
+
+1
+
+20
+
+6
+
+0
+
+0
+
+10
+
+15
+
+2
+
+0
+
+40
+
+15
+
+1
+
+3
+
+5
+
+2
+
+5
+
+9
+
+15. (4 pts) Object A has vertices (2.5,3), (6,4), (2.5,5), (-1,4). Object B has vertices (6.5,0), (10,1), (6.5,2), (3,1). Perform
+collision detection on these two objects using bounding spheres as the collision proxy. Show your work with a sketch,
+and state whether the proxies collide.
+
+16. (2 pts) Perform collision detection on the same objects using axis-aligned bounding boxes for the collision proxy. Show
+your work with a sketch, and state whether the proxies collide.
+
+17. (2 pts) Sketch the texture on the polygon with the given (s,t) texture coordinates, if the texture mode is tile/repeat (as
+opposed to clamping):
+
+texture
+
+(1,1)
+
+polygon
+(0,0)
+
+(0,0)
+
+(−3,−2)
+
+10
+
+18. (3 pts) Draw a curve made from two piecewise Bézier curves that is C 0 continuous but not C 1 continuous.
+
+19. (5 pts) Compute the midpoint of the Bézier curve specified by the four control points below using the de Casteljau
+algorithm, showing your work. Your answer should be in the form of a sketch on the grid below, labelling all new points
+in your construction with (x,y) locations.
+
+(2,6)
+(14,4)
+
+(10,2)
+
+(6,2)
+
+11
+
+20. (30 pts) Your Z buffer has 24 bits, so objects can be sorted by depth into one of 224 = 16777216 bins represented as
+integers. The OpenGL perspective matrix is used for projection, with the near plane set to n = .01 and the far plane set
+to f = 100.
+The scene consists of several pairs of polygons. All polygons are parallel with the image plane. Each pair has partial
+overlaps in x and y, but has different depths. In eye/view/camera coordinates (VCS), the polygons have the following
+depths:
+• Polygon A: 99.02
+• Polygon B: 99.03
+• Polygon C: .02
+• Polygon D: .03
+The relationship between device and view coordinates is
+
+
+f +n
+1
+2∗f ∗n
+zD = 1/2 + 1/2
++
+∗
+f − n zV
+f −n
+a) Give the depth of each polygon in device coordinates (DCS) as a floating-point number ranging from 0 to 1.
+b) Give the depth of each polygon in integer screen coordinates as an integer ranging from 0 to 224 − 1.
+c) Which polygon pairs could result in shimmering artifacts when drawn, because there is insufficient precision in the
+z-buffer to resolve their depth relationship?
+d) Derive the equation above from the OpenGL perspective projection matrix and the definitions of normalized device
+coordinates (NDCS), and device coordinates (DCS).
+
+12
+
+13
+

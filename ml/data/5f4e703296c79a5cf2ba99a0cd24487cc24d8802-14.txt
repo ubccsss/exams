@@ -1,0 +1,207 @@
+
+CPSC 121 Midterm 2
+Tuesday November 12th, 2013
+[9] 1. Short Answers
+[2] a. What kind of proof is the following (note: part of the proof is missing and has been
+replaced by . . . ) ?
+Consider an unspecified positive integer a. Suppose that the cube root of a
+is a rational number, but not an integer. This means that . . . And therefore
+the cube root of a is irrational.
+Solution : This is a proof by contradiction: we start by making an assumption (the
+cube root of a is a rational number, but not an integer) and finish by concluding the
+opposite.
+[3] b. Consider the following statement:
+∀x ∈ Z, ∃y ∈ Z, Q(x, y)
+Can a proof that starts with “Choose y = 3.” be valid? Explain why or why not.
+Solution : Yes: it is possible (but not likely) that the value y = 3 will work for
+every possible integer x. That is, maybe Q(x, 3) is true for every x ∈ Z. We could
+of course have chosen a different value of y for each x (and in fact in most cases we
+would need to do that), but it’s not required.
+[4] c. You are asked to write a direct proof to show that the statement ∃x ∈ D, ∃y ∈
+D, P (x, y) is false. What would your proof look like? Write as much of the proof as
+you can, given that we did not tell you what P (x, y) is.
+Solution : We want to prove that this statement is false, or equivalently that its negation
+∀x ∈ D, ∀y ∈ D, P (x, y)
+is true. Hence our proof would start with “Consider unspecified elements x, y of
+the domain D (where x may or may not equal y)”. We would then try to show that
+P (x, y) is false.
+[7] 2. Consider the following deterministic finite-state automaton, whose inputs are words written
+using uppercase letters (A through Z) only. The word “else” on an edge denotes every letter
+that does not appear on any other edge leaving from the same node as that edge (for instance,
+the word “else” on the edge that joins the leftmost node to itself is the same as “D, E, F, . . . ,
+Y, Z”).
+
+page 2
+
+[4] a. Which of the following words will this finite-state automaton accept (circle one of
+Yes/No for each word)?
+Solution :
+• ACTIVE
+
+Yes
+
+No
+
+• DICTATION
+
+Yes
+
+No
+
+• DICTATORIAL
+
+Yes
+
+No
+
+• FOUGHT
+
+Yes
+
+No
+
+• LUMBER
+
+Yes
+
+No
+
+• PEBBLE
+• RABIES
+• SCHNITZEL
+
+Yes
+Yes
+Yes
+
+No
+No
+No
+
+[3] b. Describe as simply as you can the set of words that this finite-state automaton accepts.
+Solution : It accepts words that contain at most one A, at most one B, and where
+every C is immediately followed by a T .
+
+page 3
+[12] 3. For each of the following inferences, first state if it’s valid or invalid, and then justify your
+answer briefly. Assume that a is an element of domain D.
+
+[3] a.
+
+∃x ∈ D, P (x) → Q(x)
+∼ Q(a)
+∴ ∼ P (a)
+Solution : This inference is invalid. Simply because the implication P (x) → Q(x)
+is true for one or more elements of the domain D, it does not mean that it is true for
+a (it could, for instance, be true for every element except a!). Since the implication
+P (a) → Q(a) may not be true, knowing ∼ Q(a) does not give us any information
+about P (a).
+
+[3] b.
+
+∀x ∈ D, P (x) → Q(x)
+∼ Q(a)
+∴ ∼ P (a)
+Solution : This inference is valid: we can first use universal instantiation on the first
+premise to deduce that P (a) → Q(a), and then since we know ∼ Q(a) it follows
+from modus tollens that ∼ P (a).
+
+[3] c.
+
+∃y ∈ D(∃x ∈ D, P (x, y)) → Q(y)
+∀z ∈ D, P (z, a)
+∴ Q(a)
+Solution : This inference is invalid: suppose we have D = {0, 1, . . . , 10}, with
+Q(y) : y = 0 and P (x, y) : x ≤ y and a = 10.
+• The first premise is valid: choose y = 0. Then Q(y) holds, which means that
+any implication with Q(y) as its right-hand side will be true.
+• The second premise is valid: z ≤ a for every element of the domain (because a
+is the largest element of the domain).
+However the conclusion 10 = 0 is clearly wrong.
+
+[3] d.
+
+∀x ∈ D, ∼ ∀y ∈ D, P (x, y) → Q(x, y)
+∴ ∀x ∈ D, ∃y ∈ D, P (x, y)∧ ∼ Q(x, y)
+Solution : This inference is valid: we simply applied the generalized DeMorgan’s
+law to the premise to get
+∀x ∈ D, ∃y ∈ D, ∼ (P (x, y) → Q(x, y)),
+
+page 4
+used the definition of → to get
+∀x ∈ D, ∃y ∈ D, ∼ (∼ P (x, y) ∨ Q(x, y)),
+and finally applied the DeMorgan’s and double negative laws to obtain the desired
+conclusion.
+[10] 4. For each of the two following theorems, first translate the theorem into predicate logic, and
+then prove it using a proof technique of your choice.
+a. It is possible to find a pair of integers whose sum and difference are both perfect
+squares.
+Solution : Translated into predicate logic, this is ∃a ∈ Z, ∃b ∈ Z, PerfectSquare(a +
+b) ∧ PerfectSquare(a − b).
+To prove this statement, we only need to choose two integers a and b and to verify that
+a + b and a − b are perfect squares. There were many possible pairs: in fact given any
+two perfect squares x, y that are either both even or both odd, and assuming without
+loss of generality that x ≤ y, the two integers a = (y + x)/2 and b = (y − x)/2 would
+work (the sum is y, the difference is x).
+This aside, all you needed to write was something like: “Choose a = b = 0. Then
+a + b = 0 = 02 and a − b = 0 = 02 . Hence both a + b and a − b are perfect squares.”
+b. If a, b and c are positive integers, and ac divides bc, then a divides b.
+Solution : Translated into predicate logic, this is ∀a ∈ Z+ , ∀b ∈ Z+ , ∀c ∈ Z+ , ac |
+bc → a | b (recall that a | b means “a divides b”).
+To prove this, consider three unspecified positive integers a, b, c. Assume that ac
+divides bc. Hence bc = (ac)x for some integer x. Since c is positive, we can divide
+both sides of the equality by c, and hence b = ax. Thus a divides b.
+[6] 5. One of your teaching assistants designed a circuit to count the number of distinct sequences
+of consecutive 1 bits in a multi-bit input (the next bit of the input is available every time the
+clock ticks). For instance, the output of the circuit should be
+• 1 if the input was 11100,
+• 2 if the input was 0111101,
+• 3 if the input was 10010010,
+etc. Unfortunately a crazy Computer Science instructor armed with an eraser came by! Help
+the teaching assistant by restoring the gate(s) and/or wire(s) the instructor has deleted, to get
+a working circuit.
+
+page 5
+
+Solution :
+
+[6] 6. Using a proof by contradiction, prove that for all positive integers a and b, (a+b)/2 ≥
+Hints: (1) you should square both sides of an inequality, (2) what is (a − b)2 ?
+
+√
+ab.
+
+Solution : We use a proof by contradiction (as stated in the question!).
+Consider two
+√
+unspecified
+positive integers a, b, and assume that (a + b)/2 < ab. Because (a + b)/2
+√
+and ab are both positive, this means that
+
+
+a+b
+2
+
+2
+
+√
+< ( ab)2
+
+and hence
+a2 + 2ab + b2
+< ab
+4
+
+page 6
+or stated otherwise
+a2 + 2ab + b2 < 4ab.
+However, by substracting 4ab from both sides of the inequality, this means that
+a2 − 2ab + b2 < 0
+which is the same as stating that
+(a − b)2 < 0
+which
+is impossible (squares of integers can not be negative). Consequently (a + b)/2 ≥
+√
+ab.
+

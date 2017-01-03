@@ -1,0 +1,220 @@
+
+THE UNIVERSITY OF BRITISH COLUMBIA
+CPSC 121: MIDTERM 2 – Individual – March 12, 2014
+Important notes about this examination
+1. You have 65 minutes to complete this exam.
+2. No electronic aides (e.g., phones or calculators) are allowed in the exam.
+3. Each student may bring up to three 8.5x11" sheets of paper with any information of the student's choice on
+them, typed or printed, one side or both, although the sheets must be readable without magnification!
+4. Please see the regulations regarding student conduct during examinations on the opposite side of this page!
+5. Good luck!
+
+Full Name:______________________
+
+Please do not write in this space:
+
+Signature:______________________
+UBC Student #:
+
+Question 1:
+
+Question 4:
+
+Question 2:
+
+Question 5:
+
+Question 3:
+
+3 236351 870758
+
+Student Conduct during Examinations
+1. Each examination candidate must be prepared to produce, upon the request of the
+invigilator or examiner, his or her UBCcard for identification.
+2. No questions will be answered in this exam. If you see text you feel is ambiguous, make a
+reasonable assumption, write it down, and proceed to answer the question.
+3. No examination candidate shall be permitted to enter the examination room after the
+expiration of one-half hour from the scheduled starting time, or to leave during the first half
+hour of the examination. Should the examination run forty-five (45) minutes or less, no
+examination candidate shall be permitted to enter the examination room once the
+examination has begun.
+4. Examination candidates must conduct themselves honestly and in accordance with
+established rules for a given examination, which will be articulated by the examiner or
+invigilator prior to the examination commencing. Should dishonest behaviour be observed
+by the examiner(s) or invigilator(s), pleas of accident or forgetfulness shall not be received.
+5. Examination candidates suspected of any of the following, or any other similar practices,
+may be immediately dismissed from the examination by the examiner/invigilator, and may
+be subject to disciplinary action:
+i. speaking or communicating with other examination candidates, unless otherwise
+authorized;
+ii. purposely exposing written papers to the view of other examination candidates or
+imaging devices;
+iii. purposely viewing the written papers of other examination candidates;
+iv. using or having visible at the place of writing any books, papers or other memory aid
+devices other than those authorized by the examiner(s); and,
+v. using or operating electronic devices including but not limited to telephones, calculators,
+computers, or similar devices other than those authorized by the examiner(s)—
+(electronic devices other than those authorized by the examiner(s) must be completely
+powered down if present at the place of writing).
+6. Examination candidates must not destroy or damage any examination material, must hand in
+all examination papers, and must not take any examination material from the examination
+room without permission of the examiner or invigilator.
+7. Notwithstanding the above, for any mode of examination that does not fall into the
+traditional, paper-based method, examination candidates shall adhere to any special rules
+for conduct as established and articulated by the examiner.
+8. Examination candidates must follow any additional examination rules or directions
+communicated by the examiner(s) or invigilator(s).
+
+This page left intentionally (almost) blank.
+If you write answers here (or anywhere other than their intended location), mark them clearly,
+indicate which question they respond to, and indicate at the provided solution blank for that
+question where you wrote your solution.
+
+[15] 1. iSaks: At the iSaks auction site, vendors offer up “lots” of identical items for sale. Each lot
+must have at least 1000 items. A bid is a dollar value per item d and a quantity q of items:
+(d, q).
+The following definitions describe this domain, but unless we state them explicitly, the parts
+described as “intentions” are not known to hold.
+• B is the set of bidders
+• Lot(i, n) means lot number i offers n (a positive integer) items for auction. i is a
+positive integer ID number. (The intention of i is that it uniquely identifies a particular
+lot and tells us what order lots were offered in; that is, no two lots should have the
+same ID number. For now, iSaks sells only lots of salt shakers; so, there’s no need for
+a description of the item.)
+• Bid(j, b, d, q, i) means bidder b bid d (positive integer) dollars per item for q (positive
+integer) items on the lot with ID i. j is a positive integer ID number for the bid. (A
+lot and a bid may coincidentally have the same ID number, but the intention is that no
+two bids should have the same ID number.)
+• Won(b, d, q, i) means that bidder b won q items from lot i at the price d.
+[6] a. Defining Predicates:
+i. It would be handy to be able to refer to a bidder’s “final bid”. Define the predicate
+FBid(b, d, q, i) to mean that the highest (by ID number) bid by bidder b on lot i
+is for d dollars per item and q items.
+FBid(b, d, q, i) ≡
+
+ii. Define a predicate Winner(b, i) to mean that bidder b won lot i (for some dollar
+value and quantity).
+Winner(b, i) ≡
+
+[7] b. Making Statements:
+State the following facts that we want to assume true in predicate logic. YOU MAY
+USE THE EXTRA PREDICATES YOU WERE ASKED TO DEFINE ABOVE.
+(Assume they are correct.)
+i. Each lot must have at least 1000 items.
+
+ii. The final bid of a winning bidder on a lot is never for less money than the final
+bid of a losing bidder on the same lot.
+
+[2] c. Negation practice:
+Negate the following statement, moving the negations “inward” as far as they will
+go:
+∀i ∈ Z+ , ∀b1 ∈ B, Winner(b1 , i) → ∼∃b2 ∈ B, Winner(b2 , i) ∧ b1 6= b2 .
+
+[8] 2. Who’s on First (or the Equivalent)?
+For each of the following pairs of predicate logic statements, CIRCLE ONE OF: EQUIV
+(meaning they’re logically equivalent), 1 → 2 (meaning the second one follows from the
+first but the first does not follow from the second), 2 → 1 (meaning the first one follows
+from the second but the second one does not follow from the first), or NEITHER meaning
+neither one implies the other.
+(a) ∃x ∈ X, R(x).
+∀x ∈ X, ∼R(x).
+
+EQUIV
+
+1→2
+
+2→1
+
+NEITHER
+
+2→1
+
+NEITHER
+
+2→1
+
+NEITHER
+
+2→1
+
+NEITHER
+
+(b) ∃x ∈ X, ∃y ∈ X, P (x, y) → Q(x, y).
+∃y ∈ X, ∃x ∈ X, ∼Q(x, y) → ∼P (x, y).
+
+EQUIV
+
+1→2
+
+(c) ∀x ∈ X, P (x) ∧ ∼∃y ∈ Y, Q(x, y).
+∀x ∈ X, ∀y ∈ Y, ∼Q(x, y).
+
+EQUIV
+
+1→2
+
+(d) ∼∃x ∈ X, ∼∃y ∈ Y, ∼∃z ∈ Z, P (x, y) ∧ P (y, z).
+∀x ∈ X, ∃y ∈ Y, ∀z ∈ Z, P (y, z) → ∼P (x, y).
+
+EQUIV
+
+1→2
+
+[11] 3. Sketchy Proofs:
+[6] a. Pred Logic Statement to Proof:
+Sketch a proof in as much detail as possible for the theorem:
+Theorem: ∀x ∈ X, (∼P (x, x) ∨ (∀y ∈ Y, P (x, y))) → ∃z ∈ Z, Q(x, z) ∨ Q(z, x).
+(Do not use logical equivalences to alter the form of the theorem, which also means
+no proof by contradiction or contrapositive.)
+NOTE: if your proof includes choosing a witness value, let us know which other
+variables’ values its value can be based on.
+
+[5] b. Proof to English Theorem:
+Consider the following fragment of a proof which is missing some details. (It was
+damaged during an ill-fated forest hike by algorithmicist R. R. Hood.) Write the
+theorem this was proving in predicate logic in as much detail as possible. Clearly
+define any sets or predicates you need.
+Proof: Without loss of generality, let n be a non-negative integer (specifically a
+number of keys). We design the following “binomial queue” f of our choice: . . .
+SECTION OF PROOF LOST IN WOLF ATTACK . . .
+Note that this binomial queue has exactly n nodes.
+Without loss of generality, let g be a different binomial queue. We now show that g
+has some number of keys m that is not equal to n.
+
+[12] 4. I Want the PROOF:
+Prove the following theorems using informal, English-language proofs. Substantial partial
+credit is available for well-formed proofs. Unclear, awkward, or unusual proof structures
+that are not precisely correct are likely to lose substantial credit.
+[7] a. Prove the following theorem:
+∀x ∈ X, (P (x, x) ∨ (∀y ∈ X, Q(x, y))) → ∃z ∈ X, P (z, z) ∨ Q(x, z).
+
+[5] b. We first give an example to illustrate some terms: The binary number 1001011 has
+four 1 bits in it. If we add 1 to it, we get 1001100, which has one fewer 1 bits than
+the original value.
+Now, prove the following theorem: Adding 1 to an unsigned binary integer with b
+bits cannot decrease the number of 1 bits in that number by more than b nor increase
+the number of 1 bits by more than 1.
+
+[4] 5. Manifold Circuits:
+Consider the following diagram of an arithmetic logic unit (ALU) from lab.
+
+The image contains two simple gates (AND and XOR), an addition module, a subtraction
+module, and two multiplexers. The two modules and the multiplexers are critical to the
+functioning of the ALU.
+[2] a. Can the modules and the multiplexers be built from simple gates such as AND, OR,
+and NOT? Briefly justify your answer.
+
+[2] b. Briefly explain why the following statement is incorrect: “The valO output is only
+usable for function values of 0 and 1 because the MUX in the upper-right only
+has actual inputs for function values of 0 and 1.”
+
+This page left intentionally (almost) blank.
+If you write answers here (or anywhere other than their intended location), mark them clearly,
+indicate which question they respond to, and indicate at the provided solution blank for that
+question where you wrote your solution.
+
+This page left intentionally (almost) blank.
+If you write answers here (or anywhere other than their intended location), mark them clearly,
+indicate which question they respond to, and indicate at the provided solution blank for that
+question where you wrote your solution.
+

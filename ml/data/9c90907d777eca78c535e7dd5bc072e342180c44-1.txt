@@ -1,0 +1,126 @@
+
+CpSc 421
+
+Final Exam
+
+December 15, 2006
+
+Do problem zero and six of problems 1 through 9. If you write down solutions for more that six problems, clearly
+indicate those that you want graded. Note that problems can be worth 12, 15 or 20 points: you can attempt between
+84 and 108 points depending on the problems that you choose. This exam will be graded on a scale of 100 points.
+0. (3 points) If you have read and understood the instructions in the previous paragraph, write
+I have read the instructions and understand that I am supposed to solve six of the nine problems; that
+I can thereby attempt between 84 and 108 total points; and that the exam is graded on a scale of 100.
+as your answer to this problem.
+1. (12 points) Let #a(w) be the number of a’s in w and #b(w) be the number of b’s in w. Draw the transition
+diagram for an NFA that recognizes the language A1 defined below:
+A1
+
+=
+
+{w ∈ {a, b}∗ | ∃x, y, z. (w = xyz) ∧ (#a(y) ≥ #b(y) + 3)}
+
+In other words, the A1 contains those strings that contain some substring (possibly the entire string itself) that
+has three more a’s than b’s.
+2. (20 points) Let Σ be a finite alphabet. For x, y ∈ Σ∗ with |x| = |y|, define the distance between x and y as the
+number of symbols for which x and y differ. For those who like formulas:
+dist (ǫ, ǫ) =
+dist (x · c, y · c) =
+dist (x · c, y · d) =
+
+0
+dist (x, y),
+x, y ∈ Σ∗ ; c ∈ Σ
+dist (x, y) + 1, x, y ∈ Σ∗ ; c, d ∈ Σ; c 6= d
+
+Let A be a language. Define
+threeStrikes(A)
+notBad (A)
+
+=
+=
+
+{x | ∃y ∈ A (|y| = |x|) ∧ (dist (x, y) < 3)}
+{x | ∃y ∈ A. (|y| = |x|) ∧ (dist (x, y) < |x|/3)}
+
+(a) (10 points) Show that if A is a regular language, then threeStrikes(A) is also regular.
+Hint: My solution has five sentences.
+(b) (2 points) Show a language A1 such that A1 and notBad (A1 ) are both regular.
+(c) (2 points) Show another language A2 such that A2 is regular and notBad (A2 ) is not regular.
+(d) (6 points) Prove that for your choice of A2 , notBad (A2 ) is not regular.
+3. (12 points) Let
+B1
+B2
+
+=
+=
+
+{x | ∃w ∈ {a, b}∗ . x = w#wR }
+{x | ∃w ∈ {a, b}∗ . x = w#wR #w}
+
+(a) (6 points) Give a CFG for B1 .
+(b) (6 points) Prove that B2 is not a CFL.
+4. (15 points) As in question 3, let
+B2
+
+=
+
+{x | ∃w ∈ {a, b}∗ . x = w#wR #w}
+
+Show that B2 is a CFL.
+Hint: Consider the proof that an bn cn is a CFL (e.g, HW 6, Q1.e).
+
+5. (12 points) Draw the transition diagram for a Turing machine that erases its tape and then continues from state
+q1 with the tape head at the left end of the tape. My solution has three states: q0 (the initial state); q1 (the state
+the TM enters after erasing its tape and moving back to the left end); and q2 (one more state to get the work
+done).
+6. (15 points) Let
+A1
+A2
+
+= {[M ] | There is some non-empty string w such that [M ] reads every symbol of w when run
+with input w. }
+= {[M ] | There is some non-empty string w such that [M ] does not read every symbol of w
+when run with input w. }
+
+(a) (3 points) Is A1 = A2 ? Give a short justification for your answer.
+(b) (6 points) Is A1 decidable? Justify your answer.
+(c) (6 points) Is A2 decidable? Justify your answer.
+7. (15 points) Let
+A42
+
+=
+
+{[M ] | [M ] describes a TM that accepts at least 42 strings. }
+
+(a) (8 points) Prove that A42 is not Turing-decidable.
+(b) (7 points) Prove that A42 is Turing-recognizable.
+8. (20 points) A one-counter automaton (OCA) is a 6-tuple (Q, Σ, δ, q0 , qf , qr ). The symbols ⊢ and ⊣ are left and
+right endmarkers; if the input string is w, the OCA’s tape will be ⊢ w ⊣.
+As the name suggests, the OCA has a counter that can hold any integer. The OCA starts in state q0 with the
+counter set to zero and the read-head at the leftmost tape square (the one with the ⊢). At each step, the OCA
+makes a move depending on its current state, the tape symbol currently under the read head, and whether or
+not the value of the counter is equal to zero. Based on this information, the OCA transitions to a new state;
+moves its tape head one square to the left or the right; and the counter is either incremented, decremented or left
+unchanged. If the OCA ever reaches state qa it accepts, and if it reaches qr it immediately rejects.
+(a) (5 points) Describe an OCA that recognizes the language:
+B1
+
+=
+
+{x | ∃w ∈ {a, b}∗ . x = w#wR }
+
+You don’t need to into lots of detail. My solution has nine sentences.
+(b) (5 points) Describe an OCA that recognizes the language:
+B2
+
+= {x | ∃w ∈ {a, b}∗ . x = w#wR #w}
+
+You don’t need to into lots of detail. My solution two sentences.
+(c) (10 points) Prove that the language emptiness problem for OCAs is Turing-undecidable.
+Once again, you don’t need lots of detail. Just describe the key points of the reduction so that it’s clear that
+you know how to solve the problem. My solution has seven sentences (using computational histories) or
+nine (using PCP).
+9. (20 points) Let A be a regular language with |A| = ∞. Prove that there exists a language B with B ⊆ A such
+that B is not Turing-recognizable.
+

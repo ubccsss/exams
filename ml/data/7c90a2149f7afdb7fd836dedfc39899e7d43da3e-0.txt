@@ -1,0 +1,162 @@
+https://web.archive.org/web/2222/http://www.cs.ubc.ca/~tmm/courses/547-14/projects/peter/finalpresentation.pdf
+NBA Shot Visualization
+
+Peter Beshai
+CPSC 547 Project
+Dec. 12, 2014
+
+Kirk Goldsberry at Grantland
+
+NBASavant.com
+
+NylonCalculus.com
+
+Improvements
+
+New Features
+
+Player selection
+
+New visualizations
+
+Clarity of visualization
+
+Player comparison
+
+Filtering shot charts
+
+League trends
+
+DATA
+Shots
+
+Players
+
+Teams
+
+Games
+
+SEASON
+SHOT_TYPE
+SHOT_DISTANCE
+LOC_X
+LOC_Y
+SHOT_MADE_FLAG
+
+FIRST_NAME
+LAST_NAME
+JERSEY
+POSITION
+
+TEAM_NAME
+TEAM_ABBREVIATION
+TEAM_CITY
+
+SEASON
+HOME_TEAM
+AWAY_TEAM
+
++-------+
+| Count |
++-------+
+|
+773 |
++-------+
+
++-------+
+| Count |
++-------+
+|
+30 |
++-------+
+
++--------+---------+
+| Season | Count
+|
++--------+---------+
+| 2011
+| 161,205 |
+| 2012
+| 201,579 |
+| 2013
+| 204,126 |
+| 2014
+| 49,742 |
++--------+---------+
+
+425 shots per player in 2013
+
++--------+-------+
+| Season | Count |
++--------+-------+
+| 2011
+|
+990 |
+| 2012
+| 1230 |
+| 2013
+| 1230 |
+| 2014
+|
+307 |
++--------+-------+
+
+DATA DERIVATION
+
+Field Goal % Average, Weighted
+1’ x 1’ Grid
+
+Distance from basket
+
+TASKS
+
+Enjoy basketball stats and visualizations
+
+Share basketball visualizations
+
+Player View
+Discover shot distributions
+Compare shot distribution against league, position
+Compare shooting stats against each team
+
+Compare View
+Compare player shot distributions
+
+League View
+Discover shot distributions of
+league, position, team
+Compare team shot distributions
+
+TOOLS
+
+D3: Data-Driven Documents
+
+AngularJS
+
+Heatmap.js
+
+Demo
+
+Discover and compare shot distributions
+
+Player View, Compare View, League View
+
+Focus on fan enjoyment, casual analysts
+
+Discover and compare shot distributions
+
+Thanks!
+Player View, Compare View, League View
+!
+
+Focus
+on
+fan
+enjoyment,
+casual
+analysts
+!
+!
+
+pbeshai@cs.ubc.ca
+

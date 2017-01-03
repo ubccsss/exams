@@ -1,0 +1,454 @@
+
+Exam No
+
+The University of British Columbia
+Computer Science 121
+Midterm 1
+February 9, 2012
+Time: 70 minutes
+Instructors (Circle one):
+
+Total marks: 65
+Section 202 - Patrice Belleville
+Section 203 & BCS - George Tsiknis
+
+Name
+(PRINT)
+
+Student No
+(Last)
+
+(First)
+
+Signature
+
+This examination has 7 pages.
+Check that you have a complete paper.
+This is a closed book exam, but you may use a sheet of
+8.5x11 inches paper with your notes.
+
+MARKS
+1
+
+Answer all the questions on this paper.
+Give very short but precise answers. Always use point
+form where it is appropriate.
+
+2
+
+Work fast and do the easy questions first. Leave some time
+to review your exam at the end.
+
+3
+
+The marks for each question are given in []. Use this to
+manage your time.
+
+4
+
+Good Luck
+
+5
+
+6
+
+Total
+
+Page 2 of 7
+Question 1. [9] Logical forms
+a. [3] Write a short propositional logic expression that corresponds to the following truth table:
+p
+F
+F
+F
+F
+T
+T
+T
+T
+
+q
+F
+F
+T
+T
+F
+F
+T
+T
+
+r
+F
+T
+F
+T
+F
+T
+F
+T
+
+s
+T
+T
+F
+T
+T
+F
+T
+T
+
+Expression:
+i. (p <--> q )  (q <--> r )
+OR
+ii. ~((~p  q  ~r)  (p  ~q  r))
+b. [3] Determine whether the following statement is a tautology a contradiction or neither, using a
+method of your choice:
+i. (( p q)  (p q )) p
+truth table:
+OR
+a proof like:
+(p -> q) ^ (p -> ~q) === (~p v q) ^ (~p v ~q)
+=== ~p v (q ^ ~q)
+=== ~p v F
+=== ~p
+c. [3] If p and q are statements , then
+p unless q means if ~q then p .
+Use this definition to translate the following sentence to propositional logic:
+The safe will not open unless you provide the code and if you don't provide the code,
+I'll call the police.
+No variable is allowed to correspond to a proposition that contains logical operators (for
+instance, you can not write that the answer is "p", where "p" corresponds to the whole
+sentence). You may circle portions of the printed statement and write the variable name beside
+the circle to reduce writing time.
+s = safe will open
+c = provide code
+p = I'll call the police
+Sentence is: ( ~c  ~s)  (~c  p )
+
+Page 3 of 7
+Question 2. [12] Logical Equivalences and Digital Circuits
+a. [6] Prove the following equivalence. Use a formal logical equivalence proof showing the rule
+that is applied at each step, and start your proof from the left-hand side of the equivalence.
+p  q)  (p  q)  p
+Proof:
+ p  q)  (p  q)
+
+given
+
+ p q)  (p  q)
+
+definition
+
+ p  q)  (p  q)
+
+de Morgan
+
+ p  q)  (p  q)
+
+double negation
+
+p ~q q)
+
+absorption
+
+p T
+
+negation
+
+p
+
+identity
+
+b. [6] Consider the following digital circuit. The circuit is input/output equivalent to another one
+that uses at most two logical gates with at most two inputs. Show the simpler circuit and justify
+your answer.
+
+The give circuit can be represented by the proposition:
+ ~p  q)  (~p  q)  (p  ~q)
+which is equivalent to
+ ~p  q q))  (p  ~q)
+
+ ~p )  (p  ~q)
+
+ p  (p  ~q)
+( p  p)  ( p  ~q)
+T  ( p  ~q)
+( p  ~q)
+ (p  q)
+
+distribution
+negation
+identity
+distribution
+negation
+identity
+identity
+
+The circuit can be implemented with a NAND gate or AND and a NOT gate:
+
+Page 4 of 7
+Question 3. [8] Number representation
+The following table shows the first few powers of 2 which may be helpful for this set of questions.
+power
+0
+2
+1
+2
+2
+2
+3
+2
+4
+2
+5
+2
+a.
+
+value
+1
+2
+4
+8
+16
+32
+
+power
+6
+2
+7
+2
+8
+2
+9
+2
+10
+2
+11
+2
+
+value
+64
+128
+256
+512
+1,024
+2,048
+
+power
+12
+2
+13
+2
+14
+2
+15
+2
+16
+2
+20
+2
+
+value
+4,096
+8,192
+16,384
+32,768
+65,536
+1,048,576
+
+[2] What is the binary representation of the decimal value 109 in 8 bits?
+01101101
+
+b. [2] What decimal value is represented by the 6-bit unsigned binary number 110010?
+50
+
+c. [2] What decimal value is represented by the 6-bit signed binary number 110010?
+-14
+
+d. [2] What is the binary representation of the decimal value -15 in 8 bits?
+
++1
+
+00001111
+11110000
+00000001
+11110001
+
+15
+-15
+
+Page 5 of 7
+Question 4. [ 10] Using logic to model and solve problems
+Design a circuit that accepts as input a 4-bit binary number and produces a two bit output that indicates
+the highest bit of the input number that is 1. For instance
+input 0110 will produce 10 meaning that the highest 1-bit is bit 2
+" 1111 "
+"
+11 "
+"
+"
+" " " 3
+" 0001 "
+"
+00 "
+"
+"
+" " " 0
+You may assume that we never input 0000 to this system (imagine that we have another circuit that tests
+for 0000 before it passes the inputs to this system.)
+a. [3] What is the formula for the first (higher) bit of the output? (Hint: don't try to create a long truth
+table for this; you should be able to directly determine the formula.)
+Let the input be b3, b2, b1, b0:
+The formula for the highest bit of the output is:
+b3  b2
+
+b.
+
+[3] What is the formula for the second (lower) bit of the output? (Hint: again, you should determine
+the formula directly).
+The formula for the lowest bit of the output is:
+b3  (~b2  b1)
+
+c.
+
+[4] Now design the circuit for this problem.
+
+Page 6 of 7
+Question 5. [12] Propositional Proofs
+a.
+
+b.
+
+[6] Consider the following propositional logic proof. At each step indicate the missing part which is
+either the conclusion or the rule that is used for the step.
+1.
+
+pq
+
+premise
+
+
+
+qs
+
+premise
+
+3.
+
+prw
+
+premise
+
+4.
+
+~s
+
+premise
+
+5.
+
+~q  m  r
+
+premise
+
+6.
+
+~q
+
+2, 4, modus tollens
+
+7.
+
+p
+
+1, 6, elimination
+
+8.
+
+mr
+
+5, 6, modus ponens
+
+9.
+
+r
+
+8, specialization
+
+10.
+
+pr
+
+7, 9, conjunction
+
+11.
+
+w
+
+3,10, modus ponens
+
+[6] Determine whether the following argument is valid or not. If you think it is invalid provide a
+truth value assignments that proves your claim. Otherwise provide a proof for it.
+1.
+pq
+2.
+ms
+3.
+~s  ~r
+4.
+~q  s
+5.
+~s
+6. ~p  m  u
+----------------------- ~u
+The argument is not valid. Here is an assignment that makes the premises true and the
+conclusion false:
+s=F
+q=F
+p=F
+m=T
+r=F
+u =T
+
+Page 7 of 7
+Question 6. [14] Predicate Logic
+Databases usually store information about entities(things) and relationships between the entities. For
+instance, a company's database will stores information about the employees, the departments they are
+in, their salaries, etc. To reason about the data stored in the database we can express this information in
+logic and use it to derive the properties we need.
+Let's consider the employee database of some company. We use the following predicates and functions
+to represent the basic information in this database:
+
+
+
+
+
+
+E is the domain of all employees
+D is the domain of all departments in the company
+Works(e, d) : it is true iff employee e works in department d
+Soccer(e) : it is true iff employee e is in the company's soccer team
+(salary e) : a function that returns the salary of employee e
+
+Translate each of the following statements to Predicate Logic:
+a)
+
+[4] “Every employee works in some department and every department has some employee
+working in it”
+
+(eE, dD, W(e, d))  (dD, eE, W(e, d))
+
+b)
+
+[5] “Every employee works in exactly one department”
+
+eE, dD, W(e, d)  ~d1D, W(e, d1)  ~ d=d1
+OR
+eE, dD, W(e, d)  d1D, W(e, d1)  d=d1
+
+c)
+
+[5] “The soccer players in the finance department earn more that $100,000 each”
+
+eE, W(e, finance)  S(e)  (salary e) > 100000
+

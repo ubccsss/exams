@@ -1,0 +1,534 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs344/current-term/res/oldexams/cpsc344-2007w1-midterm-sample-soln.pdf
+Author: wolf
+ame: Sample Sol’n (yours may differ!)
+
+Student ID umber:
+
+Signature:
+
+CPSC 344, 2007-08 Winter Term 1 Midterm Exam
+90 minutes
+
+Department of Computer Science
+University of British Columbia
+S. Wolfman
+Exam Instructions (read carefully):
+1. Sign this page in the space provided to indicate your
+agreement with these instructions. (You must sign to
+write the exam.)
+2. Continue reading these instructions, but do not open
+the exam booklet until you are told to do so by a
+proctor.
+3. Print your initials at the top of each page in the
+booklet before you start working.
+4. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+5. The exam is closed book. There are no aids
+permitted (this includes calculators).
+6. Interpret the exam questions as written. When in
+doubt, take a strict, literal interpretation of the
+question and write down any necessary assumptions.
+7. You have 90 minutes in which to work (~1
+min/mark). Budget your time wisely.
+8. When continuing your work on a blank page at the
+end, please indicate this clearly at the initial location
+and on the blank page.
+9. No one will be permitted to leave the exam room
+during the last ten minutes of the exam.
+
+Question
+
+Points
+
+1
+
+18
+
+2
+
+12
+
+3
+
+15
+
+4
+
+14
+
+5
+
+6
+
+6
+
+8
+
+7
+
+7
+
+Total
+
+80
+
+Received
+
+THIS PAGE ITETIOALLY LEFT BLAK
+
+CPSC 344 2007/08 W1
+
+2 of 14
+
+Midterm Exam (90 minutes)
+
+Initials: _________________
+
+Question #1 [18 points total]: True/False
+For each of the 6 statements below, indicate whether the statement is true or false by circling either True
+or False. Briefly explain your T/F response in one or two sentences, and illustrate with an example where
+appropriate. [3 pts each, 1 pt for T/F + 2 pts for explanation]
+
+(a) Statement: Because they emphasize natural mappings, mapping models are the most appropriate type
+of mental model to aim for in interface design.
+True
+
+False
+
+Explain:
+Mapping models are one of a variety of models, any of which (or any combination of which) may
+be appropriate depending on the nature of the design scenario and design. For example, a file
+system lends itself naturally to an object-action model, since users conceive of themselves as
+managing a collection of individual objects. File systems have also traditionally used metaphors
+to strengthen their models.
+
+(b) Statement: When designing a graphical user interface, the primary purpose of a low-fidelity paper
+prototype is typically to capture and assess the interface’s appearance.
+True
+
+False
+
+Explain:
+Low-fidelity prototyping generally does not capture either the final appearance or functionality of
+a system. Rather, the intention of a lo-fi prototype is generally to communicate design ideas or
+evaluate workflow and gross design ideas. Indeed, one of the strengths of a paper prototype is
+that its rough appearance telegraphs the unpolished state of the design, inviting comment from
+users.
+(c) Statement: Seven is a reasonable number of items to expect interface users to hold in short-term
+memory because the average number of chunks people can hold in short-term memory is 7.
+True
+
+False
+
+Explain:
+
+It is true that people can generally hold about 7 ± 2 “chunks” in memory at a time.
+However, that means that a substantial fraction of our user population (perhaps roughly
+half) will at any given time find it difficult to hold 7 chunks in short-term memory, which
+is not really acceptable for design purposes. It might be more appropriate to expect users
+to hold 5 chunks in short-term memory to accommodate the vast majority of users.
+
+CPSC 344 2007/08 W1
+
+3 of 14
+
+Midterm Exam (90 minutes)
+
+(d) Statement: The CS344/444/543/544 ethics protocol submitted to the Behavioral Research Ethics
+Board at UBC allows 344 students to use people they know personally as subjects.
+True
+
+False
+
+Explain:
+In fact, the ethics protocol not only allows but requires students to use acquaintances (such as
+people they personally know).
+
+(e) Statement: A password entry system that shows a warning when CAPS LOCK appears to be
+unintentionally active is an example of a “visible constraint”.
+True
+
+False
+
+Explain:
+This interaction illustrates feedback, not a visible constraint. A constraint might somehow
+prevent the user from entering an unintentionally capitalized word (though it’s not clear how that
+would be done).
+
+(f) Statement: Contextual inquiry is generally a better choice over plain ethnography when gathering
+information for UI design because contextual inquiry is structured specifically with the needs of UI
+design in mind.
+True
+
+False
+
+Explain:
+
+One way to think about contextual inquiry is as a variation of ethnography structured specifically
+around a design problem in a workplace context. Various features of CI (such as explicit design
+discussions and a focus on a design question) support this intent.
+
+CPSC 344 2007/08 W1
+
+4 of 14
+
+Midterm Exam (90 minutes)
+
+Initials: _________________
+
+Question #2 [12 points total]: Design Concepts
+This question describes four flawed vending machine designs. Assume all vended items cost the same
+amount, and that cost is known to the user (so only selection is a stake). Match each of the design
+concepts affordance, feedback, mapping, and visibility with the single design that best illustrates a
+violation of the concept and explain why the design violates the concept. [3 pts each: 1 for matching term
+and 2 for explanation]
+(a) The vending machine is a large, glass-fronted case with multiple trays of snack items. Each item has a
+label beneath it that lists a letter and number combination like “B7”. Users must insert their payment and
+then type the letter and number combination of the item they want on a keypad divided into a set of 10
+letter keys and 10 number keys (sufficient to type every possible label in the case).
+Design concept violated: Mapping
+Explanation:
+There is no natural connection between a snack (like Cheetos) and a letter number combination (like
+“B7”). So, users must memorize, albeit briefly and in short-term memory, a meaningless mapping to
+purchase their snack. Furthermore, users may have difficulty identifying whether a given snack goes with
+the number above or below it.
+OTE: on none of these questions do we request a design solution! Be careful about proposing a
+solution when an explanation is requested; they are not the same thing and not always interchangeable!
+
+(b) The vending machine looks like the one from (a) — a large, glass-fronted case with multiple trays of
+snack items — except the items are unlabeled. The glass face of the case doubles as a touch screen.
+Users enter appropriate change and then press the glass over the item they want.
+Design concept violated: Affordance
+Explanation:
+Users are not used to touching glass, and nothing about a plain glass-fronted case suggests pressing or
+touching. Indeed, fears of dirtying/smudging or even breaking glass mean that the glass case will likely
+suppress intent to touch it!
+
+CPSC 344 2007/08 W1
+
+5 of 14
+
+Midterm Exam (90 minutes)
+
+(c) The vending machine is a large, opaque case. Below the payment slot on the right is a column of
+buttons, each one flanked by an image of the item vended. The user enters payment and then presses the
+button next to the image of the item they want. If the user selects an item that is sold out, the machine
+returns the user’s change and shows a message saying that the item is out and to please select another.
+Design concept violated: Visibility
+Explanation:
+A crucial element of the system state (availability of an item) is not visible in the system image at the time
+when the user needs it.
+ote: “visibility” as used here does not necessarily relate to vision. For example, a telephone system can
+have good visibility through careful management of the state revealed to users via speech and other
+sounds as long as that system image (what the user hears) communicates the key elements and
+functionality of the system itself.
+
+(d) The vending machine looks like the one from (c) — a large, opaque case with a column of buttons and
+images— except there is also a “SOLD OUT” light next to each button. The light turns on for items that
+are out. Users enter their payment and press the button of the item they want. If they press the button of
+an item that is sold out, the machine simply waits for them to press a different button instead.
+Design concept violated: Feedback
+Explanation:
+Although this machine fixes the visibility problem from the previous section, users may still request items
+that are sold out because the overlook or misunderstand the SOLD OUT indicator. If they do, this
+machine provides no visible or audio feedback to indicate that a problem occurred. Because it silently
+ignores the error, users are apt to repeat their mistake or conclude that the machine is broken.
+
+CPSC 344 2007/08 W1
+
+6 of 14
+
+Midterm Exam (90 minutes)
+
+Initials: _________________
+
+Question #3 [15 points total]: Discussion Questions
+(a) In a few sentences, describe Heuristic Evaluation: what it consists of, and (briefly) its goals, its
+limitations, and when in the design process it is most useful. [6 pts]
+In HE, a design team provides a prototype of their design to a group of 3-5 usability experts for
+review in order to identify classic usability problems according to a set of ~10 design heuristics.
+The experts individually review the prototype, noting violations of the heuristics and their severity
+and perhaps design recommendations. The individual reviews are then aggregated into a final report.
+Because HE requires a prototype (or clear specification), it best used after some initial design work.
+Because it does not use real users, it may be best early on when “cheap” feedback is most helpful.
+Since HE is focused on criticism, it generally does not lead to new design ideas or directions.
+(b) List and justify 3 important characteristics of a good task example or set of task examples. [9 pts]
+NOTE: there are many possibilities, here are three. Also, note the requirement to justify!
+(1) Characteristic: Good task examples should say what the user does not how they do it.
+Justification: such examples are “design neutral” in the sense that they can be used with any
+design (any process for accomplishing the task). This is crucial during the early stages when task
+examples are developed to avoid prematurely committing designers to a particular design.
+(2) Characteristic: Good task examples describe a complete task that accomplishes an important goal
+for the user.
+Justification: task examples that represent only a part of a task may clearly illustrate a portion of a
+design from the designer’s perspective (i.e., “fit” within some component of the design structure),
+but they are divorced from users’ intentions. A complete task example aimed at a user’s goal
+forces the designer to consider users’ needs and to recognize the entire design problem.
+
+(3) Characteristic: Good task example sets cover a range of tasks including common, critical, and rare
+but interesting or important cases.
+Justification: as in (2), designers need a wholistic view of the design scenario to create a design
+that addresses users’ needs. Creating a broad task set encourages this wholistic view of the
+scenario early on. Later, designers might justifiably divide these task examples into those that
+they will focus on and those that they will de-emphasize or even not support.
+
+CPSC 344 2007/08 W1
+
+7 of 14
+
+Midterm Exam (90 minutes)
+
+Questions 4-6 are based on the following design brief.
+You’ve been hired by a company that produces bicycling products to design a “ride muse”: a device that
+record ideas cyclists have during their rides. The device is inspired by the company CEO’s habit of
+thinking deep thoughts during his rides and frustration with having no easy way to jot these ideas down.
+On his own time, the CEO put together four physical form-factor prototypes of “ride muses” based on
+different recording formats (voice-activated audio, lever-activated audio using an extra “gear” lever,
+always-on audio with continuous compression for silent stretches, and one-handed “chorded” handlebar
+keypad input). After trial runs with each one, he much preferred the voice-activated audio system and has
+decided to go with it.
+The company expects to design, market, and sell the product itself, but the actual production will be
+handled by another firm with the necessary expertise (e.g., a firm that produces dictation devices).
+Successful marketing in the cycling world requires word-of-mouth from influential users; fortunately, the
+company has a well-established partnership with a local bike club and a national bicycling magazine.
+Your team is about to begin. While you are excited about the product idea, you are also concerned about
+the state of the design process as it was “handed” to you.
+
+Question #4 [14 points total]: Pre-Design Activities
+(a) The company CEO has already made some key errors in user-centred design, but it’s touchy to give
+that kind of feedback to your boss. Briefly explain two things that he did very well from a usercentred design perspective and two things that he did very poorly. [4 pts]
+NOTE: there are many possibilities, here are the ones we found most compelling.
+Good job, boss:
+You prototyped a variety of approaches to explore their strengths and weaknesses.
+You tested your systems under realistic circumstances.
+
+But maybe we shouldn’t have…
+…focused your design efforts on the available technology rather than the problems, needs, and
+practices of users.
+…settled so quickly based only on your own input (and not a broad range of representative users)
+on a particular design.
+
+(continued on next page)
+
+CPSC 344 2007/08 W1
+
+8 of 14
+
+Midterm Exam (90 minutes)
+
+Initials: _________________
+(b) Now that your boss is convinced of the need for more early stage user-centred design work, list two
+useful and experimentally valid activities which you, as a trained HCI designer, could do to learn
+more to about how this product should work (or even if it’s a good idea). In each case, describe the
+goal of the activity, the subject group’s makeup, how you’d contact them and what/how you’d ask
+them. [5 pts each]
+Example response: To explore typical enthusiastic cyclists’ willingness to add an extra device to the
+set of devices they already use on rides, team up with the local bike club to solicit a series of focus
+group sessions (divided into commuters, hobbyists, and racers). Contact the users by the most
+standard mass distribution means the bike club uses, e.g., an e-mail newsletter if they have one.
+Questions might centre on the equipment that riders currently own and use and their fears, tolerance,
+and demand for new devices, but the focus group facilitator would allow discussion to roam freely as
+long as the topic continued to be ride “accessories”.
+NOTE: there are many possibilities, here are two interesting ones based on student responses.
+(1) To assess the potential benefit of the device among "influential" potential users (those who will
+help other end users make their purchase decisions, particularly tour leaders and bike store
+owners/operators), in terms of the number and importance of ideas that occur to them on rides, we
+will equip subjects with a clicker device they can use to record each time they have an idea during a
+ride that they would "regret not remembering later". We will recruit influential users using an
+exhaustive list of tour leaders/cycle shops in the city (or a tighter region if funding is too tight) and
+contacting each one via telephone. We will send the clicker device to the subject to use on a training
+or pleasure ride along with diarying/submission instructions (to get info on type, length, and
+environment of the ride they made and basic demographics). We will compensate participants in
+cash.
+
+(2) To explore the broader market for the device beyond cyclists, we will conduct a broad-ranging
+survey of "mobile thinkers": anyone who might have (and lose!) ideas in situations where it's difficult
+to record them. Questions will focus on whether individuals "lose" ideas that seem important to them
+because of inadequate recording (we will need to include examples to help them understand the
+concept) and what their environment/context is during this process. Because this is an exploratory
+process, we're looking less for complete representativeness within groups and more for a broad range
+of groups; so, we will try to canvass a variety of interest groups through venues like university clubs
+or professional organizations. We will send a limited set of questionnaires to each organization's
+representatives with monetary compensation tied to completion of as many of the surveys as possible
+by different organization members, up to the limit provided.
+
+CPSC 344 2007/08 W1
+
+9 of 14
+
+Midterm Exam (90 minutes)
+
+Question #5 [6 points total]: Stakeholders
+List what you consider to be the 3 most important stakeholders, given the constraints and resources from
+the design brief. (Many relevant stakeholders exist!) Be specific in your answer: e.g. if describing an
+end-user stakeholder, clearly identify demographic characteristics.
+For each stakeholder, say in 1 sentence what makes this role important. You do not need to identify
+their potential needs and concerns. [2 pts each]
+Example: Enthusiastic but non-professional cyclists (i.e., amateurs who join bike clubs and ride
+groups), who constitute the largest pool of likely purchasers for the product.
+NOTE: there are many possibilities although there are also many responses that are clearly not among the
+three most important. Here are three plausible “most important” stakeholders. Yes, we stole (1) from
+Question #4… that’s a great way to save time and effort on the exam!
+(1) Cyclists in positions of direct, face-to-face influence such as tour leaders and bike store
+owners/operators will help many (and perhaps most) other end users make their purchase decisions.
+
+(2) The CEO had the initial idea and impetus for this project and has shown a clear, personal interest
+in it. Thus, he seems likely to at least have an effective “veto” over the design.
+
+(3) The members of the local bike club will likely play a central role in the evaluation process as
+available, friendly users. Thus, we will probably want to keep them engaged in and informed about
+the design process from the start both for the value of their feedback and to maintain goodwill so we
+can rely on their help in various formal evaluations.
+
+CPSC 344 2007/08 W1
+
+10 of 14
+
+Midterm Exam (90 minutes)
+
+Initials: _________________
+
+Question #6 [8 points total]: Threats to Validity
+Following pre-design evaluation, the UI group builds a functional prototype of a proposed UI. The
+prototype is tethered, requiring power and data connections to a computer that runs the system back-end.
+The interface for downloading, viewing, and organizing ride notes has not yet been prototyped.
+You set up a testing lab in a wind-tunnel. A bicycle frame — minus the wheels but with freely spinning
+pedals — is bolted to the centre of the tunnel. Before an experiment, the subject receives a list of topics
+to think about and has the frame adjusted to their own normal riding configuration. They then put on the
+prototype, mount the frame, and begin pedaling. A “natural cycling sound-track” recorded from a ride in
+the area plays as background. They pedal for 20 minutes, recording ideas they have on the chosen topics.
+Through use of the lab setup and an off-site retroactive interview, you plan to learn whether potential
+users feel comfortable with the physical prototype while in riding position, and how much use (in
+“muses” per unit time) the device receives.
+Your recruiters solicit randomly selected passing riders as participants at a stop sign along a well-used
+commuter bike path. You offer modest compensation in exchange for taking part in the two-session
+experiment. You end up with 25 participants from a range of backgrounds.
+This example, if the sole source of user input at this stage, violates multiple kinds of experiment validity
+as discussed in 344. For each of the validity types listed below, describe a way in which it is violated
+and a way in which it is respected.
+[4 pts each]
+NOTE: there are many possibilities. Here are a few plausible ones.
+(a) External OR face validity.
+VIOLATED:
+External: this setup generalizes poorly to real potential users’ rides. For most rides, musing
+would instead be secondary to the ride’s primary goal (commuting or even pleasure).
+
+RESPECTED:
+External/face: the key factor of realistic ambient noise, which may lead to “muses” or interfere
+with recording, is replicated reasonably faithfully, which strengthens the generalizability of
+claims from the experiment to the noisy environments real cyclists face.
+
+(b) Construct validity:
+VIOLATED:
+When we supply a list of topics to think about, we end up measuring muses on our provided
+threads rather than the rider’s “intrinsic” muses per unit time.
+
+RESPECTED:
+The lab setup seems well-designed to actually measure riders’ comfort in cycling position since
+care is taken to ensure that cyclists conform to a reasonable riding position.
+
+CPSC 344 2007/08 W1
+
+11 of 14
+
+Midterm Exam (90 minutes)
+
+Question #7 [7 points total]: Matching Exercise
+The terms listed immediately below are possible answers for the definitions listed lower on the page. Use
+the number corresponding to a term in the first list as an answer in the space provided next to the
+following questions if you think it is the best match for that concept or definition. Each term in the first
+list is used either once or not at all.
+(1) Affinity diagram
+
+(10) Likert scale responses on a questionnaire
+
+(2) Camera
+
+(11) Sensory buffers
+
+(3) System image
+
+(12) Videotaped, semi-structured interview
+
+(4) Modular input processing
+
+(13) Cognitive Walkthrough
+
+(5) Negative transfer
+
+(14) Cultural idiom
+
+(6) Stimulus/response compatibility
+
+(15) Exploratory vs. confirmatory research
+
+(7) Recognition vs. recall
+
+(16) Keyboard logs
+
+(8) Norman’s “Gulfs”
+
+(17) Affordance
+
+(9) Task examples
+
+(18) Perceptual fusion
+
+For each statement below, write the number of the term from the list above that best fits into the missing
+space. [1 pt each]
+3
+
+(a) What the users sees of an interface
+
+10
+
+(b) Numeric ratings of agreement/disagreement
+
+1
+
+(c) A way to turn unprocessed qualitative data into coherent arguments
+
+2
+
+(d) A poor model of how human vision works
+
+8
+
+(e) An overall metaphor for what makes understanding an interface challenging for users
+
+13
+
+(f) A “discount” usability method
+
+15
+
+(g) One way of comparing qualitative and quantitative methods
+
+CPSC 344 2007/08 W1
+
+12 of 14
+
+Midterm Exam (90 minutes)
+
+ame:
+
+Student ID umber:
+
+Extra page to continue work.
+
+CPSC 344 2005-06 T1
+
+13 of 14
+
+Midterm Exam (50 minutes)
+
+Extra page to continue work.
+
+CPSC 344 2007/08 W1
+
+14 of 14
+
+Midterm Exam (90 minutes)
+

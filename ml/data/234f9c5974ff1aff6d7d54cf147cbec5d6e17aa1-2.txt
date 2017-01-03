@@ -1,0 +1,876 @@
+
+Author: 
+Final
+
+CpSc 418
+
+December 12, 2012
+
+100 points
+
+1. DLS talk (5 points)
+Judea Pearl’s talk: “The Mathematics of Cause and Effect” made frequent use of the term “counterfactual.”
+What word or phrase below best describes “counterfactual” as Pearl used it in his talk:
+(a) a false statement;
+(b) an ancient story or account such as the Garden of Eden or the destruction of Sodom;
+(c) a paradox;
+(d) a “what if?” scenario;
+(e) a rebuttal to an argument.
+Solution: d.
+2. Short definitions (20 points). Give a short definition for each term below. Give a brief (one or two sentences)
+definition and a simple example (one or two sentences).
+(a) deadlock
+Solution:
+A cycle of processes or threads where each is blocked waiting for the next process in the process
+in the cycle. Example 1: thread 0 holds a lock that thread 1 is trying to acquire and vice-versa.
+Example 2: Process 1 is waiting to receive a message from process 2, and will then send something to process 2, and vice-versa.
+(b) livelock
+Solution: A situation where two or more processes are busy interfering with each other in a way
+such that none of them make any progress. Example: several processes could be attempting to
+acquire the same lock. Each tries to get the lock, sees that another process is trying to get the
+lock, backs off and tries again.
+(c) the zero-one principle
+Solution: If a sorting network sorts all inputs consisting only of 0’s and 1’s correctly, then it sorts
+all inputs (arbitrary values of any type with an ordering relation) correctly.
+(d) termination detection
+Solution: Determining that an ensemble of processes have all completed. Example, the method
+in Stern & Dill’s distributed model checking algorithm that checks message-sent and messagereceived counts (and suppresses sending new messages) when checking to see if all of the worker
+processes are done.
+
+1
+
+Final result: 5
+extract fields of interest
+by process 0
+{1, 3, 5, false, 21, 1}
+combine
+by process 0
+P0 ! {−1, 5, 5, false, 21, 1}
+{1, 3, 4, false, −3, 1}
+combine
+by process 0
+
+{−1, 5, 5, false, 21, 1}
+combine
+by process 2
+
+P0 ! {4, 3, 3, false, −3, 1}
+{1, 3, 3, false, 2, 1}
+
+{{4, 3, 3, false, −3, 1}
+
+local
+computation
+by process 0
+1
+
+2
+
+3
+
+2
+
+P2 ! {21,1, 2,false, 21, 1}
+{−1, 4, 4, true, −1, 4}
+
+local
+computation
+by process 1
+4
+
+local
+computation
+by process 2
+
+6 7 −2 −2
+−1 0 8 13
+Figure A-Q3.a: Example of the reduce.
+
+{21, 1, 2, false, 21, 1}
+
+local
+computation
+by process 3
+21 16 23 21
+
+3. Reduce (25 points) Given a list of numbers, report the length of the longest non-descending sequence, in other
+words the length of the longest sequence of the form xi , xi+1 , . . . xi+k such that xi ≤ xi+1 ≤ · · · ≤ xi+k . For
+example,
+longest ascending([1, 2, 3, 2, 4, 6, 7,-2, -3, -1, 0, 8, 13, 21, 16, 23, 21])
+is 6.
+(a) (5 points) Draw a figure showing how this computation can be performed with four processes using a
+reduce. Assume that the list is distributed over the processes as shown below:
+Process 0:
+Process 1:
+Process 2:
+Process 3:
+
+[1, 2, 3, 2]
+[4, 6, 7, -2, -3]
+[-1, 0, 8, 13]
+[21, 16, 23, 21]
+
+Solution: See Figure A-Q3.a.
+(b) (5 points) Describe the type for the value that you will pass up the tree to do the reduce. For example, “a
+tuple of three elements where the first element is. . . ”, or “an integer”, or “a list of . . . ”, etc.
+Solution:
+If the local portion of the list is non-empty, then a triple of the form:
+{LeftVal, LeftLen, MaxLen,Span, RightVal, RightLen}
+where:
+LeftVal is the leftmost value under this subtree;
+LeftLen is the length of longest ascending sequence starting at the leftmost element
+(LeftLen = 1 if the leftmost value is greater than the next value.);
+MaxLen is the length of longest ascending sequence for this subtree;
+Span is true iff the entire subtree is one ascending sequence;
+
+2
+
+RightVal is the rightmost value under this subtree; and
+RightLen is the length of longest ascending sequence ending at the rightmost element of
+the subtree.
+Otherwise, an empty tuple.
+(c) (5 points) Sketch a function to use at the leaves of the tree to perform this reduce. You can write it in
+erlang, C, Java, or any reasonable resemblance of any of those languages.
+Solution:
+leaf([]) -> {};
+leaf([LeftVal | T]) -> Leaf({LeftVal, 1, 1, true, LeftVal, 1}, T).
+leaf(V, []) -> V;
+leaf({LV, LL, ML, Sp, RV, RL}, [H | T]) when (H >= RV) and Sp ->
+leaf({LV, LL+1, ML+1, Sp, H, RL+1}, T);
+leaf({LV, LL, ML, Sp, RV, RL}, [H | T]) when (H >= RV) and (RL == ML) ->
+leaf({LV, LL, ML+1, Sp, H, RL+1}, T);
+leaf({LV, LL, ML, Sp, RV, RL}, [H | T]) when (H >= RV) ->
+leaf({LV, LL, ML, Sp, H, RL+1}, T);
+leaf({LV, LL, ML, Sp, RV, RL}, [H | T]) ->
+leaf({LV, LL, ML, false, H, 1}).
+
+The rules for leaf/2 say:
+If the current value of the list, H, is greater than or equal to the previous value, RV, and the entire
+list as been ascending, then increment LL (i.e. LeftLen), ML (i.e. MaxLen), and RL (i.e.
+RightLen);
+Otherwise, if the current value of the list is greater than or equal to the previous value and the
+ascending sequence at the right is the longest one so far, then increment ML and RL; RL (i.e.
+RightLen);
+Otherwise, if the current value of the list is greater than or equal to the previous value, increment
+RL.
+If the list is empty, return the tuple that we’ve generated in the previous steps.
+(d) (5 points) Sketch a function to use to combine values from subtrees. Use the same notation as you chose
+for part c.
+Solution:
+combine({}, Right) -> Right;
+combine(Left, {}) -> Left;
+combine({LV1, LL1, ML1, Sp1, RV1, RL1}, {LV2, LL2, ML2, Sp2, RV2, RL2}) ->
+Extend = RV1 =< LV2,
+{ LV1,
+LL1 + if (Sp1 and Extend) -> LL2; true -> 0 end,
+max(max(ML1, ML2, if (Extend) -> RL1 + LL2; true -> 0)),
+Sp1 and Sp2,
+RV2,
+RL2 + if (Sp2 and Extend) -> RL1; true -> 0 end
+}
+
+(e) (5 points) Sketch a function to generate the final answer given the result of the combine at the root.
+Solution:
+root({}) -> 0;
+root({ LV, LL, ML,
+
+Sp,,
+
+RV,
+
+Each of your functions descriptions should be short.
+
+3
+
+RL} -> ML.
+
+4. Peril-L and Pthreads (25 points) Peril-L has full/empty variables. There isn’t a direct equivalent in POSIX
+threads. Figure 2 shows a one way that full/empty variables could be implemented using POSIX threads.
+(a) (10 points) Write the body for function FE int get.
+Solution:
+// FE int get: Get the value of *ef.
+// If *ef is empty, block until it is full.
+int FE int get(struct FE int *ef) {
+int val;
+pthread mutex lock(&(ef->lock));
+while(!ef->full)
+pthread cond wait(&(ef->cond), &(ef->lock));
+val = ef->value;
+ef->full = FALSE;
+pthread cond signal(&(ef->cond));
+pthread mutex unlock(&(ef->lock));
+return(val);
+}
+
+Likewise, Peril-L doesn’t provide mutexes or condition variables. Show that you can implement a mutex using
+Peril-L full/empty variables. Figure 1 shows an outline of the code that you should write. Note that I’m not
+asking you to write the functions to allocate, initialize, or free your mutex structs.
+(b) (5 points) Define a Peril-L struct FE mutex for a mutex type that is implemented using one or more
+full/empty variables. In Peril-L, a variable whose name ends with an apostrophe is a full/empty variable,
+for example, int v’;. Your struct can also use regular variables that are, presumably, global because
+this struct is used for synchronization. Note that Peril-L uses C-syntax plus the Peril-L extensions. Any
+reasonable approximation to Peril-L’s syntax will be accepted.
+Solution:
+struct FE mutex {
+bool fe’;
+bool is locked;
+}
+(c) (5 points) Write the function body for FE mutex lock. The textbook points out that it is a usage error
+if a thread attempts to acquire a lock that it already has. POSIX-threads doesn’t check for this; so, you
+don’t have to either.
+Solution:
+void FE mutex lock(struct FE mutex *m) {
+m->fe’ = TRUE; // will block until the mutex is free.
+m->is locked = TRUE; // see FE mutex unlock
+}
+(d) (5 points) Write the function body for FE mutex unlock. It is an error to attempt to unlock a mutex
+that is not presently locked. Your code should call error("bad unlock"); in this situation.
+Solution:
+void FE mutex unlock(struct FE mutex *m) {
+if(!m->is locked) error("bad unlock");
+m->is locked = FALSE;
+int toss = m->fe’; // empty fe to release the lock
+}
+
+4
+
+struct FE mutex {
+// You declare the fields.
+};
+// FE mutex lock(m): acquire mutex m.
+void FE mutex lock(struct FE mutex *m) {
+// You write the function body.
+}
+// FE mutex unlock(m): release mutex m.
+void FE mutex unlock(struct FE mutex *m) {
+// You write the function body.
+}
+
+Figure 1: Implementing a mutex using full/empty variables.
+
+struct FE int {
+int value;
+boolean full;
+pthread mutex t lock;
+pthread cond t cond;
+};
+// FE int set: Set the value of *ef to val.
+// If *ef is full, block until it is empty.
+void FE int set(struct FE int *ef; int val) {
+pthread mutex lock(&(ef->lock));
+while(ef->full)
+pthread cond wait(&(ef->cond), &(ef->lock));
+ef->value = val;
+ef->full = TRUE;
+pthread cond signal(&(ef->cond));
+pthread mutex unlock(&(ef->lock));
+}
+// FE int get: Get the value of *ef to val.
+// If *ef is empty, block until it is full.
+int FE int get(struct FE int *ef) {
+// You get to write get!
+}
+
+Figure 2: Implementing full/empty variables using POSIX threads
+
+5
+
+c=1
+r=1
+
+c=2
+
+c=3
+
+c=4
+
+c=5
+
+c=6
+
+c=7
+
+c=8
+
+S
+
+r=2
+r=3
+r=4
+r=5
+r=6
+r=7
+r=8
+
+E
+
+Figure 3: Critical path for parallel editing distance computation
+
+5. (27 points) Consider the parallel implementation of dynamic programming for computing editing distance from
+the November 1 lecture. . . .
+In lecture, we modeled the time for this computation assuming that a processor takes time tup to update one cell
+of the tableau, and that the total for the sender and receiver to send and receive a message of m tableau elements
+is t0 + t1 m. With this model, the time for the sequential computation is tseq = tup N 2 and the time for the
+parallel computation is
+ 2
+
+
+N
+N
+tpar = (2P − 1)
+tup + 2(P − 1) t0 + t1
+P
+P
+(a) (5 points) Assume that tup = 20ns, t0 = 200ns and t1 = 10ns (reasonable values on a shared-memory
+implementation using POSIX threads or Java threads. Note: 1ns = 10− 9 seconds). What is the speed-up if
+N = 1000 and P = 16?
+Solution:
+tseq
+
+tpar
+
+SpeedUp
+
+= N 2 tup
+= 10002 20ns,
+= 20ms
+ 2
+N
+N
+= (2P − 1)
+tup + 2(P − 1)(t0 + )t1
+P
+P
+2
+= (2 ∗ 16 − 1) 1000
+20ns
++
+2
+∗
+(16
+−
+1)
+∗ (200ns +
+16
+= 2.45ns
+=
+=
+
+N = 1000, tup = 20ns
+
+1000
+16 )10ns,
+
+P = 16, t0 = 200ns, t1 = 10ns
+
+tseq
+tpar
+
+8.17
+
+Note: There was a right-parenthesis in the wrong place in the equation for tpar in the original
+version of the problem. If you used that formula, you would get (something whose units don’t
+make sense, but for I’ll ignore than to obtain)
+6
+
+• If 200ns is taken as (dimensionless) 200 · 10−9 , then tpar = 2.44ms, and SpeedUp = 8.19.
+• If 200ns is taken as (dimensionless) 200, then then tpar = 2.5ms, and SpeedUp = 7.998.
+
+7
+
+(b) (5 points) Show that in the limit that N → ∞, the speed-up goes to P/2.
+Solution:
+limN →∞ SpeedUp
+
+=
+
+limN →∞
+
+=
+
+limN →∞
+
+=
+=
+
+tseq (N )
+tpar (N )
+
+N 2 tup
+(2P −1)(N/P )2 tup +2(P −1)(t0 +(N/P )t1 )
+−1
+limN →∞ (2P − 1)/P 2 + 2(P − 1)(t0 /N + t1 /P )/N
+
+P
+2−
+
+1
+P
+
+For moderate to large values of P , this is roughly P/2. I’ll accept either answer.
+We can divide the tableau into smaller blocks. For any integer M > 1, let each block have size (N/(M P )) ×
+(N/(M P )). Now, the entire tableau consists of M P rows of M P columns of these blocks. Assume that N is
+divisible by M P . The revised algorithm (for processor k) is:
+for(int m = 0; m < M; m++) {
+c = m*(N/P) + k;
+top row[Jc ] = initial values;
+for(int r = 0; r < P; r++) {
+if(c > 1)
+receive values for T (I r , (c − 1) ∗ (N/P )) from process c-1;
+update B(r, c);
+if(c < N)
+send values for T (I r , c ∗ (N/P )) to process c+1;
+}
+}
+
+(c) (4 points) Draw the critical path for this computation when P = 8 and M = 2. You may use the template
+from Figure 4 when drawing your answer.
+Solution: See Figure A.Q5-c. There are many possible critical paths. This one shows a path
+where process 2 is busy for most of the path. All blocks that are traversed by solid-line portions of
+the blue line are on the path; other blocks, including those under dashed portions of the blue line
+are not on the critical path. On this path, process 1 computes B(1, 1), then process 2 computes
+all of its blocks except for thelast one, B(16, 14). Processes 3 and 4 then compute B(15, 15),
+B(15, 16), and B(16, 16).
+This path has the properties that as many blocks as possible have 2 ≤ j < M P – these blocks
+require both a send and a receive during their computation, thus the communication time is maximized. Furthermore, by including most of the computations for process 2 in the path, the computation time is not affected by whether or not process 2 time-shares when it has multiple blocks
+that can be updated. The same total comptuation time is needed either way.
+There are many other ways to choose a critical path that has the properties described above. Any
+correct answer will get full credit.
+(d) (5 points) Derive a formula for the parallel execution time as a function of N , P , M , t0 , t1 , and tup .
+Solution: The critical path includes the updates of M 2 P +(P −1) blocks. Each block consists of
+N
+N
+N2
+M P × M P cells that must be updated. Thus, the computation time to update a block is M 2 P 2 tup ,
+and the computation time on the critical path is:
+tcompute
+
+=
+=
+
+2
+
+(M 2 P + (P − 1)) MN2 P 2 tup
+ 2
+1 + M12 P 1 − P1 NP tup
+8
+
+All of these block updates involve one receive operation and one send except for the update
+of B(1, 1) which only involves a send, and the update of B(M P, M P ) which only involves a
+receive. Thus there are M 2 P + (P − 2) receives and M 2 P + (P − 2) sends on the path. Each
+message communicates N/(M P ) values. This yields a communication time of
+
+tmsg = (M 2 P + (P − 2)) t0 + MNP t1
+N
+= N M t1 + M
+1 − P2 t1 + (M 2 P + P − 2)t0
+The total time for the parallel computation is the sum of the time for computation plus the time
+for communication:
+tpar
+
+=
+=
+
+tcompute + tmsg
+N2
+N2
+P tup + M 2 P 1 −
+
+1
+P
+
+
+
+tup + N M t1 +
+
+N
+M
+
+1−
+
+2
+P
+
+
+
+t1 + (M 2 P + P − 2)t0
+
+(e) (4 points) What is the speed-up with M = 8 and the same parameters as for part a?
+Solution: Each block is MNP × MNP = 7.8125 × 7.8125 elements. You might ask how we can
+have a fractional number of elements in a block? That’s a reasonable question; I’m just taking it
+as a reasonable approximation for the next part when we consider large values of N , M , and P .
+Of course, I’ll give full credit to any solution that handles this is a reasonable way. The time for
+a block update is
+2
+tblk = MN2 P 2 tup
+2
+= 1000
+82 162 20ns
+= 1.22µs
+There are M 2 P + (P − 1) = 1039 blocks on the critical path; so the total compute time is
+1039 ∗ 1.2207µs = 1.2683ms. I’ll also use my formula for tcompute above and get
+tcompute
+
+=
+=
+=
+
+ 2
+1 + M 21∗P 1 − P1 NP tup
+
+1
+1
+10002
+1 + 82 ∗16
+1 − 16
+16 20ns
+1.2683ns
+
+The two calculations agree – I’m happy.
+There are 1038 sends and receives of 7.8125 values. Each send+receive takes time
+t0 + 7.8125t1 = 200ns + 7.8125 ∗ 10ns = 278.125ns
+
+The total time for sends and receives is 1038 ∗ 278.125ns = 288.7µs. I’ll also use my formula
+for tmsg above and get
+
+N
+tmsg = N M t1 + M
+1 − P2 t1 + (M 2P + P − 2)t0 N ∗ M ∗ t1 + (N/M )(1 − 2/P ) ∗ t1 + (M 2 ∗ P + P − 2)
+2
+= 1000 ∗ 8 ∗ 10ns + 1000
+1 − 16
+10ns + (82 ∗ 16 + 16 − 2) ∗ 200ns
+8
+= 288.7µs
+Again, the two calculations agree, and I’m happy.
+The total time is
+tpar = tcompute + tmsg
+= 1.557ms
+I’ll also use my formula for tmsg above and get
+tpar 0
+
+= tcompute + tmsg
+
+
+2
+2
+N
+1 − P2 t1 + (M 2 P + P − 2)t0
+= NP tup + MN2 P 1 − P1 tup + N M t1 + M
+2
+2
+= ((10002 )/16) ∗ 20ns + 81000
+2 ∗16 (1 − (1/16)) ∗ 20ns + 1000 ∗ 8 ∗ 10ns + (1000/8)(1 − (2/16))10ns + (8
+= 1.557ms
+9
+
+Good, that works out too.
+Finally,
+SpeedUp 0
+
+=
+=
+=
+
+tseq
+tpar 0
+20ms
+1.557ms
+12.85
+
+(f) (4 points) Show that in the limit as N → ∞, M can be chosen so that the speed-up will converge to P .
+Solution: From part (c) we have:
+tpar
+
+=
+
+N2
+P tup
+
++
+
+N2
+M 2P
+
+1−
+
+1
+P
+
+
+
+tup + N M t1 +
+
+N
+M
+
+1−
+
+2
+P
+
+
+
+t1 + (M 2 P + P − 2)t0
+t
+
+seq
+= P . Equivalently,
+and the problem statement gave us that tseq = N 2 tup . We want limN →∞ tpar
+we want to choose M so that
+
+
+2
+N
+limN →∞ MN2 P 1 − P1 tup + N M t1 + M
+1 − P2 t1 + (M 2 P + P − 2)t0 = o((N 2 /P )tup )
+2 2
+= o(1)
+⇔
+limN →∞ M12 + MNP + NPM + MNP2
+
+q
+If P = o(N ) then let M = N
+P , and the conclusion follows. If P is not o(N ), then we have
+an example of excessive parallelism which may be fun for algorithms on a PRAM, but it not the
+topic of this course.
+6. Sorting on a Mesh (28 points).
+Let a be an array with of N values, [a0 , a2 , . . . , aN − 1]. Every operation that I describe in this problem can be
+implemented using sorting networks. Thus, we can assume that every element of a has a value of 0 or 1.
+If N = N1 N2 , then we can arrange the elements of a in a two dimensional array, A, where
+Ai,j
+Ai,j
+
+= aN2 ∗i+j ,
+if i is even
+= aN2 ∗(i+1)−(j+1) , if i is odd
+
+This scheme arranges a into a “snaking” in A with even indexed rows going left-to-right, and odd-indexed rows
+going right-to-left.
+For simplicity, assume that N1 is a power of 2 greater than 1. We will say that a row of A is “clean” if all of its
+elements have the same value, and “dirty” if the row contains at least one 0 and at least one 1.
+In the first step of our sorting algorithm, we will sort all even-indexed rows to be ascending to the right, and all
+odd-indexed rows to be ascending to the left, i.e.:
+∀0 < j < N2 . A(i, j − 1) ≤ A(i, j), if i is even
+∀0 < j < N2 . A(i, j − 1) ≥ A(i, j), if i is odd
+(a) (5 points) Show that initially, the number of clean rows of A can be any value from 0 to N1 (inclusive).
+Solution: Assume N2 ≥ 2. Let 0 ≤ d ≤ N1 be the desired number of dirty rows. Let a be the
+sequence with:
+ai = 1, if i mod N2 = 0 and i/N2 < d
+= 0, otherwise
+The first d rows of A have one 1, and N2 − 1 0’s, and the remaining rows are all zero. Thus, A
+has d dirty rows.
+
+10
+
+c=1
+
+c=5
+
+c=9
+
+c=13
+
+c=16
+
+r=1 S
+
+r=5
+
+r=9
+
+r=13
+
+E
+
+r=16
+
+Figure 4: Critical path template for revised parallel editing distance computation
+
+c=1
+
+c=5
+
+c=9
+
+c=13
+
+c=16
+
+r=1 S
+
+r=5
+
+r=9
+
+r=13
+
+E
+
+r=16
+
+Figure A.Q5-c: Path for revised parallel editing distance computation
+
+11
+
+(b) (5 points) For every even numbered i with 0 ≤ i < N1 , do a compare-and-swap of A(i, j) and A(i + 1, j)
+for all 0 ≤ j < N2 . Show that after the compare-and-swap, at least one of row i or row i + 1 must be
+clean.
+Hint: consider what happens if the total number of zeros in rows i and i+1 is greater than the total number
+of ones. What if the number of ones is greater than the number of zeros?
+Solution: If the total number of zeros in rows i and i + 1 is greater than or equal to number of 1’s
+then the total number of zeros is greater than or equal to N2 . Because i is even, row i is sorted
+ascending to the right. Let
+j0
+j1
+
+= minj s.t.A(i, j) = 1,
+if ∃j ∈ {0, . . . N2 − 1}s.t.A(i, j) = 1
+= minj s.t.A(i + 1, j) = 0, if ∃j ∈ {0, . . . N2 − 1}s.t.A(i + 1, j) = 0
+
+The total number of zeros in row i is j0 , and the total number of zeros in row i + 1 is N2 − j1 .
+Thus,
+j0 + N2 − j1 > N2 , total number of zeros > N2
+j0 > j1 N2
+This means that for all 0 ≤ j < N2 , at least one of A(i, j) or A(i + 1, j) must be zero. After the
+compare and swap operation, all elements of A(i, j) must be 0, and row i is clean.
+If the total number of zeros in rows i and i + 1 is less than the number of ones, then a similar
+argument shows that after the compare-and-swap, all elements of A(i + 1, j) must be 1, and row
+i + 1 is clean.
+With either case, at least one of row i or row i + 1 must be clean.
+(c) (5 points) Instead of doing the compare-and-swap from part b, sort each column into ascending order, i.e.:
+∀0 < i < N1 . A(i − 1, j) ≤ A(i, j)
+Show that after all of the columns are sorted in this way, A has at least N1 /2 clean rows.
+Solution: After sorting the columns, each column consists of a sequence of zeros followed by
+a sequence of ones. The height of the sequence of zeros is equal to the number of zeros in the
+unsorted column. Performing a compare-and-swap as in part (b) does not change the number of
+zeros in each column; thus, we could perform this compare and swap on each pair of rows before
+the column sort and not change the outcome of the sort. This produces at least N1 /2 clean rows.
+For every row that is all 0’s before the column sort, there must be a row that is all 0’s after the
+column sort (these rows “sink” to the bottom). Likewise, row’s of 1’s float to the top.
+Combining these two observations, A must have at least N1 /2 clean rows after the column sort.
+(d) (8 points) Show that if the following algorithm is executed:
+for k = 1 to 1 + log2 N1 do
+forall i in (0..(N1 -1)) do
+if(i is even) sort row i of A ascending to the right;
+else sort row i of A descending to the right;
+end
+forall j in (0..(N2 -1)) do
+sort column j of A into ascending order;
+end
+array A has at most one dirty row.
+Solution: As shown above, after the first iteration of the for k loop, A must have at least N1 /2
+clean rows. The rows of zeros at the bottom of the array will be unaffected by further row or
+column sorts. Likewise for the rows of ones at the top. After the first iteration, A will have at
+
+12
+
+most N1 − N1 /2 = N1 /2 dirty rows, and these rows are the only ones modified by subsequent
+iterations of the for k loop.
+In the same manner, each successive iteration of the for k loop will reduce the number of dirty
+rows by a factor of two. More precisely, at the end of iteration k, A will have at most dN1 /2−k e
+dirty rows. At the end of the log2 N1 iterations, A will have at most one dirty row. The final
+iteration sorts this row (and the column sort will do nothing).
+(e) (5 points) Show that at the end of step d, A is sorted into ascending “snake” order (i.e. a is sorted into
+ascending order when mapped to A as described above).
+Solution: Let 0 ≤ i1 , i2 ≤ N1 and 0 ≤ j1 , j2 < N1 . Let
+m1
+
+= N2 ∗ i1 + j1 ,
+if i1 is even
+= N2 ∗ (i1 + 1) − (j1 + 1), if i1 is odd
+
+m2
+
+= N2 ∗ i2 + j2 ,
+if i2 is even
+= N2 ∗ (i2 + 1) − (j2 + 1), if i2 is odd
+
+I’ll show that if m1 ≤ m2 , then A(i1 , j1 ) ≤ A(i2 , j2 ). First, I’ll show that if i1 > i2 , then
+m1 > m2 . If i1 is even, then either i2 is odd or i1 − i2 ≥ 2, thus
+m1 − m2
+
+≥
+≥
+≥
+≥
+≥
+
+N2 ∗ i1 + j1 − max(N2 ∗ (i1 − 2) + j2 , N2 ∗ ((i1 − 1) + 1) − (j2 + 1))
+N2 ∗ i1 + j1 − N2 ∗ i1 − max(j2 − 2 ∗ N2 , −(j2 + 1))
+j1 − max(−N2 − 1, −j2 − 1)
+j1 + 1
+1
+
+Thus, if i1 is even and i1 > i2 , then m1 > m2 . A similar argument shows that if i1 is odd and
+i1 > i2 , then m1 > m2 . Thus, if i1 > i2 , then m1 > m1 .
+Now, assume m1 ≤ m2 , then i1 ≤ i2 as just shown. If i1 < i2 , then at least one of row i1 or
+i2 must be clean, and it follows that A(i1 , j1 ) ≤ A(i2 , j2 ). If i1 = i2 , then if i1 is even then
+j1 ≤ j2 , and if i1 is odd then then j1 ≥ j2 . Consider the case when i1 is even. Row i1 is sorted in
+the final step into ascending order. Because j1 ≤ j2 , A(i1 , j1 ) ≤ A(i2 , j2 ). Otherwise, i2 is odd;
+j1 ≥ j2 , row i1 is sorted into descending order; and A(i1 , j1 ) ≤ A(i2 , j2 ). Thus, if m1 ≤ m2 ,
+A(i1 , j1 ) ≤ A(i2 , j2 ), and a(m1 ) ≤ a(m2 ). The two-dimensional array A has been sorted into
+“snake order,” and the one-dimensional array a has been sorted into ascending order.
+Note: This algorithm is known as “Shear Sort” see
+• I.D. Scherson, S. Sen: “Parallel sorting in two-dimensional VLSI models of computation.”
+IEEE Transactions on Computers vol. C-38, no. 2, pp. 238-249 (1989)
+• http://www.iti.fh-flensburg.de/lang/algorithmen/sortieren/twodim/shear/shearsorten.htm
+
+13
+
+c=0
+
+c=1
+
+c=5
+
+c=6
+
+c=7
+
+r=0
+
+a0
+
+a5
+
+a6
+
+a7
+
+r=1
+
+a15 a14 a13 a12 a11 a10 a9
+
+a8
+
+r=2
+
+a16
+
+a1
+
+c=2
+
+a2
+
+c=3
+
+a3
+
+c=4
+
+a4
+
+r=3
+r=4
+r=5
+r=6
+r=7
+
+a63
+
+Figure 5: Snake-ordering of the elements of an array
+
+14
+

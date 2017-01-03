@@ -1,0 +1,962 @@
+https://web.archive.org/web/2222/http://www.cs.ubc.ca:80/~emtiyaz/papers/emt_eusipco2004.pdf
+EXPECTATION-MAXIMIZATION (EM) ALGORITHM FOR INSTANTANEOUS
+FREQUENCY ESTIMATION WITH KALMAN SMOOTHER
+Md. Emtiyaz Khan, D. Narayana Dutt
+Department of Electrical Communication Engineering
+Indian Institute of Science, Bangalore, India
+phone: +91 80 22932742, email: emtiyaz@protocol.ece.iisc.ernet.in
+
+ABSTRACT
+In this paper, we propose an expectation-maximization (EM)
+algorithm based approach for instantaneous frequency (IF)
+estimation in a Kalman smoother framework. We formulate
+time-varying AR (TVAR) model as a state-space model and
+derive EM algorithm for model parameter estimation. This
+is used with Kalman smoother for IF estimation. We show
+that our scheme EMIF shows best performance among the
+other existing adaptive algorithms like RLS and LMS. Performance analysis is reported for a class of FM signals.
+1. INTRODUCTION
+Estimation of instantaneous frequency (IF) is of primary interest in many fields like wireless communications, speech,
+radar and underwater acoustics etc. Time-varying autoregressive (TVAR) model based IF estimation was first proposed in [6]. Later, Shan and Beex [1] applied basis function approach to a TVAR model. Various IF estimation algorithms, including the adaptive algorithms (RLS and LMS)
+were reviewed and compared by Boashash [7]. It was observed that performance of these algorithms is low because
+of suboptimal smoothing.
+We propose an expectation-maximization (EM) algorithm based IF estimation (EMIF) in a Kalman smoother
+framework. We first formulate the TVAR model as a statespace model. Then we estimate the model parameters with
+EM algorithm. Once we have the model parameters, IF estimates are computed with a Kalman smoother. As EMIF falls
+in the category of adaptive algorithms, we compare it with
+RLS and LMS algorithms. We show that EMIF performs
+significantly better than the other adaptive algorithms.
+
+T , following a time-varying
+Consider the time series {yt }t=1
+AR (TVAR) model,
+p
+
+yt =
+
+∑
+
+0
+
+p(yt |xt , ht ) = N (ht xt , σv2 )
+p(xt |xt−1 ) = N (Axt−1 , Q)
+p(x1 ) = N (π1 , V1 )
+
+Denote the model parameters as Θ ≡ {A, σv2 , Q, π1 ,V1 }. This
+kind of model has been previously studied in [2] and [5]. If
+Θ is known, xt (the TVAR parameters) can be inferred using Kalman filter. The advantages of Kalman filter are well
+known [2]. As the usual practice in IF estimation is to process a block of data, we can use both the preceding and succeeding time series samples. This leads to the notion of a
+Kalman smoother.
+However, in practice, we do not know Θ, so usually these
+parameters are set to arbitrary values or various ad-hoc /suboptimal procedures are used for their estimation. We use
+expectation-maximization (EM) algorithm for parameter estimation of our state-space model. Similar approach has been
+used in [3] and [4]. But our model differs from those in the
+sense that the observation vector ht is not constant, but depends on the lagged output {yt−1 , yt−2 . . . , yt−p }. We first derive the joint log-likelihood for our model and then describe
+EMIF.
+2.1 Log-Likelihood
+We define,
+Y1T = {y1 , y2 , . . . , yT } and
+{x1 , x2 , . . . , xT }. The joint likelihood is given by,
+
+(1)
+
+p
+{atk }k=1
+
+where,
+are the TVAR parameters, p is the model
+order and vt is observation noise, vt ∼ N (0, σv2 ). Define
+xt ≡ [at1 at2 . . . atp ]0 and ht ≡ [yt−1 yt−2 . . . yt−p ]0 ( 0 denotes
+transpose). The TVAR parameters are modeled as a multivariate AR(1) process, leading to the following state-space
+model,
+0
+
+= ht xt + vt
+= Axt−1 + wt
+
+T
+
+T
+
+t=2
+
+t=1
+
+X1T =
+
+Using eq.(4)-(6), we get,
+log p(X1T , Y1T |Θ) = −
+
+k=1
+
+yt
+xt
+
+(4)
+(5)
+(6)
+
+p(X1T , Y1T |Θ) = p(x1 ) ∏ p(xt |xt−1 ) ∏ p(yt |xt , ht ) (7)
+
+2. TVAR AND STATE SPACE MODEL
+
+atk yt−k + vt
+
+where wt ∼ N (0, Q) is the state noise and A is p × p state
+transition matrix. Eq.(2)(3) is a class of linear dynamical
+system. We have,
+
+(2)
+(3)
+
+−
+
+0
+1 T
+T
+ln σv2 − 2 ∑ (yt − ht xt )2
+2
+2σv t=1
+0
+1 T
+(xt − Axt−1 ) Q−1 (xt − Axt−1 )
+∑
+2 t=2
+
+1
+1
+− (x1 − π1 )0V1−1 (x1 − π1 ) − ln |V1 |
+2
+2
+(p + 1)T
+T −1
+ln |Q| −
+ln 2π
+(8)
+−
+2
+2
+Clearly, the joint log-likelihood is function of xt , which is
+a hidden variable. The joint log-likelihood cannot be maximized directly. We use EM algorithm for maximization.
+
+3. EM ALGORITHM FOR IF ESTIMATION (EMIF)
+In E-step, we compute the expected log-likelihood, given observations Y1T and parameter estimate Θi−1 from the previous iteration,
+Q(Θ, Θ
+
+i−1
+
+)=E
+
+£
+
+ln p(X1T , Y1T |Θ)|Y1T , Θi−1
+
+¤
+
+(9)
+
+Q(Θ, Θi−1 )
+
+We then maximize
+with respect to Θ, to obtain
+the parameter estimate Θi for the next iteration. The EM
+algorithm, as applied to the present problem is discussed below.
+3.1 E-step
+Computation of Q(Θ, Θi−1 ) requires E[xt |Y1T ], E[xt xt0 |Y1T ]
+0 |Y T ], which we denote by x
+bt , Pt and Pt,t−1 reand E[xt xt−1
+1
+spectively. These are estimated with a Kalman smoother. Define, xtτ ≡ E(xt |Y1τ ) and Vtτ ≡ Var(xt |Y1τ ). We obtain the
+following Kalman filter forward recursions:
+xt−1
+t
+
+= Axt−1
+t−1
+
+Vtt−1
+
+=
+
+Kt
+
+=
+
+xtt
+
+=
+
+Vtt
+
+=
+
+(10)
+
+t−1 0
+AVt−1
+A +Q
+t−1
+Vt ht
+0
+2
+σv + ht Vtt−1 ht
+0
++ Kt (yt − ht xt−1
+xt−1
+t )
+t
+0
+t−1
+(I − Kt ht )Vt
+
+(11)
+(12)
+
+T
+xt−1
+T
+Vt−1
+
+t−1 0 t−1 −1
+= Vt−1
+A (Vt )
+
+=
+=
+
+Jt−1 (xtT − Axt−1
+t−1 )
+t−1
+0
+Vt−1
++ Jt−1 (VtT −Vtt−1 )Jt−1
+
+Pt,t−1
+
+= Jt−1VtT
+=
+
+0
+
+t−1
+P(yt |Y1t−1 ) = N (ht xt−1
+ht + σv2 )
+t , ht Vt
+
+bi
+Q
+
+πb1i
+Vb1i
+
+t=2
+T
+
+1
+T
+
+=
+
+´³
+
+T
+
+T
+
+∑ Pt,t−1 ∑ Pt−1
+∑
+
+t=1
+
+³
+
+t=2
+
+´−1
+
+0
+
+0
+
+bt yt + ht Pt ht
+yt2 − 2 ht x
+
+´
+T
+1 ³ T
+bi ∑ Pt−1,t
+Pt − A
+∑
+T − 1 t=2
+t=2
+
+=
+
+b1
+= x
+
+=
+
+3.3 IF Estimation
+
+(21)
+´
+
+(22)
+(23)
+(24)
+
+b1 x
+b01
+P1 − x
+
+(25)
+
+Once we have the estimates of Θ, TVAR parameters i.e. xt
+can be inferred from Kalman smoother eq.(10)-(17). Then,
+we estimate the time-varying frequency spectrum as,
+Pbt ( f ) =
+
+c2
+σ
+v
+p
+|1 − ∑k=1 abtk e−i2π k f / f s |2
+
+(26)
+
+The IF estimate is computed as the peak of the spectrum
+Pbt ( f ), i.e.,
+bft = arg max Pbt ( f )
+(27)
+f
+
+We observed that initializing the algorithm properly leads to
+better estimates, and speedens convergence. For initialization, we divide the dataset into overlapping windows, and
+compute the maximum likelihood estimates of xt for each
+window. By setting A to identity matrix, and assuming state
+equation (3), we compute maximum likelihood estimates of
+{Q, x1 ,V1 }. With these estimates of parameters, we again
+run the dataset through Kalman smoother to get the estimates
+of xt , from which the maximum likelihood estimates of all
+the parameters are obtained. These are used to initialize the
+EM algorithm.
+After initialization, E and M steps are iterated. The
+progress of the algorithm is monitored with the likelihood
+given by eq.(20), and the algorithm is said to have converged,
+if successive iterations do not improve the likelihood score
+by more than 0.01%.
+To generalize the formulation for multiple observations,
+bt , Pt , Pt,t−1 are time
+we need to take care of the fact that x
+dependent. For the sake of simplicity, we assume all the observations to be i.i.d., which yields,
+
+(15)
+(16)
+(17)
+
+(19)
+
+The conditional likelihood is computed as,
+0
+
+c2 i
+σ
+v
+
+³
+
+=
+
+(14)
+
+(18)
+
+T
+T0
+Vt,t−1
++ xtT xt−1
+
+bi
+A
+
+4. PRACTICAL ISSUES
+
+For calculation of Pt,t−1 ,
+Vt,t−1
+
+Maximizing Q(Θ, Θi−1 ) with respect to Θ, we get the following estimates in the ith iteration:
+
+(13)
+
+bt ≡ xtT and Pt ≡
+where x01 = π1 and V10 = V1 . To compute x
+T
+T
+T
+0
+Vt +xt xt one performs a set of backward recursions using,
+Jt−1
+
+3.2 M-step
+
+(20)
+
+With this equation, the progress of the learning algorithm is
+monitored. This formulation is similar to [4], but there is an
+important difference. As ht is varying with time, the estibt , Pt , Pt,t−1 will also vary with time, unlike the usual
+mate of x
+formulation of Kalman filters (see [8]), where Pt and Pt,t−1
+are independent of data.
+
+¡
+¢
+Q Θ, Θi−1 =
+
+N
+
+∑E
+
+k=1
+
+£¡
+
+¤
+¢
+ln p(X k , Y k |Θ) |Y k , Θi−1 (28)
+
+where X k and Y k are variables associated with the kth obbt , Pt , Pt,t−1 ¡are the sum
+servation. Clearly, the estimates of x
+¢
+of the estimates of each observation. Then, Q Θ, Θi−1 is
+maximized with respect to Θ.
+In this paper, we set model order at p = 4. Effect of
+model order on the performance and computational complexity of the algorithm will be studied separately.
+
+50
+
+Frequency (Hz)
+
+Frequency (Hz)
+
+30
+20
+10
+0
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+40
+30
+20
+10
+0
+
+1.8
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+(a)
+
+10
+0
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+1.8
+
+30
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.4
+
+1.6
+
+1.8
+
+2
+
+Figure 3: (a) Time-varying spectral estimate of a sinusoidal
+FM signal, estimated with EMIF (b) Comparison of EMIF,
+RLS and LMS, for IF estimation of sinusoidal FM (one realization at 10.98 dB).
+60
+Frequency (Hz)
+
+Frequency (Hz)
+
+1.2
+
+(b)
+
+EMIF
+
+40
+30
+20
+10
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+EMIF
+
+40
+20
+0
+
+0
+
+1.8
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+1.8
+
+2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+1.8
+
+2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+1.8
+
+2
+
+60
+Frequency (Hz)
+
+50
+Frequency (Hz)
+
+1
+
+Time (Seconds)
+
+50
+
+RLS
+
+40
+30
+20
+10
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+RLS
+
+40
+20
+0
+
+0
+
+1.8
+
+0
+
+0.2
+
+60
+
+40
+
+Frequency (Hz)
+
+50
+Frequency (Hz)
+
+1.8
+
+10
+0
+
+2
+
+Figure 1: (a) Time-varying spectral estimate of a linear FM
+signal, estimated with EMIF (b) comparison of EMIF, RLS
+and LMS, for IF estimation of linear FM (one realization at
+10.98 dB).
+
+LMS
+
+30
+20
+10
+0
+
+1.6
+
+20
+
+(b)
+
+0
+
+1.4
+
+LMS
+RLS
+True IF
+EMIF
+
+40
+
+Time (Seconds)
+
+0
+
+1.2
+
+50
+
+LMS
+RLS
+Truw IF
+EMIF
+
+Frequency (Hz)
+
+Frequency (Hz)
+
+30
+20
+
+1
+
+(a)
+
+20
+0
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1
+
+1.2
+
+1.4
+
+1.6
+
+1.8
+
+Time (Seconds)
+
+Figure 2: fbt (solid line), fbt ± σ f (dashed line) for IF estimates
+of 100 realizations of linear FM signal, with SNR=17.9 dB,
+estimated with EMIF, RLS and LMS
+
+LMS
+
+40
+
+0
+
+0.2
+
+Time (Seconds)
+
+Figure 4: fbt (solid line), fbt ± σ f (dashed line) for IF estimates
+of 100 realizations of sinusoidal FM signal, with SNR=17.9
+dB, estimated with EMIF, RLS and LMS
+
+5. RESULTS
+5.1 Experiment I
+First, we compare the performance, for linear IF estimate.
+Consider,
+yt = 5 sin(2π ft t) + ut
+(29)
+where ft is the instantaneous frequency given by ft = 10t,
+and ut is a white Gaussian noise with variance σu2 . We generated one realization with σu2 = 1 (SNR=10.98 dB), of 2 seconds duration, and sampled at 128 Hz. Time-varying spectral estimate is shown in Fig.1(a). IF estimates were obtained
+with EMIF, RLS and LMS. Forgetting factor λ , for RLS and
+step size µ for LMS, were set to 0.95 and 0.04, respectively.
+One can clearly see in Fig.1(b), that the steady state error,
+
+as well as settling time, are very less in EMIF, compared to
+RLS and LMS. Hence, we see that EMIF gives the best overall performance.
+To analyze the average performance over realizations, we
+generated 100 realizations with σu2 = 0.2. λ and µ were set
+to 0.95 and 0.01, respectively. Fig.2 shows fbt and fbt ± σ f ,
+where fbt and σ f denote mean and standard deviation, respectively, of the IF estimates. Here again, EMIF is observed to
+have very less steady state error and settling time, compared
+to RLS and LMS. Also, EMIF has the closest mean to the
+true IF, and least variance of all. Thus, EMIF has the best
+average performance too.
+
+5.2 Experiment II
+
+55
+
+where ut ∼ N (0, σu2 ). The instantaneous frequency, underlying the signal, is given by,
+f i (t) = f + 0.1π f f mod cos(2π fmod t)
+
+(31)
+
+We set f = 19.2 Hz and f mod = 1.28 Hz. We produced one realization of 2 seconds duration with σu2 = 1
+(SNR=10.98 dB), and sampled at 128 Hz. Time-varying
+spectral estimate with EMIF is shown in Fig.3(a). λ and
+µ were set to 0.85 and 0.01 respectively. IF estimates are
+shown in Fig.3(b). We see that EMIF tracks the true IF better
+than RLS and LMS.
+To compare the average performance, we compute IF estimates of 100 realizations, with σe2 = 1.25 (SNR=10dB). λ
+and µ were set to 0.85 and 0.01 respectively. Fig.4 shows fbt
+and fbt ± σ f . Clearly, EMIF has the closest mean and least
+spread of all.
+5.3 Experiment III
+
+35
+
+25
+
+25
+
+15
+
+15
+
+5
+0
+
+10
+
+20
+
+30
+
+0
+
+10
+
+20
+
+SNR (dB)
+
+SNR (dB)
+
+(a)
+
+(b)
+
+30
+
+Figure 5: MSE vs. SNR for (a) linear FM signal (b) sinusoidal FM signal
+7. ACKNOWLEDGMENT
+The authors would like to thank S. Chandra Shekhar, Dept.
+of Electrical Communication Engg., Indian Institute of Science, Bangalore for his advice and support during this work.
+REFERENCES
+
+To complete the analysis, we compare the error performance
+at different noise levels, for both linear and sinusoidal FM
+signal. We vary σu2 , and estimate the IF for 100 realizations.
+The mean square error (MSE) was calculated as,
+T
+
+MSE =
+
+35
+
+RLS
+EM
+LMS
+
+MSE (dB)
+
+(30)
+
+45
+
+MSE (dB)
+
+yt = 5 sin(2π f (t + 0.05 sin(2π f mod t))) + ut .
+
+RLS
+EM
+LMS
+
+45
+
+Now we compare for non-linear FM signal (sinusoidal) given
+as,
+
+N
+
+∑T ∑ ( fbtk − ft )2
+
+(32)
+
+t= 2 k=1
+
+where, fbtk is the IF estimate from kth realization, ft is true
+IF, N is the total number of realizations, T is observation
+length. Note that rather than computing MSE at a point, we
+averaged MSE for all the points, from middle of the block to
+end. This is because of our interest in tracking the IF and not
+in estimating it at a point. Also, first half of the estimate is
+not used for MSE computation, because the RLS and LMS
+algorithms have large initial error. Including them will bias
+the error measure and hence, they were not considered. Only
+[T /2, T ] was used.
+The average error against SNR for linear FM and sinusoidal FM, is shown in Fig.5 (a) and (b). One can clearly see
+that error is least for EMIF. At higher SNR too, EMIF performs satisfactorily, whereas the performance of LMS and
+RLS is very bad.
+6. CONCLUSION
+In this paper, we proposed a new algorithm EMIF for instantaneous frequency estimation, using EM algorithm approach
+in a Kalman smoother framework. We compared EMIF with
+RLS and LMS algorithms for IF estimation. EMIF was
+shown to have best IF tracking. We compared MSE at different noise levels, and EMIF was shown to have least error
+for all. Even at higher SNR, where the performance of LMS
+and RLS was very bad, EMIF performed reasonably well.
+Hence, EMIF is a significant improvement over other available adaptive algorithms.
+
+[1] P. Shan and A. A. Beex, ”High-resolution instantaneous
+frequency estimation based on time-varying AR modeling”, IEEE 4th International Symposium on TimeFrequency and Time-Scale Analysis (TFTS’98), Pittsburgh, PA, Oct. 1998.
+[2] M. Arnold, W. H. R. Miltner, H. Witte, R. Bauer, and
+C. Braun, ”Adaptive AR modelling of nonstationary
+time series by means of Kalman filtering”, IEEE Trans.
+Biomed. Eng., vol. 45, pp. 553-562, May 1998.
+[3] R.H. Shumway and D.S. Stoffer, ”An approach to Time
+Series smoothing and forecasting using the EM algorithm”, J. Time Series Anal., vol. 3, No. 4, pp. 253-264,
+1982.
+[4] Z. Ghahramani and G. E. Hinton (1996), ”Parameter
+Estimation for Linear Dynamical Systems”, Technical
+report, Univ. Toronto, Dept. Comput. Sci, Toronto, ON,
+Canada.
+[5] M. J. Cassidy and W. D. Penny, ”Bayesian nonstationary autoregressive models for biomedical signal analysis”, IEEE Trans. Biomed. Eng., vol. 49, no. 10, pp.
+1142-1152, Oct.2002.
+[6] K. C. Sharman and B. Friedlander, ”Time-varying autoregressive modeling of a class of nonstationary signals”, Proc. ICASSP’84, vol. 2, pp. 22.2.1-22.2.4, San
+Diaego, CA, March 1984.
+[7] B. Boashash, ”Estimation and interpreting the instantaneous frequency of a signal - part 2: algorithm and
+applications”, Proceedings of IEEE, vol. 80, no. 4, pp.
+540-568, 1992.
+[8] Kay, S.M., Fundamentals of Statistical Signal Processing: Estimation Theory, Prentice Hall International,
+1993.
+

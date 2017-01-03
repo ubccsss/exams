@@ -1,0 +1,346 @@
+
+Author: Hazra
+Midterm 2
+Ques 1. [2 Marks] Circle the correct answers
+1. Normalization is not for
+a) reducing the number of tables in the schema.
+b) eliminating uncontrolled redundancy of data.
+c) eliminating anomalies that could otherwise occur with insert, delete or
+update.
+d) ensuring that functional dependencies are enforced.
+
+2.If a non-key attribute of a relation is null, then that table automatically violates
+which normal form
+a) NONE
+b) 1NF
+c) 2NF
+d) 3NF
+e) BCNF
+
+3. A table is in 2NF if the table is in 1NF and what other condition is met?
+a) There are no functional dependencies.
+b) There are no null values in primary key fields.
+c) There are no repeating tuples.
+d) There are no attributes that are not fully functionally dependent on the
+relation's primary key.
+
+4. Which is true?
+a) A superkey is a key.
+b) Two tuples can have the same key value.
+c) A relation can have more than one candidate key.
+d) None of the above
+
+2
+
+Normalization, 3NF, BCNF
+Ques 2. [4 Marks] Consider the relation shown
+A
+
+B
+
+C
+
+A1
+
+B1
+
+C1
+
+A1
+
+B1
+
+C2
+
+A2
+
+B1
+
+C1
+
+A2
+
+B1
+
+C3
+
+a) List all the functional dependencies that
+the given relation instance satisfies.
+List
+
+b) Assume that the value of attribute C of
+the last record in the relation is changed
+from C3 to C2. Now list all the functional
+dependencies that this relation instance
+satisfies.
+Ques 3. [2 Marks] Consider a relation R = (A, B, C, D, E).
+R is decomposed it into R1 = (A, B, C), R2 = (A, D, E). The set of functional dependencies
+is:
+A → BC
+CD → E
+B→D
+E → A.
+Show that this decomposition is a lossless-join decomposition.
+
+3
+
+Ques 4. [6 Marks] Consider the below instance of the CLASS relation. Determine whether
+each of the following statements is true or false; briefly justify your answer.
+CID
+
+CName
+
+Credit
+
+SID
+
+SName
+
+Grade
+
+C1
+C1
+C2
+C3
+C3
+C3
+C4
+C4
+C5
+
+Math
+Math
+AI
+DB
+DB
+DB
+SE
+SE
+DM
+
+4
+4
+4
+3
+3
+3
+3
+3
+3
+
+S1
+S2
+S3
+S4
+S5
+S6
+S1
+S2
+S7
+
+Jimmy
+Sean
+Mary
+Peter
+Lila
+Tony
+Jimmy
+Sean
+Boi
+
+Pass
+Pass
+Pass
+Fail
+Pass
+Pass
+Pass
+Fail
+Pass
+
+Statements
+a) If class (C5, DM) is deleted then
+the information about student S7
+would also be removed because of
+deletion anomaly.
+
+T/F?
+
+Brief Justification
+
+b) Inserting CLASS (C6, Calculus, 3)
+is
+an
+example
+of
+insertion
+anomaly.
+
+4
+
+Ques 5. [6 Marks] Consider the following two schemas
+Schema 1: R (A,B,C,D)
+Schema 2: R1 (A,B,C) and R2 (B,D)
+Determine whether each of the following statement is true or false; briefly
+justify your answer.
+Statements
+a) Consider Schema 1 and suppose that
+the only functional dependencies that
+hold on the relations in this schema are
+AB and CD. Is Schema 1 in BoyceCodd Normal Form (BCNF)?
+
+T/F?
+
+b) Consider Schema 2 and suppose that
+the only functional dependencies that
+hold on the relations in this schema are
+AB, A C, B A, AD and all possible
+implicit FDs. Is Schema 2 in BCNF?
+
+c) If AD is deleted from part (b). Is
+Schema 2 in BCNF?
+
+5
+
+Brief Justification
+
+Ques 6. [15 Marks] Consider the following relation R(A, B, C, D) and the functional
+dependencies that hold over this relation.
+F = A → B, D
+C, D → B
+C→D
+B→D
+a) Determine all candidate keys of R.
+
+b) Compute the closure of {C, B}
+
+c) Compute the minimal cover
+
+6
+
+d) Is R in 3NF? If not, then decompose it. Show all the steps. If you are
+decomposing R then determine the candidate keys of each decomposed
+relations.
+
+7
+
+SQL
+Ques 7. [6 Marks] Consider the below relations where primary keys are underline and
+foreign key is bold.
+employee (ssn,name, address, phone)
+project(pno, pname,essn)
+Determine whether each of the following statement is true or false; provide a brief
+justification of your choice. State any assumptions that you make.
+Statements
+a) In SQL, the query
+“SELECT name FROM employee where
+ssn>10”
+will not return duplicates.
+
+T/F?
+
+b) Consider below queries:
+Query 1: SELECT COUNT (*) FROM
+employee
+Query 2: SELECT COUNT(name) FROM
+employee
+Query1 and Query2 always return the
+same result.
+
+c) SELECT e.name FROM
+employee e, project p
+WHERE e.ssn = p.essn
+is equivalent to
+SELECT name FROM employee
+
+8
+
+Brief Justification
+
+Ques 8. [5 Marks] Give the SQL command needed to create the Item relation. You may
+choose the reasonable domains for your attributes. You must specify the following:
+ ItemNo is the primary key
+ {IName, Quantity} is a candidate key
+ IName and Quantity are not allowed to contain null values
+ Price must be greater than 100.
+
+9
+
+Ques 9. [6 Marks] Consider the following relations (Keys are underlined and foreign keys
+are bold)
+Author ( Name, Address, Gender, Research_area)
+Journal (JName, Paper_title, Published_year, AName)
+Write SQL statements that correspond to the following relational algebra expressions.
+
+𝜋𝐽𝑁𝑎𝑚𝑒,𝑃𝑎𝑝𝑒𝑟_𝑡𝑖𝑡𝑙𝑒 (𝜎𝑃𝑢𝑏𝑙𝑖𝑠ℎ𝑒𝑑_𝑦𝑒𝑎𝑟=2016 (𝐽𝑜𝑢𝑟𝑛𝑎𝑙))
+
+𝜋𝐽𝑁𝑎𝑚𝑒 (𝜎𝐴𝑛𝑎𝑚𝑒=𝑛𝑎𝑚𝑒 𝐴𝑁𝐷 𝑝𝑢𝑏𝑙𝑖𝑠ℎ𝑒𝑑_𝑦𝑒𝑎𝑟=2016 (Author X Journal))
+
+10
+
+Ques 10. [24 Marks] Consider the Company database schema and instances given in
+Appendix A. Use SQL to answer the following questions. Please make sure that your
+queries do not include any extra information.
+a) For each project, retrieve the project number, the project name, and the number of
+employees from department 5 who work on the project.
+
+b) Retrieve the name of all employees who have two or more dependents. (Use nested query)
+
+11
+
+c) Create a view that has employee name, supervisor name, and employee salary for each
+employee who works in the ‘Research’ department
+
+d) Retrieve all employees whose address is in Houston, Texas
+
+12
+
+e) Retrieve the list of all project numbers for projects that involve an employee whose name is
+‘John Smith’, either as a worker or as a manager of the department that controls the project.
+
+f) Retrieve the name of all employees who works on all projects controlled by department
+number 5.
+
+13
+
+Datalog
+Ques 11. [12 Marks] Consider the following relations (Primary keys are underline and
+foreign keys are bold):
+Paper(title, citation, AName,year,JName)
+Journal(JName, year, PName, AName)
+Author (AName, RArea)
+Where Aname is author name, PName is publisher name and RArea is research area.
+Write Datalog to answer the following queries.
+a) List the journal name and author name of all journals in the database.
+
+b) List the name of journals in which papers are published by authors having research area
+“Databases”
+
+14
+
+A continuation of the above question; the relations are listed here again to prevent having
+to look them up
+Paper(title, citation, AName,year,JName)
+Journal(JName, year, PName, AName)
+Author (AName, RArea)
+Where Aname is author name, PName is publisher name and RArea is research area.
+c) List the citation of all paper authored in 2016 or authored by Hazra Imran
+
+d) Find the names of authors who have authored paper for all journals.
+
+15
+
+This space is intentionally left blank. You can use it to answer questions or
+as scratch paper
+
+16
+
+APPENDIX A
+Name: _________________________________
+
+Student ID________________________________
+
+Consider the relation schema and instance of the COMPANY database given below:
+
+17
+

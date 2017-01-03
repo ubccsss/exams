@@ -1,0 +1,194 @@
+
+CPSC 121 Sample Midterm
+October 2008
+Name:
+Signature:
+
+Student ID:
+Tutorial section:
+
+– You have 70 minutes to write the 6 questions on this examination.
+A total of 60 marks are available.
+– Justify all of your answers.
+
+Question Marks
+
+– You are allowed to bring in one hand-written, double-sided 8.5 x
+11 sheet of notes, and nothing else.
+
+1
+
+– Keep your answers short. If you run out of space for a question,
+you have written too much.
+
+3
+
+– The number in square brackets to the left of the question number
+indicates the number of marks allocated for that question. Use
+these to help you determine how much time you should spend on
+each question.
+
+5
+
+2
+4
+6
+Total
+
+– Use the back of the pages for your rough work.
+– Good luck!
+UNIVERSITY REGULATIONS:
+– Each candidate should be prepared to produce, upon request, his/her library card.
+– No candidate shall be permitted to enter the examination room after the expiration of one half
+hour, or to leave during the first half hour of the examination.
+– CAUTION: candidates guilty of any of the following, or similar, dishonest practices shall be
+immediately dismissed from the examination and shall be liable to disciplinary action.
+1. Having at the place of writing, or making use of, any books, papers or memoranda, electronic equipment, or other memory aid or communication devices, other than those authorised by the examiners.
+2. Speaking or communicating with other candidates.
+3. Purposely exposing written papers to the view of other candidates. The plea of accident or
+forgetfulness shall not be received.
+– Candidates must not destroy or mutilate any examination material; must hand in all examination
+papers; and must not take any examination material from the examination room without permission of the invigilator.
+
+page 2 out of 7
+[12] 1. After the midterm, several friends are thinking about going to see a movie, either Death at
+a Funeral or Rendition. Let
+a
+e
+p
+v
+w
+d
+r
+
+=
+=
+=
+=
+=
+=
+=
+
+Alice wants to go to the movie
+Ebert wants to go to the movie
+Peter wants to go to the movie
+Volkov wants to go to the movie
+Wolfgang wants to go to the movie
+The movie is Death at a Funeral
+The movie is Rendition
+
+The table below contains various English sentences, predicates, and logic circuits. Each
+sentence, truth value of an expression, or output of a circuit describes a set of conditions
+where Wolfgang will go to a movie (that is, “w”). Identify those that are equivalent to each
+other. You will find 3 groups of two table entries that are equivalent, and two entries that are
+equivalent to no other entry. You should write your answer in the form “A ≡ B, C ≡ D,
+E ≡ F , G and H are unpaired.”
+Write your answers below (continue at the top of the next page). You should give a short
+justification (one or two sentences) for each pairing. Do not spend more than 15 minutes
+on this question, unless you have already completed the rest of the examination.
+
+A.
+
+a
+p
+e
+v
+
+w
+
+B.
+
+a
+p
+e
+v
+
+w
+
+C.
+
+Wolfgang will go to a movie if and
+only if at least three of the other four
+people want to go to it.
+
+D.
+
+Wolfgang will go if and only if that
+makes the number of people in the
+group even.
+
+E.
+
+Wolfgang will only go to Death at
+a Funeral with Peter or to Rendition
+with Alice.
+
+F.
+
+(d ∧ p) ∨ (r ∧ a)
+
+G.
+
+(p ∧ ∼ a) ∨ (v ∧ ∼ e)
+
+H.
+
+((a ∨ e) ∧ (v ∨ p)) ∨
+((a ∨ v) ∧ (e ∨ p))
+
+page 3 out of 7
+Continue writing your answer to question 1 here.
+
+page 4 out of 7
+[12] 2. Because he was busy grading a Computer Science midterm, Steve was unable to attend the
+department’s Halloween party. He managed to obtain some information by talking to people
+who attended the party. Unfortunately, their memories were rather imprecise, and so all that
+Steve learned was the following:
+• Either Ujjal or Wolfgang came dressed as a werewolf.
+• Either Ronald or Stéphanie was dressed as a dragon.
+• Priscilla and Quirinius both left early.
+• If Ujjal came dressed as a werewolf, then Ronald came dressed as a dragon and Tom
+was dressed as a giant snake.
+• If Ronald was dressed as a dragon, then Quirinius did not leave early.
+• Tom was disguised as a giant snake if and only if neither Ronald nor Stéphanie was
+disguised as a dragon.
+[4] (a) Rewrite each of these statements using propositional logic. Make sure to define the
+propositions you are using (that is, state something like: “u: Ujjal came dressed as
+a werewolf” before writing the proposition ∼u).
+
+[8] (b) Using your answer from part (a), known logical equivalences, and the rules of inference, prove that Wolfgang was dressed as a werewolf.
+
+page 5 out of 7
+[6] 3. Let G be the set of all games of the Vancouver Canucks in the 2008/2009 Hockey season,
+and F be the set of all hockey fans. Furthermore, suppose we have a predicates Saw(x,y)
+that is true if fan x saw game y (in person, or on TV). You may assume that “first game”
+and “last game” are element of G that correspond to the first and last games of the Canucks’
+season respectively.
+[3] (a) Translate into English the proposition
+∃g ∈ G ∀x ∈ F Saw(x, g) ∨ Saw(x, last game)
+
+[3] (b) Write the statement “Every fan who saw at least two different games saw the first
+game of the season” using predicate logic.
+
+[11] 4. Number representation
+[3] a. Explain briefly why almost all modern computers represent integers using two’s complement representation, instead of setting aside one bit to use as a sign (with 0 representing +, and 1 representing −).
+
+page 6 out of 7
+[8] b. Design a circuit that takes as input a four-bit unsigned integer a3 a2 a1 a0 , and outputs
+1 if that integer is divisible by 3. Show your work: we need to understand how you
+designed your circuit and why you believe it computes the correct answer. Hint: do
+not try to implement binary division. Instead, use the fact that there are only a few
+values for which your circuit should output 1.
+A working circuit will be worth at least 6 marks out of 8. To get full marks, your
+circuit will also need to be reasonably elegant (a solution with only 7 gates exists).
+
+page 7 out of 7
+[11] 5. Consider the following theorem:
+No matter what positive real number c we pick, there will be some positive integer n for which 3n > c2n .
+[3] a. Translate this theorem into predicate logic (that is, using predicates and quantifiers).
+
+[8] b. Prove the theorem using a direct proof.
+
+[8] 6. Using an indirect proof, prove that the equation ax + b = c (where a, b, c are real numbers,
+and a 6= 0) has only a single solution for x.
+

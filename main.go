@@ -23,6 +23,7 @@ import (
 	"github.com/alecthomas/units"
 	"github.com/pkg/errors"
 	"github.com/russross/blackfriday"
+	"github.com/urfave/cli"
 )
 
 var templates = template.Must(template.ParseGlob("template/*"))
@@ -166,6 +167,10 @@ func (f *File) reader() (io.ReadCloser, error) {
 		return nil, errors.Errorf("No source or path for %+v", f)
 	}
 	return source, nil
+}
+
+func (f File) String() string {
+	return fmt.Sprintf("%s %s %s", f.Name, f.Path, f.Source)
 }
 
 var maxFileSize = int64(10 * units.MB)
@@ -439,11 +444,7 @@ func saveAndGenerate() error {
 
 var layout string
 
-func main() {
-	if err := loadDatabase(); err != nil {
-		log.Printf("tried to load database: %s", err)
-	}
-
+func serveSite(c *cli.Context) error {
 	wrapperTemplate, err := fetchTemplate()
 	if err != nil {
 		log.Fatal(err)
@@ -467,7 +468,18 @@ func main() {
 	}
 
 	log.Println("Listening...")
-	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
+	return http.ListenAndServe("0.0.0.0:8080", nil)
+}
+
+func main() {
+	if err := loadDatabase(); err != nil {
+		log.Printf("tried to load database: %s", err)
+	}
+
+	app := setupCommands()
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func fetchFileAndSave(course string, year int, term, name, href string) error {

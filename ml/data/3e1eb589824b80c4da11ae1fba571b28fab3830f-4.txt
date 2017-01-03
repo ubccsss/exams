@@ -1,0 +1,331 @@
+
+CPSC 121 Sample Final Examination
+December 2013
+[6] 1. Short answers
+[3] a. What is wrong with the following circuit?
+
+Solution : You can not connect the outputs of two or more gates together directly;
+what will happen if one of the gates tries to drive it high while the others try to drive
+it low?
+[3] b. Explain briefly the difference between the purpose of a half-adder and that of a fulladder.
+Solution : A half-adder computes the sum of two bits. A full-adder adds three bits
+(two bits and a carry from a previous position).
+[6] 2. Let A = {1, 2, 3 . . . , 299, 300}.
+[3] a. Give an example of a function f from Z+ into A that is not onto (surjective).
+Solution : The function f defined by f (x) = 1 is not onto (there is no positive integer
+x such that f (x) = 2).
+[3] b. Consider the function f : {1, 2, . . . , 18} → A defined by f (x) = x2 − 3x + 3. Is f
+one-to-one (injective)? Explain why or why not.
+Solution :
+
+No, because f (1) = f (2) = 1.
+
+[9] 3. Number representation
+[3] (a) What unsigned integer is represented by the 9-bit value 100111011?
+Solution :
+
+256 + 32 + 16 + 8 + 2 + 1 = 315
+
+[3] (b) What signed integer is represented by the 9-bit value 100111011?
+Solution :
+
+−256 + 32 + 16 + 8 + 2 + 1 = −197
+
+[3] (c) A professional programmer wrote a program that takes a floating point number x,
+sets its value to 0, and then adds 0.1 to x repeatedly until it becomes equal to 10,
+printing each value of x as it goes. Why does the program produce the output
+0.0 0.1 0.2 0.3 0.4 0.5 0.6
+1.0000001 1.1000001 1.2000002
+
+0.70000005
+
+0.8000001
+
+0.9000001
+
+page 2
+(and so on) instead of
+0.0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+1.0
+
+?
+Solution : The value 0.1 can not be represented exactly as a (binary) floating point
+value. Hence the value being added is not actually 0.1, but a number that’s just a
+little bit larger than 0.1. This also means that the sum will never be exactly equal to
+10 (and so the program will keep going, and going, and going, and . . . )
+[12] 4. Consider the following circuit:
+
+The terminal and the oneBit subcircuit provide bits one at a time to the remainder of the
+circuit, and the clock attached to the D flip-flops ticks each time a bit is available.
+[4] a. Suppose that the user first flips the reset switch on, then off, and finally types in the
+digits 0, 0, 1, 1, 0, 1, 1, 0 in this order. What will be the state of the LED (on/off)
+after each of the digits is typed (you need to provide 8 answers).
+Solution :
+
+The LED will be off, off, on, off, on, on, off and on respectively.
+
+[4] b. Explain in English the purpose of this circuit.
+Solution : The ouput is true (on) if the last two bits entered were different, and false
+(off) if they were the same.
+[4] c. Show how to modify the part of the circuit that is inside the gray box so the LED
+would be on if an odd number of 1 digits had been typed, and off if an even number of
+1 digits had been typed. Hint: you will only need one flip-flop, and a few other gates.
+Solution :
+
+page 3
+[7] 5. Determine the validity of the following argument. Justify your answer fully.
+1. (∼ p ∨ q) → r
+2. r → (s ∨ t)
+3. ∼ s ∧ ∼ u
+4. ∼ u →∼ t
+∴p
+Solution :
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+
+∼u
+∼t
+∼s
+∼s ∧ ∼t
+∼ (s ∨ t)
+∼r
+∼ (∼ p ∨ q)
+∼∼ p ∧ ∼ q
+∼∼ p
+p
+
+specialization from (3)
+modus ponens from (3) and (5)
+specialization from (3)
+conjunction from (6) and (7)
+DeMorgan’s law from (8)
+modus tollens from (2) and (9)
+modus tollens from (1) and (10)
+deMorgan’s law from (11)
+specialization from (12)
+double negative law from (13)
+
+Therefore the argument is valid.
+[9] 6. A perfect number is a positive integer that is equal to the sum of its divisors (except itself).
+For instance, 28 is perfect since 28 = 1 + 2 + 4 + 7 + 14. In this question, we will look at
+almost-perfect numbers: numbers that are one more than the sum of their divisors (except
+themselves). For instance, 16 is almost perfect since 1+2+4+8 = 15. Consider the following
+statement:
+Given any positive integer n, we can always find an almost-perfect number that is
+larger than n.
+[3] a. Translate this statement into first-order logic (that is, using predicates and quantifiers).
+You may assume the existence of a predicate isAlmostPerfect.
+Solution :
+
+∀n ∈ Z+ , ∃x ∈ Z+ , x > n ∧ isAlmostPerfect(x)
+
+[6] b. Prove the statement. Hint: look carefully at the example I gave, and see if you can
+make it more general.
+Solution : Consider an unspecified positive integer n. There is a power of 2 (say
+x = 2n ) that is larger than n. The divisors of x are 20 , 21 , . . . , 2n−1 , 2n . Hence the
+sum of the divisors (other than x) is
+n−1
+X
+
+2i = 2n − 1
+
+i=0
+
+which means that x is almost perfect.
+[11] 7. Let U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, and f be a function from U into U. Finally, let
+F : P(U) → P(U) be the function defined by
+F (X) = {f (x) | x ∈ X}
+
+page 4
+For instance, if f (x) = 13 − x, and X = {1, 3, 4, 7}, then F (X) = {f (1), f (3), f (4), f (7)} =
+{12, 10, 9, 6}.
+[7] a. Prove that for every two subsets A, B of U, we have F (A ∩ B) ⊆ F (A) ∩ F (B).
+Solution : Consider two unspecified subsets A, B of U, and choose an arbitrary
+element x of F (A ∩ B). We need to prove that x ∈ F (A) ∩ F (B).
+Since x ∈ F (A ∩ B), there exists an element y of A ∩ B such that x = f (y). Because
+y ∈ A ∩ B, we know that y ∈ A and hence x = f (y) ∈ F (A). Similarly y ∈ B and so
+x = f (y) ∈ F (B). This implies that x ∈ F (A) ∩ F (B).
+[4] b. Give an example that shows that F (A−B) is not necessarily a subset of F (A)−F (B).
+Solution : Let A = {1, 2}, B = {1} and f (x) = 1 for every x ∈ U. Then F (A − B) =
+F ({2}) = {1}, but F (A) − F (B) = {1} − {1} = ∅.
+[8] 8. Prove that for every positive integer n,
+n
+X
+
+i(i + 1) =
+
+i=1
+
+Solution :
+n
+X
+
+n(n + 1)(n + 2)
+3
+
+We prove the theorem by induction on n. When n = 1,
+
+i(i + 1) = 1 × 2 = 2
+
+i=1
+
+and
+1×2×3
+n(n + 1)(n + 2)
+=
+=2
+3
+3
+. Hence the theorem holds for the base case n = 1. Now let us prove the induction step.
+Consider an unspecified positive integer n ≥ 1. Suppose that the theorem holds for n, that
+is suppose that
+n
+X
+i=1
+
+i(i + 1) =
+
+n(n + 1)(n + 2)
+3
+
+. We need to prove that the theorem holds for n + 1. Indeed
+!
+n+1
+n
+X
+X
+i(i + 1) =
+i(i + 1) + (n + 1)(n + 2)
+i=1
+
+i=1
+
+n(n + 1)(n + 2)
+=
++ (n + 1)(n + 2)
+3
+n
+
+= (n + 1)(n + 2)
++1
+3
+n+3
+= (n + 1)(n + 2)
+3
+(n + 1)(n + 2)(n + 3)
+=
+3
+
+by the induction hypothesis
+
+page 5
+[8] 9. The inhabitants of the country of Pirlouitland use only three kinds of coins, worth 1 schlip, 5
+schlips and 10 schlips respectively. Johan, one of the knights, makes the following observation:
+For every amount n ≥ 10 schlips, the way to pay for n schlips that uses the fewest
+coins always contains a 10 schlip coin.
+Prove Johan’s observation using an indirect proof. Hint: think of substituting some coin(s)
+for other coin(s).
+Solution : We start by assuming that the conclusion is false, that is, that there exists an
+amount n ≥ 10 schlips for which the way to pay this amount with the fewest coin does not
+use a 10 schlip coin. There are three cases to consider:
+• If the smallest collection of coins that adds up to n schlips contains two or more 5 schlip
+coins, then we can replace two of the 5 schlip coins by a single 10 schlip coin. This gives
+us a way to pay for n schlips using fewer coins than the solution that uses the fewest
+coins (a contradiction).
+• If the smallest collection of coins that adds up to n schlips contains exactly one 5 schlip
+coins, then it must also contain at least five 1 schlip coins. We can replace the 5 schlip
+coin and five of the 1 schlip coins by a single 10 schlip coin. This gives us a way to pay for
+n schlips using fewer coins than the solution that uses the fewest coins (a contradiction).
+• If the smallest collection of coins that adds up to n schlips does not contain any 5 schlip
+coin, then it must also contain at least ten 1 schlip coins. We can replace ten of the 1
+schlip coins by a single 10 schlip coin. This gives us a way to pay for n schlips using
+fewer coins than the solution that uses the fewest coins (a contradiction).
+We found a contradiction no matter how our solution without 10 schlip coins was constructed,
+which means our assumption that such a solution exists was wrong.
+[12] 10. Mathematical Induction
+[3] a. Explain briefly the two forms of mathematical induction discussed in class.
+Solution : In one form, we have a single base case, and for the induction step we
+assume that the theorem is true for an unspecified positive integer n, and then prove
+that it must also hold for n + 1. In the second form, we have one (or more) base
+cases, and for the induction step we assume that the theorem is true for every positive
+integer from 1 to an unspecified positive integer n, and then prove that it must also
+hold for n + 1.
+[9] b. Recall that bxc is the largest integer that is ≤ x, that dxe is the smallest integer that
+is ≥ x, and that ∀x ∈ R+ , bx/2c + dx/2e = x.
+Let p1 , p2 , p3 , . . . be a sequence of integers defined by
+p1 = 0, p2 = 1
+
+and
+
+pn = pbn/2c + pdn/2e + 1
+
+for all n ∈ Z+ where n ≥ 3.
+
+For example, p3 = pb3/2c + pd3/2e + 1 = p1 + p2 + 1 = 0 + 1 + 1 = 2
+Prove that for all nonnegative integers n ≥ 1, pn = n −1. You must state the induction
+hypothesis clearly.
+
+page 6
+Solution : First we need to prove the base cases: p1 = 0 which is indeed 1 − 1 and
+p2 = 1 which is 2 − 1. Now consider an unspecified positive integer n ≥ 3, and suppose
+that pk = k − 1 for every k in the interval 1 ≤ k < n.
+pn
+
+=
+
+pbn/2c + pdn/2e + 1
+
+=
+
+(bn/2c) − 1) + (dn/2e) − 1) + 1
+
+=
+
+(bn/2c + dn/2e) − 1 − 1 + 1
+
+=
+
+n−1
+
+by the induction hypothesis
+
+as required. This completes the induction step and the proof of the theorem.
+[10] 11. Consider the set L of all strings over the alphabet {a, b, c, d} that start and end with the
+same letter, and do not contain this letter in any other position. For instance, the strings a,
+bb and cabbac belong to L, but the empty string and the strings acccb and cabcbac do not.
+[7] a. Design a DFA that accepts every string in L, and reject every other string.
+Solution :
+
+[3] b. Write a regular expression that matches exactly the strings that belong to L.
+
+Solution :
+
+^(a|b|c|d|a[bcd]*a|b[acd]*b|c[abd]*c|d[abc]*d)$
+

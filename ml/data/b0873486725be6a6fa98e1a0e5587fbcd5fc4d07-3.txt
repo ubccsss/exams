@@ -1,0 +1,483 @@
+
+CPSC 121 Sample Final Examination
+December 2008
+[16] 1. { Medium-Easy } Consider the following two columns containing logical expressions, set expressions, and circuits. Each element of the first column is equivalent to
+an element of the second column. For each element of the first column, write down
+the element of the second column that it is equivalent to, and give a short proof to
+justify your choice.
+A.
+
+(P △ Q) ∪ R
+
+1.
+
+p ⊕ (q ∧ r)
+
+B.
+
+p∨q∨r
+
+2.
+
+r ∨ (∼ q → ∼ p)
+
+p
+
+p
+
+q
+r
+
+q
+r
+
+C.
+D.
+
+3.
+(p → q)∨ ∼ p ∨ r
+
+4.
+
+(P ∪ Q ∪ R) − (P ∩ Q ∩ RC )
+
+Solution :
+• A goes with 4 (these were the only two expressions involving sets):
+(P △ Q) ∪ R = ((P ∪ Q) − (P ∩ Q)) ∪ R
+= ((P ∪ Q) ∩ (P ∩ Q)C ) ∪ R
+= ((P ∪ Q) ∪ R) ∩ ((P ∩ Q)C ∪ R)
+= ((P ∪ Q) ∪ R) − ((P ∩ Q)C ∪ R)C
+= ((P ∪ Q) ∪ R) − ((P ∩ Q) ∩ RC )
+= (P ∪ Q ∪ R) − (P ∩ Q ∩ RC )
+• B goes with 3. The circuit for (3) outputs the value ∼ (∼ (p ∨ q) ∧ ∼ r), and
+∼ (∼ (p ∨ q) ∧ ∼ r) ≡ (∼∼ (p ∨ q) ∨ ∼∼ r)
+≡ (p ∨ q) ∨ r
+• C goes with 1. The circuit for (C) outputs (p ⊕ (q ∧ r)) ∨ (p ∧ ∼ q ∧ ∼ r).
+Observe however that if (p ∧ ∼ q ∧ ∼ r) is true, then p ⊕ (q ∧ r) is also true.
+Therefore the term (p ∧ ∼ q ∧ ∼ r) does not change the truth value produced
+by the circuit, which is thus p ⊕ (q ∧ r).
+
+page 2
+• D goes with 2.
+(p → q) ∨ ∼ p ∨ r ≡ (∼ p ∨ q) ∨ ∼ p ∨ r
+≡ ∼p ∨ q ∨ r
+≡ r ∨ (∼ p ∨ q)
+≡ r ∨ (p → q)
+≡ r ∨ (∼ q →∼ p)
+[15] 2. { Medium-Hard } Let U be a set, and P(U) denote its power set. For each subset
+A of U, we can define a function fA : P(U) → P(U) by
+fA (S) = A − S
+Prove that fA is one-to-one if and only if A = U.
+Solution : First we prove that if A = U then fA is one to one. Indeed, suppose
+that A = U. If we have two subsets S, S ′ of U such that S 6= S ′ , then there is an
+element x of U that belongs to one of the subsets (say S without loss of generality)
+and not the other. Since x ∈ S and x ∈ A, this means that x ∈
+/ fA (S). Moreover,
+′
+′
+since x ∈
+/ S and x ∈ A, it follows that x ∈ fA (S ). Therefore fA (S) 6= fA (S ′ ).
+We now prove that if A 6= U then fA is not one to one. Suppose that A 6= U. Then
+there is an element x of U that does not belong to A. Let S = ∅ and S ′ = {x}.
+Then fA (S) = A − S = A, and fA (S ′ ) = A − S ′ = A (since the only element of S ′
+does not belong to A). Therefore fA is not one to one.
+[10] 3. { Medium-Easy } Prove that for any positive integer n
+n
+X
+1
+i=0
+
+i!
+
+≤3−
+
+1
+n
+
+Recall that 0! = 1, and for n > 0, n! = 1 ∗ 2 ∗ 3 ∗ · · · ∗ n. If you want, you can use
+the fact that for every n ≥ 1
+1
+1
+≤
+(n + 1)!
+n(n + 1)
+without proving it.
+Solution : We prove the fact by induction on n. The base case is the case n = 1.
+P
+P
+We have 1i=0 1/i! = 1/0! + 1/1! = 2, and 3 − 1/1 = 2. So 1i=0 1/i! ≤ 3 − 1/1.
+
+page 3
+We now deal with the induction step. Consider an unspecified positive integer n.
+P
+Suppose that ni=0 1/i! ≤ 3 − 1/n. Then
+n+1
+X
+i=0
+
+1
+i!
+
+=
+
+n
+X
+1
+i=0
+
+i!
+
+!
+
++
+
+1
+(n + 1)!
+
+1
+1
++
+n (n + 1)!
+1
+1
+3− +
+n n(n + 1)
+
+
+1
+1
+3−
+−
+n n(n + 1)
+
+
+1
+n+1
+−
+3−
+n(n + 1) n(n + 1)
+n
+3−
+n(n + 1)
+1
+3−
+(n + 1)
+
+≤ 3−
+≤
+=
+=
+=
+=
+
+Hence the theorem holds by the principle of mathematical induction.
+[10] 4. { Medium } Let p0 , p1 , p2 , p3 , . . . be an integer sequence defined by
+p0 = 1, p1 = 2, p2 = 3,
+
+and
+
+pn = pn−1 + pn−2 + pn−3
+
+for all n ∈ Z+ where n ≥ 3.
+
+(For example, p3 = 3 + 2 + 1 = 6 and p4 = 6 + 3 + 2 = 11.)
+Prove that for all nonnegative integers n, pn ≤ 3n .
+Solution :
+
+We use the strong form of mathematical induction. First the base cases:
+
+• For n = 0, p0 = 1 and 3n = 1. Clearly 1 ≤ 1.
+• For n = 1, p1 = 2 and 31 = 3. Clearly 2 ≤ 3.
+• For n = 2, p2 = 3 and 32 = 9. Clearly 3 ≤ 9.
+Now we consider the induction step. Pick an unspecified integer n ≥ 3, and suppose
+that the theorem holds for 0, 1, 2, . . . , n − 1. Now,
+pn = pn−1 + pn−2 + pn−3
+≤ 3n−1 + 3n−2 + 3n−3
+≤ 3n−1 + 3n−1 + 3n−1
+= 3n .
+Hence the theorem holds for every n ≥ 0 by the principle of mathematical induction.
+
+page 4
+[24] 5. { Hard } Figure 1 shows a sequential logic circuit (i.e. one with state held in D
+flip-flops). The circuit has inputs up and down and outputs q0 and q1 . We will refer
+to the outputs combined together as q and interpret q as a two’s complement, binary
+value.
+two−bit adder
+
+q1 q0
+
+a1
+down
+
+D flip−flops
+
+a0 Σ
+1
+
+d1 q1
+
+q1
+
+b1 Σ0
+
+d0 q0
+
+q0
+
+b0
+
+c_in
+
+up
+
+clk
+
+Figure 1: Sequential circuit for question 5
+
+[6] a. Complete the table below as follows:
+• For the column labeled q, write the value of q interpreted as a two’s
+complement binary integer.
+• Let us call b1 and b0 the two bits of the lower input to the adder in the
+circuit. For the columns labeled b1 and b0 , write the values of these signals
+as a boolean function of the inputs up and down, assuming that the values
+of q0 and q1 are as written on that row. You can abbreviate up as u and
+down as d.
+We have filled in the first row as an example:
+q1
+
+q0
+
+q
+
+b1
+
+b0
+
+F
+
+F
+
+0
+
+d
+
+u∨d
+
+F
+
+T
+
+T
+
+F
+
+T
+
+T
+
+page 5
+
+Solution :
+q1
+
+q0
+
+q
+
+b1
+
+b0
+
+F
+
+F
+
+0
+
+d
+
+u∨d
+
+F
+
+T
+
+1
+
+d
+
+d
+
+T
+
+F
+
+-2
+
+F
+
+u
+
+T
+
+T
+
+-1
+
+d
+
+u∨d
+
+[6] b. For each possible pairs of values of up and down, this circuit can be seen as
+computing a function of the input q. Fill in the following table, indicating the
+function that is being computed.
+up
+
+down
+
+F
+
+F
+
+F
+
+T
+
+T
+
+F
+
+T
+
+T
+
+f(q)
+f(q) = q
+
+Solution :
+f(q)
+
+up
+
+down
+
+F
+
+F
+
+f(q) = q
+
+F
+
+T
+
+f(q) = q−1 except f(-2) = -2
+
+T
+
+F
+
+f(q) = q+1 except f(1) = 1
+
+T
+
+T
+
+f(q) = q−1 except f(-2) = -1
+
+page 6
+[9] c. Draw the state transition diagram (finite state machine) that corresponds to
+this circuit. Each state has been labeled with the corresponding value of q
+(interpreted as a two’s complement signed integer). You need to add the
+arrows between states. Each arrow should be labeled with a pair of letters
+that causes this state transition to take place. For instance, we have labeled
+the one arrow 01, 11 to indicate that if the current state is 0, and at the next
+clock tick we have up = 0 and down = 1, or up = 1 and down = 1, then the
+next state will be -1.
+
+-2
+
+-1
+
+01, 11
+
+0
+
+1
+
+Solution :
+00, 01
+-2
+
+00
+10, 11
+01, 11
+
+-1
+
+00
+10
+01, 11
+
+0
+
+00, 10
+10
+01, 11
+
+1
+
+[3] d. Give a brief explanation of what this circuit does. Your answer should be no
+longer than five simple sentences (shorter answers are possible).
+Solution : This circuit either counts up (up = 1, down = 0) or down (up
+= 0, down = 1) without overflowing. That is, once its gets to the largest
+(smallest) possible value while going up (down), it remains at that value. If
+up = down = 0 then nothing happens. The behaviour for the case where up
+= down = 1 is just an accident.
+[8] 6. { Medium } Design a DFA that takes as input a string over the alphabet Σ =
+{a, b, c, . . . , z} and ends up in an accepting state if and only if the input string
+contains either the letter a followed some time later by the letter b, or the letter c
+followed some time later by the letter d (or both).
+You may write the label else on an edge to indicate that the transition will be
+taken if the next character is any character other than one already used as a label
+on another edge that starts from the same state (i.e. the same way we did in class
+for the real numbers example).
+
+page 7
+Solution :
+
+else
+b
+else
+a
+c
+
+c
+
+else
+
+else
+
+else
+
+b,d
+a
+d
+
+[8] 7. { Medium } Prove or disprove the following statements about two functions f :
+B → C and g : A → B: if f is one-to-one and g is onto, then f ◦ g is one-to-one.
+Solution : This is false. Suppose that A = {1, 2}, B = {a}, and C = {green}.
+Define g = {(1, a), (2, a)} and f = {(a, green)}. Then f is one-to-one, g is onto, and
+yet (f ◦ g)(1) = (f ◦ g)(2), which means that f ◦ g is not one-to-one.
+[9] 8. { Medium } Write regular expressions that describe the following sets of strings:
+[3] a. All strings of letters whose first and last characters are both a, or whose first
+and last characters are both o.
+Solution :
+
+^a[A-Za-z]*a$|^o[A-Za-z]*o$.
+
+[6] b. All strings over the alphabet {0, 1} that do not contain the substring 011.
+Solution : The trick to derive the regular expression is that once we have
+seen a 0, every other 1 afterwards must be followed by either at least one 0,
+or by nothing at all. Hence we get: ^1*(0+1?)*$ (this was tricky).
+

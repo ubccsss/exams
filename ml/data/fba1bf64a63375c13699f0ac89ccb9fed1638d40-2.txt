@@ -1,0 +1,565 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs344/current-term/res/oldexams/cpsc344-2006w1-partialfinal-sample-soln.pdf
+Author: Karon MacLean
+Name:
+
+Student ID Number:
+
+Signature:
+
+CPSC 344 2006-07 (T1) Final Exam
+[PARTIAL] SOLUTIONS
+Department of Computer Science
+University of British Columbia
+K. MacLean
+Exam Instructions (read carefully):
+1. Immediately sign the first page of the exam with
+your signature in the space provided on the upper
+left.
+
+Question
+
+Points
+Possible
+
+2. Continue reading the instructions on this page and
+complete the peer review, which is on a separate
+sheet not attached to the exam booklet. Do not open
+the exam booklet until you are told to do so by a
+proctor.
+
+1
+
+10
+
+2
+
+12
+
+3. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+
+3
+
+11
+
+4
+
+9
+
+removed
+
+5
+
+11
+
+removed
+
+6
+
+19
+
+7
+
+6
+
+8
+
+9
+
+removed
+
+9
+
+18
+
+removed
+
+10
+
+15
+
+extra
+credit
+
+5
+
+Total
+
+120 (+5)
+
+4. The exam is closed book. There are no aids
+permitted.
+5. You will have 150 minutes in which to work. This is
+~1 min/mark, plus 30 additional minutes. Budget
+your time wisely.
+
+6. No one will be permitted to leave the exam room
+during the last ten minutes of the exam.
+
+CPSC 344 2006-07 (T1)
+
+1 of 9
+
+Class Mean
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #1 [10 pts]: Warmup
+For each of the following questions, circle True or False. [1 pt each]
+(a) When we say “Attention is the gateway to memory”, we are referring to how information moves from
+working to long-term memory.
+
+True
+
+False
+
+(b) Task examples are design-independent. This makes them useful for debugging specific designs.
+
+True
+
+False
+
+(c) A designer imagining what a user will do or how a user will feel when interacting with a system
+embodies an attitude of user-centered design.
+
+True
+
+False
+
+(d) A novel ‘ubicomp’ interface allows a cell phone user to share control of a large shared display at a bar. A
+practical and effective approach to designing this system’s user interface is to focus on one key element usability - hile the hardware design team handles functionality, information privacy and security.
+
+True
+
+False
+
+(e) Cognitive walkthroughs are a good evaluation choice when the question is to assess how novice users
+will interact with a system.
+
+True
+
+False
+
+(f) Once formed, a mental model is very difficult to change.
+
+True
+
+False
+
+(g) A stakeholder is defined as anyone who will eventually use the interface being designed.
+
+True
+
+False
+
+(h) Sending designers to interview workers in an office setting is an example of contextual inquiry.
+
+True
+
+False
+
+(i) Affective reactions are what allow us to make decisions.
+
+True
+
+False
+
+(j) Douglas Engelbart demonstrated the first prototype of a computer mouse and chorded key input devices,
+the first use of a GUI “desktop metaphor”, and networked multi-user collaboration with shared control
+of a cursor, all at the same time, live, at a conference in San Jose – long before technology had even
+made the idea of a personal computer feasible, and when San Jose was a dusty little agricultural town.
+
+True
+
+False
+
+CPSC 344 2006-07 (T1)
+
+2 of 9
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #2 [12 pts]: Short Answer
+(a) Early in 344, you saw a sketch of Moore’s Law and “Darwin’s Law” superimposed; this was offered as a
+justification for why HCI is important. Reproduce the key elements of this sketch (i.e. draw a diagram
+which contrasts these two laws, giving some attention to labeling of the time axis), and explain in 1
+sentence how this relates to HCI [4 pts]
+The sketch should be a graph with time (50 years or so at least) on the x-axis and
+capabilities on the vertical axis. It should have 2 curves: a rising exponential for
+Moore’s Law – starting at a plausible first date for computation devices - and a flat
+line for Darwin’s Law. Explanation should capture that (a) computer abilities are
+evolving rapidly while human abilities are not; and (b) some time in the past,
+computer abilities have passed human abilities.
+
+(b) Explain the difference between prescriptive and descriptive HCI design models and identify their
+respective primary target users, in 2-3 sentences. [4 pts].
+
+A prescriptive design model instructs a designer in how to do something, and is
+intended for practicing designers – especially those who are learning how.
+A descriptive model generalizes and encapsulates observed processes, is used by
+those who study and talk about the process of interface design, and are often used to
+advocate certain key points or features of a process – for example, the central role of
+user evaluation.
+
+(c) “Triangulation” refers to the need to use multiple faulty methods in the effort to get reliable information
+about a question.
+What needs to be true, as a group, about those faulty methods in order for this scheme to actually work?
+Give an example of 2 methods you could use together to triangulate as you get information from users,
+and explain why. [4 pts]
+The faults must be complementary, i.e. categorically different; they cannot all have
+the same weakness, or else the bias / noise in your data will be compounded rather
+than cancelled out. The most obvious example is to combine a self-report –type
+evaluation with some kind of non-intrusive observation. Self reports are unreliable in
+many ways, but they let you hear thoughts. Observation, if uncorrupted by the
+evaluator’s presence, is accurate but superficial – you often don’t have access to why.
+
+CPSC 344 2006-07 (T1)
+
+3 of 9
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #3 [11 pts]: Design Concepts and Mental Models
+SCENARIO: You are on vacation in Japan. You don’t know Japanese. You want to buy a Coke from a vending
+machine, which is of a kind you have never seen before and seems to be able to do a lot of things that vending machines
+in North America don’t do. You’d rather not use your credit card for this small purchase. You have a handful of local
+coins, but aren’t sure how much they’re worth.
+
+(a) List and describe/justify in 1-2 sentences three general, basic concepts (many more are possible) of
+good user interface design that a designer might employ when creating the interface for the vending
+machine scenario above; and why that concept is important and particularly relevant to the design
+task at hand. [3 pts each]
+For example (don’t use this one!), “Provide a clear visual affordance, so that the user understands
+which actions are possible. This is important for a walk-up-and-use interface like a vending machine.”
+(i)
+
+(ii)
+
+(iii)
+
+1 pt per principle + 1 pt for being relevant + 1 pt per explanation that clarifies
+relevence. Other reasonable responses accepted.
+• Causality/understandable action
+• Visible constraints
+• Mapping
+• Make positive use of transfer effects (e.g. through metaphor) – but be careful in
+cultural situations
+• Be aware of population stereotypes
+Also acceptable answer (these aren’t from the basic heuristic list, but are also good
+principles)
+• understand range of users & their limitations
+• communicate functionality (what it does)
+• provide model of how to make it work
+• foresee possible contexts of use.
+
+(b) Your answers to part (a) are characteristics of (circle one): [2 pts]
+Designer’s model
+
+System image
+
+User’s mental model
+
+System model
+
+Evaluation. Following the manual’s instructions, Sally hits Record, then specifies
+recording time and channel. After this there is the machine clicks, but there is no change
+on the unit’s LCD display. Sally is not sure whether the machine is processing her
+instructions or her instructions have failed, or in fact the unit has begun recording.
+[the example here needs to illustrate that the user can’t ascertain whether her action
+produced the desired result or not.]
+
+Question #4 [9 pts]: Goal Oriented Action - REMOVED
+Question #5 [11 pts]: Planning and Executing Evaluations and Prototypes - REMOVED
+CPSC 344 2006-07 (T1)
+
+4 of 9
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #6 [19 pts]: Initiating a Design Project
+The voice mail system used by many universities across the country (a product made by a company called
+VoiceBin Inc.) has received a lot of complaints from end-users. The universities have communicated to
+VoiceBin that there are problems (without being very specific about them), and threatened to switch to
+another vendor if VoiceBin doesn’t improve things. Therefore VoiceBin has retained you, as an interface
+consultant, to investigate the problem and work with their in-house design team to solve these problems.
+(a) Who are the stakeholders you need to consider throughout this design process? List four, ordered by
+decreasing importance. Be specific. [4 pts]
+(i)
+
+For example,
+1. customer decision makers (i.e., university management)
+2. end-users
+3. VoiceBin management
+4. VoiceBin customer support staff
+
+(ii)
+(iii)
+(iv)
+
+(b) You are planning your strategy for your first step. In general terms, list 5 items which MUST be done at
+this stage for each iteration step in any design process (not just for this one). [5 pts]
+(i)
+(ii)
+(iii)
+(iv)
+(v)
+
+Consider other reasonable answers, but these are all important. In particular, I
+am looking for 1 and 4, which are crucial but hard to get across.
+1. your reason for doing this activity (experiment question).
+2. the type of activity
+3. who will be involved
+4. how you will contact these individuals
+5. who you need to get permission from in order to do so.
+
+(c) Describe the first step you will take, by thoughtfully and thoroughly addressing each of your 5 points
+above, relative to this design scenario in 1-2 sentences each. [10 pts]
+(i)
+
+(ii)
+
+(iii)
+
+(iv)
+
+(v)
+
+Answers should be thoughtful and thorough, and correspond to previous answer.
+1. Better understand the problems that end-users are having. Seeing the product
+used in a real-world environment will help me identify problems that the endusers encounter, even if they are not able to accurately describe them to me.
+2. Observation and contextual inquiry of the system in use by end-users, carried
+out to begin within in one university setting (assume similar problems at other
+sites)
+3. End-users, taken from a selection of representative roles (office staff, faculty,
+grad students, etc).
+4. Contact by soliciting the community for people interested in participating.
+Should bet response from most affected individuals.
+5. Get permission from the customer’s management to observe end-users at
+work.
+
+CPSC 344 2006-07 (T1)
+
+5 of 9
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #7 [6 pts]: Interface Design Critique
+
+The image above shows the shutdown menu (located in the right side of the image) of the new Windows
+Vista operating system.
+(a) Comment on the shortcomings of this menu, focusing on functional rather than visual aspects. [3 pts]
+
+Expected answer deals with the complexity of the menu: many options are
+available for what are essentially 2 possible
+Ther good answer are acceptable.
+
+(b) Describe two changes you would make to the menu to improve it as an interface. Your answer may
+involve changing the options available. [3 pts]
+
+The best answer will involve removing options, not adding or simply rewording
+them.
+Some possible answers:
+• Combine hibernate and sleep into one option.
+• Combine shutdown and restart into one option which shuts down.
+• Combine log off, lock, and switch user into one option which logs out.
+
+CPSC 344 2006-07 (T1)
+
+6 of 9
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #8 [9 pts]: Prototyping Methods - REMOVED
+Question #9 [18 points total]: Following Through with the Design Process - REMOVED
+Question #10 [15 pts]: Collaborative Interfaces
+You have been asked to help select collaboration tools for a development team working together on a large
+software project. For each of the three scenarios below and on the following page, pick out a different
+CSCW technology from the list provided. For each scenario there are multiple good answers, depending
+upon your assumptions.
+Your answer should include
+(i)
+
+Type of technology you would use to support the scenario’s collaboration. If necessary, you may pair 2
+technologies together to achieve the needed functionality. [1 pt each]
+
+(ii) Whether the usage of this technology will be co-located or distributed [0.5 pts each]
+(iii) Whether the usage of this technology will be synchronous or asynchronous [0.5 pts each]
+(iv) One reason why it is a good solution [3 pts]. Explain any assumptions you are making.
+List of CSCW technologies to use in part (i)
+•
+
+E-mail
+
+•
+
+Pen, paper and scotch tape
+
+•
+
+Electronic whiteboard
+
+•
+
+Multiple PDAs (bluetooth or wifi equipped)
+
+•
+
+Regular whiteboard
+
+•
+
+Videoconferencing
+
+•
+
+Instant messaging
+
+•
+
+Telephone (1 to 1)
+
+•
+
+"Tracking changes" in an Office document
+
+•
+
+Voice mail (1 to 1)
+
+•
+
+Telephone (conference call, i.e. 3+ parties)
+
+•
+
+Projector driven by a pen-input tablet laptop
+
+•
+
+CVS (Concurrent Versioning System)
+repository - allows version control and change
+integration of plain text documents
+
+(a) Scenario: During a weekly status meeting in the company board room, the team leader wants to display
+some statistics on the project's progress, and allow his team members to annotate them.
+(i) Technology:
+(ii) Co-located / Distrib (circle one)
+(iii) Synch / Asynch (circle one)
+(iv) Justification:
+
+CPSC 344 2006-07 (T1)
+
+(i)
+(ii)
+(iii)
+(iv)
+
+Electronic whiteboard + wireless PDA’s
+Co-located + Distrib
+Synch
+I assume team leader can easily display her statistics on the electronic
+whiteboard. This technology allows others to annotate the information –
+but they need a mechanism to do so, which is provided by the wireless
+PDA’s.
+
+7 of 9
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+Question #10, continued: Collaborative Interfaces
+(b) Scenario: A software developer located in Vancouver wants to ask his co-worker in Toronto a question
+about some of her code. He does not need an immediate answer, but would like one within 24 hours.
+(i) Technology:
+(ii) Co-located / Distrib (circle one)
+(iii) Synch / Asynch (circle one)
+(iv) Justification:
+
+(i)
+
+Email + CVS is best answer from list. (voice mail + CVS might also be
+okay, but needs to be justified from email)
+(ii) Distrib
+(iii) Asynch
+(iv) Email allows the question to be answered, and CVS the code to be
+viewed – and meanwhile, both developers can continue to work. This is
+not an ideal solution, since it might be klunky to use either email or
+voice mail to point to the specific code sequence. Probably other
+technologies out there!
+
+(c) Scenario: An instructor is holding a review session in preparation for an exam in a class of 15 students.
+As students ask questions, the instructor needs to informally illustrate points so all can see them, while
+students take notes.
+(i) Technology:
+(ii) Co-located / Distrib (circle one)
+(iii) Synch / Asynch (circle one)
+(iv) Justification:
+
+(i)
+(ii)
+(iii)
+(iv)
+
+CPSC 344 2006-07 (T1)
+
+Plain whiteboard
+Co-located
+Synch
+Plain whiteboard is best answer because no artifact needs to be
+captured afterwards (in which case an e-whiteboard would probably be
+desirable). Also, most would prefer a plain whiteboard to a tablet-driven
+projector simply because the setup is simpler, and the tablet allows no
+particular benefit in this instance.
+
+8 of 9
+
+Final Exam (2.5 hours)
+
+Name:
+
+Student ID Number:
+
+EXTRA CREDIT: Physical Interfaces [1-5 pts] [used in all KM finals]
+Suggest an example (other than those shown in class) of a useful physical metaphor that could be
+implemented in a haptic interface. For example, mentioned in class was the debit card whose “weight” you
+could feel when you swiped it, representing the amount of money in the account; and the “clutched film reel”
+metaphor for browsing streaming media such as video.
+Partial credit will be given according to the quality and innovativeness of the idea.
+This is a shameless ploy to use your brains for fresh new research ideas. If you come up with something I
+would like to use and have not thought of or seen elsewhere, I’ll contact you to discuss using your idea.
+
+CPSC 344 2006-07 (T1)
+
+9 of 9
+
+Final Exam (2.5 hours)
+

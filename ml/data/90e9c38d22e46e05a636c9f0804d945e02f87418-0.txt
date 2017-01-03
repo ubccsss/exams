@@ -1,0 +1,61 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca:80/~cs260/this_term/labs/kimslabs/labpractice/labpractice.pdf
+Author: Kimberly Voll
+CS260: Linked List and Trees Practice
+
+Linked Lists:
+1. Download the incomplete linked_list program (available under Labs on the course
+web page).
+2. Implement the following functions using the linked_list code (be sure to modify the
+main method to demonstrate the output after running these new functions):
+// Pre-condition: The front of a linked list is provided.
+// Post-condition: The back (last element) of that linked list has been
+// deleted.
+void delete_back( Node*& front );
+// Pre-condition: The front of a linked list, an existing key in that list,
+// and a new key-value pair to insert are provided.
+// Post-condition: The linked list now contains that element at the end.
+void insert_after( Node*& front, int key, int newKey, string newValue );
+// Pre-condition: The fronts of two linked lists are provided.
+// Post-condition: A linked list is returned that is the result of
+// interleaving the elements from each provided list.
+// (e.g. {1, 2, 3} & { 4, 5, 6} would return {1, 4, 2, 5, 3, 6}
+Node* interleave( Node*& front1, Node*& front2 );
+
+Trees (a more general linked list):
+3. Download the incomplete binary tree program (available under Labs on the course
+web page).
+4. Complete the following functions using the Binary Tree code (the file Bintree.cpp
+contains the function headers for each of these already). Note that part of the code
+for delete_node has been provided for you in your lecture notes. You are
+encouraged to complete the code on your own first, as you will be responsible for
+understanding and producing this code on your own.
+//
+// Counts the leaves in a tree rooted at rootNode
+//
+// PRE: rootNode is a valid Node address
+// POST: returns the number of leaves in the tree rooted at rootNode
+int countLeaves( Node* rootNode )
+//
+// Counts the nodes of the tree rooted at rootNode
+//
+// PRE: rootNode is a valid Node address
+// POST: Returns the number of nodes in the tree rooted at rootNode
+int size( Node* rootNode )
+
+CS260: Linked List and Trees Practice
+
+//
+// Deletes a node containing item in the tree rooted at rootNode
+//
+// PRE: rootNode is a valid Node address
+// POST: If item is in tree rooted at rootNode, the Node containing it
+//
+is removed from the tree and true is returned;
+//
+otherwise, false is returned.
+bool delete_node( Node*& rootNode, TYPE item )
+
+5. As succinctly as possible, describe what the q2c() method does. Note, try walking
+through this code (on paper) with a wide variety of binary trees of different heights
+and styles.
+

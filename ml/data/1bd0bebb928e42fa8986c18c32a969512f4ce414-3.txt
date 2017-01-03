@@ -1,0 +1,123 @@
+
+Author: knorr
+Some CPSC 259 Sample Final Exam Questions (Part 3)
+Some of these have appeared on exams for related courses. I’ve changed some questions to
+reflect CPSC 259 material (e.g., translated the code to C, excluded material we don’t cover,
+included material we do cover, and changed the marks a bit to reflect probable CPSC 259
+marking practices).
+
+1. {4 marks} You will get 3 marks if you get one wrong, 2 marks if you get 2 wrong, and 0
+marks if you get 3 or more wrong. Circle ALL correct answers because there may be more than
+1 correct answer!
+Which of the following statements are true about sorting algorithms?
+a) Quicksort runs in O(lg n) average time, and O(n2) worst case time.
+b) In the worst case, Mergesort runs in O(n lg n) time.
+c) There are no pivot elements in Mergesort.
+d) Quicksort and Insertion Sort perform equally well (when sorting a list of numbers).
+e) It is not possible to perform a comparison-based sort in less than O(n lg n) time for n
+arbitrary elements.
+
+2. {4 marks} You will get 3 marks if you get one wrong, 2 marks if you get 2 wrong, and 0
+marks if you get 3 or more wrong. Circle ALL correct answers because there may be more than
+1 correct answer!
+Which of the following statements are general design goals of an efficient algorithm?
+a)
+b)
+c)
+d)
+e)
+
+It must be correct (i.e., it must work).
+It can easily be turned into program code by a programmer of average ability.
+As a rule of thumb, it should run in less than a minute on today’s PCs.
+It shouldn’t use more than 64K of memory.
+It probably shouldn’t take O(kn) steps, where k > 1, and n is the size of the input.
+
+3. {3 marks} Perform Quicksort on the following array of integers. Show the result of the array
+just before the first recursive call (for the left partition) is made. Use the same method shown in
+class (Bentley’s algorithm). Don’t write any code. Assume that the pivot value is taken from the
+first subscript value (which in the case below for the full array is index 0).
+24
+
+55
+
+33
+
+19
+
+7
+
+44
+
+12
+
+50
+
+22
+
+4. {7 marks} A security guard has m keys and n locks, but forgot which keys open which locks.
+(The keys are just for these locks.) Suppose that there are exactly 2 keys that open the same
+lock, while the rest of the keys open exactly one of those n locks each.
+a) Give the best Big-O estimate for the worst-case number of steps required to open all the
+locks, given m keys and n locks. No witnesses are required, but briefly justify your
+answer (by showing your calculations).
+b) How would your analysis change, if we changed the rules a bit: this time, some of the m
+
+keys open no lock at all (because they are for some other lock not found in this set of n
+locks)?
+
+5. {5 marks} Write a recursive algorithm (using pseudo-code) to compute the product of 2
+positive integers m and n using only addition.
+
+6. {10 marks} Suppose the nodes of a doubly-linked list structure are defined as follows:
+struct node
+{
+int
+item;
+struct node * next;
+struct node * prev;
+};
+
+Define a function add_ordered that takes a new item and a list whose items are kept in
+increasing order and inserts the new item in the right place in the list (so that the items in the list
+continue to be in increasing order after the insertion).
+For example, if ls is the list (3,5,6,9), then after calling “add_ordered(&head_of_ls,
+8);”, list ls becomes (3,5,6,8,9).
+Note 1: The list may be empty before the first call.
+Note 2: Use the function make_node to create a node. Its prototype is:
+struct node * make_node(int new_item, struct node * next,
+struct node * prev);
+
+7. {6 marks} Suppose the nodes of a binary tree structure are defined as follows:
+struct node
+{
+int
+value;
+struct node * left;
+struct node * right;
+};
+
+Define a recursive function count which takes as an argument a binary tree and returns the
+number of nodes that are in the tree. The function must leave its argument unchanged. Hint: The
+number of nodes in a tree with non-empty root r is 1 + the number of nodes in its left and right
+subtrees.
+
+8. {8 marks} Suppose the nodes of a binary tree structure are defined as follows:
+struct Bnode
+{
+int
+value;
+struct Bnode * left;
+struct Bnode * right;
+}
+
+Define a recursive function height that takes the address of a node in a binary tree and returns
+the height of the node in that tree.
+Recall: The height of a node in a tree is the length of the longest path from the node to a leaf.
+The height of a node without children is 0, and for this function (only), if the user passes in a null
+node, you can assume that its height is 0, too.
+Hint: The height of a binary tree is largely determined by the height of its respective children.
+Here’s the function header to help you get started:
+int height(struct Bnode * node)
+{
+

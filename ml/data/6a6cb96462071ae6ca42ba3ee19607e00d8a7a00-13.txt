@@ -1,0 +1,311 @@
+
+Author: G. Tsiknis
+Exam No
+
+The University of British Columbia
+Computer Science 121
+Midterm 2
+March 15, 2012
+Time: 70 minutes
+Instructors (Circle one):
+
+Total marks: 60
+Section 202 - Patrice Belleville
+Section 203 & BCS - George Tsiknis
+
+Name
+(PRINT)
+
+Student No
+(Last)
+
+(First)
+
+Signature
+
+This examination has 8 pages.
+Check that you have a complete paper.
+
+MARKS
+
+This is a closed book exam, but you may use a sheet of
+8.5x11 inches paper with your notes.
+
+1
+
+Answer all the questions on this paper.
+
+2
+
+Give very short but precise answers. Always use point
+form where it is appropriate.
+
+3
+
+Work fast and do the easy questions first. Leave some time
+to review your exam at the end.
+
+4
+5
+
+The marks for each question are given in []. Use this to
+manage your time.
+
+Good Luck
+
+6
+Total
+
+Page 2 of 10
+Question 1. [10] Formal Proofs in Predicate Logic
+a. [4] Prove that :
+~∀x∈D, ∃y∈D, (P(x, y) ∧ ~Q(x, y)) ∨ ( P(x, y) ∧ Q(x, y) ) ≡ ∃x∈D, ∀y∈D, ~P(x, y)
+Proof:
+
+b. [6] Provide a formal proof (by using one formal rule of deduction at a time and explicitly stating
+the rule that is used on the right side) for the following argument. You may assume that a∈D,
+b∈D and c∈D:
+∀x∈D, ∀y∈D, (∃z∈D, W(x, z) ∧ W(y, z) ) → x=y
+W(a,b)
+a=c ∨ ~W(c,b)
+Proof:
+
+(1)
+(2)
+
+Page 3 of 10
+
+Question 2. [8] Proof Techniques I
+Express each of the following statements in predicate logic, and then suggest an appropriate proof
+strategy for it (pick one of the techniques we have seen in the class: witness proof, generalizing from a
+generic particular, proof by cases, contrapositive proof or proof by contradiction ). Note that you must
+NOT prove the statement. You just need to suggest a proof strategy which is the most substantial part
+of the proof of the statement..
+
+a. [2]
+
+2
+For any integer n if n mod 5 is 3 than n mod 5 is 4. Recall that x mod y is the remainder when
+x is divided by y.
+Formula:
+
+Proof strategy:
+
+b. [2]
+
+If the product of two positive real numbers is less than 10000, at least one of them is less than
+100. Use R+ to represent the set of all positive real numbers.
+Formula:
+
+Proof strategy:
+
+c. [2]
+
+Not every animal that has wings flies (use A for the domain of all animals, W(x) ≡ x has wings
+and F(x) ≡ x flies ).
+Formula:
+
+Proof strategy:
+
+d. [2]
+
+For every integer n, n2 is odd if and only if n is odd (use predicates Odd(x) and Even(x) to
+indicate odd and even integers) .
+Formula:
+
+Page 4 of 10
+
+Proof strategy:
+
+Page 5 of 10
+Question 3. [8] Proof Techniques II: Complete the Proof
+The following is an incomplete proof for the statement
+for any integer n, n2 – 2 is not divisible by 4
+We first express the statement in Predicate Logic using the predicate
+Divisible(x,y) ≡ x is the product of y and another integer k.
+Some parts of the proof are left out and are shown by "______". Fill in these parts to complete this
+proof.
+Proof:
+Expressed in Propositional Logic, the statement that we need to prove is:
+___________________________________________
+Let n be any non specific integer. We need to show
+____________________________________________
+Assume that
+____________________________________________ (1)
+is true and we'll derive a contradiction.
+From (1)
+n2–2 = ______________________ for some integer k
+
+or
+
+_____________________________________ (2)
+
+Since n2 is even, n must be even by the relevant theorem we have proved in the class.
+Let n = ___________________________ for some integer m.
+From (2) we get
+____________________ = 4k+2
+or
+_______________________________
+But the left hand side of this equation is even and the right hand side is odd. This is a contradiction.
+
+Page 6 of 10
+Therefore we can conclude ~Divisible( n2–2, 4).
+
+Page 7 of 10
+
+Question 4. [10] Proof Techniques III
+Provide a proof for the following statement :
+For all integers m and n, if m+n is even then m and n are
+both even or m and n are both odd
+You must first express the statement in Predicate Logic and then construct a proof by contraposition
+following the basic steps we discussed in the class. You can use the predicates Even(x) and Odd(x)
+to indicate that x is an even or odd number.
+The statement in Predicate logic:
+
+Proof:
+
+Page 8 of 10
+
+Question 5. [ 16] Finite State Automata
+Consider the following DFA:
+
+a. [4] Which of the following sequences of 0's and 1's are accepted by the DFA? Simply circle
+one of the choices besides the input sequence:
+
+b.
+
+i.010101
+
+YES
+
+NO
+
+ii.01111
+
+YES
+
+NO
+
+iii.0111110
+
+YES
+
+NO
+
+iv.011110
+
+YES
+
+NO
+
+[4] Using the cases you have seen in (a) provide a short description of the language that is
+accepted by the automaton.
+
+c. [4] The following is the truth table that describes the transition function for the first two
+states of this automaton. Fill in the part of the table that defines the transitions from states 2
+and 3.
+
+Page 9 of 10
+
+Current State
+
+Next State
+Input
+
+s2
+
+s1
+
+s0
+
+s2
+
+s1
+
+s0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+1
+
+1
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+1
+
+1
+
+0
+
+1
+
+0
+
+d. [4] Suppose we implement this automaton in the way we discussed in the class (using
+flip-flops for the current state, a multiplexer that selects the next state etc.). Provide the
+circuits that will implement the transitions for states 0 and 1 as they are defined in the above
+table.
+Circuit for state 0:
+s2
+input
+s1
+
+s0
+Circuit for state 1:
+
+s2
+input
+s1
+
+s0
+
+Page 10 of 10
+Question 6. [8] Sequential Circuits
+In Lab 5 you learned how to use a D flip-flop to design a frequency divider and used that idea to develop
+a counter. Using this idea, complete the circuit that is given below to create a 3-bit counter that counts
+from 0 to 7 each time the clock ticks (low or high).
+Your design CANNOT use any additional clocks or D flip-flops. You may only use wires and simple
+gates to complete your circuit. Note that for this circuit you don't need to use any of the 3 pins that are
+on the south side of the flip-flops. Use only the pins that are on their east and west sides.
+Make sure that your circuit counts from 0 to 7 and that the output pins bit0, bit1 and bit2 have
+the corresponding bits of the counter value.
+

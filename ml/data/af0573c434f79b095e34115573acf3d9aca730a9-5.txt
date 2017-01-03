@@ -1,0 +1,712 @@
+
+CPSC 213, Winter 2015, Term 2 — Midterm Exam
+Date: February 29, 2016; Instructor: Mike Feeley
+
+This is a closed book exam. No notes. No electronic calculators. Note: this is a normal 1-hour-length
+midterm, but you have 2 hours to write it.
+Answer in the space provided. Show your work; use the backs of pages if needed. There are 9
+questions on 8 pages, totaling 64 marks. You have 2 hours to complete the exam.
+
+Q1
+
+/8
+
+Q2
+
+/6
+
+Q3
+
+/6
+
+Q4
+
+/6
+
+STUDENT NUMBER:
+
+Q5
+
+/6
+
+NAME:
+
+Q6
+
+/6
+
+Q7
+
+/8
+
+Q8
+
+/8
+
+Q9
+
+/ 10
+
+SIGNATURE:
+
+1 (8 marks) Memory and Numbers. Consider the following C code containing global variables a, b, and c that
+is executing on a little endian, 32-bit processor. Assume that the address of a[0] is 0x1000 and that the compiler
+allocates global variables in the order they appear in the program without unnecessarily wasting space between them.
+With this information, you can determine the value of certain bytes of memory following the execution of foo().
+char a[2];
+int b[2];
+int* c;
+
+void foo()
+a[1] =
+b[1] =
+c
+=
+}
+
+{
+0x10;
+0x30405060;
+b;
+
+List the address and value of every memory location whose address and value you know. Use the form “address: value”.
+List every byte on a separate line and list all numbers in hex.
+
+2 (6 marks)
+
+Static Scalars and Arrays. Consider the following C code containing global variables s and d.
+
+int s[2];
+int* d;
+Use r0 for the variable i (i.e., do not read or write memory for i) and use labels for static values. Give assembly code
+that is equivalent to each of the following C statements. Treat each question separately; i.e., do not use register values
+assigned in a previous answer.
+
+2a i = s[i];
+
+2b i = d[i];
+
+2c d = &s[10];
+
+3 (6 marks)
+
+Structs and Instance Variables Consider the following C code containing the global variable a.
+
+struct S {
+int
+x;
+int
+y;
+struct S* z;
+};
+
+struct S* a;
+
+Once again use r0 for the variable i (i.e., do not read or write memory for i) and use labels for static values. Give
+assembly code that is equivalent to each of the following C statements. Treat each question separately; i.e., do not use
+register values assigned in a previous answer.
+
+3a i = a->y
+
+3b i = a->z->y;
+
+3c a->z->z = a;
+
+2
+
+4 (6 marks)
+
+Static Control Flow. Answer these questions using the register r0 for x and r1 for y.
+
+4a Write commented assembly code equivalent to the following.
+if (x <= 0)
+x = x + 1;
+else
+x = x - 1;
+
+4b Write commented assembly code equivalent to the following.
+for (x=0; x<y; x++)
+y--;
+
+5 (6 marks)
+
+C Pointers. Consider the following C procedure copy() and global variable a.
+
+void copy (char* s, char* d, int n) {
+for (int i=0; i<n; i++)
+d[i] = s[i];
+}
+char a[9] = {1,2,3,4,5,6,7,8,9};
+And this procedure call:
+copy (a, a+3, 6);
+List the value of the elements of the array a (in order), following the execution of this procedure call.
+
+3
+
+6 (6 marks)
+
+Dynamic Allocation. The following four pieces of code are identical except for the their use of
+free(). Each of them may be correct or they may have a memory leak, dangling pointer or both. In each case,
+determine whether these bugs exists and if so, briefly describe the bug(s); do not describe how to fix the bug.
+
+6a int* copy (int* src) {
+int* dst = malloc (sizeof (int));
+*dst = *src;
+return dst;
+}
+
+6b int* copy (int* src) {
+int* dst = malloc (sizeof (int));
+*dst = *src;
+free (dst);
+return dst;
+
+int foo() {
+int a = 3;
+int* b = copy (&a);
+return *b;
+}
+
+int foo() {
+int a = 3;
+int* b = copy (&a);
+return *b;
+}
+
+}
+
+6c int* copy (int* src) {
+int* dst = malloc (sizeof (int));
+*dst = *src;
+return dst;
+}
+
+6d int* copy (int* src) {
+int* dst = malloc (sizeof (int));
+*dst = *src;
+free (dst);
+return dst;
+}
+
+int foo() {
+int a = 3;
+int* b = copy (&a);
+free (b);
+return *b;
+}
+
+int foo() {
+int a = 3;
+int* b = copy (&a);
+free (b);
+return *b;
+}
+
+4
+
+7 (8 marks) Reference Counting. The following extends the code from the previous question by adding a procedure
+saveIfMax that is implemented in a separate module. Add calls to inc_ref and dec_ref to use referencing counting to eliminate all dangling pointers and memory leaks in this code while creating no coupling between
+saveIfMax and the rest of the code (i.e., saveIfMax can not know about what the rest of the code does and neither
+can the rest of the code know what saveIfMax does). Do not implement reference counting nor worry about storing
+the reference count itself; just add calls to inc_ref and dec_ref in the right places, which may require slightly
+rewriting portions of the code.
+int* copy (int* src) {
+int* dst = malloc (sizeof (int));
+
+int* max;
+void saveIfMax (int* x) {
+
+*dst = *src;
+
+if (max==NULL || *x > *max) {
+
+return dst;
+
+max = x;
+
+}
+
+}
+}
+
+int foo() {
+int
+
+a = 3;
+
+int* b = copy (&a);
+saveIfMax (b);
+return *b;
+}
+
+5
+
+8 (8 marks)
+
+Procedures and the Stack. Answer the following questions about this assembly code.
+
+[01]
+[02]
+[03]
+[04]
+[05]
+[06]
+[07]
+[08]
+[09]
+[10]
+[11]
+[12]
+[13]
+[14]
+[15]
+[16]
+[17]
+[18]
+[19]
+[20]
+[21]
+[22]
+[23]
+[24]
+
+ld $-12, r0
+add r0, r5
+ld $2, r0
+st r0, 0(r5)
+st r0, 4(r5)
+st r0, 8(r5)
+gpc $6, r6
+j
+foo
+ld $12, r1
+add r1, r5
+ld $0x1000, r1
+st r0, (r1)
+halt
+foo:
+
+ld $-8, r0
+add r0, r5
+st r6, 4(r5)
+ld 8(r5), r0
+ld 12(r5), r1
+ld 16(r6), r2
+add r1, r0
+add r2, r0
+ld $8, r1
+add r1, r5
+j (r6)
+
+8a How many arguments, if any, does foo() have?
+
+8b How many local variables, if any, does foo() have (count them even if they are not used)?
+
+8c Is foo()’s return address saved on the stack at any point. If so, which line saves it?
+
+8d If you can determine the integer value in memory at address 0x1000 following the execution of this code,
+give its value.
+
+6
+
+9 (10 marks)
+
+Reading Assembly. Comment the following assembly code and then translate it into C. Use the back
+of the preceding page for extra space if you need it.
+foo:
+
+L0:
+
+L2:
+L3:
+
+ld
+
+$-12, r0
+
+#
+
+add r0, r5
+
+#
+
+st
+
+r6, 8(r5)
+
+#
+
+ld
+
+$0, r1
+
+#
+
+st
+
+r1, 0(r5)
+
+#
+
+st
+
+r1, 4(r5)
+
+#
+
+ld
+
+20(r5), r2
+
+#
+
+not r2
+
+#
+
+inc r2
+
+#
+
+mov r2, r3
+
+#
+
+add r1, r3
+
+#
+
+beq r3, L3
+
+#
+
+bgt r3, L3
+
+#
+
+ld
+
+12(r5), r3
+
+#
+
+ld
+
+(r3, r1, 4), r3
+
+#
+
+ld
+
+16(r5), r4
+
+#
+
+ld
+
+(r4, r1, 4), r4
+
+#
+
+ld
+
+$-8, r0
+
+#
+
+add r0, r5
+
+#
+
+st
+
+r3, 0(r5)
+
+#
+
+st
+
+r4, 4(r5)
+
+#
+
+gpc $6, r6
+
+#
+
+j
+
+bar
+
+#
+
+ld
+
+$8, r3
+
+#
+
+add r3, r5
+
+#
+
+beq r0, L2
+
+#
+
+ld
+
+#
+
+0(r5), r3
+
+inc r3
+
+#
+
+st
+
+#
+
+r3, 0(r5)
+
+inc r1
+
+#
+
+br
+
+L0
+
+#
+
+ld
+
+0(r5), r0
+
+#
+
+ld
+
+8(r5), r6
+
+#
+
+ld
+
+$12, r1
+
+#
+
+add r1, r5
+
+#
+
+j
+
+#
+
+(r6)
+
+Translate into C:
+
+7
+
+You may remove this page.
+
+These two tables describe the SM213 ISA. The first gives
+a template for instruction machine and assembly language and describes instruction semantics. It uses ’s’ and ’d’ to
+refer to source and destination register numbers and ’p’ and ’i’ to refer to compressed-offset and index values. Each
+character of the machine template corresponds to a 4-bit, hexit. Offsets in assembly use ’o’ while machine code stores
+this as ’p’ such that ’o’ is either 2 or 4 times ’p’ as indicated in the semantics column. The second table gives an
+example of each instruction.
+Operation
+load immediate
+load base+offset
+load indexed
+store base+offset
+store indexed
+halt
+nop
+rr move
+add
+and
+inc
+inc addr
+dec
+dec addr
+not
+shift
+
+Machine Language
+0d-- vvvvvvvv
+1psd
+2bid
+3spd
+4sdi
+F000
+FF00
+60sd
+61sd
+62sd
+63-d
+64-d
+65-d
+66-d
+67-d
+7dss
+
+branch
+branch if equal
+branch if greater
+jump
+get program counter
+jump indirect
+jump double ind, b+off
+jump double ind, index
+
+8-pp
+9rpp
+Arpp
+B--- aaaaaaaa
+6Fpd
+Cdpp
+Cdpp
+Edi-
+
+Operation
+load immediate
+load base+offset
+load indexed
+store base+offset
+store indexed
+halt
+nop
+rr move
+add
+and
+inc
+inc addr
+dec
+dec addr
+not
+shift
+
+Machine Language Example
+0100 00001000
+1123
+2123
+3123
+4123
+f000
+ff00
+6012
+6112
+6212
+6301
+6401
+6501
+6601
+6701
+7102
+71fe
+1000: 8003
+1000: 9103
+1000: a103
+b000 00001000
+6f31
+c104
+d102
+e120
+
+branch
+branch if equal
+branch if greater
+jump
+get program counter
+jump indirect
+jump double ind, b+off
+jump double ind, index
+
+Semantics / RTL
+r[d] ← vvvvvvvv
+r[d] ← m[(o = p × 4) + r[s]]
+r[d] ← m[r[b] + r[i] × 4]
+m[(o = p × 4) + r[d]] ← r[s]
+m[r[b] + r[i] × 4] ← r[s]
+(stop execution)
+(do nothing)
+r[d] ← r[s]
+r[d] ← r[d] + r[s]
+r[d] ← r[d] & r[s]
+r[d] ← r[d] + 1
+r[d] ← r[d] + 4
+r[d] ← r[d] − 1
+r[d] ← r[d] − 4
+r[d] ←!r[d]
+r[d] ← r[d] << ss
+(if ss is negative)
+pc ← (aaaaaaaa = pc + pp × 2)
+if r[r] == 0 : pc ← (aaaaaaaa = pc + pp × 2)
+if r[r] > 0 : pc ← (aaaaaaaa = pc + pp × 2)
+pc ← aaaaaaaa
+r[d] ← pc + (o = 2 × p)
+pc ← r[d] + (o = 2 × pp)
+pc ← m[(o = 4 × pp) + r[d]]
+pc ← m[4 × r[i] + r[d]]
+
+Assembly
+ld $vvvvvvvv,rd
+ld o(rs),rd
+ld (rb,ri,4),rd
+st rs,o(rd)
+st rs,(rb,ri,4)
+halt
+nop
+mov rs, rd
+add rs, rd
+and rs, rd
+inc rd
+inca rd
+dec rd
+deca rd
+not rd
+shl ss, rd
+shr -ss, rd
+br aaaaaaaa
+beq rr, aaaaaaaa
+bgt rr, aaaaaaaa
+j aaaaaaaa
+gpc $o, rd
+j o(rd)
+j *o(rd)
+j *(rd,ri,4)
+
+Assembly Language Example
+ld $0x1000,r1
+ld 4(r2),r3
+ld (r1,r2,4),r3
+st r1,8(r3)
+st r1,(r2,r3,4)
+halt
+nop
+mov r1, r2
+add r1, r2
+and r1, r2
+inc r1
+inca r1
+dec r1
+deca r1
+not r1
+shl $2, r1
+shr $2, r1
+br 0x1008
+beq r1, 0x1008
+bgt r1, 0x1008
+j 0x1000
+gpc $6, r1
+j 8(r1)
+j *8(r1)
+j *(r1,r2,4)
+8
+

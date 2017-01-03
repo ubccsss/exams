@@ -1,0 +1,238 @@
+
+Author: G. Tsiknis
+Computer Science 121
+Midterm 1 Solutions
+1. A truth table for the statement:
+p
+F
+F
+T
+T
+
+q
+F
+T
+F
+T
+
+p q
+T
+T
+F
+T
+
+q
+T
+F
+T
+F
+
+( p q)  ~p
+T
+T
+F
+F
+
+~p
+T
+T
+F
+F
+
+whole statement
+T
+F
+T
+T
+
+Therefore the statement is neither a tautology nor a contradiction.
+2.
+a. ~(~w  g )  (d  t)
+
+OR
+
+(w  ~g )  (d  t)
+
+If we interpret “but we will be late” as “in any case we will be late”:
+(~(~w  g )  d)  t
+
+OR
+
+( (w  ~g )  d )  t
+
+b. ~g  ( w  (d  t ) )
+OR
+(~g  w )  (d  t)
+3.
+Expression:
+(~p  ~ q )  (q  r )
+OR
+~(( q  ~r)  (p  q))
+4.
+Proof:
+p  ~q)  ~p
+
+given
+
+≡  p ~q) ~p
+
+definition of 
+
+≡  p ~q) ~p
+
+DeMorgan
+
+≡  p q) ~p
+
+double negation (may skip)
+
+≡ ~p p q)
+
+commutative (may skip)
+
+≡ (~p p) q
+
+associative
+
+≡
+
+~pq
+
+idempotence
+
+≡
+
+pq
+
+definition of 
+
+Name:____________________________________ St. No:____________________
+5.
+a.
+
+~[ ~p  ~( p q)  r)]
+
+b.
+
+
+
+~[ ~p  ~( p q)  r)]
+≡ ~~p  ~~( p q)  r)
+≡ p  ( p q)  r)
+≡ (p   p q))  r
+≡ p  r
+
+c.
+
+The circuit can be implemented with a single OR gate:
+
+DM
+DNEG (twice)
+ASS
+ABS
+
+6.
+a. 0 1111000
+b. 54
+c. -10
+d.
++1
+
+01000000
+10111111
+00000001
+11000000
+
+64
+-64
+
+7.
+OR
+
+Page 2 of 3
+
+Name:____________________________________ St. No:____________________
+8.
+
+Page 3 of 3
+
+1.
+
+p q
+
+premise
+
+
+
+qr
+
+premise
+
+3.
+
+put
+
+premise
+
+4.
+
+~q  (w  u)
+
+premise
+
+5.
+
+~r
+
+premise
+
+6.
+
+~q
+
+2, 5, modus tollens____________
+
+7.
+
+p_______________
+
+1, 6, elimination
+
+8.
+
+wu
+
+4, 6, modus ponens____________
+
+9.
+
+u
+
+8, specialization
+
+10.
+
+pu
+
+7, 9, conjunction___________
+
+11.
+
+t
+
+3, 10, modus ponens
+
+9. a)
+i. pPM, L(p)  C(p)
+OR
+pPM, L(p)  C(p)
+ii. pPM, W(p)  C(p)
+
+b)
+i. No prime minister of Canada is/was a member of the Liberal and the Conservative Party
+ii. Every prime minister of Canada who is not /was not a woman and is/was a member of the Liberal
+Party, does not like fishing
+OR (assuming that not female means male):
+Every male prime minister of Canada who is not /was a member of the Liberal Party, does not like
+fishing
+

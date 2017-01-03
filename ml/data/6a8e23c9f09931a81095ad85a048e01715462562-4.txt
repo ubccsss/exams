@@ -1,0 +1,819 @@
+
+Author: 
+Q1
+
+Q2
+
+Q3
+
+Q4
+
+Q5
+
+TOTAL
+
+50
+
+50
+
+50
+
+45
+
+30
+
+225
+
+bonus
+
+Definition of Programming Languages
+
+CPSC 311 2016W1
+University of British Columbia
+Practice Final Examination—Episode One plus Q5
+Joshua Dunfield
+Student
+Name:
+
+Student
+Number:
+
+Signature:
+
+INSTRUCTIONS
+•
+•
+
+This is a CLOSED BOOK / CLOSED NOTES examination.
+Write all answers ON THE EXAMINATION PAPER.
+Try to write your answers in the blanks or boxes given. If you can’t, try to write them elsewhere
+on the same page, or on one of the worksheet pages, and LABEL THE ANSWER. We can’t
+give credit for answers we can’t find.
+
+•
+
+Blanks are suggestions. You may not need to fill in every blank.
+
+This is an incomplete practice exam; the actual final exam will have an additional question
+on subtyping. We plan to release an updated version of this practice exam that includes a
+question on subtyping.
+
+Question 1 [50 points]: “If it’s ‘dynamic’, it must be better.”
+The following rules define an environment-based semantics for lexically-scoped functions, Lam,
+and dynamically-scoped functions, Ds-lam.
+
+env ` e ⇓ v Under environment env, expression e evaluates to value v
+env ` (Num n) ⇓ (Num n)
+
+Env-num
+
+env ` e1 ⇓ v1
+
+env ` e1 ⇓ (Num n1)
+
+env ` (Add e1 e2) ⇓ (Num n1+n2)
+x=v1, env ` e2 ⇓ v2
+
+env ` (Let x e1 e2) ⇓ v2
+lookup(env, x) = e
+env ` (Id x) ⇓ e
+
+env ` e2 ⇓ (Num n2)
+
+Env-let
+
+lookup(env, x) undefined
+
+Env-id
+
+env ` (Id x) unknown-id-error
+
+env ` (Lam x e1) ⇓ Clo env (Lam x e1)
+env ` e1 ⇓ (Clo envold (Lam x eB))
+
+Env-unknown-id
+
+envold ` e ⇓ v
+
+ Env-lam
+
+env ` (Clo envold e) ⇓ v
+
+env ` e2 ⇓ v2
+
+x=v2, envold ` eB ⇓ v
+
+env ` (App e1 e2) ⇓ v
+
+env ` (Ds-lam x e1) ⇓ (Ds-lam x e1)
+
+Env-ds-lam
+
+env ` e1 ⇓ (Ds-lam x eB)
+
+Env-add
+
+env ` e2 ⇓ v2
+
+Env-clo
+
+Env-app
+
+x=v2, env ` eB ⇓ v
+
+env ` (App e1 e2) ⇓ v
+
+Assume that lookup(env, x) returns the leftmost binding of x. For example:
+
+ 
+lookup x=(Num 2), x=(Num 1), ∅ , x = (Num 2)
+Consider the following expression, shown in concrete syntax (left) and in abstract syntax (right).
+
+Let y (Num 100)
+{Let y 100
+
+{Let f {Let y 10
+Let f Let y (Num 10)
+
+{Lam x {+ x y}}}
+(Lam
+x
+(Add
+(Id
+x)
+(Id
+y)))
+{Let y 2
+
+Let y (Num 2)
+{App f y}}}}
+
+(App (Id f) (Id y))
+Q1a [10 points] Complete the
+abstract syntax tree for
+the above expression.
+
+=⇒
+
+Let
+/ | \
+y Num
+100
+
+2
+
+Env-ds-app
+
+Question 1 [50 points]: “If it’s ‘dynamic’, it must be better.” (cont.)
+Q1b [10 points] If we evaluate the above expression in the empty environment, what value do we get?
+(Num 12)
+
+Q1c [10 points] While evaluating the above expression, we will evaluate the body of the Lam. When we
+evaluate that expression, (Add (Id x) (Id y)), what is the complete environment?
+
+x=(Num 2), y=(Num 10), y=(Num 100), ∅
+Q1d [10 points] Warning: Dynamic scope ahead!
+If we evaluate the expression that is almost the same, but has Ds-lam in place of Lam, as
+shown below, what value do we get?
+(Num 4)
+
+Let y (Num 100)
+{Let y 100
+
+{Let f {Let y 10
+Let f Let y (Num 10)
+{Ds-lam x {+ x y}}}
+
+(Ds-lam
+x
+(Add
+(Id
+x)
+(Id
+y)))
+{Let y 2
+Let y (Num 2)
+
+{App f y}}}}
+
+(App (Id f) (Id y))
+Q1e [10 points] (No more dynamic scope. Yay!)
+This will be a question about substitution.
+It should be roughly similar to Q1 on the midterm, but will probably ask you to show your
+work by writing the intermediate steps of applying the substitution.
+
+3
+
+Worksheet (i)
+
+4
+
+Worksheet (ii)
+
+5
+
+Question 2 [50 points]: Little Perennials II
+The expression strategy, value strategy, and lazy evaluation are different ways of evaluating a function application (App e1 e2). All strategies evaluate e1 to (Lam x eB), but they differ in how they
+handle e2:
+• The expression strategy evaluates eB with x bound to a “thunk” containing e2. The thunk is
+a closure (Clo env e2), which saves the current environment env, to make sure we don’t use
+dynamic scoping.
+• The value strategy evaluates e2 to a value v2, then evaluates eB with x bound to that value.
+• Lazy evaluation creates a lazy thunk, `.(Lazy-thk env e2), in the store, and evaluates eB with
+x bound to (Lazy-ptr `). If (Id x) is evaluated, we evaluate e2 to a value v2, and replace
+`.(Lazy-thk env e2) with `.v2 (rule SEnv-lazy-ptr). If (Id x) is evaluated again, rule SEnvlazy-ptr-done looks up the value v2, without evaluating e2 again.
+If you need to, you can refer to the following evaluation rules:
+
+env; S ` e ⇓ v; S 0 Under environment env and store S, expression e evaluates to v with updated store S 0
+env; S ` (Lam x e1) ⇓ Clo env (Lam x e1) ; S
+
+
+env; S ` e1 ⇓ (Clo envold (Lam x eB)); S1
+
+SEnv-lam
+
+envold ; S1 ` e ⇓ v; S2
+env; S1 ` (Clo envold e) ⇓ v; S2
+
+env; S1 ` e2 ⇓ v2; S2
+
+SEnv-clo
+
+x=v2, envold ; S2 ` eB ⇓ v; S 0
+
+env; S ` (App e1 e2) ⇓ v; S 0
+env; S ` e1 ⇓ (Clo envold (Lam x eB)); S1
+
+x=(Clo env e2), envold ; S1 ` eB ⇓ v; S2
+
+env; S ` (App e1 e2) ⇓ v; S2
+env; S ` e1 ⇓ (Clo envold (Lam x eB)); S1
+
+SEnv-app-value
+
+SEnv-app-expr
+
+x=(Lazy-ptr `), envold ; `.(Lazy-thk env e2), S1 ` eB ⇓ v; S2
+
+env; S ` (App e1 e2) ⇓ v; S2
+envarg ; S ` e2 ⇓ v; S1
+
+lookup-loc(S, `) = (Lazy-thk envarg e2)
+
+update-loc(S1, `, v) = S2
+
+env; S ` (Lazy-ptr `) ⇓ v; S2
+lookup-loc(S, `) = v2
+
+v2 6= (Lazy-thk · · · · · ·)
+
+env; S ` (Lazy-ptr `) ⇓ v2; S
+lookup(env, x) = e
+
+SEnv-lazy-ptr-done
+
+env; S ` e ⇓ v; S 0
+
+env; S ` (Id x) ⇓ v; S 0
+env; S ` e1 ⇓ (Num n1); S1
+
+SEnv-id
+
+env; S1 ` e2 ⇓ (Num n2); S 0
+
+env; S ` (Add e1 e2) ⇓ (Num n1 + n2); S 0
+env; S ` e1 ⇓ (Num n1); S1
+
+env; S1 ` e2 ⇓ (Num n2); S 0
+
+env; S ` (Sub e1 e2) ⇓ (Num n1 − n2); S 0
+
+6
+
+SEnv-add
+
+SEnv-sub
+
+SEnv-app-lazy
+
+SEnv-lazy-ptr
+
+Question 2 [50 points]: Little Perennials II, continued
+Consider the following expression:
+
+
+
+App App Lam x (Lam y (Add (Id y) (Id y)))
+
+Sub (Num 7) (Num 1)
+
+
+Sub (Num 10) (Num 1)
+
+{App {App {Lam x {Lam y {+ y y}}}
+{- 7 1}}
+{- 10 1}}
+
+Q2a [15 points] If we implement the SEnv-app-value rule (and not the SEnv-app-expr and SEnv-app-lazy
+rules) and evaluate the above expression, we will perform
+1
+
+addition(s), and 2
+
+subtraction(s).
+
+Q2b [10 points] Now we switch from the value strategy to the expression strategy.
+Complete the derivation tree for the second premise of SEnv-app-expr.
+
+SEnv-lam
+∅; ∅ ` Lam x eBody
+SEnv-lam
+x=(Clo ∅ eSub), ∅; ∅ ` eBody ⇓ (Clo x=(Clo ∅ eSub) eBody); ∅
+⇓ (Clo ∅ (Lam x eBody)); ∅
+
+SEnv-app-expr
+
+
+⇓ (Clo x=(Clo ∅ eSub) eBody); ∅
+Sub (Num 7) (Num 1)
+∅; ∅ ` App Lam x (Lam y (Add (Id y) (Id y)))
+{z
+} |
+|
+{z
+}
+eBody
+
+eSub
+
+Q2c [10 points] If we implement the SEnv-app-expr rule instead of SEnv-app-value, and evaluate the expression at the top of the page, we will perform
+1 addition(s), and 2
+
+subtraction(s).
+
+Q2d [15 points] If we implement the SEnv-app-lazy rule instead of SEnv-app-value, and evaluate the expression at the top of the page, we will perform
+1 addition(s), and 1
+
+7
+
+subtraction(s).
+
+Question 3 [50 points]: Big Log
+The small-step semantic interpreters we have seen so far don’t include side effects. Useful side
+effects include state (Ref, Deref, Setref) and input/output.
+An interpreter can be extended with input/output by introducing a Print construct, and we can
+model the effect of printing by appending to an output buffer B:
+
+B; e −→ B 0 ; e 0 With starting buffer B, expression e steps to expression e 0 and an updated buffer B 0
+Reduction rules:
+
+Context rule:
+
+
+
+B; Add (Num n1) (Num n2) −→ B; (Num n1+n2)
+
+Step-add
+
+B1; (Print v) −→ B2; v
+
+B; C[e] −→ B 0 ; C[e 0 ]
+
+Step-context
+
+Rule Step-context uses the following
+evaluation contexts:
+
+   Step-let
+B; (Let x v1 e2) −→ B; v1 x e2
+B2 = append(B1, v)
+
+B; e −→ B 0 ; e 0
+
+C ::= [ ]
+| (Add C e)
+| (Add v C)
+| (Let x C e)
+| (Print C)
+
+Step-print
+
+This question uses the following define-types, and functions with the following signatures:
+(define-type Config ; Type of result of 'reduce' and 'step':
+[config (B Buffer?) (e E?)]) ; a buffer and an expression
+(define-type Buffer
+[buffer/empty]
+[buffer/append (head Buffer?) (tail E?)])
+; append-buffer : Buffer E → Buffer
+;
+; (append-buffer B1 v) = append(B1, v)
+; value? : E → boolean
+;
+; Returns #true iff e is a Num.
+
+Go to the next page.
+8
+
+Question 3 [50 points]: Big Log, continued
+Q3a [15 points] In the function reduce (below), implement the rule Step-print.
+; reduce : Buffer E −> (or Config false)
+; Given a buffer B and expression e, return (config B2 e2) where B; e −→ B2; e2
+; using a reduction rule, or #false if no reduction rule can be applied.
+(define (reduce B e)
+(type-case E e
+[Add (e1 e2)
+(if (and (value? e1) (Num? e1)
+(value? e2) (Num? e2))
+(config B
+(Num (+ (Num-n e1) (Num-n e2))))
+#false)]
+; ...
+[Print (e1)
+(if (value? e1)
+(config (append-buffer B e1)
+e1)
+#false)
+]))
+Q3b [15 points] In the function step (below), implement the evaluation context (Print C).
+; step : Buffer E −> (or Config false)
+; Given a buffer B and expression e, return (config B2 e2) where B; e −→ B2; e2
+; using rule Step-context, or #false if no derivation of B; e −→ B2; e2 exists.
+(define (step B e)
+(or (reduce B e)
+(type-case E e
+[Add (e1 e2)
+(if (step B e1)
+(type-case Config (step B e1) ; C ::= (Add C e2)
+[config (B2 s1)
+(config B2 (Add s1 e2))])
+(if (and (value? e1) (step B e2))
+(type-case Config (step B e2) ; C ::= (Add v C)
+[config (B2 s2)
+(if s2
+(config B2 (Add e1 s2))
+#false)])
+#false)
+)])]
+; ...
+[Print (e1)
+(and (step B e1)
+(type-case Config (step B e1)
+[config (B2 s1)
+(config B2 (Print s1))])))
+
+9
+
+Question 3 [50 points]: Big Log, continued
+Q3c [20 points] We can model concurrency in our language by adding angelic nondeterminism:
+B; (Par v1 e2) −→ B; v1
+B; (Par e1 v2) −→ B; v2
+
+Step-par-left
+Step-par-right
+
+C ::= · · ·
+| (Par C e)
+| (Par e C)
+
+Let −→∗ be the reflexive-transitive closure of −→.
+That is, e −→∗ e 0 if either e 0 = e, or e −→ e2 and e2 −→∗ e 0 .
+Suppose our program is this expression e:
+
+
+
+
+
+e =
+Print Par Let r2 (Print (Num 2)) (Num 22) Let r3 (Print (Num 3)) (Num 33)
+The result of repeatedly stepping e is not always the same; both the buffer and the resulting value
+can vary.
+For example:
+h i; e −→∗ h(Num 2), (Num 22)i; (Num 22)
+by the intermediate steps
+
+
+
+
+
+h i; e −→ h(Num 2)i; Print Par Let r2 (Num 2) (Num 22) Let r3 (Print (Num 3)) (Num 33)
+
+
+
+
+−→ h(Num 2)i; Print Par (Num 22) Let r3 (Print (Num 3)) (Num 33)
+
+
+−→ h(Num 2)i; Print (Num 22)
+−→ h(Num 2), (Num 22)i; (Num 22)
+Fill in the intermediate computation steps:
+
+
+
+
+
+h i; e −→ h(Num 3)i; Print Par Let r2 (Print (Num 2)) (Num 22) Let r3 (Num 3) (Num 33)
+
+
+
+
+−→ h(Num 3)i; Print Par Let r2 (Print (Num 2)) (Num 22) (Num 33)
+
+
+−→ h(Num 3)i; Print (Num 33)
+−→ h(Num 3), (Num 33)i; (Num 33)
+
+Note: Different solutions are possible!
+
+10
+
+Worksheet (iii)
+
+11
+
+Question 4 [45 points]: Power of Two
+This question is about intersection types, which are a little like polymorphic types: they describe expressions
+that have more than one type. (But you can answer this question without remembering anything about
+polymorphic types!)
+In bidirectional typing, the judgment form Γ ` e : A is replaced by two judgments:
+Γ `e⇒A
+
+read “under assumptions in Γ , the expression e synthesizes type A”
+
+Γ `e⇐A
+
+read “under assumptions in Γ , the expression e checks against type A”
+
+An expression e has type A1 ∩ A2, “A1 intersect A2”, if e has type A1 and e has type A2.
+A reasonable introduction rule for ∩—a rule that has ∩ in its conclusion—is a checking rule:
+Γ ` e ⇐ A1
+Γ ` e ⇐ A2
+Check-sect-intro
+Γ ` e ⇐ (A1 ∩ A2)
+If we know that an expression has type (A1 ∩ A2), then it has type A1 and also type A2. For example,
+supposing
+
+
+Γ ` (Id multiply) ⇒ (pos ∗ pos) → pos ∩ (int ∗ int) → int
+then if we apply multiply to a pair of integers
+
+App (Id multiply) (Pair (Num 5) (Num −3))
+
+
+we should know from (Id multiply) ⇒ (pos ∗ pos) → pos ∩ (int ∗ int) → int
+that (Id multiply) ⇒ (int ∗ int) → int , and (using Synth-app) derive
+
+Γ ` App (Id multiply) (Pair (Num 5) (Num −3)) ⇒ int
+The step of deriving multiply ⇒ A2 from multiply ⇒ (A1 ∩ A2) is accomplished by an elimination rule,
+Synth-sect-elim2.
+Γ ` e ⇒ (A1 ∩ A2)
+Synth-sect-elim2
+Γ ` e ⇒ A2
+
+Γ ` e ⇒ (A1 ∩ A2)
+Synth-sect-elim1
+Γ ` e ⇒ A1
+Some additional rules:
+
+Γ ` e1 ⇒ (A → A 0 )
+Γ ` e2 ⇐ A
+Synth-app
+Γ ` (App e1 e2) ⇒ A 0
+
+Γ (x) = A
+Synth-var
+Γ ` (Id x) ⇒ A
+n∈Z
+n≥0
+Synth-pos
+Γ ` (Num n) ⇒ pos
+
+n∈Z
+Synth-int
+Γ ` (Num n) ⇒ int
+
+Γ `e⇒A
+A=B
+Check-sub
+Γ `e⇐B
+
+Q4a [20 points] Complete the following derivation.
+Γ (copy) = (Apos ∩ Aint))
+Synth-var
+Synth-int
+Γ ` copy : (Apos ∩ Aint)
+Γ ` (Num −3) ⇒ int
+int = int
+Synth-sect-elim2
+Check-sub
+Γ ` (Id copy) ⇒ Aint
+Γ ` (Num −3) ⇐ int
+
+
+
+Synth-app
+copy : pos → (pos∗pos) ∩ int → (int∗int) ` App (Id copy) (Num −3) ⇒ (int ∗ int)
+{z
+} |
+{z
+}
+|
+|
+
+Apos
+
+{z
+
+Aint
+
+}
+
+Γ
+
+12
+
+Question 4 [45 points]: Power of Two, continued
+(define-type Type
+[Tpos] ; positive integers
+[Tint] ; integers
+[Trat] ; rationals
+[Tbool]
+[T* (A1 Type?) (A2 Type?)]
+[T-> (domain Type?) (range Type?)]
+[Tsect (A1 Type?) (A2 Type?)])
+
+; A1 ∩ A2
+
+Q4b [15 points] Again, the rule for checking an expression e against a given intersection type (A1 ∩ A2):
+Γ ` e ⇐ A1
+Γ ` e ⇐ A2
+Check-sect-intro
+Γ ` e ⇐ (A1 ∩ A2)
+Implement Check-sect-intro in check, or use the space to (briefly) explain why this is not feasible (assuming you cannot change the signatures of check/synth or any existing branches of those functions).
+For reference, we have shown the code that implements the rule Check-pair.
+Γ ` e1 ⇐ B1
+Γ ` e2 ⇐ B2
+Check-pair
+Γ ` (Pair e1 e2) ⇐ (B1 ∗ B2)
+; synth : Typing-context E −> (or false Type)
+; check : Typing-context E Type −> boolean
+;
+(define (check tc e B)
+(type-case Type B
+[Tsect (A1 A2)
+(and (check tc e A1)
+(check tc e A2))
+]
+[else ; B not Tsect
+(type-case E e
+; ...
+[Pair (e1 e2) (type-case Type B
+[T* (B1 B2) (and (check tc e1 B1)
+(check tc e2 B2))]
+[else #false])]
+; ...
+[else #false ; you can cross this out, if necessary
+(Nothing to add here.)
+]
+))
+
+] ; end of else branch of type-case E e
+; end of else branch of type-case Type B
+
+13
+
+Question 4 [45 points]: Power of Two, continued
+Q4c [10 points]
+Suppose that, instead of bidirectional typing, we are using the traditional single typing judgment Γ ` e : A.
+Rules for the intersection type ∩ can be obtained by copying the bidirectional rules Check-sect-intro, Synthsect-elim1 and Synth-sect-elim2, and replacing “⇒” and “⇐” with “:”.
+Γ ` e : A1
+Γ ` e : A2
+Type-sect-intro
+Γ ` e : (A1 ∩ A2)
+Γ ` e : (A1 ∩ A2)
+Type-sect-elim2
+Γ ` e : A2
+
+Γ ` e : (A1 ∩ A2)
+Type-sect-elim1
+Γ ` e : A1
+
+Implement Type-sect-intro in typeof, or use the space to (briefly) explain why this is not feasible (assuming
+you cannot change the signature of typeof or any existing branch).
+(define (typeof tc e)
+
+; typeof : Typing-context E −> (or false Type)
+
+Not feasible, because we don’t know when to apply Type-sect-intro.
+We would need a way to know when we might get two different types, or somehow enumerate all the
+possible results of typeof.
+(type-case E e
+; ...
+[Pair-case (e x1 x2 eBody)
+(let ([Ae (typeof tc e)])
+(and Ae
+(type-case Type Ae
+[T* (A1 A2)
+(let ([tc2 (tc/cons-tp x1 A1 (tc/cons-tp x2 A2 tc))])
+(typeof tc2 eBody))]
+[else #false])))]
+; ...
+[else #false ; you can cross this out, if necessary
+(see explanation above)
+]))
+
+14
+
+Question 5 [30 points]: The Criminal Cats of West 11th Avenue
+The subsumption principle states that, if A1 <: A2 (meaning that A1 is a subtype of A2), then any value of
+type A1 can safely be used wherever a value of type A2 is required.
+Each part of this question proposes one or more subtyping rules. In each part, determine whether the rules
+proposed maintain the subsumption principle or violate it. If they violate the subsumption principle, give an
+example of an expression of type A1 that cannot be safely used where an expression of type A2 is expected.
+Assume, in all the parts, that we have the following subtyping and typing rules that allow us to distinguish
+positive (≥ 0) rational numbers from negative (≤ 0) rational numbers through types pos and neg, which are
+both subtypes of rat. Also assume there is a function print-pos : pos → pos that can only print positive
+rationals, and will crash if given a rational that is less than zero.
+n≥0
+n≤0
+pos <: rat neg <: rat
+Γ ` (Num n) : pos Γ ` (Num n) : neg
+Example
+
+Proposed rule:
+rat <: pos
+
+Does this proposed rule:
+
+maintain the subsumption principle, or
+X violate it (example expression:
+
+(Num −3)
+
+)
+
+Note: As this sample answer shows, we are not asking for an entire expression that will give an error when
+evaluated—only for an expression that (in this example) has type rat and that cannot be safely used where
+an expression of type pos is expected. That is, you do not have to show us an expression such as
+
+App (Id print-pos) (Num −3)
+However, thinking about such expressions may help you answer the questions.
+Q5a
+[15 points]
+
+Recall some relevant typing rules:
+Γ ` e : ref A
+Γ `e:A
+Γ ` (Ref e) : ref A
+Γ ` (Deref e) : A
+
+Proposed rule:
+
+A <: B
+B <: A
+(ref A) <: (ref B)
+
+Γ ` e1 : ref A
+Γ ` e2 : A
+Γ ` (Setref e1 e2) : A
+
+Does this proposed rule:
+X maintain the subsumption principle, or
+violate it (example expression:
+where A =
+
+Q5b
+[15 points]
+
+)
+
+and B =
+
+The feline criminals of West 11th Avenue (perhaps confused about the meaning of “rat”) have proposed
+that any function taking a rat as its argument can be used as a rat.
+Recall some relevant typing rules:
+Γ ` e1 : rat
+Γ ` e2 : rat
+Γ ` (Add e1 e2) : rat
+
+x : A, Γ ` eBody : B
+Γ ` (Lam x eBody) : (A → B)
+
+Γ ` e1 : (A → B)
+Γ ` e2 : B
+Γ ` (App e1 e2) : B
+
+Proposed subtyping rule:
+(rat → B) <: rat
+Does this proposed rule:
+
+maintain the subsumption principle, or
+X violate it (example expression:
+where B =
+
+pos
+15
+
+(Lam x (Num 0))
+
+)
+

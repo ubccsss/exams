@@ -1,0 +1,476 @@
+https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs344/current-term/res/oldexams/cpsc344-2005w1-midterm-sample-soln.pdf
+Author: maclean
+Name:
+
+Student ID Number:
+
+Signature:
+
+CPSC 344 2005-06 Term 1 Midterm Exam
+50 minutes
+SOLUTIONS + comments
+Department of Computer Science
+University of British Columbia
+K. MacLean
+Exam Instructions (read carefully):
+1. Immediately sign the first page of the exam with
+your signature in the space provided on the upper
+left.
+
+Question
+
+Points
+
+2. Print your Name and Student ID at the top of each
+page in the booklet before you start working.
+
+1
+
+9
+
+2
+
+8
+
+3
+
+9
+
+4
+
+12
+
+5
+
+12
+
+Total
+
+50
+
+3. Continue reading these instructions, but do not open
+the exam booklet until you are told to do so by a
+proctor.
+4. Cheating is an academic offense. Your signature on
+the exam indicates that you understand and agree to
+the University’s policies regarding cheating on
+exams.
+5. The exam is closed book. There are no aids
+permitted (this includes calculators).
+6. Interpret the exam questions as written. When in
+doubt, take a strict, literal interpretation of the
+question.
+
+Received
+
+7. You have 50 minutes in which to work (~1
+min/mark). Budget your time wisely.
+8. No one will be permitted to leave the exam room
+during the last ten minutes of the exam.
+
+CPSC 344 2005-06/T1
+
+1 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #1 [9 points total]: Matching Exercise
+The terms listed immediately below are possible answers for the definitions listed lower on the page. Use
+the number corresponding to a term below as an answer in the space provided next to the following
+questions if you think it is the best match for that concept or definition. Each term is used either once or
+not at all.
+(1) Focus group
+
+(13) Runnable model
+
+(2) Stakeholder constraint
+
+(14) Cognitive walkthrough
+
+(3) Design model
+
+(15) Technology constraint
+
+(4) Origami
+
+(16) The myth of human error
+
+(5) Heuristic evaluation
+
+(17) Psychopathology
+
+(6) Cast of characters
+
+(18) Situation of concern
+
+(7) Ethnography
+
+(19) Iterative design
+
+(8) Unstructured interview
+
+(20) Hidden video recording
+
+(9) Task example
+
+(21) Causal relation
+
+(10) Participatory design
+
+(22) Transfer effect
+
+(11) Gulf of evaluation
+
+(23) Paper prototype
+
+(12) Popcorn
+
+(24) Active listening
+
+For each statement below, write the number of the term from the list above that best fits into the missing
+space. [1 pt each]
+8
+
+(a) Example of an ‘intrusive’ tool for observing a single user (in sense of user’s immediate
+perception)
+
+23
+
+(b) Illustrates the logical flow of an interface design
+
+7
+
+(c) The general practice of observing users and tasks in their own context
+
+6
+
+(d) A method in which designers “identify with” the user
+
+15
+
+(e) One example is when a company owns intellectual property relating to the product being
+designed
+
+22
+
+(f) The designer can exploit this to promote an accessible mental model for an interface
+
+1
+
+(g) Evaluation technique especially suited for identifying ‘proto-users’
+
+11
+
+(h) An impediment to transparent goal-oriented action
+
+12
+
+(i) A metaphor that describes a particular concept generation technique
+
+CPSC 344 2005-06/T1
+
+2 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #2 [8 points total]: True/False
+For each of the 4 statements below, indicate whether the statement is true or false by circling either True
+or False. Briefly explain your answer in one or two sentences. [1 pt / correct answer, 1 pt/explanation]
+(a) Statement: Discount methods are a means of ‘simulating’ user feedback, and as such may have a
+lower cost.
+True
+
+False
+
+Explain:
+True. They’re ‘discount’ because they’re cheap. Ideally, direct user feedback would be required; but this
+is not always possible. Also, the analytical qualities of the discount methods are useful in their own right.
+
+(b) Statement: The CS344/444/543/544 ethics protocol submitted to the Behavioral Research Ethics
+Board at UBC allows 344 students to request participation from anyone who is clearly a stakeholder
+of the system being evaluated in the students’ course project.
+True
+
+False
+
+Explain:
+
+False. 444/544 students may only recruit their friends, family members, classmates and acquaintances
+through word of mouth.
+
+(c) Statement: Slips are errors that are made because the user has the incorrect mental model.
+True
+
+False
+
+Explain:
+
+False. Slips are unconscious errors. Mistakes are errors of intention that could be caused by an incorrect
+mental model.
+
+(d) Statement: Questionnaires usually have a lowest cost of actual administration and analysis (per-study)
+of any evaluation technique.
+True
+
+False
+
+Explain:
+
+True. The cost of administering and analyzing a questionnaire is pretty low (especially with online
+methods); and it is relatively easy to automate. On the other hand, designing a questionnaire well can be
+time-consuming, and collecting contact data (e.g. email addresses or mail addresses) may be problematic
+or expensive. Respondence rates can be low.
+
+CPSC 344 2005-06 T1
+
+3 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #3 [9 points total]: Discussion Questions
+generally very well done
+(a) Describe how task examples relate to a design prototype. [3 pts]
+Task examples explain what a user does or wants to do, but not how s/he does it. They can be used to test
+a design prototype (e.g. by driving a heuristic evaluation) but they themselves are design-independent.
+
+(b) Describe “stimulus fusion”, and explain its relation to perceptual causality. [3 pts]
+
+Stimuli which occur in the same ‘perceptual processing cycle’ can fuse and appear to belong to the same
+percept. If stimuli appear to cause one another, they can also fuse without having to occur at the same
+time.
+
+(c) Compare and contrast ethnography and observation. [3 pts]
+
+Observation = a broad class of observation techniques.
+Ethnography = a specific but sophisticated type of observation, usually extending over a period of time
+and with the objective of building up a body of general knowledge about a user group.
+
+CPSC 344 2005-06 T1
+
+4 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Questions 4-5 are based on the following design brief.
+“DigiCookbook”: a Cook’s Assistant for the Electronic Kitchen
+Digital Kitchens Inc. has finished most of the development of a product called DigiCookbook, a recipe
+management application that lets users:
+• enter or download recipes
+• search on topics such as cuisine or ingredient
+• compile weekly menus
+• create grocery shopping lists.
+It will operate on a desktop PC; in a networked home, it will also be usable in the kitchen with simplified
+I/O devices, replacing a paper recipe book. DigiCookbook will use two sources of recipe data: a locally
+stored and cross-indexed database of downloaded or manually entered recipes, both capable of being
+annotated; and/or a large online database of recipes, available at www.digiCookbook.com.
+DigiCookbook is targeted at tech-savvy families with children living in the home.
+You’ve been assigned by your employer (a UI design consulting firm) to help DigiCookbook’s production
+team to refine certain aspects of their upcoming product release.
+At present, DigiCookbook exists as (a) a functioning but aesthetically unexciting engineering prototype
+that simulates access to local and online recipe databases, and (b) a series of non-functioning conceptual
+mockups that indicate how the graphical user interface might look. The latter takes the approach of two
+use modes of the interface, with graded complexity:
+(1) desk: for I/O intensive tasks such as data entry, search, menu management, etc; user sits at a
+computer and uses a keyboard and mouse
+(2) kitchen: for simple recipe display in the kitchen while cooking; assumes ‘thin client’ connection
+to the desk computer, with a low-res touch screen but no separate keyboard or storage. Individual
+recipes, or small sets of them, can be ‘sent’ to the kitchen display from the desk terminal.
+
+CPSC 344 2005-06 T1
+
+5 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #4 [12 points total]: Interaction Models
+(a) Which of these mental model types do you think a user would find most useful in the use of the
+‘kitchen’ mode for DigiCookbook – and a designer should therefore choose to reinforce? Circle one,
+justify your response in 1-2 sentences, and give one example of a design element that would reinforce
+the type of model you’ve chosen. [5 pts] – one pt for free (circling one of the choices)
+state-transition model
+
+object-action model
+
+mapping model
+
+metaphorical model
+
+Justify:
+There is more than one reasonable approach to designing this interaction, so the key to this question is in
+your justification. For example,
+- An object action model is probably the most obvious, since the primary goal of the interaction is to
+effect changes on specific data objects (individual recipes, the recipe database, menus, grocery lists, etc).
+- A metaphorical model may be a popular choice, since the metaphor of a traditional recipe book or file
+might drive the design. It will almost certainly run into limits which might make it less useful, though,
+since this system supposedly will do much more.
+
+Example of a design element that reinforces the model in a useful way:
+Object-action model: visually representing the objects which the user can’t see is a good way to
+reinforce this model. The representation must be in a useful way to get full credit.
+
+(b) Identify one challenge the UI designer will face in creating a good mental model for this product
+(more than one good answer exists). [3 pts]
+Many possibilities. 2 examples:
+1. Exhibiting the functionality available in limited kitchen mode
+2. Organization of data (e.g. what can be searched on).
+3. Making the kitchen display update step transparent, when the user making the update from the desk
+terminal cannot see the kitchen display for confirmation of correct actions
+Points varied based on quality of answer and how well it related to the mental model.
+
+(c) Identify two reasons why users might prefer the ‘old-fashioned’ system consisting of a mess of bound
+cookbooks and paper recipe cards, over this new electronic approach. [4 pts]
+Many possibilities. Credit for all good ones, e.g.:
+1. Physical annotation properties of archival paper
+2. Data entry is a pain
+3. Paper is easier to read than a monitor, and perhaps more kitchen-friendly; wasteful to print out
+recipes each time used
+CPSC 344 2005-06 T1
+
+6 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+4. Many recipe books are beautiful and/or embody emotional attachments
+Points varied based on quality of answer and how well it related to the mental model.
+
+CPSC 344 2005-06 T1
+
+7 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Question #5 [12 points total]: Involving Users
+You need to get a general idea of the problems with the current design for DigiCookbook, and to
+understand the basic constraints on the next iteration. Who should you talk to?
+In the box below, list four primary stakeholders who might have distinct needs, concerns and influence
+in this design process, taking care to identify their key attributes and abilities. The terms “family member”
+or “the company that manufactures the product” are too general.
+Then, for each stakeholder group identified, list one activity that you could do as the designer, which
+would help you better understand how to proceed with your task. Choose the activity appropriately for the
+particular stakeholder and keep in mind the current prototyping status of DigiCookbook. The terms
+“observation” or “interview” are too general as answers; you must also include some sense of what you
+hope to gain. Do not list the same activity under more than one stakeholder (i.e. list 4 different activities).
+Finally, clearly justify the choice of activity for that stakeholder.
+There is more than one acceptable answer for this question.
+Credit given for all reasonable answers: 4 pts / stakeholder (16 pts total), 2 pt for each well-defined,
+appropriate stakeholder and 2 pts for each plausibly justified activity. Examples of possible answers are
+listed below. Points were subtracted for answers that were unhelpfully vague (e.g. “family members”:
+there are many possible types of family members, with different roles to play in this product and different
+abilities / motivations for making it function smoothly. )
+Stakeholder
+
+Activity
+
+Justification
+
+(a) technically
+sophisticated family
+members who participate
+in the family cooking
+and/or menu planning
+
+Think-aloud observation
+while using engineering
+prototype
+
+This group is probably best suited as a
+source of specific usability feedback, and
+should be able to ‘see past’ an ‘ugly’
+engineering prototype
+
+(b) technically
+unsophisticated family
+members who cook
+
+Paper (not online)
+questionnaires
+
+Don’t show them the engineering prototype,
+since they might find it overwhelming or
+difficult to comprehend.
+
+Focus group, combined
+with demo of mediumfidelity conceptual
+prototypes
+
+Since not familiar w/ technology, the peerreinforced atmosphere of a focus group
+might be reassuring and generate more
+imaginative responses. They probably will
+need some aid to understand system.
+Questionnaires might be good way to get at
+willingness-to-pay, etc.
+
+(c) system engineers
+
+Semi-structured interview
+
+Ask about constraints on system design.
+Structured part: opinions on changes you’re
+envisioning suggesting.
+Unstructured part: ‘What else should I
+
+CPSC 344 2005-06 T1
+
+8 of 10
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+know about’?
+(d) company’s VP of
+marketing
+
+CPSC 344 2005-06 T1
+
+Unstructured interview
+
+9 of 10
+
+‘Tell me about the demographic you’re
+targeting for this product.”
+
+Midterm Exam (50 minutes)
+
+Name:
+
+Student ID Number:
+
+Extra page to continue work.
+
+CPSC 344 2005-06 T1
+
+10 of 10
+
+Midterm Exam (50 minutes)
+

@@ -1,0 +1,210 @@
+
+CPSC 121 Midterm 2
+Friday November 13th, 2015
+[10] 1. For each of the following statements:
+• Rewrite the statement using predicate logic.
+• Write down ALL of the proof strategies (from the list given below), that are appropriate to use to prove the statement.
+Just use the LETTER for each strategy (do not write down the full name):
+A. Constructive or non-constructive direct proof of existence.
+B. Exhaustive proof.
+C. Direct proof by generalizing from a generic particular (i,e, let x be any non particular
+(unspecified). . . ).
+D. Proof by cases.
+E. Contrapositive proof.
+F. Antecedent assumption (called direct proof by Epp).
+G. Proof by contradiction.
+Note that you must NOT prove the statement. You just need to suggest all the proof strategies which can be used to prove it.
+[2] a. For any three integers a, b and c, if a divides b and b divides c then a divides c. Use
+Z to represent the set of integers, and predicate Divides(x, y) for “x divides y”.
+Solution : The predicate logic statement is:
+∀a ∈ Z∀b ∈ Z∀c ∈ Z, Divides(a, b) ∧ Divides(b, c) → Divides(a, c)
+Possible proof strategies are C, F and G.
+[2] b. For any positive real numbers x and y,
+all positive real numbers.
+
+x+y
+2
+
+≥
+
+√
+
+xy. Use R+ to represent the set of
+
+Solution : The predicate logic statement is:
+x+y √
+∀x ∈ R+ ∀y ∈ R+ ,
+≥ xy
+2
+A possible proof strategy is G.
+[2] c. There is a perfect square that is the sum of two perfect squares. Use Z to represent
+the set of integers, and predicate Square(n) for “n is a perfect square”.
+
+page 2
+Solution : The predicate logic statement is:
+∃x ∈ Z∃y ∈ Z∃z ∈ Z, Square(x) ∧ Square(y) ∧ Square(z) ∧ x + y = z
+A possible proof strategy is A.
+[2] d. For any integers n and m, n + m is odd if and only if n − m is odd. Use predicates
+Odd(x) for “x is odd” and Even(x) for “x is even”.
+Solution : The predicate logic statement is:
+∀n ∈ Z∀m ∈ Z, Odd(n + m) ↔ Odd(n − m)
+Possible proof strategies are C, E and F .
+[2] e. The product of a non-zero rational number x and an irrational number y is an irrational number. Use R for the domain of real numbers, and predicates Rational(x) for
+“x is rational” and Irrational(x) for “x is irrational”.
+Solution : The predicate logic statement is:
+∀x ∈ R∀y ∈ R, Rational(x) ∧ x 6= 0 ∧ Irrational(y) → Irrational(xy)
+A possible proof strategy is G.
+[8] 2. Provide a formal proof (by using one formal rule of inference at a time and explicitly stating
+the rule that is used on the right side) for the following argument. You don’t need to rewrite
+the premises in the proof. Just continue with step 4.
+1. ∀x ∈ D, ∀y ∈ D, P (x) → (Q(y) ∧ R(x, y))
+2. ∀z ∈ D, ∼ Q(z) ∨ R(z, z)
+3. ∃u ∈ D, P (u)
+∴ ∃x ∈ D, R(x, x)
+Solution :
+4.
+
+P (w)
+
+Existential instantiation from (3).
+w is a new unspecified element of D.
+
+5.
+
+∀y ∈ D, P (w) → (Q(y) ∧ R(w, y))
+
+Universal instantiation from (1).
+
+6.
+
+P (w) → (Q(w) ∧ R(w, w)
+
+Universal instantiation from (5).
+
+7.
+
+Q(w) ∧ R(w, w)
+
+Modus ponens from (4) and (6).
+
+8.
+
+R(w, w)
+
+Specialization from (7).
+
+9.
+
+∃x ∈ D, R(x, x).
+
+Existential generalization from (8).
+
+[7] 3. Consider the following deterministic finite-state automaton, whose inputs are words written
+using uppercase letters (A through Z) only. The word “else” on an edge denotes every letter
+that does not appear on any other edge leaving from the same node as that edge (for instance,
+the word “else” on the edge that joins the top-left node to itself is the same as “A, . . . , D, F,
+G, H, J, K, M, . . . , Q, S, . . . , Z”).
+
+page 3
+
+[4] a. Which of the following words will this finite-state automaton accept (circle one of
+Yes/No for each word)?
+Solution :
+• INDOLENT
+
+Yes
+
+No
+
+• RABBITS
+
+Yes
+
+No
+
+• LIKE
+
+Yes
+
+No
+
+• WATCHING
+• SIR
+• ELVIS
+• ON
+• TELEVISION
+
+Yes
+Yes
+
+No
+No
+
+Yes
+Yes
+
+No
+No
+
+Yes
+
+No
+
+[3] b. Describe as simply as you can the set of words that this finite-state automaton accepts.
+Solution : It accepts words that contain at least one I, do not contain any R, and
+where every L must be immediately preceded by an E.
+[11] 4. For each of the two following theorems, first translate the theorem into predicate logic, and
+then prove it using a proof technique of your choice.
+a. It is possible to find positive integers x, y and z such that x4 + y 3 = z 2 .
+
+page 4
+Solution : Translated into predicate logic, this is ∃x ∈ Z+ , ∃y ∈ Z+ , ∃z ∈ Z+ , x4 +
+y3 = z2.
+To prove this statement, we only need to choose three integers x, y and z and to verify
+that x4 + y 3 = z 2 . So choose x = 1, y = 2 and z = 3. It is easily verified that
+14 + 23 = 1 + 8 = 9 = 32 . QED
+b. If a, b and c are positive integers, and a divides both b + c and bc, then a divides
+b2 + c2 .
+Solution : Translated into predicate logic, this is ∀a ∈ Z+ , ∀b ∈ Z+ , ∀c ∈ Z+ , a |
+b + c ∧ a | bc → a | b2 + c2 (recall that a | b means “a divides b”).
+To prove this, consider three unspecified positive integers a, b, c. Assume that a
+divides b + c and that a divides bc. Hence b + c = ax for some integer x and bc = aqy
+for some integer y. Then
+b2 + c2 = (b + c)2 − 2bc = (ax)2 − 2ay = ax2 = 2ay = a(x2 − 2y).
+Since x and y are both integers, so is x2 − 2y, which means that a divides b2 + c2 .
+QED
+[7] 5. Consider the following sequential circuit:
+
+Please observe that the registers labeled A, B and C initially contain the values 1, 0 and 0
+respectively.
+[3] a. What values will registers A and B contain five clock cycles later?
+Solution : At the end of each of these five cycles, register A will contain the values
+3, 5, 7, 9 and 11, while register B will contain 1, 4, 9, 16 and 25.
+[4] b. Let f (n) denote the value of register B after n clock cycles. Complete the circuit so
+that, after n clock cycles, register C contains the value f (1) + f (2) + · · · + f (n), that
+is, the sum of the values that register B held during the n clock cycles. For instance,
+if register B had values 1, 8 and 3 at the end of clock cycles 1, 2 and 3, then C would
+take on the values 1, 9 and 12.
+
+page 5
+Solution :
+
+[7] 6. Suppose that we want to color the nodes (circles) in the following figure according to four
+rules:
+• Every node must be colored using one of the colors Red, Green and Blue.
+• Two nodes that are joined by a line must have different colors.
+• The node labeled “R” must be colored Red.
+• The node labeled “G” must be colored Green.
+
+Using a proof by contradiction, prove that every coloring that follows these four rules must
+use the color Green for at least one of the nodes labeled X1, X2, X3. Hint: if three nodes
+are all joined by a line to each other, then they will use three different colors.
+
+page 6
+Solution : We use a proof by contradiction (as stated in the question!). Suppose that none
+of X1, X2, X3 are colored green. Since all of them are joined to R, they can not be colored
+red, and hence they are blue. Now Y1, Y2 and Y3 are all joined to each other, so they must
+use three different colors. Neither Y1 nor Y2 can be blue (they’re both connected to a blue
+node already), so Y3 must be blue. Using the same reasoning for Y4, Y5 and G, we see that
+G must also be blue. But that contradicts the rule that says G must be green. QED
+
