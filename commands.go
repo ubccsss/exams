@@ -15,6 +15,7 @@ func setupCommands() *cli.App {
 			Action:  serveSite,
 		},
 		setupEgressCommands(),
+		setupIngressCommands(),
 	}
 
 	return app

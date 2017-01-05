@@ -15,12 +15,24 @@ func TestExpandURLToParents(t *testing.T) {
 			[]string{"https://example.com/"},
 		},
 		{
+			"https://example.com",
+			[]string{"https://example.com"},
+		},
+		{
 			"https://example.com/duck/foo",
 			[]string{"https://example.com/duck/foo", "https://example.com/duck/", "https://example.com/"},
 		},
 		{
 			"https://example.com/duck/",
 			[]string{"https://example.com/duck/", "https://example.com/"},
+		},
+		{
+			"https://example.com/duck/?foo=10",
+			[]string{"https://example.com/duck/?foo=10", "https://example.com/duck/", "https://example.com/"},
+		},
+		{
+			"https://example.com/duck?foo=10",
+			[]string{"https://example.com/duck?foo=10", "https://example.com/duck", "https://example.com/"},
 		},
 	}
 

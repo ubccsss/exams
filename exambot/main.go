@@ -5,57 +5,103 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
+	"flag"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"net/url"
 	"os"
 	"os/signal"
 	"path"
 	"regexp"
+	"runtime"
+	"runtime/pprof"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/boltdb/bolt"
 	"github.com/d4l3k/exams/exambot/exambotlib"
 	archive "github.com/d4l3k/go-internetarchive"
 	"github.com/temoto/robotstxt"
+	"github.com/willf/bloom"
 )
 
 const (
 	userAgent   = "UBC CSSS Exam Bot vpc@ubccsss.org"
 	workerCount = 8
+	boltDBPath  = "exambot.boltdb"
+
+	// bloom filter configuration
+	maxNumberOfPages  = 1000000
+	falsePositiveRate = 0.00001
 )
 
 var (
-	seedURLs = []string{
+	pageBucket            = []byte("pages")
+	pageHashBucket        = []byte("pagehash")
+	assortedBucket        = []byte("assorted")
+	bloomFilterSeenKey    = []byte("bloom:seen")
+	bloomFilterVisitedKey = []byte("bloom:visited")
+	seedURLs              = []string{
 		"https://www.cs.ubc.ca/~schmidtm/Courses/340-F16/",
 		"http://www.cs.ubc.ca/~pcarter/",
 		"https://sites.google.com/site/ubccpsc110/",
+		"https://www.cs.ubc.ca/our-department/people",
 	}
 	archiveSearchPrefixes = []string{
 		"https://www.ugrad.cs.ubc.ca/~",
 		"https://www.cs.ubc.ca/~",
 		"https://blogs.ubc.ca/cpsc",
+		"https://www.cs.ubc.ca/people/",
 	}
 	validPostfix = []string{"/", ".html", ".htm", ".cgi", ".php"}
-	blacklist    = []string{".*//www.cs.ubc.ca/~davet/music/.*"}
-	validHosts   = map[string]struct{}{
-		"www.cs.ubc.ca":       struct{}{},
-		"www.ugrad.cs.ubc.ca": struct{}{},
-		"blogs.ubc.ca":        struct{}{},
-		"sites.google.com":    struct{}{},
+	blacklist    = []string{
+		".*//www.cs.ubc.ca/~davet/music/.*",
+		".*\\?replytocom=.*",
+		".*//www.cs.ubc.ca/bookings/.*",
+		".*//www.cs.ubc.ca/news-events/calendar/.*",
+		".*//www.cs.ubc.ca/print/.*",
+		".*/bugzilla/.*",
+		".*people/people/people/people.*",
+		".*//sites.google.com/.*/system/errors/NodeNotFound.*",
+		".*(aanb|acam|adhe|afst|agec|anae|anat|ansc|anth|apbi|appp|apsc|arbc|arc|arch|arcl|arst|arth|arts|asia|asic|asla|astr|astu|atsc|audi|ba|baac|babs|baen|bafi|bahc|bahr|baim|bait|bala|bama|bams|bapa|basc|basd|basm|batl|batm|baul|bioc|biof|biol|biot|bmeg|bota|brdg|busi|caps|ccfi|ccst|cdst|ceen|cell|cens|chbe|chem|chil|chin|cics|civl|clch|clst|cnps|cnrs|cnto|coec|cogs|cohr|comm|cons|cpen|crwr|csis|cspw|dani|dent|derm|dhyg|dmed|dpas|dsci|eced|econ|edcp|edst|educ|eece|elec|eli|emba|emer|ends|engl|enph|enpp|envr|eosc|epse|etec|exch|exgr|fact|febc|fhis|fipr|fish|fist|fmed|fmpr|fmst|fnel|fnh|fnis|food|fopr|fre|fren|frsi|frst|gbpr|gem|gene|geob|geog|germ|gpp|grek|grs|grsj|gsat|hebr|heso|hgse|hinu|hist|hpb|hunu|iar|iest|igen|inde|indo|inds|info|isci|ital|itst|iwme|japn|jrnl|kin|korn|lais|larc|laso|last|latn|law|lfs|libe|libr|ling|lled|math|mdvl|mech|medd|medg|medi|mgmt|micb|midw|mine|mrne|mtrl|musc|name|nest|neur|nrsc|nurs|obms|obst|ohs|onco|opth|ornt|orpa|paed|path|pcth|pers|phar|phil|phrm|phth|phyl|phys|plan|plnt|poli|pols|port|prin|psyc|psyt|punj|radi|relg|res|rgla|rhsc|rmst|rsot|russ|sans|scan|scie|seal|slav|soal|soci|soil|sowk|span|spha|spph|stat|sts|surg|swed|test|thtr|tibt|trsc|udes|ufor|ukrn|uro|urst|ursy|vant|vgrd|visa|vrhc|vurs|wood|wrds|writ|zool)\\d{3}.*",
+	}
+	validHosts = map[string]host{
+		"www.cs.ubc.ca":       host{},
+		"www.ugrad.cs.ubc.ca": host{},
+		"blogs.ubc.ca":        host{},
+		"sites.google.com": host{
+			whitelist: []string{
+				".*(cs|cpsc)\\d{3}.*",
+			},
+		},
 	}
 	scoreRegexes = map[int][]string{
 		-1: []string{"final", "exam", "midterm", "sample", "mt", "(cs|cpsc)\\d{3}", "(20|19)\\d{2}"},
-		1:  []string{"report", "presentation", "thesis", "slide"},
+		1:  []string{"report", "presentation", "thesis", "slide", "print"},
 	}
 )
 
+type host struct {
+	blacklist []string
+	whitelist []string
+}
+
 var robotsCache = map[string]*robotstxt.Group{}
 var robotsCacheLock sync.RWMutex
+
+type Page struct {
+	URL        string
+	StatusCode int
+	Hash       string
+	Fetched    time.Time
+	Links      []string
+}
 
 func makeGet(url string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", url, nil)
@@ -82,19 +128,53 @@ func validSuffix(uri string) bool {
 	return validExt
 }
 
+func cleanURL(uri string) (string, error) {
+	u, err := url.Parse(uri)
+	if err != nil {
+		return "", err
+	}
+	bits := strings.Split(u.Host, ":")
+	if len(bits) <= 1 || len(bits[0]) == 0 {
+		return uri, nil
+	}
+	host := bits[0]
+	port := bits[1]
+	if (u.Scheme == "https" && port == "443") || (u.Scheme == "http" && port == "80") {
+		u.Host = host
+	}
+	return u.String(), nil
+}
+
 func validURL(uri string) (bool, error) {
+	lower := strings.ToLower(uri)
 	u, err := url.Parse(uri)
 	if err != nil {
 		return false, err
 	}
 
 	// Check valid hosts
-	if _, ok := validHosts[u.Host]; ok {
+	hostRules, ok := validHosts[u.Host]
+	if !ok {
 		return false, nil
 	}
 
-	// Only want /~foo paths since that's where the courses are.
-	if !strings.HasPrefix(u.Path, "/~") {
+	matchesWhiteList := len(hostRules.whitelist) == 0
+	for _, pattern := range hostRules.whitelist {
+		match, err := regexp.MatchString(pattern, lower)
+		if err != nil {
+			return false, err
+		}
+		if match {
+			matchesWhiteList = true
+			break
+		}
+	}
+	if !matchesWhiteList {
+		return false, nil
+	}
+
+	// Skip root indexes. "/", ""
+	if len(u.Path) <= 1 {
 		return false, nil
 	}
 
@@ -102,7 +182,6 @@ func validURL(uri string) (bool, error) {
 		return false, nil
 	}
 
-	lower := strings.ToLower(uri)
 	for _, pattern := range blacklist {
 		match, err := regexp.MatchString(pattern, lower)
 		if err != nil {
@@ -139,10 +218,10 @@ func validURL(uri string) (bool, error) {
 }
 
 // fetchURL returns all links from the page and the hash of the page.
-func fetchURL(uri string) ([]string, string, error) {
+func fetchURL(uri string) (Page, error) {
 	resp, err := makeGet(uri)
 	if err != nil {
-		return nil, "", err
+		return Page{}, err
 	}
 	defer resp.Body.Close()
 
@@ -151,12 +230,12 @@ func fetchURL(uri string) ([]string, string, error) {
 
 	doc, err := goquery.NewDocumentFromReader(bodyReader)
 	if err != nil {
-		return nil, "", err
+		return Page{}, err
 	}
 
 	base, err := url.Parse(uri)
 	if err != nil {
-		return nil, "", err
+		return Page{}, err
 	}
 
 	var links []string
@@ -175,8 +254,13 @@ func fetchURL(uri string) ([]string, string, error) {
 	})
 
 	hash := hex.EncodeToString(hasher.Sum(nil))
-
-	return links, hash, nil
+	return Page{
+		URL:        uri,
+		StatusCode: resp.StatusCode,
+		Hash:       hash,
+		Links:      links,
+		Fetched:    time.Now(),
+	}, nil
 }
 
 var regexCache = map[string]*regexp.Regexp{}
@@ -238,38 +322,74 @@ type Spider struct {
 	Out io.WriteCloser
 	Mu  struct {
 		ToVisit URLHeap
-		Visited map[string]struct{}
-		Seen    map[string]struct{}
+		Seen    *bloom.BloomFilter
+		Visited *bloom.BloomFilter
 		sync.RWMutex
 	}
-	HashMu struct {
-		ProcessedHashes map[string]struct{}
-		sync.RWMutex
-	}
+	DB *bolt.DB
 }
 
 // MakeSpider makes a new spider.
-func MakeSpider() *Spider {
-	s := &Spider{}
-	s.Mu.Visited = map[string]struct{}{}
-	s.Mu.Seen = map[string]struct{}{}
-	s.HashMu.ProcessedHashes = map[string]struct{}{}
+func MakeSpider(db *bolt.DB) *Spider {
+	s := &Spider{
+		DB: db,
+	}
+
+	s.Mu.Seen = bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
+	s.Mu.Visited = bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
+	log.Printf("Fetched bloom filter: m %d k %d", s.Mu.Seen.Cap(), s.Mu.Seen.K())
+
+	go s.statsMonitor()
+
 	return s
 }
 
+func (s *Spider) statsMonitor() {
+	for range time.NewTicker(10 * time.Second).C {
+		s.printStats()
+	}
+}
+
+func (s *Spider) printStats() {
+	s.Mu.RLock()
+	s.Mu.RUnlock()
+	log.Printf("ToVisit %d", len(s.Mu.ToVisit))
+}
+
 type spiderState struct {
-	ToVisit         URLHeap
-	Visited         map[string]struct{}
-	Seen            map[string]struct{}
-	ProcessedHashes map[string]struct{}
+	ToVisit URLHeap
 }
 
 // Save saves the spider state.
 func (s *Spider) Save() error {
 	s.Mu.Lock()
-	s.HashMu.Lock()
 	defer s.Mu.Unlock()
-	defer s.HashMu.Unlock()
+
+	if err := s.DB.Update(func(tx *bolt.Tx) error {
+		b, err := tx.CreateBucketIfNotExists(assortedBucket)
+		if err != nil {
+			return err
+		}
+		v, err := s.Mu.Seen.MarshalJSON()
+		if err != nil {
+			return err
+		}
+		log.Printf("Seen bloom filter size = %d bytes", len(v))
+		if err := b.Put(bloomFilterSeenKey, v); err != nil {
+			return err
+		}
+		v, err = s.Mu.Visited.MarshalJSON()
+		if err != nil {
+			return err
+		}
+		log.Printf("Visited bloom filter size = %d bytes", len(v))
+		if err := b.Put(bloomFilterVisitedKey, v); err != nil {
+			return err
+		}
+		return nil
+	}); err != nil {
+		return err
+	}
 
 	f, err := os.OpenFile("state.json", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
@@ -279,9 +399,6 @@ func (s *Spider) Save() error {
 
 	state := spiderState{
 		s.Mu.ToVisit,
-		s.Mu.Visited,
-		s.Mu.Seen,
-		s.HashMu.ProcessedHashes,
 	}
 	if err := json.NewEncoder(f).Encode(state); err != nil {
 		return err
@@ -293,9 +410,25 @@ func (s *Spider) Save() error {
 // Load loads the spider state.
 func (s *Spider) Load() error {
 	s.Mu.Lock()
-	s.HashMu.Lock()
 	defer s.Mu.Unlock()
-	defer s.HashMu.Unlock()
+
+	if err := s.DB.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket(assortedBucket)
+		if b == nil {
+			return errors.New("can't find bucket")
+		}
+		v := b.Get(bloomFilterSeenKey)
+		if err := s.Mu.Seen.UnmarshalJSON(v); err != nil {
+			return err
+		}
+		v = b.Get(bloomFilterVisitedKey)
+		if err := s.Mu.Visited.UnmarshalJSON(v); err != nil {
+			return err
+		}
+		return nil
+	}); err != nil {
+		log.Printf("ERR Loading Bloom Filter: %s", err)
+	}
 
 	f, err := os.Open("state.json")
 	if err != nil {
@@ -309,9 +442,6 @@ func (s *Spider) Load() error {
 	}
 
 	s.Mu.ToVisit = state.ToVisit
-	s.Mu.Visited = state.Visited
-	s.Mu.Seen = state.Seen
-	s.HashMu.ProcessedHashes = state.ProcessedHashes
 
 	return nil
 }
@@ -341,61 +471,130 @@ func (s *Spider) Worker() {
 			continue
 		}
 		url := heap.Pop(&s.Mu.ToVisit).(*URLScore)
-		s.Mu.Visited[url.URL] = struct{}{}
 		s.Mu.Unlock()
 
-		urls, hash, err := fetchURL(url.URL)
+		valid, err := validURL(url.URL)
 		if err != nil {
 			log.Printf("WORKER err: %s", err)
 			continue
 		}
 
-		s.HashMu.Lock()
-		if _, ok := s.HashMu.ProcessedHashes[hash]; ok {
-			s.HashMu.Unlock()
+		if !valid {
 			continue
 		}
-		s.HashMu.ProcessedHashes[hash] = struct{}{}
-		s.HashMu.Unlock()
 
-		s.AddAndExpandURLs(urls)
+		page, err := fetchURL(url.URL)
+		if err != nil {
+			log.Printf("WORKER err: %s", err)
+			continue
+		}
+
+		s.Mu.Lock()
+		visited := s.Mu.Visited.TestAndAddString(page.Hash)
+		s.Mu.Unlock()
+
+		if visited {
+			continue
+		}
+
+		if err := s.savePage(page); err != nil {
+			log.Printf("WORKER err: %s", err)
+			continue
+		}
+
+		// Only follow links if 200 status code.
+		if page.StatusCode == 200 {
+			s.AddAndExpandURLs(page.Links, true)
+		}
+
 		lastNoWork = false
 	}
 }
 
-func (s *Spider) AddAndExpandURLs(urls []string) {
+func pageKey(url string) []byte {
+	return []byte("page:" + url)
+}
+func hashKey(hash string) []byte {
+	return []byte("pagehash:" + hash)
+}
+
+func (s *Spider) savePage(p Page) error {
+	json, err := p.marshal()
+	if err != nil {
+		return err
+	}
+	pagekey := pageKey(p.URL)
+	hashkey := hashKey(p.Hash)
+	if err := s.DB.Update(func(tx *bolt.Tx) error {
+		pagebucket, err := tx.CreateBucketIfNotExists(pageBucket)
+		if err != nil {
+			return err
+		}
+		if err := pagebucket.Put(pagekey, json); err != nil {
+			return err
+		}
+		hashbucket, err := tx.CreateBucketIfNotExists(pageHashBucket)
+		if err != nil {
+			return err
+		}
+		if err := hashbucket.Put(hashkey, pagekey); err != nil {
+			return err
+		}
+		return nil
+	}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (p Page) marshal() ([]byte, error) {
+	return json.Marshal(p)
+}
+
+// AddAndExpandURLs cleans the URLs and adds them.
+func (s *Spider) AddAndExpandURLs(urls []string, expand bool) {
 	// Expand valid URLs
-	expandedURLs := urls
-	for _, u := range urls {
-		valid, err := validURL(u)
+	added := 0
+	for i, u := range urls {
+		if i%1000 == 0 && i > 0 {
+			log.Printf("AddAndExpandURLs: added %d of %d processed. Total: %d", added, i, len(urls))
+		}
+		clean, err := cleanURL(u)
+		if err != nil {
+			log.Printf("WORKER err: %s", err)
+			continue
+		}
+		valid, err := validURL(clean)
 		if err != nil {
 			log.Printf("WORKER err: %s", err)
 			continue
 		}
 		if valid {
-			expanded, err := exambotlib.ExpandURLToParents(u)
-			if err != nil {
-				log.Printf("WORKER err: %s", err)
-				continue
+			if expand {
+				expanded, err := exambotlib.ExpandURLToParents(clean)
+				if err != nil {
+					log.Printf("WORKER err: %s", err)
+					continue
+				}
+				added += s.AddURLs(expanded)
+			} else {
+				added += s.AddURLs([]string{clean})
 			}
-			expandedURLs = append(expandedURLs, expanded...)
 		}
 	}
-	s.AddURLs(expandedURLs)
 }
 
-// AddURLs adds a bunch of URLs to be processed if valid.
-func (s *Spider) AddURLs(urls []string) {
+// AddURLs adds a bunch of URLs to be processed if valid and returns how many
+// were added.
+func (s *Spider) AddURLs(urls []string) int {
 	s.Mu.Lock()
 	defer s.Mu.Unlock()
+	added := 0
 	for _, url := range urls {
-		if _, ok := s.Mu.Visited[url]; ok {
+		if s.Mu.Seen.TestAndAddString(url) {
 			continue
 		}
-		if _, ok := s.Mu.Seen[url]; ok {
-			continue
-		}
-		s.Mu.Seen[url] = struct{}{}
+
 		fmt.Fprintf(s.Out, "%s\n", url)
 		valid, err := validURL(url)
 		if err != nil {
@@ -409,18 +608,88 @@ func (s *Spider) AddURLs(urls []string) {
 		us := &URLScore{URL: url}
 		us.computeScore()
 		heap.Push(&s.Mu.ToVisit, us)
+		added++
 	}
+	return added
 }
 
+var cpuprofile = flag.String("cpuprofile", "", "write cpu profile `file`")
+var memprofile = flag.String("memprofile", "", "write memory profile to `file`")
+
 func main() {
+	flag.Parse()
 	log.SetOutput(os.Stderr)
 
-	s := MakeSpider()
+	go func() {
+		log.Println(http.ListenAndServe("localhost:6060", nil))
+	}()
+
+	if *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			log.Fatal("could not create CPU profile: ", err)
+		}
+		if err := pprof.StartCPUProfile(f); err != nil {
+			log.Fatal("could not start CPU profile: ", err)
+		}
+		defer pprof.StopCPUProfile()
+	}
+
+	db, err := bolt.Open(boltDBPath, 0600, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	args := flag.Args()
+	if len(args) == 1 {
+		switch args[0] {
+		case "list":
+			if err := db.View(func(tx *bolt.Tx) error {
+				b := tx.Bucket(pageBucket)
+				if b == nil {
+					return errors.New("can't find bucket")
+				}
+
+				seen := bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
+				var page Page
+				var count int
+
+				if err := b.ForEach(func(k, v []byte) error {
+					count++
+					if err := json.Unmarshal(v, &page); err != nil {
+						return err
+					}
+					if !seen.TestAndAddString(page.URL) {
+						fmt.Println(page.URL)
+					}
+
+					for _, l := range page.Links {
+						if !seen.TestAndAddString(l) {
+							fmt.Println(l)
+						}
+					}
+					if count%10000 == 0 {
+						log.Printf("Count %d", count)
+					}
+					return nil
+				}); err != nil {
+					return err
+				}
+
+				return nil
+			}); err != nil {
+				log.Fatal(err)
+			}
+			return
+		}
+	}
+
+	s := MakeSpider(db)
 	if err := s.Load(); err != nil {
 		log.Print(err)
 	}
 
-	var err error
 	if _, err2 := os.Stat("index.txt"); os.IsNotExist(err2) {
 		s.Out, err = os.Create("index.txt")
 	} else if err != nil {
@@ -441,19 +710,36 @@ func main() {
 			if err := s.Save(); err != nil {
 				log.Fatal(err)
 			}
+			pprof.StopCPUProfile()
+			if *memprofile != "" {
+				f, err := os.Create(*memprofile)
+				if err != nil {
+					log.Fatal("could not create memory profile: ", err)
+				}
+				runtime.GC() // get up-to-date statistics
+				if err := pprof.WriteHeapProfile(f); err != nil {
+					log.Fatal("could not write memory profile: ", err)
+				}
+				f.Close()
+			}
+			s.printStats()
 			os.Exit(0)
 		}
 	}()
 
+	s.AddAndExpandURLs(seedURLs, true)
 	log.Println("Fetching seed data from internet archive...")
-	urls := seedURLs
 	for _, prefix := range archiveSearchPrefixes {
+		log.Printf("... searching prefix %q", prefix)
 		results := archive.SearchPrefix(prefix)
+		var urls []string
 		for result := range results {
 			urls = append(urls, result.OriginalURL)
 		}
-		s.AddAndExpandURLs(urls)
+		log.Printf("... adding %d urls", len(urls))
+		go s.AddAndExpandURLs(urls, false)
 	}
+
 	log.Printf("Spinning up %d workers...", workerCount)
 	for i := 0; i < workerCount-1; i++ {
 		go s.Worker()

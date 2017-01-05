@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+	"os"
 	"os/exec"
 	"path"
 	"regexp"
@@ -14,6 +17,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/d4l3k/exams/archive.org"
+	"github.com/urfave/cli"
 )
 
 // ingressDeptCourses sshes into the dept server and fetches the courses.
@@ -164,4 +168,61 @@ func ingressUBCCSSS(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Fprintf(w, "Done.")
+}
+
+func ingressPotentialFile(c *cli.Context) {
+	file := c.String("file")
+
+	if len(file) == 0 {
+		log.Fatal("need to provide file")
+	}
+
+	var reader io.ReadCloser
+	var err error
+	if file == "-" {
+		reader = os.Stdin
+	} else {
+		reader, err = os.Open(file)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	defer reader.Close()
+
+	var files []*File
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		files = append(files, &File{
+			Source: scanner.Text(),
+		})
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	db.addPotentialFiles(os.Stderr, files)
+	if err := saveAndGenerate(); err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Done.")
+}
+
+func setupIngressCommands() cli.Command {
+	return cli.Command{
+		Name:    "ingress",
+		Aliases: []string{"i"},
+		Subcommands: []cli.Command{
+			{
+				Name:   "potential",
+				Usage:  "import a bunch of potential files via a file",
+				Action: ingressPotentialFile,
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "file, f",
+						Usage: "Load potential files from `FILE`",
+					},
+				},
+			},
+		},
+	}
 }
