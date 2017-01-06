@@ -27,18 +27,28 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "</ul>")
 }
 
+// FindFile returns the file with the matching hash and the potentialFile index
+// if it's a potential file.
+func (db Database) FindFile(hash string) (*File, int) {
+	for i, f := range db.PotentialFiles {
+		if f.Hash == hash {
+			return f, i
+		}
+	}
+	for _, course := range db.Courses {
+		for _, year := range course.Years {
+			for _, f := range year.Files {
+				return f, -1
+			}
+		}
+	}
+	return nil, -1
+}
+
 func handleFile(w http.ResponseWriter, r *http.Request) {
 	parts := strings.Split(r.URL.Path, "/")
 	hash := parts[len(parts)-1]
-	var file *File
-	var filei int
-	for i, f := range db.PotentialFiles {
-		if f.Hash == hash {
-			file = f
-			filei = i
-			break
-		}
-	}
+	file, filei := db.FindFile(hash)
 	if file == nil {
 		http.Error(w, "not found", 404)
 		return
@@ -84,7 +94,9 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), 500)
 			return
 		}
-		db.PotentialFiles = append(db.PotentialFiles[:filei], db.PotentialFiles[filei+1:]...)
+		if filei >= 0 {
+			db.PotentialFiles = append(db.PotentialFiles[:filei], db.PotentialFiles[filei+1:]...)
+		}
 		http.Redirect(w, r, "/admin/potential", 302)
 		if err := saveAndGenerate(); err != nil {
 			http.Error(w, err.Error(), 500)
@@ -126,7 +138,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	typ, samp, sol, err := classifier.Classify(file)
+	typ, samp, sol, _, err := classifier.Classify(file)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -144,4 +156,62 @@ func handleGenerate(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+}
+
+var indexEndpoints = []string{
+	"/admin/generate",
+	"/admin/potential",
+}
+
+func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
+	for _, url := range indexEndpoints {
+		fmt.Fprintf(w, `<p><a href="%s">%s</a></p>`, url, url)
+	}
+}
+
+func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprint(w, `<h1>Files that Potentially Need to be Fixed</h1>
+	<table>
+	<thead>
+	<th>Name</th>
+	<th>Path</th>
+	<th>Source</th>
+	</thead>
+	<tbody>`)
+	for _, file := range db.needFix() {
+		if file.NotAnExam {
+			continue
+		}
+		fmt.Fprintf(w, `<tr><td><a href="/admin/file/%s">%s</a></td><td>%s</td><td>%s</td></tr>`, file.Hash, file.Name, file.Path, file.Source)
+	}
+	fmt.Fprint(w, `</tbody></table>`)
+}
+
+func validFileName(name string) bool {
+	for _, label := range labels {
+		if name == label {
+			return true
+		}
+	}
+	return false
+}
+
+func (db Database) needFix() []*File {
+	var files []*File
+	for _, course := range db.Courses {
+		for _, year := range course.Years {
+			for _, f := range year.Files {
+				if !validFileName(f.Name) {
+					files = append(files, f)
+					continue
+				}
+
+				if f.Term == "" {
+					files = append(files, f)
+				}
+			}
+		}
+	}
+	return files
 }

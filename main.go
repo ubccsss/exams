@@ -293,18 +293,20 @@ func (db *Database) addFile(course string, year int, term, name, path, source st
 	}
 	courseYear := db.Courses[course].Years[year]
 
+	f := &File{Name: name, Path: path, Source: source, Term: term}
+	if err := f.hash(); err != nil {
+		return err
+	}
+
 	for _, file := range courseYear.Files {
-		if file.Path == path {
+		if file.Hash == f.Hash {
 			file.Name = name
 			file.Source = source
+			file.Term = term
 			return nil
 		}
 	}
 
-	f := &File{Name: name, Path: path, Source: source}
-	if err := f.hash(); err != nil {
-		return err
-	}
 	courseYear.Files = append(courseYear.Files, f)
 	return nil
 }
@@ -447,6 +449,38 @@ var layout string
 
 var classifier *DocumentClassifier
 
+const classifierDir = "data/classifiers"
+
+func loadOrTrainClassifier() error {
+	if classifier != nil {
+		return nil
+	}
+	log.Println("Loading classifier...")
+	classifier = MakeDocumentClassifier()
+	if err := classifier.Load(classifierDir); err != nil {
+		log.Printf("Failed to load classifier: %s", err)
+		if err := retrainClassifier(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func retrainClassifier() error {
+	c := MakeDocumentClassifier()
+	if err := c.Train(); err != nil {
+		return err
+	}
+	if err := os.MkdirAll(classifierDir, 0755); err != nil {
+		return err
+	}
+	if err := c.Save(classifierDir); err != nil {
+		return err
+	}
+	classifier = c
+	return nil
+}
+
 func serveSite(c *cli.Context) error {
 	wrapperTemplate, err := fetchTemplate()
 	if err != nil {
@@ -454,8 +488,7 @@ func serveSite(c *cli.Context) error {
 	}
 	layout = wrapperTemplate
 
-	classifier, err = MakeDocumentClassifier()
-	if err != nil {
+	if err := loadOrTrainClassifier(); err != nil {
 		return err
 	}
 
@@ -463,12 +496,15 @@ func serveSite(c *cli.Context) error {
 
 	http.HandleFunc("/admin/generate", handleGenerate)
 	http.HandleFunc("/admin/potential", handlePotentialFileIndex)
+	http.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
 	http.HandleFunc("/admin/file/", handleFile)
 
 	http.HandleFunc("/admin/ingress/deptcourses", ingressDeptCourses)
 	http.HandleFunc("/admin/ingress/deptfiles", ingressDeptFiles)
 	http.HandleFunc("/admin/ingress/ubccsss", ingressUBCCSSS)
 	http.HandleFunc("/admin/ingress/archive.org", ingressArchiveOrgFiles)
+
+	http.HandleFunc("/admin/", handleAdminIndex)
 
 	// Launch 4 source workers
 	for i := 0; i < 4; i++ {

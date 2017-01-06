@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"path"
 	"strings"
 
 	"github.com/jbrukh/bayesian"
@@ -28,11 +29,18 @@ const (
 	Blank    bayesian.Class = ""
 )
 
+const (
+	WinterTerm1 bayesian.Class = "W1"
+	WinterTerm2 bayesian.Class = "W2"
+	SummerTerm  bayesian.Class = "S"
+)
+
 // The class orders.
 var (
 	TypeClasses     = []bayesian.Class{Final, Midterm1, Midterm2, Midterm}
 	SampleClasses   = []bayesian.Class{Sample, Real}
 	SolutionClasses = []bayesian.Class{Solution, Blank}
+	TermClasses     = []bayesian.Class{WinterTerm1, WinterTerm2, SummerTerm}
 )
 
 func typeClassFromLabel(label string) bayesian.Class {
@@ -61,20 +69,85 @@ func solutionClassFromLabel(label string) bayesian.Class {
 	return Blank
 }
 
+func termClassFromTerm(term string) bayesian.Class {
+	term = strings.ToLower(term)
+	for _, t := range TermClasses {
+		if strings.Contains(term, strings.ToLower(string(t))) {
+			return t
+		}
+	}
+	return ""
+}
+
 // DocumentClassifier can classify a document into type, sample and solution
 // classes.
 type DocumentClassifier struct {
 	TypeClassifier     *bayesian.Classifier
 	SampleClassifier   *bayesian.Classifier
 	SolutionClassifier *bayesian.Classifier
+	TermClassifier     *bayesian.Classifier
 }
 
 // MakeDocumentClassifier trains a document classifier with all files in the DB.
-func MakeDocumentClassifier() (*DocumentClassifier, error) {
-	typeClassifier := bayesian.NewClassifier(TypeClasses...)
-	sampleClassifier := bayesian.NewClassifier(SampleClasses...)
-	solutionClassifier := bayesian.NewClassifier(SolutionClasses...)
+func MakeDocumentClassifier() *DocumentClassifier {
+	d := &DocumentClassifier{
+		TypeClassifier:     bayesian.NewClassifier(TypeClasses...),
+		SampleClassifier:   bayesian.NewClassifier(SampleClasses...),
+		SolutionClassifier: bayesian.NewClassifier(SolutionClasses...),
+		TermClassifier:     bayesian.NewClassifier(TermClasses...),
+	}
 
+	return d
+}
+
+const (
+	TypeClassifierFile     = "type.classifier"
+	SampleClassifierFile   = "sample.classifier"
+	SolutionClassifierFile = "solution.classifier"
+	TermClassifierFile     = "term.classifier"
+)
+
+// Load loads a classifier from a directory.
+func (d *DocumentClassifier) Load(dir string) error {
+	var err error
+	d.TypeClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, TypeClassifierFile))
+	if err != nil {
+		return err
+	}
+	d.SampleClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, SampleClassifierFile))
+	if err != nil {
+		return err
+	}
+	d.SolutionClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, SolutionClassifierFile))
+	if err != nil {
+		return err
+	}
+	d.TermClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, TermClassifierFile))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// Save saves a classifier to a directory.
+func (d DocumentClassifier) Save(dir string) error {
+	if err := d.TypeClassifier.WriteToFile(path.Join(dir, TypeClassifierFile)); err != nil {
+		return err
+	}
+	if err := d.SampleClassifier.WriteToFile(path.Join(dir, SampleClassifierFile)); err != nil {
+		return err
+	}
+	if err := d.SolutionClassifier.WriteToFile(path.Join(dir, SolutionClassifierFile)); err != nil {
+		return err
+	}
+	if err := d.TermClassifier.WriteToFile(path.Join(dir, TermClassifierFile)); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Train trains a classifier from the database.
+func (d DocumentClassifier) Train() error {
 	log.Println("Training document classifier...")
 	documents := 0
 
@@ -87,16 +160,19 @@ func MakeDocumentClassifier() (*DocumentClassifier, error) {
 
 				words, err := fileToWordBag(f)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				if typeClass := typeClassFromLabel(f.Name); typeClass != "" {
-					typeClassifier.Learn(words, typeClass)
+					d.TypeClassifier.Learn(words, typeClass)
 				}
 				sampleClass := sampleClassFromLabel(f.Name)
-				sampleClassifier.Learn(words, sampleClass)
+				d.SampleClassifier.Learn(words, sampleClass)
 				solutionClass := solutionClassFromLabel(f.Name)
-				solutionClassifier.Learn(words, solutionClass)
+				d.SolutionClassifier.Learn(words, solutionClass)
+				if termClass := termClassFromTerm(f.Term); termClass != "" {
+					d.TermClassifier.Learn(words, termClass)
+				}
 
 				documents++
 				if documents%100 == 0 {
@@ -107,34 +183,31 @@ func MakeDocumentClassifier() (*DocumentClassifier, error) {
 	}
 
 	log.Printf("Finished training document classifier! %d documents.", documents)
-
-	d := &DocumentClassifier{
-		TypeClassifier:     typeClassifier,
-		SampleClassifier:   sampleClassifier,
-		SolutionClassifier: solutionClassifier,
-	}
 	if err := d.Test(); err != nil {
-		return nil, err
+		return err
 	}
-	return d, nil
+	return nil
 }
 
 // Classify returns the most likely labels for each function.
-func (d DocumentClassifier) Classify(f *File) (bayesian.Class, bayesian.Class, bayesian.Class, error) {
+func (d DocumentClassifier) Classify(f *File) (bayesian.Class, bayesian.Class, bayesian.Class, bayesian.Class, error) {
 	words, err := fileToWordBag(f)
 	if err != nil {
-		return "", "", "", err
+		return "", "", "", "", err
 	}
 	_, typeInx, _ := d.TypeClassifier.LogScores(words)
 	_, sampleInx, _ := d.SampleClassifier.LogScores(words)
 	_, solutionInx, _ := d.SolutionClassifier.LogScores(words)
-	return TypeClasses[typeInx], SampleClasses[sampleInx], SolutionClasses[solutionInx], nil
+	_, termInx, _ := d.TermClassifier.LogScores(words)
+	return TypeClasses[typeInx], SampleClasses[sampleInx], SolutionClasses[solutionInx], TermClasses[termInx], nil
 }
 
+// Test computes the test error and prints it.
 func (d DocumentClassifier) Test() error {
 	log.Println("Testing document classifier...")
 
-	var typeRight, typeTotal, sampleRight, sampleTotal, solutionRight, solutionTotal int
+	documents := 0
+	var typeRight, typeTotal, sampleRight, sampleTotal, solutionRight, solutionTotal, termRight, termTotal int
 	for _, c := range db.Courses {
 		for _, y := range c.Years {
 			for _, f := range y.Files {
@@ -166,15 +239,28 @@ func (d DocumentClassifier) Test() error {
 				if SolutionClasses[inx] == solutionClass {
 					solutionRight++
 				}
+				if termClass := termClassFromTerm(f.Term); termClass != "" {
+					_, inx, _ := d.TermClassifier.LogScores(words)
+					termTotal++
+					if TypeClasses[inx] == termClass {
+						termRight++
+					}
+				}
+
+				documents++
+				if documents%100 == 0 {
+					log.Printf("... tested on %d", documents)
+				}
 			}
 		}
 	}
 
 	log.Printf(
-		"Errors: Type %d/%d = %f, Sample %d/%d = %f, Solution %d/%d = %f",
+		"Errors: Type %d/%d = %f, Sample %d/%d = %f, Solution %d/%d = %f, Term %d/%d = %f",
 		typeRight, typeTotal, float64(typeRight)/float64(typeTotal),
 		sampleRight, sampleTotal, float64(sampleRight)/float64(sampleTotal),
 		solutionRight, solutionTotal, float64(solutionRight)/float64(solutionTotal),
+		termRight, termTotal, float64(termRight)/float64(termTotal),
 	)
 
 	return nil
