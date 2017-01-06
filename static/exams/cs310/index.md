@@ -51,4 +51,6 @@ See `handin` at https://fn.lc/hw/cs310.
 
 * [Sample Midterm](/static/exams/cs310/2015/CPSC310-2015W2-SampleMidterm-Questions.pdf)
 
+* [Sample Midterm (Solution)](/static/exams/cs310/2015/CPSC310-2015W2-SampleMidterm-Questions-with-Solutions.pdf)
+
 

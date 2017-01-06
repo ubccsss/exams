@@ -53,6 +53,8 @@ See `handin` at https://fn.lc/hw/cs320.
 
 * [Sample Midterm 2](/static/exams/cs320/2010/sampleMidterm2.pdf)
 
+* [Sample Midterm 1](/static/exams/cs320/2010/sampleMidterm1.pdf)
+
 
 
 ## 2011

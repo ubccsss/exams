@@ -100,6 +100,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		Year    string
 		Terms   []string
 		Term    string
+		Label   string
 	}{
 		File:    file,
 		Courses: db.Courses,
@@ -112,14 +113,25 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 			meta.Course = c
 		}
 	}
-	meta.Year = yearRegex.FindString(lowerPath)
+	years := yearRegex.FindAllString(lowerPath, -1)
+	if len(years) > 0 {
+		meta.Year = years[len(years)-1]
+	}
 
+	// Don't try to match "S" since it's too generic.
 	for _, term := range meta.Terms[:2] {
 		if strings.Contains(lowerPath, strings.ToLower(term)) {
 			meta.Term = term
 			break
 		}
 	}
+
+	typ, samp, sol, err := classifier.Classify(file)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	meta.Label = fmt.Sprintf("%s %s %s", samp, typ, sol)
 
 	if err := templates.ExecuteTemplate(w, "file.html", meta); err != nil {
 		http.Error(w, err.Error(), 500)

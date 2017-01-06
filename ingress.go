@@ -192,9 +192,11 @@ func ingressPotentialFile(c *cli.Context) {
 	var files []*File
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
-		files = append(files, &File{
-			Source: scanner.Text(),
-		})
+		url := scanner.Text()
+		f := &File{
+			Source: url,
+		}
+		files = append(files, f)
 	}
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)

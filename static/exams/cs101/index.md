@@ -13,6 +13,13 @@ See `handin` at https://fn.lc/hw/cs101.
 
 
 
+## 2006
+
+
+* [Sample Midterm (Solution)](/static/exams/cs101/2006/cpsc-101-2006W2-midterm-sample-soln.pdf)
+
+
+
 ## 2007
 
 

@@ -137,6 +137,10 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Sample Midterm](/static/exams/cs121/2008/sampleMidterm-2008W1.pdf)
 
+* [Sample Final](/static/exams/cs121/2008/cpsc-121-2008-2009-w2-final-sample.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs121/2008/samplefinal-2008w1-soln.pdf)
+
 
 
 ## 2010
@@ -158,6 +162,8 @@ See `handin` at https://fn.lc/hw/cs121.
 * [Midterm 2](/static/exams/cs121/2011/cpsc-121-2011-w1-midterm2.pdf)
 
 * [Midterm 1](/static/exams/cs121/2011/midterm1.pdf)
+
+* [Midterm 2 (Solution)](/static/exams/cs121/2011/midterm2-sol.pdf)
 
 
 
@@ -188,6 +194,8 @@ See `handin` at https://fn.lc/hw/cs121.
 * [Sample Midterm 2](/static/exams/cs121/2013/cpsc-121-2013W2-midterm2-practice.pdf)
 
 * [Midterm 1 (Solution)](/static/exams/cs121/2013/midterm1-sol.pdf)
+
+* [Sample Final](/static/exams/cs121/2013/cpsc-121-2013W2-final-practice.pdf)
 
 
 

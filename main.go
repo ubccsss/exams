@@ -273,6 +273,7 @@ func unprocessedSourceWorker() {
 
 		if err := f.hash(); err != nil {
 			log.Printf("error processing source: %+v: %s", f, err)
+			continue
 		}
 
 		db.addPotentialFiles(os.Stderr, []*File{f})
@@ -444,12 +445,19 @@ func saveAndGenerate() error {
 
 var layout string
 
+var classifier *DocumentClassifier
+
 func serveSite(c *cli.Context) error {
 	wrapperTemplate, err := fetchTemplate()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	layout = wrapperTemplate
+
+	classifier, err = MakeDocumentClassifier()
+	if err != nil {
+		return err
+	}
 
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 

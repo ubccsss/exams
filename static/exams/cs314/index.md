@@ -72,6 +72,8 @@ See `handin` at https://fn.lc/hw/cs314.
 
 * [(Solution)](/static/exams/cs314/2009/cs314-2009-t1-final-solution.pdf)
 
+* [Sample Final (Solution)](/static/exams/cs314/2009/final_sample_solved.pdf)
+
 
 
 ## 2012
