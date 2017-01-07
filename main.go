@@ -24,7 +24,7 @@ import (
 const (
 	staticDir     = "static"
 	examsDir      = "static/exams"
-	dbFile        = "exams.json"
+	dbFile        = "data/exams.json"
 	templateGlob  = "templates/*"
 	classifierDir = "data/classifiers"
 )
