@@ -106,7 +106,7 @@ func verifyConsistency() error {
 	}
 
 	for _, f := range db.PotentialFiles {
-		f.ComputeScore(db)
+		f.ComputeScore(&db)
 		f.Path = strings.TrimSpace(f.Path)
 		f.Source = strings.TrimSpace(f.Source)
 	}

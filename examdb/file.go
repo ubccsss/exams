@@ -99,7 +99,7 @@ func (f *File) ComputeHash() error {
 }
 
 // ComputeScore computes the rank for f and stores it f.Score.
-func (f *File) ComputeScore(db Database) float64 {
+func (f *File) ComputeScore(db *Database) float64 {
 	path := strings.ToLower(f.Source)
 	var score int
 	for _, r := range db.CoursesNoFiles() {
