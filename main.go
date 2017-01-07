@@ -93,9 +93,11 @@ func saveDatabase() error {
 
 func verifyConsistency() error {
 	log.Println("Verifying consistency of data and doing house keeping...")
-	for _, course := range db.Courses {
-		for _, year := range course.Years {
+	for code, course := range db.Courses {
+		for yearnum, year := range course.Years {
 			for _, f := range year.Files {
+				f.Year = yearnum
+				f.Course = code
 				if len(f.Hash) == 0 {
 					if err := f.ComputeHash(); err != nil {
 						return err
