@@ -57,6 +57,8 @@ type File struct {
 	NotAnExam bool
 }
 
+// Reader opens the file either over HTTP or from disk and returns an
+// io.ReadCloser which needs to be closed by the caller.
 func (f *File) Reader() (io.ReadCloser, error) {
 	var source io.ReadCloser
 	if len(f.Path) > 0 {
@@ -81,6 +83,7 @@ func (f File) String() string {
 	return fmt.Sprintf("%s %s %s", f.Name, f.Path, f.Source)
 }
 
+// ComputeHash hashes the document and then saves it to f.Hash.
 func (f *File) ComputeHash() error {
 	hasher := sha1.New()
 	source, err := f.Reader()
@@ -121,3 +124,13 @@ type FileSlice []*File
 func (p FileSlice) Len() int           { return len(p) }
 func (p FileSlice) Less(i, j int) bool { return p[i].Score >= p[j].Score }
 func (p FileSlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
+
+// FileByName attaches the methods of sort.Interface to []*File, sorting in
+// increasing order by name.
+type FileByName []*File
+
+func (p FileByName) Len() int { return len(p) }
+func (p FileByName) Less(i, j int) bool {
+	return strings.ToLower(p[i].Name) < strings.ToLower(p[j].Name)
+}
+func (p FileByName) Swap(i, j int) { p[i], p[j] = p[j], p[i] }

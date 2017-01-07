@@ -18,8 +18,7 @@ iframe {
 
 <well>
 <header>
-  <h1>{{ .File.Name }}</h1>
-  <a href="/admin/potential">All</a> <br>
+  <h1><a href="/admin/potential">All</a> / {{ .File.Name }}</h1>
   <a href="{{ .File.Source }}">{{ .File.Source }}</a>
   <p>Suspected label: {{.Label}}</p>
 </header>
@@ -85,7 +84,7 @@ iframe {
       <input type="submit" value="Not An Exam / Invalid">
     </form>
   </div>
-  <iframe src="{{ .File.Source }}">
+  <iframe src="{{ .FileURL }}">
   </iframe>
 </article>
 </well>

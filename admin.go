@@ -3,10 +3,13 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"path"
+	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/d4l3k/exams/examdb"
+	"github.com/d4l3k/exams/ml"
 )
 
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
@@ -97,10 +100,16 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		Terms   []string
 		Term    string
 		Label   string
+		FileURL string
 	}{
 		File:    file,
 		Courses: db.Courses,
 		Terms:   []string{"W1", "W2", "S"},
+		FileURL: file.Source,
+	}
+
+	if len(meta.FileURL) == 0 {
+		meta.FileURL = path.Join("/", file.Path)
 	}
 
 	lowerPath := strings.ToLower(file.Source)
@@ -122,7 +131,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	typ, samp, sol, _, err := classifier.Classify(file)
+	typ, samp, sol, _, err := ml.Classifier.Classify(file)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -145,6 +154,7 @@ func handleGenerate(w http.ResponseWriter, r *http.Request) {
 var indexEndpoints = []string{
 	"/admin/generate",
 	"/admin/potential",
+	"/admin/needfix",
 }
 
 func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
@@ -163,7 +173,9 @@ func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 	<th>Source</th>
 	</thead>
 	<tbody>`)
-	for _, file := range db.NeedFix() {
+	files := db.NeedFix()
+	sort.Sort(examdb.FileByName(files))
+	for _, file := range files {
 		if file.NotAnExam {
 			continue
 		}

@@ -1,4 +1,4 @@
-package main
+package ml
 
 import (
 	"log"
@@ -149,7 +149,7 @@ func (d DocumentClassifier) Save(dir string) error {
 }
 
 // Train trains a classifier from the database.
-func (d DocumentClassifier) Train() error {
+func (d DocumentClassifier) Train(db *examdb.Database) error {
 	log.Println("Training document classifier...")
 	documents := 0
 
@@ -185,7 +185,7 @@ func (d DocumentClassifier) Train() error {
 	}
 
 	log.Printf("Finished training document classifier! %d documents.", documents)
-	if err := d.Test(); err != nil {
+	if err := d.Test(db); err != nil {
 		return err
 	}
 	return nil
@@ -205,7 +205,7 @@ func (d DocumentClassifier) Classify(f *examdb.File) (bayesian.Class, bayesian.C
 }
 
 // Test computes the test error and prints it.
-func (d DocumentClassifier) Test() error {
+func (d DocumentClassifier) Test(db *examdb.Database) error {
 	log.Println("Testing document classifier...")
 
 	documents := 0
@@ -296,26 +296,29 @@ func urlToWords(uri string) []string {
 	})
 }
 
-var classifier *DocumentClassifier
+// Classifier is the default classifier set by LoadOrTrainClassifier.
+var Classifier *DocumentClassifier
 
-func loadOrTrainClassifier() error {
-	if classifier != nil {
+// LoadOrTrainClassifier loads or trains the classifier.
+func LoadOrTrainClassifier(db *examdb.Database, classifierDir string) error {
+	if Classifier != nil {
 		return nil
 	}
 	log.Println("Loading classifier...")
-	classifier = MakeDocumentClassifier()
-	if err := classifier.Load(classifierDir); err != nil {
+	Classifier = MakeDocumentClassifier()
+	if err := Classifier.Load(classifierDir); err != nil {
 		log.Printf("Failed to load classifier: %s", err)
-		if err := retrainClassifier(); err != nil {
+		if err := RetrainClassifier(db, classifierDir); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func retrainClassifier() error {
+// RetrainClassifier retrains classifier from db and saves it to disk.
+func RetrainClassifier(db *examdb.Database, classifierDir string) error {
 	c := MakeDocumentClassifier()
-	if err := c.Train(); err != nil {
+	if err := c.Train(db); err != nil {
 		return err
 	}
 	if err := os.MkdirAll(classifierDir, 0755); err != nil {
@@ -324,6 +327,6 @@ func retrainClassifier() error {
 	if err := c.Save(classifierDir); err != nil {
 		return err
 	}
-	classifier = c
+	Classifier = c
 	return nil
 }

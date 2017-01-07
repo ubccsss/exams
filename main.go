@@ -16,6 +16,7 @@ import (
 
 	"github.com/d4l3k/exams/examdb"
 	"github.com/d4l3k/exams/generators"
+	"github.com/d4l3k/exams/ml"
 	"github.com/pkg/errors"
 	"github.com/urfave/cli"
 )
@@ -125,7 +126,7 @@ func saveAndGenerate() error {
 }
 
 func serveSite(c *cli.Context) error {
-	if err := loadOrTrainClassifier(); err != nil {
+	if err := ml.LoadOrTrainClassifier(&db, classifierDir); err != nil {
 		return err
 	}
 

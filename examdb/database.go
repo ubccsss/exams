@@ -40,7 +40,9 @@ func (db Database) FindFile(hash string) (*File, int) {
 	for _, course := range db.Courses {
 		for _, year := range course.Years {
 			for _, f := range year.Files {
-				return f, -1
+				if f.Hash == hash {
+					return f, -1
+				}
 			}
 		}
 	}
