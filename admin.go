@@ -5,11 +5,13 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/d4l3k/exams/examdb"
 )
 
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d</p>", len(db.PotentialFiles), db.processedCount())
+	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d</p>", len(db.PotentialFiles), db.ProcessedCount())
 	fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
 	for _, file := range db.PotentialFiles {
 		if !file.NotAnExam {
@@ -25,24 +27,6 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	fmt.Fprint(w, "</ul>")
-}
-
-// FindFile returns the file with the matching hash and the potentialFile index
-// if it's a potential file.
-func (db Database) FindFile(hash string) (*File, int) {
-	for i, f := range db.PotentialFiles {
-		if f.Hash == hash {
-			return f, i
-		}
-	}
-	for _, course := range db.Courses {
-		for _, year := range course.Years {
-			for _, f := range year.Files {
-				return f, -1
-			}
-		}
-	}
-	return nil, -1
 }
 
 func handleFile(w http.ResponseWriter, r *http.Request) {
@@ -106,8 +90,8 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "text/html")
 	meta := struct {
-		File    *File
-		Courses map[string]*Course
+		File    *examdb.File
+		Courses map[string]*examdb.Course
 		Course  string
 		Year    string
 		Terms   []string
@@ -179,39 +163,11 @@ func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 	<th>Source</th>
 	</thead>
 	<tbody>`)
-	for _, file := range db.needFix() {
+	for _, file := range db.NeedFix() {
 		if file.NotAnExam {
 			continue
 		}
 		fmt.Fprintf(w, `<tr><td><a href="/admin/file/%s">%s</a></td><td>%s</td><td>%s</td></tr>`, file.Hash, file.Name, file.Path, file.Source)
 	}
 	fmt.Fprint(w, `</tbody></table>`)
-}
-
-func validFileName(name string) bool {
-	for _, label := range labels {
-		if name == label {
-			return true
-		}
-	}
-	return false
-}
-
-func (db Database) needFix() []*File {
-	var files []*File
-	for _, course := range db.Courses {
-		for _, year := range course.Years {
-			for _, f := range year.Files {
-				if !validFileName(f.Name) {
-					files = append(files, f)
-					continue
-				}
-
-				if f.Term == "" {
-					files = append(files, f)
-				}
-			}
-		}
-	}
-	return files
 }

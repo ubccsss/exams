@@ -6,6 +6,7 @@ import (
 	"os"
 	"sort"
 
+	"github.com/d4l3k/exams/examdb"
 	"github.com/sajari/docconv"
 	"github.com/urfave/cli"
 )
@@ -24,29 +25,10 @@ func setupEgressCommands() cli.Command {
 	}
 }
 
-var labels = []string{
-	"Final",
-	"Final (Solution)",
-	"Sample Final",
-	"Sample Final (Solution)",
-	"Midterm",
-	"Midterm (Solution)",
-	"Sample Midterm",
-	"Sample Midterm (Solution)",
-	"Midterm 1",
-	"Midterm 1 (Solution)",
-	"Sample Midterm 1",
-	"Sample Midterm 1 (Solution)",
-	"Midterm 2",
-	"Midterm 2 (Solution)",
-	"Sample Midterm 2",
-	"Sample Midterm 2 (Solution)",
-}
-
 func exportToML(c *cli.Context) error {
 	// Map each label to be 1-n, 0 represents invalid label.
 	isLabel := map[string]int{}
-	for i, l := range labels {
+	for i, l := range examdb.ExamLabels {
 		isLabel[l] = i + 1
 	}
 
@@ -78,9 +60,9 @@ func exportToML(c *cli.Context) error {
 	return nil
 }
 
-func convertAndSaveFileAsML(f *File, class int) error {
+func convertAndSaveFileAsML(f *examdb.File, class int) error {
 	log.Printf("Egressing %s", f)
-	in, err := f.reader()
+	in, err := f.Reader()
 	if err != nil {
 		return err
 	}

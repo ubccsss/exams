@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
+	"os"
 	"path"
 	"strings"
 
+	"github.com/d4l3k/exams/examdb"
 	"github.com/jbrukh/bayesian"
 	"github.com/sajari/docconv"
 )
@@ -190,7 +192,7 @@ func (d DocumentClassifier) Train() error {
 }
 
 // Classify returns the most likely labels for each function.
-func (d DocumentClassifier) Classify(f *File) (bayesian.Class, bayesian.Class, bayesian.Class, bayesian.Class, error) {
+func (d DocumentClassifier) Classify(f *examdb.File) (bayesian.Class, bayesian.Class, bayesian.Class, bayesian.Class, error) {
 	words, err := fileToWordBag(f)
 	if err != nil {
 		return "", "", "", "", err
@@ -266,8 +268,8 @@ func (d DocumentClassifier) Test() error {
 	return nil
 }
 
-func fileToWordBag(f *File) ([]string, error) {
-	in, err := f.reader()
+func fileToWordBag(f *examdb.File) ([]string, error) {
+	in, err := f.Reader()
 	if err != nil {
 		return nil, err
 	}
@@ -292,4 +294,36 @@ func urlToWords(uri string) []string {
 		}
 		return false
 	})
+}
+
+var classifier *DocumentClassifier
+
+func loadOrTrainClassifier() error {
+	if classifier != nil {
+		return nil
+	}
+	log.Println("Loading classifier...")
+	classifier = MakeDocumentClassifier()
+	if err := classifier.Load(classifierDir); err != nil {
+		log.Printf("Failed to load classifier: %s", err)
+		if err := retrainClassifier(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func retrainClassifier() error {
+	c := MakeDocumentClassifier()
+	if err := c.Train(); err != nil {
+		return err
+	}
+	if err := os.MkdirAll(classifierDir, 0755); err != nil {
+		return err
+	}
+	if err := c.Save(classifierDir); err != nil {
+		return err
+	}
+	classifier = c
+	return nil
 }

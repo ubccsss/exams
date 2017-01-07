@@ -17,6 +17,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/d4l3k/exams/archive.org"
+	"github.com/d4l3k/exams/examdb"
 	"github.com/urfave/cli"
 )
 
@@ -57,19 +58,6 @@ func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// AddCourse adds a course the DB if it doesn't exist already.
-func (db *Database) AddCourse(w io.Writer, code string) {
-	code = strings.ToLower(strings.TrimSpace(code))
-	if _, ok := db.Courses[code]; ok {
-		return
-	}
-	if db.Courses == nil {
-		db.Courses = map[string]*Course{}
-	}
-	db.Courses[code] = &Course{Code: code}
-	fmt.Fprintf(w, "Added: %s\n", code)
-}
-
 // ingressDeptFiles talks to the exams.cgi binary running on the ugrad servers and
 // returns potential file matches.
 func ingressDeptFiles(w http.ResponseWriter, r *http.Request) {
@@ -78,7 +66,7 @@ func ingressDeptFiles(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	var files []*File
+	var files []*examdb.File
 	if err := json.NewDecoder(req.Body).Decode(&files); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -87,7 +75,7 @@ func ingressDeptFiles(w http.ResponseWriter, r *http.Request) {
 		f.Source = f.Path
 		f.Path = ""
 	}
-	db.addPotentialFiles(w, files)
+	db.AddPotentialFiles(w, files)
 	if err := saveAndGenerate(); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -97,13 +85,13 @@ func ingressDeptFiles(w http.ResponseWriter, r *http.Request) {
 
 func ingressArchiveOrgFiles(w http.ResponseWriter, r *http.Request) {
 	urls := examsarchiveorg.PossibleExams()
-	var files []*File
+	var files []*examdb.File
 	for _, u := range urls {
-		files = append(files, &File{
+		files = append(files, &examdb.File{
 			Source: u,
 		})
 	}
-	db.addPotentialFiles(w, files)
+	db.AddPotentialFiles(w, files)
 	if err := saveAndGenerate(); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -189,11 +177,11 @@ func ingressPotentialFile(c *cli.Context) {
 	}
 	defer reader.Close()
 
-	var files []*File
+	var files []*examdb.File
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		url := scanner.Text()
-		f := &File{
+		f := &examdb.File{
 			Source: url,
 		}
 		files = append(files, f)
@@ -202,7 +190,7 @@ func ingressPotentialFile(c *cli.Context) {
 		log.Fatal(err)
 	}
 
-	db.addPotentialFiles(os.Stderr, files)
+	db.AddPotentialFiles(os.Stderr, files)
 	if err := saveAndGenerate(); err != nil {
 		log.Fatal(err)
 	}

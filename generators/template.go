@@ -1,4 +1,4 @@
-package main
+package generators
 
 import (
 	"fmt"
@@ -7,9 +7,9 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func renderTemplateExam(title, content string) string {
+func (g Generator) renderTemplateExam(title, content string) string {
 	title = strings.ToUpper(title)
-	return renderTemplate(title, fmt.Sprintf(
+	return g.renderTemplate(title, fmt.Sprintf(
 		`<ol class="breadcrumb"><li><a href="..">Exams Database</a></li>
 		<li class="active">%s</li>
 		</ol>
@@ -21,11 +21,11 @@ func renderTemplateExam(title, content string) string {
 		</div>`, title, content))
 }
 
-func renderTemplate(title, content string) string {
-	return fmt.Sprintf(layout, title, content)
+func (g Generator) renderTemplate(title, content string) string {
+	return fmt.Sprintf(g.layout, title, content)
 }
 
-func fetchTemplate() (string, error) {
+func (g Generator) fetchTemplate() (string, error) {
 	doc, err := goquery.NewDocument("https://ubccsss.org/services")
 	if err != nil {
 		return "", err
