@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/pkg/errors"
 	"github.com/russross/blackfriday"
 )
 
@@ -15,7 +16,7 @@ import (
 func (g Generator) Database() error {
 	dir := g.examsDir
 	if err := os.MkdirAll(dir, 0755); err != nil {
-		return err
+		return errors.Wrapf(err, "mkdirall %q", dir)
 	}
 
 	type course struct {

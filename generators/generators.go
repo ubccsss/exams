@@ -4,6 +4,7 @@ import (
 	"html/template"
 
 	"github.com/d4l3k/exams/examdb"
+	"github.com/pkg/errors"
 )
 
 // Generator contains all generators.
@@ -23,6 +24,7 @@ func MakeGenerator(db *examdb.Database, templateGlob, examsDir string) (*Generat
 	g := &Generator{
 		db:        db,
 		templates: templates,
+		examsDir:  examsDir,
 	}
 	layout, err := g.fetchTemplate()
 	if err != nil {
@@ -36,12 +38,12 @@ func MakeGenerator(db *examdb.Database, templateGlob, examsDir string) (*Generat
 // All generates all files that there are generates for.
 func (g Generator) All() error {
 	if err := g.Database(); err != nil {
-		return err
+		return errors.Wrap(err, "database")
 	}
 
 	for _, course := range g.db.Courses {
 		if err := g.Course(*course); err != nil {
-			return err
+			return errors.Wrapf(err, "course %+v", course)
 		}
 	}
 	return nil

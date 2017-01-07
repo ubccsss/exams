@@ -146,9 +146,10 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 
 func handleGenerate(w http.ResponseWriter, r *http.Request) {
 	if err := saveAndGenerate(); err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, fmt.Sprintf("%+v", err), 500)
 		return
 	}
+	w.Write([]byte("Done."))
 }
 
 var indexEndpoints = []string{

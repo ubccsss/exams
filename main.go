@@ -117,10 +117,10 @@ func verifyConsistency() error {
 
 func saveAndGenerate() error {
 	if err := generator.All(); err != nil {
-		return err
+		return errors.Wrap(err, "error generating all")
 	}
 	if err := saveDatabase(); err != nil {
-		return err
+		return errors.Wrap(err, "err saving database")
 	}
 	return nil
 }
