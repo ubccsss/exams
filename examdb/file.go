@@ -48,13 +48,15 @@ var (
 
 // File is a single exam file typically a PDF.
 type File struct {
-	Name      string
-	Path      string
-	Source    string
-	Hash      string
-	Score     float64
-	Term      string
-	NotAnExam bool
+	Name      string  `json:",omitempty"`
+	Path      string  `json:",omitempty"`
+	Source    string  `json:",omitempty"`
+	Hash      string  `json:",omitempty"`
+	Score     float64 `json:",omitempty"`
+	Term      string  `json:",omitempty"`
+	NotAnExam bool    `json:",omitempty"`
+	Course    string  `json:",omitempty"`
+	Year      int     `json:",omitempty"`
 }
 
 // Reader opens the file either over HTTP or from disk and returns an

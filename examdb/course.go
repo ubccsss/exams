@@ -2,8 +2,8 @@ package examdb
 
 // Course represents a single course.
 type Course struct {
-	Code  string
-	Years map[int]*CourseYear
+	Code  string              `json:",omitempty"`
+	Years map[int]*CourseYear `json:",omitempty"`
 }
 
 // FileCount returns the number of files for that course.
@@ -17,5 +17,5 @@ func (c Course) FileCount() int {
 
 // CourseYear contains all the files for a specific year of a course.
 type CourseYear struct {
-	Files []*File
+	Files []*File `json:",omitempty"`
 }
