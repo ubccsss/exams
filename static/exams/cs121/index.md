@@ -11,8 +11,6 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Sample Final (Term 1)](/static/exams/cs121/2005/cs121-2005-t1-sample-final.pdf)
 
-* [(Solution)](/static/exams/cs121/2005/cs121-2005-t1-sample-final-solution.pdf)
-
 * [Quiz 1 (Term 2)](/static/exams/cs121/2005/cs121-2005-t2-quiz1.pdf)
 
 * [(Solution)](/static/exams/cs121/2005/cs121-2005-t2-quiz1-solution.pdf)
@@ -22,6 +20,15 @@ See `handin` at https://fn.lc/hw/cs121.
 * [(Worksheet)](/static/exams/cs121/2005/cs121-2005-t2-quiz2-worksheet.pdf)
 
 * [(Solution)](/static/exams/cs121/2005/cs121-2005-t2-quiz2-solution.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs121/2005/cs121-2005-t1-sample-final-solution.pdf)
+
+
+
+## 2006
+
+
+* [Sample Midterm (Solution)](/static/exams/cs121/2006/sampleMidterm-sol.pdf)
 
 
 
@@ -78,17 +85,17 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Midterm (Summer)](/static/exams/cs121/2007/cs121-2007-s-midterm.pdf)
 
-* [(Solution)](/static/exams/cs121/2007/cs121-2007-s-midterm-solution.pdf)
-
-* [Midterm (Term 1) (Solution)](/static/exams/cs121/2007/cs121-2007-t1-midterm-solution.pdf)
+* [Midterm (Solution)](/static/exams/cs121/2007/cpsc-121-2007-2008-w1-midterm-soln.pdf)
 
 * [Sample Midterm (Term 1)](/static/exams/cs121/2007/cs121-2007-t1-sample-midterm.pdf)
-
-* [(Solution)](/static/exams/cs121/2007/cs121-2007-t1-sample-midterm-solution.pdf)
 
 * [Sample Final (Term 1)](/static/exams/cs121/2007/cs121-2007-t1-sample-final.pdf)
 
 * [Quiz 1](/static/exams/cs121/2007/quiz1-summer07.pdf)
+
+* [Midterm (Solution)](/static/exams/cs121/2007/cs121-2007-s-midterm-solution.pdf)
+
+* [Sample Midterm (Solution)](/static/exams/cs121/2007/cs121-2007-t1-sample-midterm-solution.pdf)
 
 
 
@@ -117,29 +124,36 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Sample Midterm (Term 1)](/static/exams/cs121/2008/cs121-2008-t1-sample-midterm.pdf)
 
-* [(Solution)](/static/exams/cs121/2008/cs121-2008-t1-sample-midterm-solution.pdf)
-
-* [Sample Midterm (Term 2)](/static/exams/cs121/2008/cs121-2008-t2-sample-midterm.pdf)
+* [Sample Midterm](/static/exams/cs121/2008/cpsc-121-2008-2009-w2-midterm-sample.pdf)
 
 * [Midterm (Term 2)](/static/exams/cs121/2008/cs121-2008-t2-midterm.pdf)
 
 * [(Solution)](/static/exams/cs121/2008/cs121-2008-t2-midterm-solution.pdf)
 
-* [Sample Final (Term 1](/static/exams/cs121/2008/cs121-2008-t1-sample-final.pdf)
-
-* [(Solution)](/static/exams/cs121/2008/cs121-2008-t1-sample-final-solution.pdf)
+* [Sample Final](/static/exams/cs121/2008/cs121-2008-t1-sample-final.pdf)
 
 * [Sample Final (Term 2)](/static/exams/cs121/2008/cs121-2008-t2-sample-final.pdf)
 
 * [Sample Final](/static/exams/cs121/2008/sampleFinal-2008W1-soln.pdf)
 
-* [Sample Midterm (Solution)](/static/exams/cs121/2008/sampleMidterm-2008W1-soln.pdf)
+* [Sample Midterm (Solution)](/static/exams/cs121/2008/samplemidterm-2008w1-soln.pdf)
 
-* [Sample Midterm](/static/exams/cs121/2008/sampleMidterm-2008W1.pdf)
+* [Sample Midterm](/static/exams/cs121/2008/samplemidterm-2008w1.pdf)
 
 * [Sample Final](/static/exams/cs121/2008/cpsc-121-2008-2009-w2-final-sample.pdf)
 
 * [Sample Final (Solution)](/static/exams/cs121/2008/samplefinal-2008w1-soln.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs121/2008/cs121-2008-t1-sample-final-solution.pdf)
+
+* [Sample Midterm (Solution)](/static/exams/cs121/2008/cs121-2008-t1-sample-midterm-solution.pdf)
+
+
+
+## 2009
+
+
+* [Midterm 2 (Solution)](/static/exams/cs121/2009/cpsc-121-2009-w1-midterm-2-soln.pdf)
 
 
 
@@ -147,6 +161,12 @@ See `handin` at https://fn.lc/hw/cs121.
 
 
 * [Midterm 1 (Solution)](/static/exams/cs121/2010/midterm1-sol.pdf)
+
+* [Midterm 1](/static/exams/cs121/2010/midterm1.pdf)
+
+* [Midterm 1 (Solution)](/static/exams/cs121/2010/midterm1-sol-1.pdf)
+
+* [Midterm 2](/static/exams/cs121/2010/midterm2.pdf)
 
 
 
@@ -165,6 +185,8 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Midterm 2 (Solution)](/static/exams/cs121/2011/midterm2-sol.pdf)
 
+* [Midterm 2 (Solution)](/static/exams/cs121/2011/cpsc-121-2011-w1-midterm2-sample-soln.pdf)
+
 
 
 ## 2012
@@ -173,6 +195,10 @@ See `handin` at https://fn.lc/hw/cs121.
 * [Midterm 1 (Solution)](/static/exams/cs121/2012/midterm1-sol.pdf)
 
 * [Sample Final](/static/exams/cs121/2012/sampleFinal.pdf)
+
+* [Midterm 2 (Solution)](/static/exams/cs121/2012/midterm2-sol.pdf)
+
+* [Midterm 1 (Solution)](/static/exams/cs121/2012/midterm1-sol-1.pdf)
 
 
 
@@ -197,6 +223,16 @@ See `handin` at https://fn.lc/hw/cs121.
 
 * [Sample Final](/static/exams/cs121/2013/cpsc-121-2013W2-final-practice.pdf)
 
+* [Sample Final](/static/exams/cs121/2013/sampleFinal.pdf)
+
+* [Sample Midterm 1](/static/exams/cs121/2013/cpsc-121-2013W2-sample-midterm-questions.pdf)
+
+* [Sample Midterm 2 (Solution)](/static/exams/cs121/2013/cpsc-121-2013W2-midterm2-sample-soln.pdf)
+
+* [Midterm 2 Group](/static/exams/cs121/2013/cpsc-121-2013W2-midterm2-group-full.pdf)
+
+* [Midterm 2](/static/exams/cs121/2013/midterm2-1.pdf)
+
 
 
 ## 2015
@@ -209,5 +245,13 @@ See `handin` at https://fn.lc/hw/cs121.
 * [Sample Midterm 1](/static/exams/cs121/2015/midterm1.pdf)
 
 * [Midterm 2 (Solution)](/static/exams/cs121/2015/midterm2-sol.pdf)
+
+* [Midterm 2 (Solution)](/static/exams/cs121/2015/midterm2-sol-1.pdf)
+
+* [Midterm 2](/static/exams/cs121/2015/midterm2-1.pdf)
+
+* [Midterm 1 (Solution)](/static/exams/cs121/2015/midterm1-sol-1.pdf)
+
+* [Midterm 1](/static/exams/cs121/2015/midterm1-1.pdf)
 
 

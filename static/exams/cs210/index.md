@@ -59,4 +59,6 @@ See `handin` at https://fn.lc/hw/cs210.
 
 * [Sample Midterm 2 (Solution)](/static/exams/cs210/2015/Sample-Midterm2Soln.pdf)
 
+* [Midterm 1 (Solution)](/static/exams/cs210/2015/CPSC210-15W1-MT1-solutions.pdf)
+
 

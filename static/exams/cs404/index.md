@@ -20,7 +20,7 @@ See `handin` at https://fn.lc/hw/cs404.
 
 * [Quiz 2 Sample](/static/exams/cs404/2003/cs404-2003-t1-quiz2-sample.pdf)
 
-* [(Solution)](/static/exams/cs404/2003/cs404-2003-t1-quiz2-sample-solution.pdf)
+* [Quiz 2 (Solution)](/static/exams/cs404/2003/cs404-2003-t1-quiz2-sample-solution.pdf)
 
 
 
@@ -29,11 +29,11 @@ See `handin` at https://fn.lc/hw/cs404.
 
 * [Midterm 1 (Term 2)](/static/exams/cs404/2004/cs404-2004-t2-midterm1.pdf)
 
-* [(Solution)](/static/exams/cs404/2004/cs404-2004-t2-midterm1-solution.pdf)
-
 * [Midterm 2 (Term 2)](/static/exams/cs404/2004/cs404-2004-t2-midterm2.pdf)
 
 * [(Solution)](/static/exams/cs404/2004/cs404-2004-t2-midterm2-solution.pdf)
+
+* [Midterm 1 (Solution)](/static/exams/cs404/2004/cs404-2004-t2-midterm1-solution.pdf)
 
 
 

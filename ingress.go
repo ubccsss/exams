@@ -141,7 +141,13 @@ func ingressUBCCSSS(w http.ResponseWriter, r *http.Request) {
 				}
 				if strings.Contains(href, "/files/") {
 					fmt.Fprintf(w, "file: %d, %s, %s\n", year, s.Text(), href)
-					if err := fetchFileAndSave(courseCode, year, "", s.Text(), href); err != nil {
+					f := examdb.File{
+						Course: courseCode,
+						Year:   year,
+						Name:   s.Text(),
+						Source: href,
+					}
+					if err := db.FetchFileAndSave(&f, examsDir); err != nil {
 						http.Error(w, err.Error(), 500)
 						return
 					}

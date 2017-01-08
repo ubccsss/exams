@@ -6,6 +6,11 @@ import (
 )
 
 var (
+	// YearRegexp is a regexp that matches years.
+	YearRegexp = regexp.MustCompile("(20|19)\\d{2}")
+)
+
+var (
 	regexCache   = map[string]*regexp.Regexp{}
 	regexCatchMu sync.RWMutex
 )

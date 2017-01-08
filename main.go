@@ -2,14 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"path"
-	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -30,7 +27,6 @@ const (
 )
 
 var (
-	yearRegex = regexp.MustCompile("(20|19)\\d{2}")
 	templates = template.Must(template.ParseGlob(templateGlob))
 
 	db        examdb.Database
@@ -71,7 +67,12 @@ func loadDatabase() error {
 	if err != nil {
 		return err
 	}
-	if err := json.Unmarshal(raw, &db); err != nil {
+
+	db.Mu.Lock()
+	err = json.Unmarshal(raw, &db)
+	db.Mu.Unlock()
+
+	if err != nil {
 		return err
 	}
 	if err := verifyConsistency(); err != nil {
@@ -81,6 +82,9 @@ func loadDatabase() error {
 }
 
 func saveDatabase() error {
+	db.Mu.RLock()
+	defer db.Mu.RUnlock()
+
 	raw, err := json.MarshalIndent(db, "", "  ")
 	if err != nil {
 		return err
@@ -112,6 +116,9 @@ func verifyConsistency() error {
 		f.Path = strings.TrimSpace(f.Path)
 		f.Source = strings.TrimSpace(f.Source)
 	}
+
+	db.Mu.Lock()
+	defer db.Mu.Unlock()
 	sort.Sort(examdb.FileSlice(db.PotentialFiles))
 
 	return nil
@@ -138,6 +145,8 @@ func serveSite(c *cli.Context) error {
 	http.HandleFunc("/admin/potential", handlePotentialFileIndex)
 	http.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
 	http.HandleFunc("/admin/file/", handleFile)
+
+	http.HandleFunc("/admin/ml/retrain", handleMLRetrain)
 
 	http.HandleFunc("/admin/ingress/deptcourses", ingressDeptCourses)
 	http.HandleFunc("/admin/ingress/deptfiles", ingressDeptFiles)
@@ -170,27 +179,4 @@ func main() {
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
-}
-
-func fetchFileAndSave(course string, year int, term, name, href string) error {
-	resp, err := http.Get(href)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	base := path.Base(href)
-	dir := fmt.Sprintf("%s/%s/%d", examsDir, course, year)
-	if err := os.MkdirAll(dir, 0755); err != nil {
-		return err
-	}
-	raw, _ := ioutil.ReadAll(resp.Body)
-	file := path.Join(dir, base)
-	if _, err := os.Stat(file); !os.IsNotExist(err) {
-		return errors.New("file already exists")
-	}
-	if err := ioutil.WriteFile(file, raw, 0755); err != nil {
-		return err
-	}
-	db.AddFile(course, year, term, name, file, href)
-	return nil
 }

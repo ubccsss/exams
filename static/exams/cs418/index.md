@@ -16,8 +16,6 @@ See `handin` at https://fn.lc/hw/cs418.
 ## 2010
 
 
-* [Final](/static/exams/cs418/2010/final_questions.pdf)
-
 
 
 ## 2011

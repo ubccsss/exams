@@ -11,4 +11,6 @@ See `handin` at https://fn.lc/hw/cs414.
 
 * [Midterm](/static/exams/cs414/2003/midterm.pdf)
 
+* [Midterm (Solution)](/static/exams/cs414/2003/midterm.solutions.pdf)
+
 

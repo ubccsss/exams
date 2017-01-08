@@ -10,6 +10,7 @@ import (
 
 	"github.com/d4l3k/exams/examdb"
 	"github.com/d4l3k/exams/ml"
+	"github.com/d4l3k/exams/util"
 )
 
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +36,7 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 func handleFile(w http.ResponseWriter, r *http.Request) {
 	parts := strings.Split(r.URL.Path, "/")
 	hash := parts[len(parts)-1]
-	file, filei := db.FindFile(hash)
+	file := db.FindFile(hash)
 	if file == nil {
 		http.Error(w, "not found", 404)
 		return
@@ -77,14 +78,23 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), 400)
 			return
 		}
-		if err := fetchFileAndSave(course, year, term, name, file.Source); err != nil {
+		file.Course = course
+		file.Year = year
+		file.Term = term
+		file.Name = name
+		if err := db.RemoveFile(file); err != nil {
 			http.Error(w, err.Error(), 500)
 			return
 		}
-		if filei >= 0 {
-			db.PotentialFiles = append(db.PotentialFiles[:filei], db.PotentialFiles[filei+1:]...)
+		if err := db.FetchFileAndSave(file, examsDir); err != nil {
+			http.Error(w, err.Error(), 500)
+			return
 		}
-		http.Redirect(w, r, "/admin/potential", 302)
+		if redirectParam, ok := r.URL.Query()["redirect"]; ok && len(redirectParam) > 0 {
+			http.Redirect(w, r, redirectParam[0], 302)
+		} else {
+			http.Redirect(w, r, "/admin/potential", 302)
+		}
 		if err := saveAndGenerate(); err != nil {
 			http.Error(w, err.Error(), 500)
 			return
@@ -93,14 +103,15 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "text/html")
 	meta := struct {
-		File    *examdb.File
-		Courses map[string]*examdb.Course
-		Course  string
-		Year    string
-		Terms   []string
-		Term    string
-		Label   string
-		FileURL string
+		File         *examdb.File
+		Courses      map[string]*examdb.Course
+		Course       string
+		Year         string
+		Terms        []string
+		Term         string
+		FileURL      string
+		DetectedName string
+		DetectedTerm string
 	}{
 		File:    file,
 		Courses: db.Courses,
@@ -111,6 +122,15 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	if len(meta.FileURL) == 0 {
 		meta.FileURL = path.Join("/", file.Path)
 	}
+	if file.Year > 0 {
+		meta.Year = strconv.Itoa(file.Year)
+	}
+	if len(file.Term) > 0 {
+		meta.Term = file.Term
+	}
+	if len(file.Course) > 0 {
+		meta.Course = file.Course
+	}
 
 	lowerPath := strings.ToLower(file.Source)
 	for c := range db.Courses {
@@ -118,30 +138,41 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 			meta.Course = c
 		}
 	}
-	years := yearRegex.FindAllString(lowerPath, -1)
+	years := util.YearRegexp.FindAllString(lowerPath, -1)
 	if len(years) > 0 {
 		meta.Year = years[len(years)-1]
 	}
 
-	// Don't try to match "S" since it's too generic.
-	for _, term := range meta.Terms[:2] {
-		if strings.Contains(lowerPath, strings.ToLower(term)) {
-			meta.Term = term
-			break
-		}
-	}
-
-	typ, samp, sol, _, err := ml.Classifier.Classify(file)
+	typ, samp, sol, termClass, err := ml.Classifier.Classify(file)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	meta.Label = fmt.Sprintf("%s %s %s", samp, typ, sol)
+	meta.DetectedName = labelsToName(string(typ), string(samp), string(sol))
+	meta.DetectedTerm = string(termClass)
+
+	if len(meta.Term) == 0 {
+		meta.Term = meta.DetectedTerm
+	}
 
 	if err := templates.ExecuteTemplate(w, "file.html", meta); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+}
+
+func labelsToName(typ, samp, sol string) string {
+	var bits []string
+	for _, class := range []string{samp, typ} {
+		if len(class) == 0 {
+			continue
+		}
+		bits = append(bits, class)
+	}
+	if len(sol) > 0 {
+		bits = append(bits, "(Solution)")
+	}
+	return strings.Join(bits, " ")
 }
 
 func handleGenerate(w http.ResponseWriter, r *http.Request) {
@@ -156,6 +187,7 @@ var indexEndpoints = []string{
 	"/admin/generate",
 	"/admin/potential",
 	"/admin/needfix",
+	"/admin/ml/retrain",
 }
 
 func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
@@ -166,21 +198,33 @@ func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 
 func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprint(w, `<h1>Files that Potentially Need to be Fixed</h1>
+	files := db.NeedFix()
+	fmt.Fprintf(w, `<h1>Files that Potentially Need to be Fixed (%d)</h1>
 	<table>
 	<thead>
 	<th>Name</th>
 	<th>Path</th>
 	<th>Source</th>
 	</thead>
-	<tbody>`)
-	files := db.NeedFix()
+	<tbody>`, len(files))
 	sort.Sort(examdb.FileByName(files))
 	for _, file := range files {
 		if file.NotAnExam {
 			continue
 		}
-		fmt.Fprintf(w, `<tr><td><a href="/admin/file/%s">%s</a></td><td>%s</td><td>%s</td></tr>`, file.Hash, file.Name, file.Path, file.Source)
+		fmt.Fprintf(w, `<tr><td><a href="/admin/file/%s?redirect=/admin/needfix">%s</a></td><td>%s</td><td>%s</td></tr>`, file.Hash, file.Name, file.Path, file.Source)
 	}
 	fmt.Fprint(w, `</tbody></table>`)
+}
+
+func handleMLRetrain(w http.ResponseWriter, r *http.Request) {
+	if err := ml.RetrainClassifier(&db, classifierDir); err != nil {
+		handleErr(w, err)
+		return
+	}
+	w.Write([]byte("Done."))
+}
+
+func handleErr(w http.ResponseWriter, err error) {
+	http.Error(w, fmt.Sprintf("%+v", err), 500)
 }

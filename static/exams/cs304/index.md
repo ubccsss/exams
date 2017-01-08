@@ -19,7 +19,7 @@ See `handin` at https://fn.lc/hw/cs304.
 
 * [Midterm (Term 2)](/static/exams/cs304/2004/cs304-2004-t2-midterm.pdf)
 
-* [(Solution)](/static/exams/cs304/2004/cs304-2004-t2-midterm-solution.pdf)
+* [Midterm (Solution)](/static/exams/cs304/2004/cs304-2004-t2-midterm-solution.pdf)
 
 
 
@@ -65,9 +65,20 @@ See `handin` at https://fn.lc/hw/cs304.
 
 * [Midterm (Term 2)](/static/exams/cs304/2009/cs304-2009-t2-midterm.pdf)
 
-* [(Solution)](/static/exams/cs304/2009/cs304-2009-t2-midterm-solution.pdf)
-
 * [Midterm (Solution)](/static/exams/cs304/2009/Mid04w1-sols.pdf)
+
+* [Midterm (Solution)](/static/exams/cs304/2009/cs304-2009-t2-midterm-solution.pdf)
+
+* [Sample Final](/static/exams/cs304/2009/sample_final_exam_questions_20091215_emk.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs304/2009/sample_final_exam_questions_20091215_emk_soln.pdf)
+
+
+
+## 2013
+
+
+* [Midterm 1](/static/exams/cs304/2013/Midterm1-winter2013-noanswers.pdf)
 
 
 
@@ -82,7 +93,7 @@ See `handin` at https://fn.lc/hw/cs304.
 
 * [Midterm 2 (Solution)](/static/exams/cs304/2016/304-2016-mt2-sol.pdf)
 
-* [304-2016-SampleFinal.pdf](/static/exams/cs304/2016/304-2016-SampleFinal.pdf)
+* [Sample Final (Solution)](/static/exams/cs304/2016/samplefinal.pdf)
 
 * [Practice Final (Solution) (Answers 4 5 6)](/static/exams/cs304/2016/304-2016-SampleFinalAppendixAnswers456.pdf)
 

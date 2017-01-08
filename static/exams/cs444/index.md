@@ -16,9 +16,9 @@ See `handin` at https://fn.lc/hw/cs444.
 ## 2007
 
 
-* [Final](/static/exams/cs444/2007/CPSC444_Final_Term2_2007.pdf)
-
 * [Sample Final](/static/exams/cs444/2007/CPSC444FinalExamReviewQuestions_2007.pdf)
+
+* [Final](/static/exams/cs444/2007/CPSC444_Final_Term2_2007.pdf)
 
 
 

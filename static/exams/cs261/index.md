@@ -11,7 +11,7 @@ See `handin` at https://fn.lc/hw/cs261.
 
 * [Sample Midterm](/static/exams/cs261/2013/sampleMidterm.pdf)
 
-* [Sample Final](/static/exams/cs261/2013/sampleFinal.pdf)
+* [Sample Final](/static/exams/cs261/2013/samplefinal.pdf)
 
 
 

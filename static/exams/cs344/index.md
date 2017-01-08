@@ -32,27 +32,27 @@ See `handin` at https://fn.lc/hw/cs344.
 ## 2005
 
 
-* [Sample Final (Solution)](/static/exams/cs344/2005/cpsc344-2005w1-midterm-sample-soln.pdf)
+* [Midterm (Solution)](/static/exams/cs344/2005/cpsc344-2005w1-midterm-sample-soln-1.pdf)
 
 
 
 ## 2006
 
 
-* [Final (Solution)](/static/exams/cs344/2006/cpsc344-2006w1-partialfinal-sample-soln.pdf)
+* [Final (Solution)](/static/exams/cs344/2006/cpsc344-2006w1-partialfinal-sample-soln-1.pdf)
 
 
 
 ## 2007
 
 
-* [Midterm (Solution)](/static/exams/cs344/2007/cpsc344-2007w1-midterm-sample-soln.pdf)
+* [Midterm (Solution)](/static/exams/cs344/2007/cpsc344-2007w1-midterm-sample-soln-1.pdf)
 
 
 
 ## 2008
 
 
-* [Midterm (Solution)](/static/exams/cs344/2008/cpsc344-2008w1-midterm-sample-soln.pdf)
+* [Midterm (Solution)](/static/exams/cs344/2008/cpsc344-2008w1-midterm-sample-soln-1.pdf)
 
 

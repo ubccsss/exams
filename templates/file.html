@@ -14,13 +14,17 @@ article > div {
 iframe {
   flex-grow: 10000;
 }
+.detected {
+  color: red;
+  margin: 0;
+}
 </style>
 
 <well>
 <header>
   <h1><a href="/admin/potential">All</a> / {{ .File.Name }}</h1>
   <a href="{{ .File.Source }}">{{ .File.Source }}</a>
-  <p>Suspected label: {{.Label}}</p>
+  <a href="{{ .File.Path }}">{{ .File.Path }}</a>
 </header>
 
 <article>
@@ -28,6 +32,7 @@ iframe {
     <h2>Controls</h2>
     <form method="POST">
       <label>Name</label>
+      <p class="detected">Detected: {{.DetectedName}}</p>
       <br>
       <select name="quickname" size="17">
         <option></option>
@@ -67,6 +72,7 @@ iframe {
       <br>
       <br>
       <label>Term</label><br>
+      <p class="detected">Detected: {{.DetectedTerm}}</p>
       <select name="term" size=4>
         <option value="">Select Term</option>
         {{ $predicted := .Term }}

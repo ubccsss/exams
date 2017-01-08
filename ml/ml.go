@@ -2,14 +2,20 @@ package ml
 
 import (
 	"log"
+	"math/rand"
 	"os"
 	"path"
+	"regexp"
 	"strings"
 
+	"github.com/bbalet/stopwords"
 	"github.com/d4l3k/exams/examdb"
+	"github.com/d4l3k/exams/util"
 	"github.com/jbrukh/bayesian"
 	"github.com/sajari/docconv"
 )
+
+var yearRegex = regexp.MustCompile("(20|19)\\d{2}")
 
 // Exam type
 const (
@@ -153,6 +159,8 @@ func (d DocumentClassifier) Train(db *examdb.Database) error {
 	log.Println("Training document classifier...")
 	documents := 0
 
+	var files []*examdb.File
+
 	for _, c := range db.Courses {
 		for _, y := range c.Years {
 			for _, f := range y.Files {
@@ -160,32 +168,51 @@ func (d DocumentClassifier) Train(db *examdb.Database) error {
 					continue
 				}
 
-				words, err := fileToWordBag(f)
-				if err != nil {
-					return err
-				}
-
-				if typeClass := typeClassFromLabel(f.Name); typeClass != "" {
-					d.TypeClassifier.Learn(words, typeClass)
-				}
-				sampleClass := sampleClassFromLabel(f.Name)
-				d.SampleClassifier.Learn(words, sampleClass)
-				solutionClass := solutionClassFromLabel(f.Name)
-				d.SolutionClassifier.Learn(words, solutionClass)
-				if termClass := termClassFromTerm(f.Term); termClass != "" {
-					d.TermClassifier.Learn(words, termClass)
-				}
-
-				documents++
-				if documents%100 == 0 {
-					log.Printf("... trained on %d", documents)
-				}
+				files = append(files, f)
 			}
 		}
 	}
 
+	for i := range files {
+		j := rand.Intn(len(files))
+		files[i], files[j] = files[j], files[i]
+	}
+
+	numTest := len(files) * 9 / 10
+	trainFiles := files[:numTest]
+	testFiles := files[numTest:]
+
+	for _, f := range trainFiles {
+		words, err := fileToWordBag(f)
+		if err != nil {
+			return err
+		}
+
+		if typeClass := typeClassFromLabel(f.Name); typeClass != "" {
+			d.TypeClassifier.Learn(words, typeClass)
+		}
+		sampleClass := sampleClassFromLabel(f.Name)
+		d.SampleClassifier.Learn(words, sampleClass)
+		solutionClass := solutionClassFromLabel(f.Name)
+		d.SolutionClassifier.Learn(words, solutionClass)
+		if termClass := termClassFromTerm(f.Term); termClass != "" {
+			d.TermClassifier.Learn(words, termClass)
+		}
+
+		documents++
+		if documents%100 == 0 {
+			log.Printf("... trained on %d", documents)
+		}
+	}
+
+	/*
+		for _, c := range []*bayesian.Classifier{d.TypeClassifier, d.SolutionClassifier, d.SampleClassifier, d.TermClassifier} {
+			c.ConvertTermsFreqToTfIdf()
+		}
+	*/
+
 	log.Printf("Finished training document classifier! %d documents.", documents)
-	if err := d.Test(db); err != nil {
+	if err := d.Test(trainFiles, testFiles, db); err != nil {
 		return err
 	}
 	return nil
@@ -205,60 +232,63 @@ func (d DocumentClassifier) Classify(f *examdb.File) (bayesian.Class, bayesian.C
 }
 
 // Test computes the test error and prints it.
-func (d DocumentClassifier) Test(db *examdb.Database) error {
-	log.Println("Testing document classifier...")
+func (d DocumentClassifier) Test(trainFiles, testFiles []*examdb.File, db *examdb.Database) error {
+	if err := d.runTest("TRAINING", trainFiles, db); err != nil {
+		return err
+	}
+	if err := d.runTest("TEST", testFiles, db); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (d DocumentClassifier) runTest(label string, files []*examdb.File, db *examdb.Database) error {
+	log.Printf("[%s] Testing document classifier...", label)
 
 	documents := 0
 	var typeRight, typeTotal, sampleRight, sampleTotal, solutionRight, solutionTotal, termRight, termTotal int
-	for _, c := range db.Courses {
-		for _, y := range c.Years {
-			for _, f := range y.Files {
-				if f.NotAnExam {
-					continue
-				}
+	for _, f := range files {
+		words, err := fileToWordBag(f)
+		if err != nil {
+			return err
+		}
 
-				words, err := fileToWordBag(f)
-				if err != nil {
-					return err
-				}
-
-				if typeClass := typeClassFromLabel(f.Name); typeClass != "" {
-					_, inx, _ := d.TypeClassifier.LogScores(words)
-					typeTotal++
-					if TypeClasses[inx] == typeClass {
-						typeRight++
-					}
-				}
-				sampleClass := sampleClassFromLabel(f.Name)
-				_, inx, _ := d.SampleClassifier.LogScores(words)
-				sampleTotal++
-				if SampleClasses[inx] == sampleClass {
-					sampleRight++
-				}
-				solutionClass := solutionClassFromLabel(f.Name)
-				_, inx, _ = d.SolutionClassifier.LogScores(words)
-				solutionTotal++
-				if SolutionClasses[inx] == solutionClass {
-					solutionRight++
-				}
-				if termClass := termClassFromTerm(f.Term); termClass != "" {
-					_, inx, _ := d.TermClassifier.LogScores(words)
-					termTotal++
-					if TypeClasses[inx] == termClass {
-						termRight++
-					}
-				}
-
-				documents++
-				if documents%100 == 0 {
-					log.Printf("... tested on %d", documents)
-				}
+		if typeClass := typeClassFromLabel(f.Name); typeClass != "" {
+			_, inx, _ := d.TypeClassifier.LogScores(words)
+			typeTotal++
+			if TypeClasses[inx] == typeClass {
+				typeRight++
 			}
+		}
+		sampleClass := sampleClassFromLabel(f.Name)
+		_, inx, _ := d.SampleClassifier.LogScores(words)
+		sampleTotal++
+		if SampleClasses[inx] == sampleClass {
+			sampleRight++
+		}
+		solutionClass := solutionClassFromLabel(f.Name)
+		_, inx, _ = d.SolutionClassifier.LogScores(words)
+		solutionTotal++
+		if SolutionClasses[inx] == solutionClass {
+			solutionRight++
+		}
+		if termClass := termClassFromTerm(f.Term); termClass != "" {
+			_, inx, _ := d.TermClassifier.LogScores(words)
+			termTotal++
+			if TermClasses[inx] == termClass {
+				termRight++
+			}
+		}
+
+		documents++
+		if documents%100 == 0 {
+			log.Printf("... tested on %d", documents)
 		}
 	}
 
 	log.Printf(
-		"Errors: Type %d/%d = %f, Sample %d/%d = %f, Solution %d/%d = %f, Term %d/%d = %f",
+		"[%s] Errors: Type %d/%d = %f, Sample %d/%d = %f, Solution %d/%d = %f, Term %d/%d = %f",
+		label,
 		typeRight, typeTotal, float64(typeRight)/float64(typeTotal),
 		sampleRight, sampleTotal, float64(sampleRight)/float64(sampleTotal),
 		solutionRight, solutionTotal, float64(solutionRight)/float64(solutionTotal),
@@ -278,8 +308,21 @@ func fileToWordBag(f *examdb.File) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	words := strings.Split(strings.ToLower(txt), " ")
+	txt = strings.ToLower(txt)
+	txt = stopwords.CleanString(txt, "en", false)
+	words := urlToWords(txt)
 	words = append(words, urlToWords(strings.ToLower(f.Source))...)
+	words = append(words, urlToWords(strings.ToLower(path.Base(f.Path)))...)
+
+	// Add 2-grams
+	//twograms := generateNGrams(words, 2)
+
+	// Split years out.
+	years := splitDatesOut(words)
+
+	//words = append(words, twograms...)
+	words = append(words, years...)
+
 	return words, nil
 }
 
@@ -289,11 +332,39 @@ func urlToWords(uri string) []string {
 	}
 	return strings.FieldsFunc(uri, func(r rune) bool {
 		switch r {
-		case '~', ':', ' ', '-', '.', '/', '\\', '=', '?':
+		case '\t', '~', ':', ' ', '-', '.', '/', '\\', '=', '?', '\n', '(', ',', ')', '[', ']', '{', '}', '_':
 			return true
 		}
 		return false
 	})
+}
+
+func splitDatesOut(words []string) []string {
+	var additional []string
+	for _, word := range words {
+		match := util.YearRegexp.FindString(word)
+		if len(match) > 0 && len(match) != len(word) {
+			additional = append(additional, match)
+			rest := strings.Split(word, match)
+			for _, w := range rest {
+				if len(w) > 0 {
+					additional = append(additional, w)
+				}
+			}
+		}
+	}
+	return additional
+}
+
+func generateNGrams(words []string, n int) []string {
+	var out []string
+	for i := range words {
+		if i > len(words)-n {
+			break
+		}
+		out = append(out, strings.Join(words[i:i+n], " "))
+	}
+	return out
 }
 
 // Classifier is the default classifier set by LoadOrTrainClassifier.

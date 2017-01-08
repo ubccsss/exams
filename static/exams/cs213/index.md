@@ -58,11 +58,11 @@ See `handin` at https://fn.lc/hw/cs213.
 
 * [Midterm Review (Summer)](/static/exams/cs213/2009/cs213-2009-s-review-midterm.pdf)
 
-* [(Solution)](/static/exams/cs213/2009/cs213-2009-s-review-midterm-solution.pdf)
+* [Sample Midterm (Solution)](/static/exams/cs213/2009/cs213-2009-s-review-midterm-solution.pdf)
 
 * [Sample Midterm (Term 2)](/static/exams/cs213/2009/cs213-2009-t2-sample-midterm.pdf)
 
-* [(Solution)](/static/exams/cs213/2009/cs213-2009-t2-sample-midterm-solution.pdf)
+* [Sample Midterm (Solution)](/static/exams/cs213/2009/cs213-2009-t2-sample-midterm-solution.pdf)
 
 * [Final Review (Summer)](/static/exams/cs213/2009/cs213-2009-s-review-final.pdf)
 

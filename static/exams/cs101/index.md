@@ -27,6 +27,8 @@ See `handin` at https://fn.lc/hw/cs101.
 
 * [Sample Midterm](/static/exams/cs101/2007/sample_midterm.pdf)
 
+* [Post Midterm Exercise (Solution)](/static/exams/cs101/2007/post-midterm-exercise-algorithms-sample-soln.pdf)
+
 
 
 ## 2009
@@ -52,6 +54,10 @@ See `handin` at https://fn.lc/hw/cs101.
 
 
 * [Sample Final (Solution)](/static/exams/cs101/2012/sample-final.pdf)
+
+* [Sample Final (Solution)](/static/exams/cs101/2012/sample-final-sol.pdf)
+
+* [Sample Final](/static/exams/cs101/2012/sample-final-1.pdf)
 
 
 
