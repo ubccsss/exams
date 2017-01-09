@@ -27,6 +27,7 @@ import (
 	"github.com/boltdb/bolt"
 	"github.com/d4l3k/exams/exambot/exambotlib"
 	archive "github.com/d4l3k/go-internetarchive"
+	piazza "github.com/d4l3k/piazza-api"
 	"github.com/temoto/robotstxt"
 	"github.com/willf/bloom"
 )
@@ -39,6 +40,10 @@ const (
 	// bloom filter configuration
 	maxNumberOfPages  = 1000000
 	falsePositiveRate = 0.00001
+
+	// shutdownTime is the number of seconds to shutdown after if there is no work
+	// to be done.
+	shutdownTime = 240
 )
 
 var (
@@ -52,6 +57,8 @@ var (
 		"http://www.cs.ubc.ca/~pcarter/",
 		"https://sites.google.com/site/ubccpsc110/",
 		"https://www.cs.ubc.ca/our-department/people",
+		"https://ubccpsc.github.io",
+		"piazza://",
 	}
 	archiveSearchPrefixes = []string{
 		"https://www.ugrad.cs.ubc.ca/~",
@@ -78,6 +85,12 @@ var (
 		"sites.google.com": host{
 			whitelist: []string{
 				".*(cs|cpsc)\\d{3}.*",
+			},
+		},
+		"ubccpsc.github.io": host{},
+		"github.com": host{
+			whitelist: []string{
+				"^https://github.com/ubccpsc.*$",
 			},
 		},
 	}
@@ -152,6 +165,10 @@ func validURL(uri string) (bool, error) {
 		return false, err
 	}
 
+	if u.Scheme == piazza.PiazzaScheme {
+		return true, nil
+	}
+
 	// Check valid hosts
 	hostRules, ok := validHosts[u.Host]
 	if !ok {
@@ -207,7 +224,11 @@ func validURL(uri string) (bool, error) {
 		if err != nil {
 			return false, nil
 		}
-		robots = rhost.FindGroup(userAgent)
+		if u.Host == "github.com" {
+			robots = rhost.FindGroup("Googlebot")
+		} else {
+			robots = rhost.FindGroup(userAgent)
+		}
 
 		robotsCacheLock.Lock()
 		robotsCache[u.Host] = robots
@@ -218,15 +239,33 @@ func validURL(uri string) (bool, error) {
 }
 
 // fetchURL returns all links from the page and the hash of the page.
-func fetchURL(uri string) (Page, error) {
-	resp, err := makeGet(uri)
+func (s *Spider) fetchURL(uri string) (Page, error) {
+	u, err := url.Parse(uri)
 	if err != nil {
 		return Page{}, err
 	}
-	defer resp.Body.Close()
+	var reader io.Reader
+	var statusCode int
+	if u.Scheme == piazza.PiazzaScheme {
+		log.Printf("PIAZZA %s", uri)
+		resp, err := s.Piazza.Get(uri)
+		if err != nil {
+			return Page{}, err
+		}
+		reader = strings.NewReader(resp)
+		statusCode = 200
+	} else {
+		resp, err := makeGet(uri)
+		if err != nil {
+			return Page{}, err
+		}
+		defer resp.Body.Close()
+		reader = resp.Body
+		statusCode = resp.StatusCode
+	}
 
 	hasher := sha1.New()
-	bodyReader := io.TeeReader(resp.Body, hasher)
+	bodyReader := io.TeeReader(reader, hasher)
 
 	doc, err := goquery.NewDocumentFromReader(bodyReader)
 	if err != nil {
@@ -250,13 +289,17 @@ func fetchURL(uri string) (Page, error) {
 
 		abs := base.ResolveReference(ref)
 		abs.Fragment = ""
-		links = append(links, abs.String())
+		link := abs.String()
+		// Don't resolve relative to piazza://
+		if !(strings.HasPrefix(link, piazza.PiazzaScheme) && !strings.HasPrefix(uri, piazza.PiazzaScheme)) {
+			links = append(links, link)
+		}
 	})
 
 	hash := hex.EncodeToString(hasher.Sum(nil))
 	return Page{
 		URL:        uri,
-		StatusCode: resp.StatusCode,
+		StatusCode: statusCode,
 		Hash:       hash,
 		Links:      links,
 		Fetched:    time.Now(),
@@ -291,7 +334,7 @@ func (f *URLScore) computeScore() {
 // URLScore is a single URL and a score
 type URLScore struct {
 	URL   string
-	Score int
+	Score int `json:",omitempty"`
 }
 
 // An URLHeap is a min-heap of strings.
@@ -321,20 +364,26 @@ func (h *URLHeap) Pop() interface{} {
 type Spider struct {
 	Out io.WriteCloser
 	Mu  struct {
-		ToVisit URLHeap
+		sync.RWMutex
+
+		ToVisit    URLHeap
+		ToVisitMap map[string]struct{}
+
 		Seen    *bloom.BloomFilter
 		Visited *bloom.BloomFilter
-		sync.RWMutex
 	}
-	DB *bolt.DB
+	DB     *bolt.DB
+	Piazza *piazza.HTMLWrapper
 }
 
 // MakeSpider makes a new spider.
-func MakeSpider(db *bolt.DB) *Spider {
+func MakeSpider(db *bolt.DB, p *piazza.HTMLWrapper) *Spider {
 	s := &Spider{
-		DB: db,
+		DB:     db,
+		Piazza: p,
 	}
 
+	s.Mu.ToVisitMap = map[string]struct{}{}
 	s.Mu.Seen = bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
 	s.Mu.Visited = bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
 	log.Printf("Fetched bloom filter: m %d k %d", s.Mu.Seen.Cap(), s.Mu.Seen.K())
@@ -400,7 +449,9 @@ func (s *Spider) Save() error {
 	state := spiderState{
 		s.Mu.ToVisit,
 	}
-	if err := json.NewEncoder(f).Encode(state); err != nil {
+	enc := json.NewEncoder(f)
+	enc.SetIndent("", "  ")
+	if err := enc.Encode(state); err != nil {
 		return err
 	}
 
@@ -442,6 +493,9 @@ func (s *Spider) Load() error {
 	}
 
 	s.Mu.ToVisit = state.ToVisit
+	for _, v := range s.Mu.ToVisit {
+		s.Mu.ToVisitMap[v.URL] = struct{}{}
+	}
 
 	return nil
 }
@@ -455,10 +509,10 @@ func (s *Spider) Worker() {
 			if !lastNoWork {
 				log.Println("No URLs queued to visit!")
 				lastNoWork = true
-				timeNoWork = time.Now().Add(15 * time.Second)
+				timeNoWork = time.Now().Add(shutdownTime * time.Second)
 			}
 			if time.Now().After(timeNoWork) {
-				log.Printf("No work for 15s, shutting down.")
+				log.Printf("No work for %ds, shutting down.", shutdownTime)
 				os.Exit(0)
 			}
 			time.Sleep(1 * time.Second)
@@ -471,6 +525,7 @@ func (s *Spider) Worker() {
 			continue
 		}
 		url := heap.Pop(&s.Mu.ToVisit).(*URLScore)
+		delete(s.Mu.ToVisitMap, url.URL)
 		s.Mu.Unlock()
 
 		valid, err := validURL(url.URL)
@@ -483,7 +538,7 @@ func (s *Spider) Worker() {
 			continue
 		}
 
-		page, err := fetchURL(url.URL)
+		page, err := s.fetchURL(url.URL)
 		if err != nil {
 			log.Printf("WORKER err: %s", err)
 			continue
@@ -493,7 +548,7 @@ func (s *Spider) Worker() {
 		visited := s.Mu.Visited.TestAndAddString(page.Hash)
 		s.Mu.Unlock()
 
-		if visited {
+		if visited && !alwaysVisit(url.URL) {
 			continue
 		}
 
@@ -570,7 +625,8 @@ func (s *Spider) AddAndExpandURLs(urls []string, expand bool) {
 			continue
 		}
 		if valid {
-			if expand {
+			// don't expand piazza:// urls since we want to always visit the root ones
+			if expand && !strings.HasPrefix(clean, "piazza") {
 				expanded, err := exambotlib.ExpandURLToParents(clean)
 				if err != nil {
 					log.Printf("WORKER err: %s", err)
@@ -584,6 +640,14 @@ func (s *Spider) AddAndExpandURLs(urls []string, expand bool) {
 	}
 }
 
+func alwaysVisit(uri string) bool {
+	u, _ := url.Parse(uri)
+	if u.Scheme == piazza.PiazzaScheme {
+		return len(u.Path) <= 1
+	}
+	return false
+}
+
 // AddURLs adds a bunch of URLs to be processed if valid and returns how many
 // were added.
 func (s *Spider) AddURLs(urls []string) int {
@@ -591,7 +655,7 @@ func (s *Spider) AddURLs(urls []string) int {
 	defer s.Mu.Unlock()
 	added := 0
 	for _, url := range urls {
-		if s.Mu.Seen.TestAndAddString(url) {
+		if s.Mu.Seen.TestAndAddString(url) && !alwaysVisit(url) {
 			continue
 		}
 
@@ -604,17 +668,26 @@ func (s *Spider) AddURLs(urls []string) int {
 		if !valid {
 			continue
 		}
-		//log.Printf("+ %s", url)
+		// Don't add a URL multiple times.
+		if _, ok := s.Mu.ToVisitMap[url]; ok {
+			continue
+		}
 		us := &URLScore{URL: url}
 		us.computeScore()
 		heap.Push(&s.Mu.ToVisit, us)
+		s.Mu.ToVisitMap[url] = struct{}{}
 		added++
 	}
 	return added
 }
 
-var cpuprofile = flag.String("cpuprofile", "", "write cpu profile `file`")
-var memprofile = flag.String("memprofile", "", "write memory profile to `file`")
+var (
+	cpuprofile = flag.String("cpuprofile", "", "write cpu profile `file`")
+	memprofile = flag.String("memprofile", "", "write memory profile to `file`")
+
+	piazzaUser = flag.String("piazzauser", "", "username of Piazza account to use for scraping")
+	piazzaPass = flag.String("piazzapass", "", "password of Piazza account to use for scraping")
+)
 
 func main() {
 	flag.Parse()
@@ -685,7 +758,12 @@ func main() {
 		}
 	}
 
-	s := MakeSpider(db)
+	p, err := piazza.MakeClient(*piazzaUser, *piazzaPass)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	s := MakeSpider(db, p.HTMLWrapper())
 	if err := s.Load(); err != nil {
 		log.Print(err)
 	}
