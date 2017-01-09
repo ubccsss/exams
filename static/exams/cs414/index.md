@@ -9,8 +9,8 @@ See `handin` at https://fn.lc/hw/cs414.
 ## 2003
 
 
-* [Midterm](/static/exams/cs414/2003/midterm.pdf)
-
 * [Midterm (Solution)](/static/exams/cs414/2003/midterm.solutions.pdf)
+
+* [Midterm](/static/exams/cs414/2003/midterm.pdf)
 
 

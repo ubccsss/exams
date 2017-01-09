@@ -15,10 +15,15 @@ See `handin` at https://fn.lc/hw/cs314.
 
 
 
+## 2003
+
+
+* [Final](/static/exams/cs314/2003/Vjan2004-final.pdf)
+
+
+
 ## 2004
 
-
-* [Final](/static/exams/cs314/2004/Vjan2004-final.pdf)
 
 
 
@@ -34,14 +39,14 @@ See `handin` at https://fn.lc/hw/cs314.
 
 * [Midterm 2](/static/exams/cs314/2006/midterm2.pdf)
 
+* [Final](/static/exams/cs314/2006/cs314-2007-final.pdf)
+
+* [Final (Solution)](/static/exams/cs314/2006/cs314-2007-final.soln_.pdf)
+
 
 
 ## 2007
 
-
-* [Final](/static/exams/cs314/2007/cs314-2007-final.pdf)
-
-* [Final (Solution)](/static/exams/cs314/2007/cs314-2007-final.soln_.pdf)
 
 
 
@@ -54,15 +59,15 @@ See `handin` at https://fn.lc/hw/cs314.
 
 * [Midterm (Term 1)](/static/exams/cs314/2008/cs314-2008-t1-midterm.pdf)
 
-* [(Solution)](/static/exams/cs314/2008/cs314-2008-t1-midterm-solution.pdf)
-
 * [Makeup Midterm (Term 1)](/static/exams/cs314/2008/cs314-2008-t1-makeup-midterm.pdf)
 
 * [(Solution)](/static/exams/cs314/2008/cs314-2008-t1-makeup-midterm-solution.pdf)
 
-* [Final (Term 1)](/static/exams/cs314/2008/cs314-2008-t1-final.pdf)
-
 * [(Solution)](/static/exams/cs314/2008/cs314-2008-t1-final-solution.pdf)
+
+* [Midterm (Solution)](/static/exams/cs314/2008/cs314-2008-t1-midterm-solution.pdf)
+
+* [Final](/static/exams/cs314/2008/cs314-2008-t1-final.pdf)
 
 
 
@@ -75,13 +80,13 @@ See `handin` at https://fn.lc/hw/cs314.
 
 * [(Solution)](/static/exams/cs314/2009/cs314-2009-t1-midterm2-solution.pdf)
 
-* [Final (Term 1)](/static/exams/cs314/2009/cs314-2009-t1-final.pdf)
-
-* [(Solution)](/static/exams/cs314/2009/cs314-2009-t1-final-solution.pdf)
-
 * [Sample Final (Solution)](/static/exams/cs314/2009/final_sample_solved.pdf)
 
 * [Sample Midterm 2](/static/exams/cs314/2009/midterm2_sample.pdf)
+
+* [Final](/static/exams/cs314/2009/cs314-2009-t1-final.pdf)
+
+* [Final (Solution)](/static/exams/cs314/2009/cs314-2009-t1-final-solution.pdf)
 
 
 
@@ -99,10 +104,15 @@ See `handin` at https://fn.lc/hw/cs314.
 
 
 
+## 2015
+
+
+* [Midterm](/static/exams/cs314/2015/cs314-2016-midterm.pdf)
+
+
+
 ## 2016
 
-
-* [Midterm](/static/exams/cs314/2016/cs314-2016-midterm.pdf)
 
 * [Midterm (Solution)](/static/exams/cs314/2016/cs314-2016-midterm.soln_.pdf)
 

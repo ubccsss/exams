@@ -11,8 +11,6 @@ See `handin` at https://fn.lc/hw/cs304.
 
 * [Midterm 1 (Term 1)](/static/exams/cs304/2004/cs304-2004-t1-midterm1.pdf)
 
-* [(Solution)](/static/exams/cs304/2004/cs304-2004-t1-midterm1-solution.pdf)
-
 * [Midterm 2 (Term 1)](/static/exams/cs304/2004/cs304-2004-t1-midterm2.pdf)
 
 * [(Solution)](/static/exams/cs304/2004/cs304-2004-t1-midterm2-solution.pdf)
@@ -20,6 +18,8 @@ See `handin` at https://fn.lc/hw/cs304.
 * [Midterm (Term 2)](/static/exams/cs304/2004/cs304-2004-t2-midterm.pdf)
 
 * [Midterm (Solution)](/static/exams/cs304/2004/cs304-2004-t2-midterm-solution.pdf)
+
+* [Midterm 1 (Solution)](/static/exams/cs304/2004/cs304-2004-t1-midterm1-solution.pdf)
 
 
 
@@ -59,19 +59,19 @@ See `handin` at https://fn.lc/hw/cs304.
 
 * [Midterm 1 (Summer) (Solution 1)](/static/exams/cs304/2009/cs304-2009-s-midterm1-solution1.pdf)
 
-* [(Solution 2)](/static/exams/cs304/2009/cs304-2009-s-midterm1-solution2.pdf)
-
 * [Midterm 2 (Summer) (Solution)](/static/exams/cs304/2009/cs304-2009-s-midterm2-solution.pdf)
 
 * [Midterm (Term 2)](/static/exams/cs304/2009/cs304-2009-t2-midterm.pdf)
-
-* [Midterm (Solution)](/static/exams/cs304/2009/Mid04w1-sols.pdf)
 
 * [Midterm (Solution)](/static/exams/cs304/2009/cs304-2009-t2-midterm-solution.pdf)
 
 * [Sample Final](/static/exams/cs304/2009/sample_final_exam_questions_20091215_emk.pdf)
 
 * [Sample Final (Solution)](/static/exams/cs304/2009/sample_final_exam_questions_20091215_emk_soln.pdf)
+
+* [Midterm 1 (Solution)](/static/exams/cs304/2009/cs304-2009-s-midterm1-solution2.pdf)
+
+* [Midterm (Solution)](/static/exams/cs304/2009/Mid04w1-sols.pdf)
 
 
 

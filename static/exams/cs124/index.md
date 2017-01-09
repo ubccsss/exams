@@ -6,9 +6,14 @@ See `handin` at https://fn.lc/hw/cs124.
 
 
 
+## 2002
+
+
+* [Midterm](/static/exams/cs124/2002/mts2003.pdf)
+
+
+
 ## 2003
 
-
-* [Midterm](/static/exams/cs124/2003/mts2003.pdf)
 
 

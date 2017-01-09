@@ -11,7 +11,7 @@ See `handin` at https://fn.lc/hw/cs221.
 
 * [Summer Midterm](/static/exams/cs221/2004/cs221-2004-s-midterm.pdf)
 
-* [(Solution)](/static/exams/cs221/2004/cs221-2004-s-midterm-solution.pdf)
+* [Midterm (Solution)](/static/exams/cs221/2004/cs221-2004-s-midterm-solution.pdf)
 
 
 

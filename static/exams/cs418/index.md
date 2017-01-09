@@ -21,8 +21,6 @@ See `handin` at https://fn.lc/hw/cs418.
 ## 2011
 
 
-* [Final (Solution)](/static/exams/cs418/2011/final_answers.pdf)
-
 * [Midterm (Solution)](/static/exams/cs418/2011/midterm_answers.pdf)
 
 
@@ -44,8 +42,8 @@ See `handin` at https://fn.lc/hw/cs418.
 ## 2015
 
 
-* [Final (Solution)](/static/exams/cs418/2015/a.pdf)
-
 * [Final](/static/exams/cs418/2015/q.pdf)
+
+* [Final (Solution)](/static/exams/cs418/2015/a.pdf)
 
 

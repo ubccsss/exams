@@ -22,9 +22,14 @@ See `handin` at https://fn.lc/hw/cs444.
 
 
 
+## 2010
+
+
+* [Final](/static/exams/cs444/2010/CPSC444_Final_Term2_2011.pdf)
+
+
+
 ## 2011
 
-
-* [Final](/static/exams/cs444/2011/CPSC444_Final_Term2_2011.pdf)
 
 

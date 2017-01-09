@@ -9,9 +9,9 @@ See `handin` at https://fn.lc/hw/cs320.
 ## 2006
 
 
-* [Final (Solution)](/static/exams/cs320/2006/old-final-soln.pdf)
-
 * [Sample Final](/static/exams/cs320/2006/sampleFinal.pdf)
+
+* [Final (Solution)](/static/exams/cs320/2006/old-final-soln.pdf)
 
 
 
@@ -94,8 +94,6 @@ See `handin` at https://fn.lc/hw/cs320.
 
 * [Sample Midterm 2 (Solution)](/static/exams/cs320/2013/sampleMidterm2-sol.pdf)
 
-* [Sample Midterm 1](/static/exams/cs320/2013/sampleMidterm1-sol.pdf)
-
 * [Sample Final](/static/exams/cs320/2013/sampleFinal.pdf)
 
 * [Sample Final (Solution)](/static/exams/cs320/2013/sampleFinal-sol.pdf)
@@ -105,6 +103,8 @@ See `handin` at https://fn.lc/hw/cs320.
 * [Midterm 2 (Solution)](/static/exams/cs320/2013/sampleMidterm2-sol-1.pdf)
 
 * [Sample Midterm 1 (Solution)](/static/exams/cs320/2013/sampleMidterm1-sol-1.pdf)
+
+* [Sample Midterm 1](/static/exams/cs320/2013/sampleMidterm1-sol.pdf)
 
 
 

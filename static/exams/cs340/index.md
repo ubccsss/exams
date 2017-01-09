@@ -9,15 +9,15 @@ See `handin` at https://fn.lc/hw/cs340.
 ## 2015
 
 
-* [Midterm](/static/exams/cs340/2015/340-2015-MT.pdf)
-
-* [Midterm (Solution)](/static/exams/cs340/2015/340-2015-MTsol.pdf)
+* [Final Practice Questions](/static/exams/cs340/2015/340-2015-final-practice.pdf)
 
 * [Final](/static/exams/cs340/2015/340-2015-F.pdf)
 
 * [Final (Solution)](/static/exams/cs340/2015/340-2015-Fsol.pdf)
 
-* [Final Practice Questions](/static/exams/cs340/2015/340-2015-final-practice.pdf)
+* [Midterm (Solution)](/static/exams/cs340/2015/340-2015-MTsol.pdf)
+
+* [Midterm](/static/exams/cs340/2015/340-2015-MT.pdf)
 
 
 

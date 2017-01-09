@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -93,6 +94,18 @@ func saveDatabase() error {
 		return err
 	}
 	return nil
+}
+
+var whitespaceRegexp = regexp.MustCompile("  +")
+
+func removeDuplicateWhitespace(str string) string {
+	return whitespaceRegexp.ReplaceAllString(strings.TrimSpace(str), " ")
+}
+
+var nameToTermMapping = map[string]string{
+	"(Term 1)": "W1",
+	"(Term 2)": "W2",
+	"(Summer)": "S",
 }
 
 func verifyConsistency() error {

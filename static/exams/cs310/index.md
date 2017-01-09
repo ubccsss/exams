@@ -17,7 +17,7 @@ See `handin` at https://fn.lc/hw/cs310.
 
 * [Sample Final (Summer)](/static/exams/cs310/2009/cs310-2009-s-sample-final.pdf)
 
-* [(Solution)](/static/exams/cs310/2009/cs310-2009-s-sample-final-solution.pdf)
+* [Sample Final (Solution)](/static/exams/cs310/2009/cs310-2009-s-sample-final-solution.pdf)
 
 
 

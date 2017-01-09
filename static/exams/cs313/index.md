@@ -17,9 +17,9 @@ See `handin` at https://fn.lc/hw/cs313.
 
 * [(Solution)](/static/exams/cs313/2004/cs313-2004-t2-midterm2-solution.pdf)
 
-* [Final (Term 2)](/static/exams/cs313/2004/cs313-2004-t2-final.pdf)
+* [Final (Solution)](/static/exams/cs313/2004/cs313-2004-t2-final-solution.pdf)
 
-* [(Solution)](/static/exams/cs313/2004/cs313-2004-t2-final-solution.pdf)
+* [Final](/static/exams/cs313/2004/cs313-2004-t2-final.pdf)
 
 
 
@@ -34,7 +34,7 @@ See `handin` at https://fn.lc/hw/cs313.
 
 * [(Solution)](/static/exams/cs313/2005/cs313-2005-t1-midterm2-solution.pdf)
 
-* [(Solution)](/static/exams/cs313/2005/cs313-2005-t1-final.pdf)
+* [Final](/static/exams/cs313/2005/cs313-2005-t1-final.pdf)
 
 
 
@@ -52,8 +52,6 @@ See `handin` at https://fn.lc/hw/cs313.
 * [Midterm 1 (Term 2)](/static/exams/cs313/2006/cs313-2006-t2-midterm1.pdf)
 
 * [Midterm 2 (Term 2)](/static/exams/cs313/2006/cs313-2006-t2-midterm2.pdf)
-
-* [(Solution)](/static/exams/cs313/2006/cs313-2006-t2-midterm2-solution.pdf)
 
 * [Problem Set 1 (Term 2)](/static/exams/cs313/2006/cs313-2006-t2-problemset1.pdf)
 
@@ -91,6 +89,8 @@ See `handin` at https://fn.lc/hw/cs313.
 
 * [Midterm 1 (Solution)](/static/exams/cs313/2006/cs313-2006-t2-midterm1-solution.pdf)
 
+* [(Solution)](/static/exams/cs313/2006/cs313-2006-t2-midterm2-solution.pdf)
+
 
 
 ## 2016
@@ -100,12 +100,12 @@ See `handin` at https://fn.lc/hw/cs313.
 
 * [Midterm Sample (Solution)](/static/exams/cs313/2016/313-2016-mt-sample-soln.pdf)
 
-* [Midterm](/static/exams/cs313/2016/313-2016-mt.pdf)
-
 * [Midterm (Solution)](/static/exams/cs313/2016/313-2016-mt-soln.pdf)
 
 * [Final Sample](/static/exams/cs313/2016/313-2016-sample-final.pdf)
 
 * [Final Sample (Solution)](/static/exams/cs313/2016/313-2016-sample-final-soln.pdf)
+
+* [Midterm](/static/exams/cs313/2016/313-2016-mt.pdf)
 
 

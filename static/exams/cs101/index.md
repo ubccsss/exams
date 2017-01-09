@@ -44,9 +44,9 @@ See `handin` at https://fn.lc/hw/cs101.
 
 * [Midterm (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-midterm.pdf)
 
-* [Final (Term 1)](/static/exams/cs101/2009/cs101-2009-t1-final.pdf)
-
 * [Sample Final Exam Questions (Summer)](/static/exams/cs101/2009/second-sample-final.pdf)
+
+* [Final](/static/exams/cs101/2009/cs101-2009-t1-final.pdf)
 
 
 

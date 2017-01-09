@@ -167,6 +167,18 @@ func (d DocumentClassifier) Train(db *examdb.Database) error {
 				if f.NotAnExam {
 					continue
 				}
+				/*
+					var found bool
+					for _, l := range examdb.ExamLabels {
+						if l == f.Name {
+							found = true
+							break
+						}
+					}
+					if !found {
+						continue
+					}
+				*/
 
 				files = append(files, f)
 			}

@@ -23,7 +23,7 @@ See `handin` at https://fn.lc/hw/cs213.
 
 * [213-2015-mt-soln.pdf](/static/exams/cs213/0/213-2015-mt-soln.pdf)
 
-* [213-2015-mt.pdf](/static/exams/cs213/0/213-2015-mt.pdf)
+* [Midterm](/static/exams/cs213/2015/213-2015-mt.pdf)
 
 * [213-2015-practice-mt.pdf](/static/exams/cs213/0/213-2015-practice-mt.pdf)
 
@@ -122,8 +122,6 @@ See `handin` at https://fn.lc/hw/cs213.
 
 * [Extra Questions (Solution)](/static/exams/cs213/2015/213-2015-extra-questions-solution.pdf)
 
-* [Midterm](/static/exams/cs213/2015/213-2015-mt.pdf)
-
 * [Midterm (Solution)](/static/exams/cs213/2015/213-2015-mt-soln.pdf)
 
 * [Practice Midterm](/static/exams/cs213/2015/213-2015-practice-mt.pdf)
@@ -131,6 +129,8 @@ See `handin` at https://fn.lc/hw/cs213.
 * [Practice Midterm (Solution)](/static/exams/cs213/2015/213-2015-practice-mt-soln.pdf)
 
 * [Final Review](/static/exams/cs213/2015/213-2015-finalreview.pdf)
+
+* [Midterm](/static/exams/cs213/2015/213-2015-mt.pdf)
 
 
 
