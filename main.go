@@ -21,7 +21,7 @@ import (
 
 const (
 	staticDir     = "static"
-	examsDir      = "static/exams"
+	examsDir      = staticDir
 	dbFile        = "data/exams.json"
 	templateGlob  = "templates/*"
 	classifierDir = "data/classifiers"
@@ -108,6 +108,17 @@ var nameToTermMapping = map[string]string{
 	"(Summer)": "S",
 }
 
+var nameReplacements = map[string]string{
+	"Practice Midterm":  "Sample Midterm",
+	"Practice Final":    "Sample Final",
+	"Final Sample":      "Sample Final",
+	"Midterm 1 Sample":  "Sample Midterm 1",
+	"Midterm Sample":    "Sample Midterm",
+	"Midterm 2 Sample":  "Sample Midterm 2",
+	"Midterm I Sample":  "Sample Midterm 1",
+	"Midterm II Sample": "Sample Midterm 2",
+}
+
 func verifyConsistency() error {
 	log.Println("Verifying consistency of data and doing house keeping...")
 	for code, course := range db.Courses {
@@ -115,6 +126,25 @@ func verifyConsistency() error {
 			for _, f := range year.Files {
 				f.Year = yearnum
 				f.Course = code
+				for pattern, term := range nameToTermMapping {
+					if !strings.Contains(f.Name, pattern) {
+						continue
+					}
+
+					log.Printf("Fixing %+v", f)
+					f.Name = removeDuplicateWhitespace(strings.Replace(f.Name, pattern, "", -1))
+					f.Term = term
+					log.Printf("Fixed %+v", f)
+				}
+				for pattern, term := range nameReplacements {
+					if !strings.Contains(f.Name, pattern) {
+						continue
+					}
+
+					log.Printf("Fixing %+v", f)
+					f.Name = removeDuplicateWhitespace(strings.Replace(f.Name, pattern, term, -1))
+					log.Printf("Fixed %+v", f)
+				}
 				if len(f.Hash) == 0 {
 					if err := f.ComputeHash(); err != nil {
 						return err
@@ -152,8 +182,6 @@ func serveSite(c *cli.Context) error {
 		return err
 	}
 
-	http.Handle("/static/", http.FileServer(http.Dir(".")))
-
 	http.HandleFunc("/admin/generate", handleGenerate)
 	http.HandleFunc("/admin/potential", handlePotentialFileIndex)
 	http.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
@@ -167,6 +195,8 @@ func serveSite(c *cli.Context) error {
 	http.HandleFunc("/admin/ingress/archive.org", ingressArchiveOrgFiles)
 
 	http.HandleFunc("/admin/", handleAdminIndex)
+
+	http.Handle("/", http.FileServer(http.Dir("static")))
 
 	// Launch 4 source workers
 	for i := 0; i < 4; i++ {

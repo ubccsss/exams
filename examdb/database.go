@@ -35,6 +35,8 @@ func (db *Database) CoursesNoFiles() []string {
 	for id, c := range db.Courses {
 		if c.FileCount() == 0 {
 			classes = append(classes, id)
+			code := id[2:]
+			classes = append(classes, fmt.Sprintf("cpsc%s", code))
 		}
 	}
 	return classes

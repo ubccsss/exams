@@ -133,6 +133,11 @@ type FileByName []*File
 
 func (p FileByName) Len() int { return len(p) }
 func (p FileByName) Less(i, j int) bool {
-	return strings.ToLower(p[i].Name) < strings.ToLower(p[j].Name)
+	a := strings.ToLower(p[i].Name)
+	b := strings.ToLower(p[j].Name)
+	if a == b {
+		return strings.ToLower(p[i].Path) < strings.ToLower(p[j].Path)
+	}
+	return a < b
 }
 func (p FileByName) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
