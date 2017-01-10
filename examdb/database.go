@@ -12,6 +12,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/d4l3k/exams/config"
 	"github.com/pkg/errors"
 )
 
@@ -115,18 +116,19 @@ func (db *Database) NeedFix() []*File {
 }
 
 // AddCourse adds a course the DB if it doesn't exist already.
-func (db *Database) AddCourse(w io.Writer, code string) {
+func (db *Database) AddCourse(w io.Writer, code, desc string) {
 	db.Mu.Lock()
 	defer db.Mu.Unlock()
 
 	code = strings.ToLower(strings.TrimSpace(code))
-	if _, ok := db.Courses[code]; ok {
+	if c, ok := db.Courses[code]; ok {
+		c.Desc = desc
 		return
 	}
 	if db.Courses == nil {
 		db.Courses = map[string]*Course{}
 	}
-	db.Courses[code] = &Course{Code: code}
+	db.Courses[code] = &Course{Code: code, Desc: desc}
 	fmt.Fprintf(w, "Added: %s\n", code)
 }
 
@@ -242,7 +244,7 @@ func (db *Database) FetchFileAndSave(file *File) error {
 	}
 	base := path.Base(filename)
 	dir := fmt.Sprintf("%s/%d", file.Course, file.Year)
-	if err := os.MkdirAll(dir, 0755); err != nil {
+	if err := os.MkdirAll(path.Join(config.ExamsDir, dir), 0755); err != nil {
 		return err
 	}
 	attempt := base

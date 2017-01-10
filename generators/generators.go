@@ -38,11 +38,12 @@ func MakeGenerator(db *examdb.Database, templateGlob, examsDir string) (*Generat
 
 // All generates all files that there are generates for.
 func (g *Generator) All() error {
+	g.indexCoursePotentialFiles()
+
 	if err := g.Database(); err != nil {
 		return errors.Wrap(err, "database")
 	}
 
-	g.indexCoursePotentialFiles()
 	for _, course := range g.db.Courses {
 		if err := g.Course(*course); err != nil {
 			return errors.Wrapf(err, "course %+v", course)

@@ -1,4 +1,7 @@
 # {{ .Code }}
+{{ if ne (len .Desc) 0 }}
+<p><strong>Description:</strong> {{.Desc}}</p>
+{{end}}
 
 {{ if ne (len .Years) 0 }}
 These are all the exams for {{ .Code }}.
@@ -34,11 +37,11 @@ haven't gotten around to indexing them.
 ## Upload
 
 <style>input#shouldbeempty{display:none;}</style>
-<form method="POST" action="/admin/upload?course={{.Code}}">
+<form method="POST" action="/upload?course={{.Code}}" enctype="multipart/form-data">
   <div class="form-group">
     <label for="name">File Type</label>
     <br>
-    <select id="name" size="16">
+    <select id="name" name="name" size="16">
       <option>Final</option>
       <option>Final (Solution)</option>
       <option>Sample Final</option>
@@ -61,12 +64,12 @@ haven't gotten around to indexing them.
     <label for="year">Year</label>
     <p class="help-block">Year is the year that happens during Term 1. A final
     from Sep 2016 or Jan 2017 would be 2016.</p>
-    <input type="number" class="form-control" id="year" placeholder="Year">
+    <input type="number" class="form-control" id="year" name="year" placeholder="Year">
   </div>
   <div class="form-group">
     <label for="term">Term</label>
     <br>
-    <select id="term" size="3">
+    <select id="term" size="3" name="term">
       <option>W1</option>
       <option>W2</option>
       <option>S</option>
@@ -74,9 +77,9 @@ haven't gotten around to indexing them.
   </div>
   <div class="form-group">
     <label for="exam">File</label>
-    <input type="file" id="exam">
+    <input type="file" id="exam" name="exam">
   </div>
-  <input type="text" id="shouldbeempty">
+  <input type="text" id="shouldbeempty" name="shouldbeempty">
   <button type="submit" class="btn btn-default">Upload</button>
 </form>
 

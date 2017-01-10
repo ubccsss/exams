@@ -54,6 +54,12 @@ func unprocessedSourceWorker() {
 
 		db.AddPotentialFiles(os.Stderr, []*examdb.File{f})
 		log.Printf("%d remaining unprocessed sources", len(db.UnprocessedSources))
+
+		if len(db.UnprocessedSources) == 0 {
+			if err := saveDatabase(); err != nil {
+				log.Printf("%+v", errors.Wrap(err, "err saving database"))
+			}
+		}
 	}
 }
 
@@ -201,6 +207,8 @@ func serveSite(c *cli.Context) error {
 	} else {
 		log.Println("No admin password set, interface disabled.")
 	}
+
+	http.HandleFunc("/upload", handleFileUpload)
 	http.Handle("/", http.FileServer(http.Dir("static")))
 
 	// Launch 4 source workers

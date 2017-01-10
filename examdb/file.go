@@ -10,16 +10,12 @@ import (
 	"path"
 	"strings"
 
-	"github.com/alecthomas/units"
 	"github.com/d4l3k/exams/config"
 	"github.com/d4l3k/exams/util"
 	"github.com/pkg/errors"
 )
 
 var (
-	// MaxFileSize is the max size of a file that we'll handle.
-	MaxFileSize = int64(10 * units.MB)
-
 	// ExamLabels are all the possible labels that a file can fall under.
 	ExamLabels = []string{
 		"Final",
@@ -100,7 +96,7 @@ func (f *File) ComputeHash() error {
 		return err
 	}
 	defer source.Close()
-	if _, err := io.Copy(hasher, io.LimitReader(source, MaxFileSize)); err != nil {
+	if _, err := io.Copy(hasher, io.LimitReader(source, config.MaxFileSize)); err != nil {
 		return err
 	}
 	f.Hash = hex.EncodeToString(hasher.Sum(nil))

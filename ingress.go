@@ -34,7 +34,7 @@ func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
 		if !courseRegex.Match(part) {
 			continue
 		}
-		db.AddCourse(w, string(part))
+		db.AddCourse(w, string(part), "")
 	}
 
 	doc, err := goquery.NewDocument("https://courses.students.ubc.ca/cs/main?dept=CPSC&pname=subjarea&req=1&tname=subjareas")
@@ -42,11 +42,14 @@ func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	doc.Find("#mainTable a").Each(func(_ int, s *goquery.Selection) {
-		linkTitle := strings.ToLower(strings.TrimSpace(s.Text()))
+	doc.Find("#mainTable tr").Each(func(_ int, s *goquery.Selection) {
+		tds := s.Find("td")
+		link := tds.Find("a")
+		linkTitle := strings.ToLower(strings.TrimSpace(link.Text()))
 		if strings.HasPrefix(linkTitle, "cpsc ") {
 			course := "cs" + linkTitle[5:]
-			db.AddCourse(w, course)
+			desc := strings.TrimSpace(tds.Eq(1).Text())
+			db.AddCourse(w, course, desc)
 		}
 	})
 

@@ -20,7 +20,7 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
 	for _, file := range db.PotentialFiles {
 		if !file.NotAnExam {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s</a> %.0f</li>`, file.Hash, file.Source, file.Score)
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
 		}
 	}
 	fmt.Fprint(w, "</ul>")
@@ -28,7 +28,7 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
 	for _, file := range db.PotentialFiles {
 		if file.NotAnExam {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s</a></li>`, file.Hash, file.Source)
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
 		}
 	}
 	fmt.Fprint(w, "</ul>")

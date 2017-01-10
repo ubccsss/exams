@@ -20,8 +20,10 @@ func (g Generator) Database() error {
 	}
 
 	type course struct {
-		Name      string
-		FileCount int
+		Name               string
+		Desc               string
+		FileCount          int
+		PotentialFileCount int
 	}
 	type courses map[string]course
 	type level map[string]courses
@@ -34,7 +36,12 @@ func (g Generator) Database() error {
 			cs = courses{}
 			l[cl] = cs
 		}
-		cs[c.Code] = course{Name: strings.ToUpper(c.Code), FileCount: c.FileCount()}
+		cs[c.Code] = course{
+			Name:               strings.ToUpper(c.Code),
+			Desc:               c.Desc,
+			FileCount:          c.FileCount(),
+			PotentialFileCount: len(g.coursePotentialFiles[c.Code]),
+		}
 	}
 
 	var buf bytes.Buffer
@@ -56,6 +63,7 @@ func (g Generator) Database() error {
 		return err
 	}
 	doc.Find("h1").AddClass("page-header")
+	doc.Find("table").AddClass("table")
 	htmlStr, err := doc.Html()
 	if err != nil {
 		return err

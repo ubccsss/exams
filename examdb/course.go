@@ -3,6 +3,7 @@ package examdb
 // Course represents a single course.
 type Course struct {
 	Code  string              `json:",omitempty"`
+	Desc  string              `json:",omitempty"`
 	Years map[int]*CourseYear `json:",omitempty"`
 }
 
