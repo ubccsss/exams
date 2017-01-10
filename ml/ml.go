@@ -327,12 +327,12 @@ func fileToWordBag(f *examdb.File) ([]string, error) {
 	words = append(words, urlToWords(strings.ToLower(path.Base(f.Path)))...)
 
 	// Add 2-grams
-	//twograms := generateNGrams(words, 2)
+	twograms := generateNGrams(words, 2)
 
 	// Split years out.
 	years := splitDatesOut(words)
 
-	//words = append(words, twograms...)
+	words = append(words, twograms...)
 	words = append(words, years...)
 
 	return words, nil
@@ -412,4 +412,24 @@ func RetrainClassifier(db *examdb.Database, classifierDir string) error {
 	}
 	Classifier = c
 	return nil
+}
+
+// ExtractCourse returns the predicted courseID from the file source.
+func ExtractCourse(db *examdb.Database, f *examdb.File) string {
+	lowerPath := strings.ToLower(f.Source)
+	var bestMatch string
+	var bestMatchScore int
+	for _, c := range db.Courses {
+		for _, id := range c.AlternateIDs() {
+			if !strings.Contains(lowerPath, id) {
+				continue
+			}
+			score := len(id)
+			if score > bestMatchScore {
+				bestMatch = c.Code
+				bestMatchScore = score
+			}
+		}
+	}
+	return bestMatch
 }

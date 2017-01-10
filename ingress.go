@@ -147,7 +147,7 @@ func ingressUBCCSSS(w http.ResponseWriter, r *http.Request) {
 						Name:   s.Text(),
 						Source: href,
 					}
-					if err := db.FetchFileAndSave(&f, examsDir); err != nil {
+					if err := db.FetchFileAndSave(&f); err != nil {
 						http.Error(w, err.Error(), 500)
 						return
 					}

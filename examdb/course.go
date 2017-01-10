@@ -19,3 +19,9 @@ func (c Course) FileCount() int {
 type CourseYear struct {
 	Files []*File `json:",omitempty"`
 }
+
+// AlternateIDs returns the possible ID formats.
+func (c Course) AlternateIDs() []string {
+	number := c.Code[2:]
+	return []string{c.Code, "cpsc" + number, "cpsc-" + number, number}
+}

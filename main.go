@@ -12,23 +12,17 @@ import (
 	"strings"
 	"time"
 
+	"github.com/d4l3k/exams/config"
 	"github.com/d4l3k/exams/examdb"
 	"github.com/d4l3k/exams/generators"
 	"github.com/d4l3k/exams/ml"
+	"github.com/goji/httpauth"
 	"github.com/pkg/errors"
 	"github.com/urfave/cli"
 )
 
-const (
-	staticDir     = "static"
-	examsDir      = staticDir
-	dbFile        = "data/exams.json"
-	templateGlob  = "templates/*"
-	classifierDir = "data/classifiers"
-)
-
 var (
-	templates = template.Must(template.ParseGlob(templateGlob))
+	templates = template.Must(template.ParseGlob(config.TemplateGlob))
 
 	db        examdb.Database
 	generator *generators.Generator
@@ -64,7 +58,7 @@ func unprocessedSourceWorker() {
 }
 
 func loadDatabase() error {
-	raw, err := ioutil.ReadFile(dbFile)
+	raw, err := ioutil.ReadFile(config.DBFile)
 	if err != nil {
 		return err
 	}
@@ -90,7 +84,7 @@ func saveDatabase() error {
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile(dbFile, raw, 0755); err != nil {
+	if err := ioutil.WriteFile(config.DBFile, raw, 0755); err != nil {
 		return err
 	}
 	return nil
@@ -145,6 +139,8 @@ func verifyConsistency() error {
 					f.Name = removeDuplicateWhitespace(strings.Replace(f.Name, pattern, term, -1))
 					log.Printf("Fixed %+v", f)
 				}
+				f.Path = strings.TrimPrefix(f.Path, "static/exams/")
+				f.Path = strings.TrimPrefix(f.Path, "static/")
 				if len(f.Hash) == 0 {
 					if err := f.ComputeHash(); err != nil {
 						return err
@@ -178,24 +174,33 @@ func saveAndGenerate() error {
 }
 
 func serveSite(c *cli.Context) error {
-	if err := ml.LoadOrTrainClassifier(&db, classifierDir); err != nil {
+	if err := ml.LoadOrTrainClassifier(&db, config.ClassifierDir); err != nil {
 		return err
 	}
 
-	http.HandleFunc("/admin/generate", handleGenerate)
-	http.HandleFunc("/admin/potential", handlePotentialFileIndex)
-	http.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
-	http.HandleFunc("/admin/file/", handleFile)
+	secureMux := http.NewServeMux()
 
-	http.HandleFunc("/admin/ml/retrain", handleMLRetrain)
+	secureMux.HandleFunc("/admin/generate", handleGenerate)
+	secureMux.HandleFunc("/admin/potential", handlePotentialFileIndex)
+	secureMux.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
+	secureMux.HandleFunc("/admin/file/", handleFile)
 
-	http.HandleFunc("/admin/ingress/deptcourses", ingressDeptCourses)
-	http.HandleFunc("/admin/ingress/deptfiles", ingressDeptFiles)
-	http.HandleFunc("/admin/ingress/ubccsss", ingressUBCCSSS)
-	http.HandleFunc("/admin/ingress/archive.org", ingressArchiveOrgFiles)
+	secureMux.HandleFunc("/admin/ml/retrain", handleMLRetrain)
 
-	http.HandleFunc("/admin/", handleAdminIndex)
+	secureMux.HandleFunc("/admin/ingress/deptcourses", ingressDeptCourses)
+	secureMux.HandleFunc("/admin/ingress/deptfiles", ingressDeptFiles)
+	secureMux.HandleFunc("/admin/ingress/ubccsss", ingressUBCCSSS)
+	secureMux.HandleFunc("/admin/ingress/archive.org", ingressArchiveOrgFiles)
 
+	secureMux.HandleFunc("/admin/", handleAdminIndex)
+
+	username := c.String("user")
+	password := c.String("pass")
+	if len(password) > 0 {
+		http.Handle("/admin/", httpauth.SimpleBasicAuth(username, password)(secureMux))
+	} else {
+		log.Println("No admin password set, interface disabled.")
+	}
 	http.Handle("/", http.FileServer(http.Dir("static")))
 
 	// Launch 4 source workers
@@ -213,7 +218,7 @@ func main() {
 	}
 
 	var err error
-	generator, err = generators.MakeGenerator(&db, templateGlob, examsDir)
+	generator, err = generators.MakeGenerator(&db, config.TemplateGlob, config.ExamsDir)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,16 +1,87 @@
 # {{ .Code }}
 
+{{ if ne (len .Years) 0 }}
 These are all the exams for {{ .Code }}.
-
-See `handin` at https://fn.lc/hw/{{ .Code }}.
+{{ else }}
+Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
+{{ end }}
 
 {{ range $key, $value := .Years }}
+{{ if ne (len $value.Files) 0 }}
 {{ if eq $key 0 }}
 ## Undated
 {{ else }}
 ## {{ $key }}
 {{ end }}
 {{ range $file := $value.Files }}
-* [{{ $file.Name }}](/{{ $file.Path}})
+* [{{ $file.Name }}](/{{ $file.Path}}) {{ $file.Term }}
 {{ end }}
 {{ end }}
+{{ end }}
+
+{{ if ne (len .PotentialFiles) 0 }}
+## Other Possible Files
+
+These are files that we've automatically discovered and think might be exams but
+haven't gotten around to indexing them.
+
+{{ range $file := .PotentialFiles }}
+* [{{ $file.Source }}]({{$file.Source}})
+{{ end }}
+
+{{ end }}
+
+## Upload
+
+<style>input#shouldbeempty{display:none;}</style>
+<form method="POST" action="/admin/upload?course={{.Code}}">
+  <div class="form-group">
+    <label for="name">File Type</label>
+    <br>
+    <select id="name" size="16">
+      <option>Final</option>
+      <option>Final (Solution)</option>
+      <option>Sample Final</option>
+      <option>Sample Final (Solution)</option>
+      <option>Midterm</option>
+      <option>Midterm (Solution)</option>
+      <option>Sample Midterm</option>
+      <option>Sample Midterm (Solution)</option>
+      <option>Midterm 1</option>
+      <option>Midterm 1 (Solution)</option>
+      <option>Sample Midterm 1</option>
+      <option>Sample Midterm 1 (Solution)</option>
+      <option>Midterm 2</option>
+      <option>Midterm 2 (Solution)</option>
+      <option>Sample Midterm 2</option>
+      <option>Sample Midterm 2 (Solution)</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="year">Year</label>
+    <p class="help-block">Year is the year that happens during Term 1. A final
+    from Sep 2016 or Jan 2017 would be 2016.</p>
+    <input type="number" class="form-control" id="year" placeholder="Year">
+  </div>
+  <div class="form-group">
+    <label for="term">Term</label>
+    <br>
+    <select id="term" size="3">
+      <option>W1</option>
+      <option>W2</option>
+      <option>S</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exam">File</label>
+    <input type="file" id="exam">
+  </div>
+  <input type="text" id="shouldbeempty">
+  <button type="submit" class="btn btn-default">Upload</button>
+</form>
+
+
+## Other Resources
+
+See `handin` at https://fn.lc/hw/{{ .Code }}.
+

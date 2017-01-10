@@ -8,6 +8,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/d4l3k/exams/examdb"
+	"github.com/d4l3k/exams/ml"
 	"github.com/russross/blackfriday"
 )
 
@@ -18,13 +19,23 @@ func (g Generator) Course(c examdb.Course) error {
 		return err
 	}
 
+	data := struct {
+		examdb.Course
+		PotentialFiles []*examdb.File
+	}{
+		Course:         c,
+		PotentialFiles: g.coursePotentialFiles[c.Code],
+	}
+
 	var buf bytes.Buffer
-	if err := g.templates.ExecuteTemplate(&buf, "course.md", c); err != nil {
+	if err := g.templates.ExecuteTemplate(&buf, "course.md", data); err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile(path.Join(dir, "index.md"), buf.Bytes(), 0755); err != nil {
-		return err
-	}
+	/*
+		if err := ioutil.WriteFile(path.Join(dir, "index.md"), buf.Bytes(), 0755); err != nil {
+			return err
+		}
+	*/
 	html := blackfriday.MarkdownCommon(buf.Bytes())
 	buf.Reset()
 	if _, err := buf.Write(html); err != nil {
@@ -44,4 +55,17 @@ func (g Generator) Course(c examdb.Course) error {
 		return err
 	}
 	return nil
+}
+
+func (g *Generator) indexCoursePotentialFiles() {
+	m := map[string][]*examdb.File{}
+	for _, f := range g.db.PotentialFiles {
+		if f.NotAnExam {
+			continue
+		}
+
+		predicted := ml.ExtractCourse(g.db, f)
+		m[predicted] = append(m[predicted], f)
+	}
+	g.coursePotentialFiles = m
 }

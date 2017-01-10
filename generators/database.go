@@ -41,9 +41,11 @@ func (g Generator) Database() error {
 	if err := g.templates.ExecuteTemplate(&buf, "index.md", l); err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile(path.Join(dir, "index.md"), buf.Bytes(), 0755); err != nil {
-		return err
-	}
+	/*
+		if err := ioutil.WriteFile(path.Join(dir, "index.md"), buf.Bytes(), 0755); err != nil {
+			return err
+		}
+	*/
 	html := blackfriday.MarkdownCommon(buf.Bytes())
 	buf.Reset()
 	if _, err := buf.Write(html); err != nil {

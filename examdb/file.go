@@ -7,9 +7,11 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 
 	"github.com/alecthomas/units"
+	"github.com/d4l3k/exams/config"
 	"github.com/d4l3k/exams/util"
 	"github.com/pkg/errors"
 )
@@ -59,13 +61,18 @@ type File struct {
 	Year      int     `json:",omitempty"`
 }
 
+// PathOnDisk returns the path to the file on disk.
+func (f *File) PathOnDisk() string {
+	return path.Join(config.ExamsDir, f.Path)
+}
+
 // Reader opens the file either over HTTP or from disk and returns an
 // io.ReadCloser which needs to be closed by the caller.
 func (f *File) Reader() (io.ReadCloser, error) {
 	var source io.ReadCloser
 	if len(f.Path) > 0 {
 		var err error
-		source, err = os.Open(f.Path)
+		source, err = os.Open(f.PathOnDisk())
 		if err != nil {
 			return nil, err
 		}

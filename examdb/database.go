@@ -230,7 +230,7 @@ func (db *Database) AddPotentialFiles(w io.Writer, files []*File) {
 }
 
 // FetchFileAndSave fetches the file and saves it to a directory.
-func (db *Database) FetchFileAndSave(file *File, examsDir string) error {
+func (db *Database) FetchFileAndSave(file *File) error {
 	resp, err := file.Reader()
 	if err != nil {
 		return err
@@ -241,7 +241,7 @@ func (db *Database) FetchFileAndSave(file *File, examsDir string) error {
 		filename = file.Path
 	}
 	base := path.Base(filename)
-	dir := fmt.Sprintf("%s/%s/%d", examsDir, file.Course, file.Year)
+	dir := fmt.Sprintf("%s/%d", file.Course, file.Year)
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return err
 	}
@@ -250,12 +250,12 @@ func (db *Database) FetchFileAndSave(file *File, examsDir string) error {
 		if i > 0 {
 			attempt = incrementFileName(attempt)
 		}
-		filepath := path.Join(dir, attempt)
-		if _, err := os.Stat(filepath); !os.IsNotExist(err) {
-			f2 := db.FindFileByPath(filepath)
+		file.Path = path.Join(dir, attempt)
+		if _, err := os.Stat(file.PathOnDisk()); !os.IsNotExist(err) {
+			f2 := db.FindFileByPath(file.Path)
 			if f2 == nil || f2.Hash != file.Hash {
 				// One final check in case something became inconsistent.
-				f3 := File{Path: filepath}
+				f3 := File{Path: file.Path}
 				if err := f3.ComputeHash(); err != nil {
 					return err
 				}
@@ -264,11 +264,10 @@ func (db *Database) FetchFileAndSave(file *File, examsDir string) error {
 				}
 			}
 		}
-		file.Path = filepath
 		break
 	}
 	raw, _ := ioutil.ReadAll(resp)
-	if err := ioutil.WriteFile(file.Path, raw, 0755); err != nil {
+	if err := ioutil.WriteFile(file.PathOnDisk(), raw, 0755); err != nil {
 		return err
 	}
 	return db.AddFile(file)

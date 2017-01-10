@@ -10,5 +10,5 @@ You can find our collection of CPSC exams and quizzes here. They’re sorted by 
 {{ range $level, $courses := . }}
 ## {{$level}}
 {{ range $cid, $c := $courses }}
-[{{$c.Name}} ({{$c.FileCount}})](./{{$cid}}/) {{end}}
+* [{{$c.Name}} {{ if ne $c.FileCount 0 }}({{$c.FileCount}}){{end}}](./{{$cid}}/) {{end}}
 {{ end }}

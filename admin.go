@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/d4l3k/exams/config"
 	"github.com/d4l3k/exams/examdb"
 	"github.com/d4l3k/exams/ml"
 	"github.com/d4l3k/exams/util"
@@ -86,7 +87,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), 500)
 			return
 		}
-		if err := db.FetchFileAndSave(file, examsDir); err != nil {
+		if err := db.FetchFileAndSave(file); err != nil {
 			http.Error(w, err.Error(), 500)
 			return
 		}
@@ -132,12 +133,11 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		meta.Course = file.Course
 	}
 
-	lowerPath := strings.ToLower(file.Source)
-	for c := range db.Courses {
-		if strings.Contains(lowerPath, c) {
-			meta.Course = c
-		}
+	if len(meta.Course) == 0 {
+		meta.Course = ml.ExtractCourse(&db, file)
 	}
+
+	lowerPath := strings.ToLower(file.Source)
 	years := util.YearRegexp.FindAllString(lowerPath, -1)
 	if len(years) > 0 {
 		meta.Year = years[len(years)-1]
@@ -218,7 +218,7 @@ func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleMLRetrain(w http.ResponseWriter, r *http.Request) {
-	if err := ml.RetrainClassifier(&db, classifierDir); err != nil {
+	if err := ml.RetrainClassifier(&db, config.ClassifierDir); err != nil {
 		handleErr(w, err)
 		return
 	}
