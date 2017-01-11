@@ -9,12 +9,14 @@ These are all the exams for {{ .Code }}.
 Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
 {{ end }}
 
-{{ range $key, $value := .Years }}
+{{ $years := .Years}}
+{{ range $key, $year := .YearSections }}
+{{ $value := index $years $year }}
 {{ if ne (len $value.Files) 0 }}
-{{ if eq $key 0 }}
+{{ if eq $year 0 }}
 ## Undated
 {{ else }}
-## {{ $key }}
+## {{ $year }}
 {{ end }}
 {{ range $file := $value.Files }}
 * [{{ $file.Name }}](/{{ $file.Path}}) {{ $file.Term }}

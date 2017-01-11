@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"sort"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/d4l3k/exams/examdb"
@@ -21,11 +22,18 @@ func (g Generator) Course(c examdb.Course) error {
 
 	data := struct {
 		examdb.Course
+		YearSections   []int
 		PotentialFiles []*examdb.File
 	}{
 		Course:         c,
 		PotentialFiles: g.coursePotentialFiles[c.Code],
 	}
+
+	for y := range c.Years {
+		data.YearSections = append(data.YearSections, y)
+	}
+
+	sort.Sort(sort.Reverse(sort.IntSlice(data.YearSections)))
 
 	var buf bytes.Buffer
 	if err := g.templates.ExecuteTemplate(&buf, "course.md", data); err != nil {
