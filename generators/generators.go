@@ -3,8 +3,8 @@ package generators
 import (
 	"html/template"
 
-	"github.com/d4l3k/exams/examdb"
 	"github.com/pkg/errors"
+	"github.com/ubccsss/exams/examdb"
 )
 
 // Generator contains all generators.

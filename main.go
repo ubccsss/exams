@@ -12,12 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/d4l3k/exams/config"
-	"github.com/d4l3k/exams/examdb"
-	"github.com/d4l3k/exams/generators"
-	"github.com/d4l3k/exams/ml"
 	"github.com/goji/httpauth"
 	"github.com/pkg/errors"
+	"github.com/ubccsss/exams/config"
+	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/generators"
+	"github.com/ubccsss/exams/ml"
 	"github.com/urfave/cli"
 )
 

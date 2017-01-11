@@ -8,9 +8,9 @@ import (
 	"sort"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/d4l3k/exams/examdb"
-	"github.com/d4l3k/exams/ml"
 	"github.com/russross/blackfriday"
+	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/ml"
 )
 
 // Course generates a course.

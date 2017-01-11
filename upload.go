@@ -9,8 +9,8 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/d4l3k/exams/config"
-	"github.com/d4l3k/exams/examdb"
+	"github.com/ubccsss/exams/config"
+	"github.com/ubccsss/exams/examdb"
 )
 
 func handleFileUpload(w http.ResponseWriter, r *http.Request) {

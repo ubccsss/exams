@@ -9,10 +9,10 @@ import (
 	"strings"
 
 	"github.com/bbalet/stopwords"
-	"github.com/d4l3k/exams/examdb"
-	"github.com/d4l3k/exams/util"
 	"github.com/jbrukh/bayesian"
 	"github.com/sajari/docconv"
+	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/util"
 )
 
 var yearRegex = regexp.MustCompile("(20|19)\\d{2}")

@@ -6,8 +6,8 @@ import (
 	"os"
 	"sort"
 
-	"github.com/d4l3k/exams/examdb"
 	"github.com/sajari/docconv"
+	"github.com/ubccsss/exams/examdb"
 	"github.com/urfave/cli"
 )
 

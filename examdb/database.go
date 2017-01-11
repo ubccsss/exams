@@ -12,8 +12,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/d4l3k/exams/config"
 	"github.com/pkg/errors"
+	"github.com/ubccsss/exams/config"
 )
 
 // Database stores all of the courses and files.

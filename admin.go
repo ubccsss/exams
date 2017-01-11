@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/d4l3k/exams/config"
-	"github.com/d4l3k/exams/examdb"
-	"github.com/d4l3k/exams/ml"
-	"github.com/d4l3k/exams/util"
+	"github.com/ubccsss/exams/config"
+	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/ml"
+	"github.com/ubccsss/exams/util"
 )
 
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {

@@ -10,9 +10,9 @@ import (
 	"path"
 	"strings"
 
-	"github.com/d4l3k/exams/config"
-	"github.com/d4l3k/exams/util"
 	"github.com/pkg/errors"
+	"github.com/ubccsss/exams/config"
+	"github.com/ubccsss/exams/util"
 )
 
 var (

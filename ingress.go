@@ -16,8 +16,8 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/d4l3k/exams/archive.org"
-	"github.com/d4l3k/exams/examdb"
+	"github.com/ubccsss/exams/archive.org"
+	"github.com/ubccsss/exams/examdb"
 	"github.com/urfave/cli"
 )
 
