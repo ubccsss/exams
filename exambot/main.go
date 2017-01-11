@@ -25,10 +25,10 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/boltdb/bolt"
-	"github.com/d4l3k/exams/exambot/exambotlib"
 	archive "github.com/d4l3k/go-internetarchive"
 	piazza "github.com/d4l3k/piazza-api"
 	"github.com/temoto/robotstxt"
+	"github.com/ubccsss/exams/exambot/exambotlib"
 	"github.com/willf/bloom"
 )
 

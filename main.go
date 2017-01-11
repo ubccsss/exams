@@ -5,10 +5,12 @@ import (
 	"html/template"
 	"io/ioutil"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -216,8 +218,9 @@ func serveSite(c *cli.Context) error {
 		go unprocessedSourceWorker()
 	}
 
-	log.Println("Listening...")
-	return http.ListenAndServe("0.0.0.0:8080", nil)
+	bindAddr := net.JoinHostPort("0.0.0.0", strconv.Itoa(c.Int("port")))
+	log.Printf("Listening on %s...", bindAddr)
+	return http.ListenAndServe(bindAddr, nil)
 }
 
 func main() {

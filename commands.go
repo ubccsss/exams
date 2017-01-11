@@ -14,6 +14,11 @@ func setupCommands() *cli.App {
 			Usage:   "serve the site on :8080",
 			Action:  serveSite,
 			Flags: []cli.Flag{
+				cli.IntFlag{
+					Name:  "port",
+					Value: 8080,
+					Usage: "The port to run the webserver on.",
+				},
 				cli.StringFlag{
 					Name:  "user",
 					Value: "admin",
