@@ -29,8 +29,9 @@ func (g Generator) Course(c examdb.Course) error {
 		PotentialFiles: g.coursePotentialFiles[c.Code],
 	}
 
-	for y := range c.Years {
+	for y, files := range c.Years {
 		data.YearSections = append(data.YearSections, y)
+		sort.Sort(examdb.FileByTerm(files.Files))
 	}
 
 	sort.Sort(sort.Reverse(sort.IntSlice(data.YearSections)))
@@ -53,7 +54,7 @@ func (g Generator) Course(c examdb.Course) error {
 	if err != nil {
 		return err
 	}
-	doc.Find("h1").AddClass("page-header")
+	addStyleClasses(doc)
 	htmlStr, err := doc.Html()
 	if err != nil {
 		return err

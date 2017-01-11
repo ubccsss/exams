@@ -161,6 +161,28 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func handleAdminRemove404(w http.ResponseWriter, r *http.Request) {
+	var filesToRemove []*examdb.File
+	for _, f := range db.PotentialFiles {
+		reader, err := f.Reader()
+		if err != nil {
+			is404 := strings.Contains(err.Error(), "got 404")
+			fmt.Fprintf(w, "%s: %s (Removing %t)\n", f, err, is404)
+			if is404 {
+				filesToRemove = append(filesToRemove, f)
+			}
+		} else {
+			reader.Close()
+		}
+	}
+	for _, f := range filesToRemove {
+		if err := db.RemoveFile(f); err != nil {
+			handleErr(w, err)
+		}
+	}
+	w.Write([]byte("Done."))
+}
+
 func labelsToName(typ, samp, sol string) string {
 	var bits []string
 	for _, class := range []string{samp, typ} {
@@ -183,17 +205,8 @@ func handleGenerate(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Done."))
 }
 
-var indexEndpoints = []string{
-	"/admin/generate",
-	"/admin/potential",
-	"/admin/needfix",
-	"/admin/ml/retrain",
-}
-
 func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
-	for _, url := range indexEndpoints {
-		fmt.Fprintf(w, `<p><a href="%s">%s</a></p>`, url, url)
-	}
+	http.ServeFile(w, r, "templates/admin.html")
 }
 
 func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {

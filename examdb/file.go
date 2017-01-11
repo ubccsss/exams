@@ -77,6 +77,10 @@ func (f *File) Reader() (io.ReadCloser, error) {
 		if err != nil {
 			return nil, err
 		}
+		if req.StatusCode != http.StatusOK {
+			req.Body.Close()
+			return nil, errors.Errorf("expected http.Get(%q).StatusCode to be 200; got %d", f.Source, req.StatusCode)
+		}
 		source = req.Body
 	} else {
 		return nil, errors.Errorf("No source or path for %+v", f)
@@ -144,3 +148,32 @@ func (p FileByName) Less(i, j int) bool {
 	return a < b
 }
 func (p FileByName) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
+
+// FileByTerm attaches the methods of sort.Interface to []*File, sorting in
+// increasing order by name.
+type FileByTerm []*File
+
+func (p FileByTerm) Len() int { return len(p) }
+
+var termOrder = map[string]int{
+	"W1": -3,
+	"W2": -2,
+	"S":  -1,
+}
+
+func (p FileByTerm) Less(i, j int) bool {
+	a := termOrder[p[i].Term]
+	b := termOrder[p[j].Term]
+	if a == b {
+		c := strings.ToLower(p[i].Name)
+		d := strings.ToLower(p[j].Name)
+		if c == d {
+			e := strings.ToLower(p[i].Path)
+			f := strings.ToLower(p[j].Path)
+			return e < f
+		}
+		return c < d
+	}
+	return a < b
+}
+func (p FileByTerm) Swap(i, j int) { p[i], p[j] = p[j], p[i] }

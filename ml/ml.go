@@ -323,17 +323,21 @@ func fileToWordBag(f *examdb.File) ([]string, error) {
 	txt = strings.ToLower(txt)
 	txt = stopwords.CleanString(txt, "en", false)
 	words := urlToWords(txt)
-	words = append(words, urlToWords(strings.ToLower(f.Source))...)
-	words = append(words, urlToWords(strings.ToLower(path.Base(f.Path)))...)
+	if len(f.Source) > 0 {
+		words = append(words, urlToWords(strings.ToLower(f.Source))...)
+	} else if len(f.Path) > 0 {
+		words = append(words, urlToWords(strings.ToLower(path.Base(f.Path)))...)
+	}
 
-	// Add 2-grams
-	twograms := generateNGrams(words, 2)
+	var independentWords []string
+	// Add n-grams
+	independentWords = append(independentWords, generateNGrams(words, 2)...)
+	independentWords = append(independentWords, generateNGrams(words, 3)...)
 
 	// Split years out.
-	years := splitDatesOut(words)
+	independentWords = append(independentWords, splitDatesOut(words)...)
 
-	words = append(words, twograms...)
-	words = append(words, years...)
+	words = append(words, independentWords...)
 
 	return words, nil
 }

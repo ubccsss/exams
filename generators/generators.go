@@ -3,6 +3,7 @@ package generators
 import (
 	"html/template"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/pkg/errors"
 	"github.com/ubccsss/exams/examdb"
 )
@@ -50,4 +51,9 @@ func (g *Generator) All() error {
 		}
 	}
 	return nil
+}
+
+func addStyleClasses(sel *goquery.Document) {
+	sel.Find("h1").AddClass("page-header")
+	sel.Find("table").AddClass("table")
 }

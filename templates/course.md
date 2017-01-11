@@ -18,8 +18,10 @@ Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
 {{ else }}
 ## {{ $year }}
 {{ end }}
-{{ range $file := $value.Files }}
-* [{{ $file.Name }}](/{{ $file.Path}}) {{ $file.Term }}
+| File | Term |
+|------|------|
+{{ range $file := $value.Files -}}
+|[{{ $file.Name }}](/{{ $file.Path}})|{{ $file.Term }}|
 {{ end }}
 {{ end }}
 {{ end }}

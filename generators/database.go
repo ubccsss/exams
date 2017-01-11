@@ -62,8 +62,7 @@ func (g Generator) Database() error {
 	if err != nil {
 		return err
 	}
-	doc.Find("h1").AddClass("page-header")
-	doc.Find("table").AddClass("table")
+	addStyleClasses(doc)
 	htmlStr, err := doc.Html()
 	if err != nil {
 		return err

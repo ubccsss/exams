@@ -191,6 +191,7 @@ func serveSite(c *cli.Context) error {
 	secureMux.HandleFunc("/admin/generate", handleGenerate)
 	secureMux.HandleFunc("/admin/potential", handlePotentialFileIndex)
 	secureMux.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
+	secureMux.HandleFunc("/admin/remove404", handleAdminRemove404)
 	secureMux.HandleFunc("/admin/file/", handleFile)
 
 	secureMux.HandleFunc("/admin/ml/retrain", handleMLRetrain)
