@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/ubccsss/exams/config"
 	"github.com/ubccsss/exams/examdb"
@@ -143,13 +144,13 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		meta.Year = years[len(years)-1]
 	}
 
-	typ, samp, sol, termClass, err := ml.Classifier.Classify(file)
+	classes, err := ml.DefaultGoogleClassifier.Classify(file)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	meta.DetectedName = labelsToName(string(typ), string(samp), string(sol))
-	meta.DetectedTerm = string(termClass)
+	meta.DetectedName = labelsToName(classes["type"], classes["sample"], classes["solution"])
+	meta.DetectedTerm = classes["term"]
 
 	if len(meta.Term) == 0 {
 		meta.Term = meta.DetectedTerm
@@ -162,24 +163,41 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleAdminRemove404(w http.ResponseWriter, r *http.Request) {
-	var filesToRemove []*examdb.File
-	for _, f := range db.PotentialFiles {
-		reader, err := f.Reader()
-		if err != nil {
-			is404 := strings.Contains(err.Error(), "got 404")
-			fmt.Fprintf(w, "%s: %s (Removing %t)\n", f, err, is404)
-			if is404 {
-				filesToRemove = append(filesToRemove, f)
+	const workers = 8
+
+	fileChan := make(chan *examdb.File)
+
+	go func() {
+		files := make([]*examdb.File, len(db.PotentialFiles))
+		copy(files, db.PotentialFiles)
+		for _, f := range files {
+			fileChan <- f
+		}
+		close(fileChan)
+	}()
+
+	var wg sync.WaitGroup
+	for i := 0; i < workers; i++ {
+		wg.Add(1)
+		go func() {
+			for f := range fileChan {
+				reader, err := f.Reader()
+				if err != nil {
+					is404 := strings.Contains(err.Error(), "got 404")
+					fmt.Fprintf(w, "%s: %s (Removing %t)\n", f, err, is404)
+					if is404 {
+						if err := db.RemoveFile(f); err != nil {
+							handleErr(w, err)
+						}
+					}
+					continue
+				}
+				reader.Close()
 			}
-		} else {
-			reader.Close()
-		}
+			wg.Done()
+		}()
 	}
-	for _, f := range filesToRemove {
-		if err := db.RemoveFile(f); err != nil {
-			handleErr(w, err)
-		}
-	}
+	wg.Wait()
 	w.Write([]byte("Done."))
 }
 
@@ -232,6 +250,19 @@ func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 
 func handleMLRetrain(w http.ResponseWriter, r *http.Request) {
 	if err := ml.RetrainClassifier(&db, config.ClassifierDir); err != nil {
+		handleErr(w, err)
+		return
+	}
+	w.Write([]byte("Done."))
+}
+
+func handleMLRetrainGoogle(w http.ResponseWriter, r *http.Request) {
+	model, err := ml.MakeGoogleClassifier()
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+	if err := model.Train(&db); err != nil {
 		handleErr(w, err)
 		return
 	}

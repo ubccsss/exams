@@ -7,6 +7,7 @@ import (
 	"path"
 	"regexp"
 	"strings"
+	"sync"
 
 	"github.com/bbalet/stopwords"
 	"github.com/jbrukh/bayesian"
@@ -87,9 +88,9 @@ func termClassFromTerm(term string) bayesian.Class {
 	return ""
 }
 
-// DocumentClassifier can classify a document into type, sample and solution
+// BayesianClassifier can classify a document into type, sample and solution
 // classes.
-type DocumentClassifier struct {
+type BayesianClassifier struct {
 	TypeClassifier     *bayesian.Classifier
 	SampleClassifier   *bayesian.Classifier
 	SolutionClassifier *bayesian.Classifier
@@ -97,8 +98,8 @@ type DocumentClassifier struct {
 }
 
 // MakeDocumentClassifier trains a document classifier with all files in the DB.
-func MakeDocumentClassifier() *DocumentClassifier {
-	d := &DocumentClassifier{
+func MakeDocumentClassifier() *BayesianClassifier {
+	d := &BayesianClassifier{
 		TypeClassifier:     bayesian.NewClassifier(TypeClasses...),
 		SampleClassifier:   bayesian.NewClassifier(SampleClasses...),
 		SolutionClassifier: bayesian.NewClassifier(SolutionClasses...),
@@ -116,7 +117,7 @@ const (
 )
 
 // Load loads a classifier from a directory.
-func (d *DocumentClassifier) Load(dir string) error {
+func (d *BayesianClassifier) Load(dir string) error {
 	var err error
 	d.TypeClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, TypeClassifierFile))
 	if err != nil {
@@ -138,7 +139,7 @@ func (d *DocumentClassifier) Load(dir string) error {
 }
 
 // Save saves a classifier to a directory.
-func (d DocumentClassifier) Save(dir string) error {
+func (d BayesianClassifier) Save(dir string) error {
 	if err := d.TypeClassifier.WriteToFile(path.Join(dir, TypeClassifierFile)); err != nil {
 		return err
 	}
@@ -154,8 +155,54 @@ func (d DocumentClassifier) Save(dir string) error {
 	return nil
 }
 
+type fileWords struct {
+	*examdb.File
+	words []string
+}
+
+func filesToWordBags(files []*examdb.File) (<-chan fileWords, <-chan error) {
+	const workers = 8
+	var wg sync.WaitGroup
+
+	fChan := make(chan *examdb.File)
+	bagChan := make(chan fileWords, 1)
+	errChan := make(chan error, 1)
+
+	go func() {
+		for _, f := range files {
+			fChan <- f
+		}
+		close(fChan)
+	}()
+
+	for i := 0; i < workers; i++ {
+		wg.Add(1)
+		go func() {
+			for f := range fChan {
+				words, err := fileToWordBag(f)
+				if err != nil {
+					errChan <- err
+					close(bagChan)
+					close(errChan)
+					break
+				}
+				bagChan <- fileWords{File: f, words: words}
+			}
+			wg.Done()
+		}()
+	}
+
+	go func() {
+		wg.Wait()
+		close(bagChan)
+		close(errChan)
+	}()
+
+	return bagChan, errChan
+}
+
 // Train trains a classifier from the database.
-func (d DocumentClassifier) Train(db *examdb.Database) error {
+func (d BayesianClassifier) Train(db *examdb.Database) error {
 	log.Println("Training document classifier...")
 	documents := 0
 
@@ -167,18 +214,6 @@ func (d DocumentClassifier) Train(db *examdb.Database) error {
 				if f.NotAnExam {
 					continue
 				}
-				/*
-					var found bool
-					for _, l := range examdb.ExamLabels {
-						if l == f.Name {
-							found = true
-							break
-						}
-					}
-					if !found {
-						continue
-					}
-				*/
 
 				files = append(files, f)
 			}
@@ -194,12 +229,9 @@ func (d DocumentClassifier) Train(db *examdb.Database) error {
 	trainFiles := files[:numTest]
 	testFiles := files[numTest:]
 
-	for _, f := range trainFiles {
-		words, err := fileToWordBag(f)
-		if err != nil {
-			return err
-		}
-
+	fileWordsChan, errChan := filesToWordBags(trainFiles)
+	for f := range fileWordsChan {
+		words := f.words
 		if typeClass := typeClassFromLabel(f.Name); typeClass != "" {
 			d.TypeClassifier.Learn(words, typeClass)
 		}
@@ -217,6 +249,12 @@ func (d DocumentClassifier) Train(db *examdb.Database) error {
 		}
 	}
 
+	for err := range errChan {
+		if err != nil {
+			return err
+		}
+	}
+
 	/*
 		for _, c := range []*bayesian.Classifier{d.TypeClassifier, d.SolutionClassifier, d.SampleClassifier, d.TermClassifier} {
 			c.ConvertTermsFreqToTfIdf()
@@ -231,20 +269,34 @@ func (d DocumentClassifier) Train(db *examdb.Database) error {
 }
 
 // Classify returns the most likely labels for each function.
-func (d DocumentClassifier) Classify(f *examdb.File) (bayesian.Class, bayesian.Class, bayesian.Class, bayesian.Class, error) {
+func (d BayesianClassifier) Classify(f *examdb.File) (map[string]string, error) {
 	words, err := fileToWordBag(f)
 	if err != nil {
-		return "", "", "", "", err
+		return nil, err
 	}
+
+	typ, sample, solution, term := d.classifyWords(words)
+	return map[string]string{
+		"type":     string(typ),
+		"sample":   string(sample),
+		"solution": string(solution),
+		"term":     string(term),
+	}, nil
+}
+
+func (d BayesianClassifier) classifyWords(words []string) (bayesian.Class, bayesian.Class, bayesian.Class, bayesian.Class) {
 	_, typeInx, _ := d.TypeClassifier.LogScores(words)
 	_, sampleInx, _ := d.SampleClassifier.LogScores(words)
 	_, solutionInx, _ := d.SolutionClassifier.LogScores(words)
 	_, termInx, _ := d.TermClassifier.LogScores(words)
-	return TypeClasses[typeInx], SampleClasses[sampleInx], SolutionClasses[solutionInx], TermClasses[termInx], nil
+	return TypeClasses[typeInx],
+		SampleClasses[sampleInx],
+		SolutionClasses[solutionInx],
+		TermClasses[termInx]
 }
 
 // Test computes the test error and prints it.
-func (d DocumentClassifier) Test(trainFiles, testFiles []*examdb.File, db *examdb.Database) error {
+func (d BayesianClassifier) Test(trainFiles, testFiles []*examdb.File, db *examdb.Database) error {
 	if err := d.runTest("TRAINING", trainFiles, db); err != nil {
 		return err
 	}
@@ -254,40 +306,39 @@ func (d DocumentClassifier) Test(trainFiles, testFiles []*examdb.File, db *examd
 	return nil
 }
 
-func (d DocumentClassifier) runTest(label string, files []*examdb.File, db *examdb.Database) error {
+func (d BayesianClassifier) runTest(label string, files []*examdb.File, db *examdb.Database) error {
 	log.Printf("[%s] Testing document classifier...", label)
 
 	documents := 0
 	var typeRight, typeTotal, sampleRight, sampleTotal, solutionRight, solutionTotal, termRight, termTotal int
-	for _, f := range files {
-		words, err := fileToWordBag(f)
-		if err != nil {
-			return err
-		}
+
+	fileWordsChan, errChan := filesToWordBags(files)
+	for f := range fileWordsChan {
+		words := f.words
+		predType, predSample, predSolution, predTerm := d.classifyWords(words)
 
 		if typeClass := typeClassFromLabel(f.Name); typeClass != "" {
-			_, inx, _ := d.TypeClassifier.LogScores(words)
 			typeTotal++
-			if TypeClasses[inx] == typeClass {
+			if predType == typeClass {
 				typeRight++
 			}
 		}
+
 		sampleClass := sampleClassFromLabel(f.Name)
-		_, inx, _ := d.SampleClassifier.LogScores(words)
 		sampleTotal++
-		if SampleClasses[inx] == sampleClass {
+		if predSample == sampleClass {
 			sampleRight++
 		}
+
 		solutionClass := solutionClassFromLabel(f.Name)
-		_, inx, _ = d.SolutionClassifier.LogScores(words)
 		solutionTotal++
-		if SolutionClasses[inx] == solutionClass {
+		if predSolution == solutionClass {
 			solutionRight++
 		}
+
 		if termClass := termClassFromTerm(f.Term); termClass != "" {
-			_, inx, _ := d.TermClassifier.LogScores(words)
 			termTotal++
-			if TermClasses[inx] == termClass {
+			if predTerm == termClass {
 				termRight++
 			}
 		}
@@ -295,6 +346,12 @@ func (d DocumentClassifier) runTest(label string, files []*examdb.File, db *exam
 		documents++
 		if documents%100 == 0 {
 			log.Printf("... tested on %d", documents)
+		}
+	}
+
+	for err := range errChan {
+		if err != nil {
+			return err
 		}
 	}
 
@@ -310,7 +367,7 @@ func (d DocumentClassifier) runTest(label string, files []*examdb.File, db *exam
 	return nil
 }
 
-func fileToWordBag(f *examdb.File) ([]string, error) {
+func fileContentWords(f *examdb.File) ([]string, error) {
 	in, err := f.Reader()
 	if err != nil {
 		return nil, err
@@ -322,7 +379,14 @@ func fileToWordBag(f *examdb.File) ([]string, error) {
 	}
 	txt = strings.ToLower(txt)
 	txt = stopwords.CleanString(txt, "en", false)
-	words := urlToWords(txt)
+	return urlToWords(txt), nil
+}
+
+func fileToWordBag(f *examdb.File) ([]string, error) {
+	words, err := fileContentWords(f)
+	if err != nil {
+		return nil, err
+	}
 	if len(f.Source) > 0 {
 		words = append(words, urlToWords(strings.ToLower(f.Source))...)
 	} else if len(f.Path) > 0 {
@@ -331,8 +395,8 @@ func fileToWordBag(f *examdb.File) ([]string, error) {
 
 	var independentWords []string
 	// Add n-grams
-	independentWords = append(independentWords, generateNGrams(words, 2)...)
-	independentWords = append(independentWords, generateNGrams(words, 3)...)
+	//independentWords = append(independentWords, generateNGrams(words, 2)...)
+	//independentWords = append(independentWords, generateNGrams(words, 3)...)
 
 	// Split years out.
 	independentWords = append(independentWords, splitDatesOut(words)...)
@@ -384,21 +448,31 @@ func generateNGrams(words []string, n int) []string {
 }
 
 // Classifier is the default classifier set by LoadOrTrainClassifier.
-var Classifier *DocumentClassifier
+var (
+	DefaultClassifier       *BayesianClassifier
+	DefaultGoogleClassifier *GoogleClassifier
+)
 
 // LoadOrTrainClassifier loads or trains the classifier.
 func LoadOrTrainClassifier(db *examdb.Database, classifierDir string) error {
-	if Classifier != nil {
+	var err error
+	DefaultGoogleClassifier, err = MakeGoogleClassifier()
+	if err != nil {
+		return err
+	}
+
+	if DefaultClassifier != nil {
 		return nil
 	}
 	log.Println("Loading classifier...")
-	Classifier = MakeDocumentClassifier()
-	if err := Classifier.Load(classifierDir); err != nil {
+	DefaultClassifier = MakeDocumentClassifier()
+	if err := DefaultClassifier.Load(classifierDir); err != nil {
 		log.Printf("Failed to load classifier: %s", err)
 		if err := RetrainClassifier(db, classifierDir); err != nil {
 			return err
 		}
 	}
+
 	return nil
 }
 
@@ -414,7 +488,7 @@ func RetrainClassifier(db *examdb.Database, classifierDir string) error {
 	if err := c.Save(classifierDir); err != nil {
 		return err
 	}
-	Classifier = c
+	DefaultClassifier = c
 	return nil
 }
 

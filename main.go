@@ -195,6 +195,7 @@ func serveSite(c *cli.Context) error {
 	secureMux.HandleFunc("/admin/file/", handleFile)
 
 	secureMux.HandleFunc("/admin/ml/retrain", handleMLRetrain)
+	secureMux.HandleFunc("/admin/ml/retraingoogle", handleMLRetrainGoogle)
 
 	secureMux.HandleFunc("/admin/ingress/deptcourses", ingressDeptCourses)
 	secureMux.HandleFunc("/admin/ingress/deptfiles", ingressDeptFiles)
