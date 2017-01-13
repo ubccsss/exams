@@ -6,12 +6,13 @@ import (
 	"os"
 	"path"
 	"regexp"
+	"strconv"
 	"strings"
 	"sync"
 
 	"github.com/bbalet/stopwords"
+	"github.com/d4l3k/docconv"
 	"github.com/jbrukh/bayesian"
-	"github.com/sajari/docconv"
 	"github.com/ubccsss/exams/examdb"
 	"github.com/ubccsss/exams/util"
 )
@@ -367,23 +368,23 @@ func (d BayesianClassifier) runTest(label string, files []*examdb.File, db *exam
 	return nil
 }
 
-func fileContentWords(f *examdb.File) ([]string, error) {
+func fileContentWords(f *examdb.File) ([]string, map[string]string, error) {
 	in, err := f.Reader()
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	defer in.Close()
-	txt, _, err := docconv.ConvertPDF(in)
+	txt, meta, err := docconv.ConvertPDF(in)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	txt = strings.ToLower(txt)
 	txt = stopwords.CleanString(txt, "en", false)
-	return urlToWords(txt), nil
+	return urlToWords(txt), meta, nil
 }
 
 func fileToWordBag(f *examdb.File) ([]string, error) {
-	words, err := fileContentWords(f)
+	words, _, err := fileContentWords(f)
 	if err != nil {
 		return nil, err
 	}
@@ -510,4 +511,18 @@ func ExtractCourse(db *examdb.Database, f *examdb.File) string {
 		}
 	}
 	return bestMatch
+}
+
+func ExtractYear(f *examdb.File) int {
+	if f.Year > 0 {
+		return f.Year
+	}
+
+	lowerPath := strings.ToLower(f.Source)
+	years := util.YearRegexp.FindAllString(lowerPath, -1)
+	if len(years) > 0 {
+		n, _ := strconv.Atoi(years[len(years)-1])
+		return n
+	}
+	return 0
 }

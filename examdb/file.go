@@ -55,6 +55,11 @@ type File struct {
 	NotAnExam bool    `json:",omitempty"`
 	Course    string  `json:",omitempty"`
 	Year      int     `json:",omitempty"`
+
+	LastResponseCode int `json:",omitempty"`
+
+	// Inferred is the results that are inferred via ML.
+	Inferred *File `json:",omitempty"`
 }
 
 // PathOnDisk returns the path to the file on disk.
@@ -77,6 +82,7 @@ func (f *File) Reader() (io.ReadCloser, error) {
 		if err != nil {
 			return nil, err
 		}
+		f.LastResponseCode = req.StatusCode
 		if req.StatusCode != http.StatusOK {
 			req.Body.Close()
 			return nil, errors.Errorf("expected http.Get(%q).StatusCode to be 200; got %d", f.Source, req.StatusCode)

@@ -4,14 +4,17 @@ import (
 	"context"
 	"encoding/csv"
 	"fmt"
+	"io"
 	"log"
 	"path"
 	"strings"
 	"sync"
 
 	"golang.org/x/oauth2/google"
+	"golang.org/x/time/rate"
 	prediction "google.golang.org/api/prediction/v1.6"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/ubccsss/exams/examdb"
 
 	"cloud.google.com/go/storage"
@@ -24,25 +27,49 @@ const (
 
 type fileClassLabeler func(*examdb.File) (string, bool)
 
+const (
+	IsExam    = "yes"
+	IsNotExam = "no"
+)
+
 var fileClassifiers = map[string]fileClassLabeler{
 	"type": func(f *examdb.File) (string, bool) {
+		if f.NotAnExam {
+			return "", false
+		}
 		class := typeClassFromLabel(f.Name)
 		return string(class), len(class) > 0
 	},
 	"solution": func(f *examdb.File) (string, bool) {
+		if f.NotAnExam {
+			return "", false
+		}
 		return string(solutionClassFromLabel(f.Name)), true
 	},
 	"sample": func(f *examdb.File) (string, bool) {
+		if f.NotAnExam {
+			return "", false
+		}
 		return string(sampleClassFromLabel(f.Name)), true
 	},
 	"term": func(f *examdb.File) (string, bool) {
+		if f.NotAnExam {
+			return "", false
+		}
 		return string(termClassFromTerm(f.Term)), len(f.Term) > 0
+	},
+	"isexam": func(f *examdb.File) (string, bool) {
+		if f.NotAnExam {
+			return IsNotExam, true
+		}
+		return IsExam, true
 	},
 }
 
 // GoogleClassifier is a ML classifier that uses Google Cloud Prediction.
 type GoogleClassifier struct {
 	Trainedmodels *prediction.TrainedmodelsService
+	Limiter       *rate.Limiter
 }
 
 // MakeGoogleClassifier creates a new classifier.
@@ -54,6 +81,9 @@ func MakeGoogleClassifier() (*GoogleClassifier, error) {
 	predictionService, err := prediction.New(httpClient)
 	return &GoogleClassifier{
 		Trainedmodels: predictionService.Trainedmodels,
+
+		// Google Prediction API allows for 100 requests every 100 seconds.
+		Limiter: rate.NewLimiter(rate.Limit(100/100), 100),
 	}, nil
 }
 
@@ -63,11 +93,24 @@ func fileFeatures(f *examdb.File) ([]string, error) {
 		source = f.Path
 	}
 	source = strings.Join(urlToWords(source), " ")
-	wordBag, err := fileContentWords(f)
+	wordBag, meta, err := fileContentWords(f)
 	if err != nil {
 		return nil, err
 	}
-	return []string{source, strings.Join(wordBag, " ")}, nil
+	features := []string{source, strings.Join(wordBag, " ")}
+	for _, prop := range []string{
+		"Author",
+		"File size",
+		"Pages",
+		"Page size",
+		"CreationDate",
+		"ModDate",
+		"Title",
+	} {
+		featureWords := urlToWords(meta[prop])
+		features = append(features, strings.Join(featureWords, " "))
+	}
+	return features, nil
 }
 
 // Train uploads the data to GCE and trains a Google Cloud Prediction model.
@@ -108,26 +151,36 @@ func (c *GoogleClassifier) Train(db *examdb.Database) error {
 	for _, c := range db.Courses {
 		for _, y := range c.Years {
 			for _, f := range y.Files {
-				if f.NotAnExam {
-					continue
-				}
-
 				files = append(files, f)
 			}
 		}
 	}
 
+	for _, f := range db.PotentialFiles {
+		if f.NotAnExam {
+			files = append(files, f)
+		}
+	}
+
 	count := 0
 	for _, f := range files {
-		features, err := fileFeatures(f)
-		if err != nil {
-			return err
-		}
+		classes := map[string]string{}
 		for classifier, fun := range fileClassifiers {
 			class, ok := fun(f)
 			if !ok {
 				continue
 			}
+			classes[classifier] = class
+		}
+		if len(classes) == 0 {
+			continue
+		}
+		features, err := fileFeatures(f)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+		for classifier, class := range classes {
 			if err := csvWriters[classifier].Write(append([]string{class}, features...)); err != nil {
 				return err
 			}
@@ -148,6 +201,9 @@ func (c *GoogleClassifier) Train(db *examdb.Database) error {
 	log.Printf("Done uploading. Training model ...")
 
 	for classifier := range fileClassifiers {
+		if err := c.Limiter.Wait(ctx); err != nil {
+			return err
+		}
 		call := c.Trainedmodels.Insert(projectID, &prediction.Insert{
 			Id:                  classifierModelName(classifier),
 			StorageDataLocation: path.Join("exams", fileNames[classifier]),
@@ -182,11 +238,15 @@ func (c *GoogleClassifier) Classify(f *examdb.File) (map[string]string, error) {
 	m := map[string]string{}
 	var mu sync.Mutex
 	var wg sync.WaitGroup
-	for class := range fileClassifiers {
+	ctx := context.Background()
+	classifyInner := func(class string) {
 		wg.Add(1)
-		class := class
 		go func() {
 			defer wg.Done()
+			if err2 := c.Limiter.Wait(ctx); err2 != nil {
+				err = err2
+				return
+			}
 			call := c.Trainedmodels.Predict(projectID, classifierModelName(class), &input)
 			resp, err2 := call.Do()
 			if err2 != nil {
@@ -198,10 +258,39 @@ func (c *GoogleClassifier) Classify(f *examdb.File) (map[string]string, error) {
 			m[class] = resp.OutputLabel
 		}()
 	}
+	classifyInner("isexam")
 	wg.Wait()
 	if err != nil {
 		return nil, err
 	}
+	if m["isexam"] == IsExam {
+		for class := range fileClassifiers {
+			classifyInner(class)
+		}
+		wg.Wait()
+		if err != nil {
+			return nil, err
+		}
+	}
+	log.Printf("m: %+v", m)
 
 	return m, nil
+}
+
+// ReportAccuracy creates a report of how accurate the classifier is.
+func (c *GoogleClassifier) ReportAccuracy(w io.Writer) error {
+	ctx := context.Background()
+	for class := range fileClassifiers {
+		fmt.Fprintf(w, "%s:\n", class)
+		if err := c.Limiter.Wait(ctx); err != nil {
+			return err
+		}
+		call := c.Trainedmodels.Get(projectID, classifierModelName(class))
+		resp, err := call.Do()
+		if err != nil {
+			return err
+		}
+		spew.Fdump(w, resp)
+	}
+	return nil
 }

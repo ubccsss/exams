@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"path"
 	"sort"
@@ -12,7 +13,6 @@ import (
 	"github.com/ubccsss/exams/config"
 	"github.com/ubccsss/exams/examdb"
 	"github.com/ubccsss/exams/ml"
-	"github.com/ubccsss/exams/util"
 )
 
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
@@ -80,8 +80,8 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), 400)
 			return
 		}
-		file.Course = course
 		file.Year = year
+		file.Course = course
 		file.Term = term
 		file.Name = name
 		if err := db.RemoveFile(file); err != nil {
@@ -138,11 +138,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		meta.Course = ml.ExtractCourse(&db, file)
 	}
 
-	lowerPath := strings.ToLower(file.Source)
-	years := util.YearRegexp.FindAllString(lowerPath, -1)
-	if len(years) > 0 {
-		meta.Year = years[len(years)-1]
-	}
+	meta.Year = strconv.Itoa(ml.ExtractYear(file))
 
 	classes, err := ml.DefaultGoogleClassifier.Classify(file)
 	if err != nil {
@@ -254,6 +250,63 @@ func handleMLRetrain(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Write([]byte("Done."))
+}
+
+func handleMLGoogleAccuracy(w http.ResponseWriter, r *http.Request) {
+	if err := ml.DefaultGoogleClassifier.ReportAccuracy(w); err != nil {
+		handleErr(w, err)
+		return
+	}
+}
+
+func skipInfer(f *examdb.File) bool {
+	return f.NotAnExam || (f.Inferred != nil && (len(f.Inferred.Name) > 0 || f.Inferred.NotAnExam))
+}
+
+func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Google Prediction Inferring")
+	log.Printf("Google Prediction Inferring")
+	processed := 0
+	lastInferred := 0
+	for i, f := range db.PotentialFiles {
+		if !f.NotAnExam && skipInfer(f) {
+			lastInferred = i
+		}
+	}
+	for i, f := range db.PotentialFiles[lastInferred:] {
+		if skipInfer(f) {
+			continue
+		}
+
+		classes, err := ml.DefaultGoogleClassifier.Classify(f)
+		if err != nil {
+			fmt.Fprintf(w, "%s: %s\n", f, err)
+			log.Printf("%s: %s\n", f, err)
+			continue
+		}
+
+		inferred := &examdb.File{
+			Name:      labelsToName(classes["type"], classes["sample"], classes["solution"]),
+			Term:      classes["term"],
+			NotAnExam: classes["isexam"] == ml.IsNotExam,
+			Year:      ml.ExtractYear(f),
+			Course:    ml.ExtractCourse(&db, f),
+		}
+
+		log.Printf("%d: inferred %#v", lastInferred+i, inferred)
+
+		f.Inferred = inferred
+
+		processed++
+		if processed%100 == 0 {
+			fmt.Fprintf(w, "... processed %d files\n", processed)
+			log.Printf("... processed %d files", processed)
+		}
+	}
+	if err := saveAndGenerate(); err != nil {
+		handleErr(w, err)
+		return
+	}
 }
 
 func handleMLRetrainGoogle(w http.ResponseWriter, r *http.Request) {
