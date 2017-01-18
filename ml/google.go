@@ -223,7 +223,7 @@ func classifierModelName(classifier string) string {
 }
 
 // Classify returns the most likely labels for each function.
-func (c *GoogleClassifier) Classify(f *examdb.File) (map[string]string, error) {
+func (c *GoogleClassifier) Classify(f *examdb.File, lazy bool) (map[string]string, error) {
 	features, err := fileFeatures(f)
 	if err != nil {
 		return nil, err
@@ -258,13 +258,18 @@ func (c *GoogleClassifier) Classify(f *examdb.File) (map[string]string, error) {
 			m[class] = resp.OutputLabel
 		}()
 	}
-	classifyInner("isexam")
-	wg.Wait()
-	if err != nil {
-		return nil, err
+	if lazy {
+		classifyInner("isexam")
+		wg.Wait()
+		if err != nil {
+			return nil, err
+		}
 	}
-	if m["isexam"] == IsExam {
+	if m["isexam"] == IsExam || !lazy {
 		for class := range fileClassifiers {
+			if lazy && class == "isexam" {
+				continue
+			}
 			classifyInner(class)
 		}
 		wg.Wait()

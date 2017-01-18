@@ -69,7 +69,7 @@ func (g Generator) Course(c examdb.Course) error {
 func (g *Generator) indexCoursePotentialFiles() {
 	m := map[string][]*examdb.File{}
 	for _, f := range g.db.PotentialFiles {
-		if f.NotAnExam {
+		if f.NotAnExam || f.Inferred != nil && f.NotAnExam {
 			continue
 		}
 

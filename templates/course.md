@@ -30,11 +30,24 @@ Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
 ## Other Possible Files
 
 These are files that we've automatically discovered and think might be exams but
-haven't gotten around to indexing them.
+haven't gotten around to indexing them. These labels have been automatically
+assigned using machine learning.
 
-{{ range $file := .PotentialFiles }}
-* [{{ $file.Source }}]({{$file.Source}})
+| File | Year | Term |
+|------|------|------|
+{{ range $file := .PotentialFiles -}}
+{{- if $file.Inferred -}}
+|[{{ $file.Inferred.Name }}]({{$file.Source}})| {{$file.Inferred.Year}} | {{$file.Inferred.Term}}|
+{{end -}}
 {{ end }}
+
+### Pending Machine Learning Labels
+
+{{ range $file := .PotentialFiles -}}
+{{- if not $file.Inferred -}}
+* {{ $file.Source }}
+{{end -}}
+{{end}}
 
 {{ end }}
 

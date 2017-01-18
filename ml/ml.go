@@ -24,7 +24,13 @@ const (
 	Midterm  bayesian.Class = "Midterm"
 	Midterm1 bayesian.Class = "Midterm 1"
 	Midterm2 bayesian.Class = "Midterm 2"
+	Midterm3 bayesian.Class = "Midterm 3"
 	Final    bayesian.Class = "Final"
+	Quiz1    bayesian.Class = "Quiz 1"
+	Quiz2    bayesian.Class = "Quiz 2"
+	Quiz3    bayesian.Class = "Quiz 3"
+	Quiz4    bayesian.Class = "Quiz 4"
+	Quiz5    bayesian.Class = "Quiz 5"
 )
 
 // Sample or not
@@ -47,7 +53,7 @@ const (
 
 // The class orders.
 var (
-	TypeClasses     = []bayesian.Class{Final, Midterm1, Midterm2, Midterm}
+	TypeClasses     = []bayesian.Class{Final, Midterm1, Midterm2, Midterm3, Midterm, Quiz1, Quiz2, Quiz3, Quiz4, Quiz5}
 	SampleClasses   = []bayesian.Class{Sample, Real}
 	SolutionClasses = []bayesian.Class{Solution, Blank}
 	TermClasses     = []bayesian.Class{WinterTerm1, WinterTerm2, SummerTerm}

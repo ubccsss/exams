@@ -119,6 +119,7 @@ var nameReplacements = map[string]string{
 	"Midterm 2 Sample":  "Sample Midterm 2",
 	"Midterm I Sample":  "Sample Midterm 1",
 	"Midterm II Sample": "Sample Midterm 2",
+	"Practice Quiz":     "Sample Quiz",
 }
 
 func verifyConsistency() error {

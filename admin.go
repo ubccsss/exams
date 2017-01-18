@@ -140,7 +140,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 
 	meta.Year = strconv.Itoa(ml.ExtractYear(file))
 
-	classes, err := ml.DefaultGoogleClassifier.Classify(file)
+	classes, err := ml.DefaultGoogleClassifier.Classify(file, false)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -260,25 +260,19 @@ func handleMLGoogleAccuracy(w http.ResponseWriter, r *http.Request) {
 }
 
 func skipInfer(f *examdb.File) bool {
-	return f.NotAnExam || (f.Inferred != nil && (len(f.Inferred.Name) > 0 || f.Inferred.NotAnExam))
+	return f.NotAnExam || (f.Inferred != nil && (len(f.Inferred.Name) > 0 || f.Inferred.NotAnExam)) || (f.LastResponseCode != 200 && f.LastResponseCode != 0)
 }
 
 func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Google Prediction Inferring")
 	log.Printf("Google Prediction Inferring")
 	processed := 0
-	lastInferred := 0
 	for i, f := range db.PotentialFiles {
-		if !f.NotAnExam && skipInfer(f) {
-			lastInferred = i
-		}
-	}
-	for i, f := range db.PotentialFiles[lastInferred:] {
 		if skipInfer(f) {
 			continue
 		}
 
-		classes, err := ml.DefaultGoogleClassifier.Classify(f)
+		classes, err := ml.DefaultGoogleClassifier.Classify(f, true)
 		if err != nil {
 			fmt.Fprintf(w, "%s: %s\n", f, err)
 			log.Printf("%s: %s\n", f, err)
@@ -293,7 +287,7 @@ func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
 			Course:    ml.ExtractCourse(&db, f),
 		}
 
-		log.Printf("%d: inferred %#v", lastInferred+i, inferred)
+		log.Printf("%d: inferred %#v", i, inferred)
 
 		f.Inferred = inferred
 
