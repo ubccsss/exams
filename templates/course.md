@@ -1,3 +1,7 @@
+<style>
+th:first-child { width: 100000px; }
+</style>
+
 # {{ .Code }}
 {{ if ne (len .Desc) 0 }}
 <p><strong>Description:</strong> {{.Desc}}</p>
@@ -37,7 +41,7 @@ assigned using machine learning.
 |------|------|------|
 {{ range $file := .PotentialFiles -}}
 {{- if $file.Inferred -}}
-|[{{ $file.Inferred.Name }}]({{$file.Source}})| {{$file.Inferred.Year}} | {{$file.Inferred.Term}}|
+|[{{ if len $file.Inferred.Name }}{{ $file.Inferred.Name }}{{else}}{{$file.Source}}{{end}}]({{$file.Source}})| {{$file.Inferred.Year}} | {{$file.Inferred.Term}}|
 {{end -}}
 {{ end }}
 

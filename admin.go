@@ -15,24 +15,48 @@ import (
 	"github.com/ubccsss/exams/ml"
 )
 
+func renderAdminHeader(w http.ResponseWriter) {
+	if err := templates.ExecuteTemplate(w, "adminhead.html", nil); err != nil {
+		handleErr(w, err)
+		return
+	}
+}
+
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d</p>", len(db.PotentialFiles), db.ProcessedCount())
-	fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
-	for _, file := range db.PotentialFiles {
-		if !file.NotAnExam {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
-		}
-	}
-	fmt.Fprint(w, "</ul>")
+	renderAdminHeader(w)
 
-	fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
-	for _, file := range db.PotentialFiles {
-		if file.NotAnExam {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
+	notAnExam := 0
+	for _, f := range db.PotentialFiles {
+		if f.NotAnExam {
+			notAnExam++
 		}
 	}
-	fmt.Fprint(w, "</ul>")
+
+	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d, Not An Exam: %d</p>", len(db.PotentialFiles)-notAnExam, db.ProcessedCount()+notAnExam, notAnExam)
+	w.Write([]byte(`
+		<a href="/admin/potential">Unprocessed</a>
+		<a href="/admin/potential?invalid">Not Exams/Invalid</a>`))
+
+	_, showInvalid := r.URL.Query()["invalid"]
+
+	if !showInvalid {
+		fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
+		for _, file := range db.PotentialFiles {
+			if !file.NotAnExam {
+				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
+			}
+		}
+		fmt.Fprint(w, "</ul>")
+	} else {
+		fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
+		for _, file := range db.PotentialFiles {
+			if file.NotAnExam {
+				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
+			}
+		}
+		fmt.Fprint(w, "</ul>")
+	}
 }
 
 func handleFile(w http.ResponseWriter, r *http.Request) {
@@ -177,6 +201,10 @@ func handleAdminRemove404(w http.ResponseWriter, r *http.Request) {
 		wg.Add(1)
 		go func() {
 			for f := range fileChan {
+				if !(f.LastResponseCode == 404 || f.LastResponseCode == 0) {
+					continue
+				}
+
 				reader, err := f.Reader()
 				if err != nil {
 					is404 := strings.Contains(err.Error(), "got 404")
@@ -220,11 +248,18 @@ func handleGenerate(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "templates/admin.html")
+	w.Header().Set("Content-Type", "text/html")
+	renderAdminHeader(w)
+	if err := templates.ExecuteTemplate(w, "admin.html", nil); err != nil {
+		handleErr(w, err)
+		return
+	}
 }
 
 func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
+	renderAdminHeader(w)
+
 	files := db.NeedFix()
 	fmt.Fprintf(w, `<h1>Files that Potentially Need to be Fixed (%d)</h1>
 	<table>

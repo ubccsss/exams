@@ -31,6 +31,23 @@ func setupCommands() *cli.App {
 				},
 			},
 		},
+		{
+			Name:   "indexugrad",
+			Usage:  "saves all top level HTML files to archive.org",
+			Action: indexUGrad,
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "user",
+					Value: "q7w9a",
+					Usage: "ssh username",
+				},
+				cli.StringFlag{
+					Name:  "server",
+					Value: "annacis.ugrad.cs.ubc.ca",
+					Usage: "ssh server",
+				},
+			},
+		},
 		setupEgressCommands(),
 		setupIngressCommands(),
 	}
