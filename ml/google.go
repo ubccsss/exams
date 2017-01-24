@@ -3,6 +3,7 @@ package ml
 import (
 	"context"
 	"encoding/csv"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -115,6 +116,10 @@ func fileFeatures(f *examdb.File) ([]string, error) {
 
 // Train uploads the data to GCE and trains a Google Cloud Prediction model.
 func (c *GoogleClassifier) Train(db *examdb.Database) error {
+	if c == nil {
+		return errors.New("classifier has not been loaded")
+	}
+
 	log.Printf("Uploading to GCE")
 	ctx := context.Background()
 
@@ -224,6 +229,10 @@ func classifierModelName(classifier string) string {
 
 // Classify returns the most likely labels for each function.
 func (c *GoogleClassifier) Classify(f *examdb.File, lazy bool) (map[string]string, error) {
+	if c == nil {
+		return nil, errors.New("classifier has not been loaded")
+	}
+
 	features, err := fileFeatures(f)
 	if err != nil {
 		return nil, err
@@ -284,6 +293,10 @@ func (c *GoogleClassifier) Classify(f *examdb.File, lazy bool) (map[string]strin
 
 // ReportAccuracy creates a report of how accurate the classifier is.
 func (c *GoogleClassifier) ReportAccuracy(w io.Writer) error {
+	if c == nil {
+		return errors.New("classifier has not been loaded")
+	}
+
 	ctx := context.Background()
 	for class := range fileClassifiers {
 		fmt.Fprintf(w, "%s:\n", class)

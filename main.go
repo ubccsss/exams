@@ -184,7 +184,7 @@ func saveAndGenerate() error {
 
 func serveSite(c *cli.Context) error {
 	if err := ml.LoadOrTrainClassifier(&db, config.ClassifierDir); err != nil {
-		return err
+		log.Printf("Failed to load classifier. Classification tasks will not work.: %s", err)
 	}
 
 	secureMux := http.NewServeMux()
