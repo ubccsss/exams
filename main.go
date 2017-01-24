@@ -229,6 +229,8 @@ func serveSite(c *cli.Context) error {
 }
 
 func main() {
+	log.SetFlags(log.Flags() | log.Lshortfile)
+
 	if err := loadDatabase(); err != nil {
 		log.Printf("tried to load database: %s", err)
 	}

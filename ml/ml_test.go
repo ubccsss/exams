@@ -2,6 +2,7 @@ package ml
 
 import (
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/jbrukh/bayesian"
@@ -97,6 +98,26 @@ func TestGenerateNGrams(t *testing.T) {
 		out := generateNGrams(c.words, c.n)
 		if !reflect.DeepEqual(out, c.want) {
 			t.Errorf("%d. generateNGrams(%q, %d) = %#v; not %#v", i, c.words, c.n, out, c.want)
+		}
+	}
+}
+
+func TestExtractYearSmart(t *testing.T) {
+	cases := []struct {
+		words string
+		want  int
+	}{
+		{"", 0},
+		{"2016", 2016},
+		{"2015 2016", 2016},
+		{"2015 2015 2016", 2015},
+		{"2015 2016 January 5 2016", 2015},
+	}
+	for i, c := range cases {
+		words := strings.Split(c.words, " ")
+		out := ExtractYearSmart(words)
+		if out != c.want {
+			t.Errorf("%d. ExtractYearSmart(%+v) = %+v; not %+v", i, words, out, c.want)
 		}
 	}
 }

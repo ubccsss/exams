@@ -133,16 +133,18 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		Courses      map[string]*examdb.Course
 		Course       string
 		Year         string
+		QuickNames   []string
 		Terms        []string
 		Term         string
 		FileURL      string
 		DetectedName string
 		DetectedTerm string
 	}{
-		File:    file,
-		Courses: db.Courses,
-		Terms:   []string{"W1", "W2", "S"},
-		FileURL: file.Source,
+		File:       file,
+		Courses:    db.Courses,
+		Terms:      examdb.ExamTerms,
+		QuickNames: examdb.ExamLabels,
+		FileURL:    file.Source,
 	}
 
 	if len(meta.FileURL) == 0 {

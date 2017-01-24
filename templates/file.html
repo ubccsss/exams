@@ -36,22 +36,10 @@ iframe {
       <br>
       <select name="quickname" size="17">
         <option></option>
-        <option>Final</option>
-        <option>Final (Solution)</option>
-        <option>Sample Final</option>
-        <option>Sample Final (Solution)</option>
-        <option>Midterm</option>
-        <option>Midterm (Solution)</option>
-        <option>Sample Midterm</option>
-        <option>Sample Midterm (Solution)</option>
-        <option>Midterm 1</option>
-        <option>Midterm 1 (Solution)</option>
-        <option>Sample Midterm 1</option>
-        <option>Sample Midterm 1 (Solution)</option>
-        <option>Midterm 2</option>
-        <option>Midterm 2 (Solution)</option>
-        <option>Sample Midterm 2</option>
-        <option>Sample Midterm 2 (Solution)</option>
+        {{ $predicted := .DetectedName }}
+        {{ $fname := .File.Name }}
+        {{ range $name := .QuickNames }}
+        <option value="{{$name}}" {{if and (eq $name $predicted) (not $fname)}}selected{{end}}>{{$name}}</option> {{ end }}
       </select>
       <br>
       <input type="text" name="name" value="{{.File.Name}}">

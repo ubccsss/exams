@@ -36,6 +36,9 @@ var (
 		"Sample Midterm 2 (Solution)",
 	}
 
+	// ExamTerms are all the possible terms that a file can fall under.
+	ExamTerms = []string{"W1", "W2", "S"}
+
 	// FileNameScoreRegexes are a list of regexps and values that can be used to
 	// rank files based on how likely they are an exam.
 	FileNameScoreRegexes = map[int][]string{

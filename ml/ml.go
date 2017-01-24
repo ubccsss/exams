@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/bbalet/stopwords"
 	"github.com/d4l3k/docconv"
@@ -531,4 +532,66 @@ func ExtractYear(f *examdb.File) int {
 		return n
 	}
 	return 0
+}
+
+var dateTemplates = []string{
+	"January 2 2006",
+	"January 2006",
+	"2006",
+}
+
+func ExtractYearSmart(words []string) int {
+	var templateWordCount []int
+	for _, tmpl := range dateTemplates {
+		templateWordCount = append(templateWordCount, len(strings.Split(tmpl, " ")))
+	}
+
+	var foundYears []int
+
+	for i := 0; i < len(words); i++ {
+		for j, tmpl := range dateTemplates {
+			count := templateWordCount[j]
+			if i+count > len(words) {
+				continue
+			}
+			value := strings.Join(words[i:i+count], " ")
+			t, err := time.Parse(tmpl, value)
+			if err != nil {
+				continue
+			}
+			foundYears = append(foundYears, convertDateToYear(t))
+			i += count - 1
+			break
+		}
+	}
+
+	frequency := map[int]int{}
+	lastIndex := map[int]int{}
+
+	var bestYear int
+
+	for i, year := range foundYears {
+		frequency[year]++
+		lastIndex[year] = i
+	}
+
+	for year, freq := range frequency {
+		bestFreq := frequency[bestYear]
+		if freq > bestFreq {
+			bestYear = year
+		} else if freq == bestFreq {
+			if lastIndex[year] > lastIndex[bestYear] {
+				bestYear = year
+			}
+		}
+	}
+
+	return bestYear
+}
+
+func convertDateToYear(t time.Time) int {
+	if t.Month() < time.May && !(t.Month() == 1 && t.Day() == 1) {
+		return t.Year() - 1
+	}
+	return t.Year()
 }
