@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/ubccsss/exams/config"
 	"github.com/ubccsss/exams/examdb"
@@ -203,15 +204,23 @@ func handleAdminRemove404(w http.ResponseWriter, r *http.Request) {
 		wg.Add(1)
 		go func() {
 			for f := range fileChan {
-				if !(f.LastResponseCode == 404 || f.LastResponseCode == 0) {
+				if len(f.Path) > 0 {
+					continue
+				}
+				isExamsCGI := strings.HasPrefix(f.Source, "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi")
+				if f.LastResponseCode == 403 && isExamsCGI {
+					// Remove 403ed exams.cgi endpoints.
+				} else if !(f.LastResponseCode == 404 || f.LastResponseCode == 0) {
 					continue
 				}
 
 				reader, err := f.Reader()
 				if err != nil {
 					is404 := strings.Contains(err.Error(), "got 404")
-					fmt.Fprintf(w, "%s: %s (Removing %t)\n", f, err, is404)
-					if is404 {
+					is403 := strings.Contains(err.Error(), "got 403")
+					remove := is404 || isExamsCGI && is403
+					fmt.Fprintf(w, "%s: %s (Removing %t)\n", f, err, remove)
+					if remove {
 						if err := db.RemoveFile(f); err != nil {
 							handleErr(w, err)
 						}
@@ -242,11 +251,12 @@ func labelsToName(typ, samp, sol string) string {
 }
 
 func handleGenerate(w http.ResponseWriter, r *http.Request) {
+	start := time.Now()
 	if err := saveAndGenerate(); err != nil {
-		http.Error(w, fmt.Sprintf("%+v", err), 500)
+		handleErr(w, err)
 		return
 	}
-	w.Write([]byte("Done."))
+	fmt.Fprintf(w, "Done in %s.", time.Now().Sub(start))
 }
 
 func handleAdminIndex(w http.ResponseWriter, r *http.Request) {

@@ -15,7 +15,6 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
-	"path"
 	"regexp"
 	"runtime"
 	"runtime/pprof"
@@ -109,11 +108,12 @@ var robotsCache = map[string]*robotstxt.Group{}
 var robotsCacheLock sync.RWMutex
 
 type Page struct {
-	URL        string
-	StatusCode int
-	Hash       string
-	Fetched    time.Time
-	Links      []string
+	URL         string
+	StatusCode  int
+	ContentType string
+	Hash        string
+	Fetched     time.Time
+	Links       []string
 }
 
 func makeGet(url string) (*http.Response, error) {
@@ -129,16 +129,6 @@ func makeGet(url string) (*http.Response, error) {
 	}
 	log.Printf("GET %d %s", resp.StatusCode, url)
 	return resp, nil
-}
-
-func validSuffix(uri string) bool {
-	validExt := path.Ext(uri) == ""
-	for _, postfix := range validPostfix {
-		if strings.HasSuffix(uri, postfix) {
-			validExt = true
-		}
-	}
-	return validExt
 }
 
 func cleanURL(uri string) (string, error) {
@@ -195,7 +185,7 @@ func validURL(uri string) (bool, error) {
 		return false, nil
 	}
 
-	if !(validSuffix(u.Path) && validSuffix(u.RawQuery)) {
+	if !(exambotlib.ValidSuffix(u.Path, validPostfix) && exambotlib.ValidSuffix(u.RawQuery, validPostfix)) {
 		return false, nil
 	}
 

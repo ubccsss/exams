@@ -12,8 +12,6 @@ import (
 	"github.com/urfave/cli"
 )
 
-var pathRegexp = regexp.MustCompile("^/home/c/(cs\\w+)/public_html/(.*)$")
-
 func indexUGrad(c *cli.Context) error {
 	ssh := &easyssh.MakeConfig{
 		User:   c.String("user"),
@@ -46,17 +44,25 @@ func indexUGrad(c *cli.Context) error {
 		}()
 	}
 	for _, line := range strings.Split(response, "\n") {
-		line = strings.TrimSpace(line)
-		if len(line) == 0 {
-			continue
+		if url, ok := ugradPathToHTTP(line); ok {
+			urls <- url
 		}
-		matches := pathRegexp.FindStringSubmatch(line)
-		if len(matches) != 3 {
-			continue
-		}
-		urls <- fmt.Sprintf("https://www.ugrad.cs.ubc.ca/~%s/%s", matches[1], matches[2])
 	}
 	close(urls)
 	wg.Wait()
 	return nil
+}
+
+var pathRegexp = regexp.MustCompile("^/home/c/(cs\\w+)/public_html/(.*)$")
+
+func ugradPathToHTTP(path string) (string, bool) {
+	path = strings.TrimSpace(path)
+	if len(path) == 0 {
+		return "", false
+	}
+	matches := pathRegexp.FindStringSubmatch(path)
+	if len(matches) != 3 {
+		return "", false
+	}
+	return fmt.Sprintf("https://www.ugrad.cs.ubc.ca/~%s/%s", matches[1], matches[2]), true
 }

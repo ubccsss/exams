@@ -64,7 +64,7 @@ func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
 // ingressDeptFiles talks to the exams.cgi binary running on the ugrad servers and
 // returns potential file matches.
 func ingressDeptFiles(w http.ResponseWriter, r *http.Request) {
-	req, err := http.Get("https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi/")
+	req, err := http.Get("https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/")
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -75,7 +75,13 @@ func ingressDeptFiles(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	for _, f := range files {
-		f.Source = f.Path
+		strippedPath := strings.TrimPrefix(f.Path, "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi")
+		url, ok := ugradPathToHTTP(strippedPath)
+		if ok {
+			f.Source = url
+		} else {
+			f.Source = f.Path
+		}
 		f.Path = ""
 	}
 	db.AddPotentialFiles(w, files)

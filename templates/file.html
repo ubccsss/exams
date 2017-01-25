@@ -78,7 +78,7 @@ iframe {
       <input type="submit" value="Not An Exam / Invalid">
     </form>
   </div>
-  <iframe src="{{ .FileURL }}">
+  <iframe src="{{ if .File.Path }}/{{.File.Path}}{{else}}{{ .FileURL }}{{end}}">
   </iframe>
 </article>
 </well>

@@ -163,6 +163,14 @@ func verifyConsistency() error {
 		f.ComputeScore(&db)
 		f.Path = strings.TrimSpace(f.Path)
 		f.Source = strings.TrimSpace(f.Source)
+
+		const prefix = "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi"
+		if strings.HasPrefix(f.Source, prefix) {
+			stripped := strings.TrimPrefix(f.Source, prefix)
+			if url, ok := ugradPathToHTTP(stripped); ok {
+				f.Source = url
+			}
+		}
 	}
 
 	db.Mu.Lock()

@@ -1,8 +1,10 @@
 package exambotlib
 
 import (
+	"log"
 	"net/url"
 	"path"
+	"regexp"
 	"strings"
 )
 
@@ -33,4 +35,25 @@ func ExpandURLToParents(uri string) ([]string, error) {
 		}
 	}
 	return urls, nil
+}
+
+func ValidSuffix(uri string, validPostfix []string) bool {
+	validExt := path.Ext(uri) == ""
+	u, err := url.Parse(uri)
+	if err == nil {
+		uri = u.Path
+	}
+	for _, postfix := range validPostfix {
+		if strings.HasSuffix(uri, postfix) {
+			validExt = true
+		}
+	}
+	if !validExt {
+		var err error
+		validExt, err = regexp.MatchString("^\\w*$", path.Base(uri))
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	return validExt
 }

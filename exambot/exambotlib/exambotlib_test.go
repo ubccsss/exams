@@ -46,3 +46,42 @@ func TestExpandURLToParents(t *testing.T) {
 		}
 	}
 }
+
+func TestValidSuffix(t *testing.T) {
+	cases := []struct {
+		uri  string
+		want bool
+	}{
+		{
+			"https://example.com/",
+			true,
+		},
+		{
+			"https://example.com",
+			false,
+		},
+		{
+			"https://example.com/duck/foo",
+			true,
+		},
+		{
+			"https://example.com/duck/foo.php",
+			true,
+		},
+		{
+			"https://example.com/duck/foo.pdf",
+			false,
+		},
+		{
+			"https://example.com/duck/?foo=10",
+			true,
+		},
+	}
+
+	for i, c := range cases {
+		out := ValidSuffix(c.uri, []string{".php", "/"})
+		if !reflect.DeepEqual(out, c.want) {
+			t.Errorf("%d. ValidSuffix(%q) = %+v; not %+v", i, c.uri, out, c.want)
+		}
+	}
+}
