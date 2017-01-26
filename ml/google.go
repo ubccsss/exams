@@ -153,19 +153,13 @@ func (c *GoogleClassifier) Train(db *examdb.Database) error {
 
 	var files []*examdb.File
 
-	for _, c := range db.Courses {
-		for _, y := range c.Years {
-			for _, f := range y.Files {
-				files = append(files, f)
-			}
-		}
-	}
-
-	for _, f := range db.PotentialFiles {
-		if f.NotAnExam {
+	db.Mu.RLock()
+	for _, f := range db.Files {
+		if f.NotAnExam || f.HandClassified {
 			files = append(files, f)
 		}
 	}
+	db.Mu.RUnlock()
 
 	count := 0
 	for _, f := range files {

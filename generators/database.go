@@ -3,6 +3,7 @@ package generators
 import (
 	"bytes"
 	"io/ioutil"
+	"log"
 	"os"
 	"path"
 	"strings"
@@ -29,18 +30,21 @@ func (g Generator) Database() error {
 	type level map[string]courses
 
 	l := level{}
+	fileCounts := g.db.CourseFileCount()
+	log.Printf("fileCounts %+v", fileCounts)
 	for _, c := range g.db.Courses {
-		cl := strings.ToUpper(c.Code[0:3] + "00")
+		cl := c.YearLevel()
 		cs, ok := l[cl]
 		if !ok {
 			cs = courses{}
 			l[cl] = cs
 		}
+		count := fileCounts[c.Code]
 		cs[c.Code] = course{
 			Name:               strings.ToUpper(c.Code),
 			Desc:               c.Desc,
-			FileCount:          c.FileCount(),
-			PotentialFileCount: len(g.coursePotentialFiles[c.Code]),
+			FileCount:          count.HandClassified,
+			PotentialFileCount: count.Potential,
 		}
 	}
 
@@ -48,11 +52,6 @@ func (g Generator) Database() error {
 	if err := g.templates.ExecuteTemplate(&buf, "index.md", l); err != nil {
 		return err
 	}
-	/*
-		if err := ioutil.WriteFile(path.Join(dir, "index.md"), buf.Bytes(), 0755); err != nil {
-			return err
-		}
-	*/
 	html := blackfriday.MarkdownCommon(buf.Bytes())
 	buf.Reset()
 	if _, err := buf.Write(html); err != nil {

@@ -27,14 +27,9 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
 
-	notAnExam := 0
-	for _, f := range db.PotentialFiles {
-		if f.NotAnExam {
-			notAnExam++
-		}
-	}
+	count := db.FileCount()
 
-	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d, Not An Exam: %d</p>", len(db.PotentialFiles)-notAnExam, db.ProcessedCount()+notAnExam, notAnExam)
+	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d, Not An Exam: %d, Total: %d</p>", count.Potential, count.HandClassified, count.NotAnExam, count.Total)
 	w.Write([]byte(`
 		<a href="/admin/potential">Unprocessed</a>
 		<a href="/admin/potential?invalid">Not Exams/Invalid</a>`))
@@ -43,18 +38,14 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 
 	if !showInvalid {
 		fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
-		for _, file := range db.PotentialFiles {
-			if !file.NotAnExam {
-				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
-			}
+		for _, file := range db.UnprocessedFiles() {
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
 		}
 		fmt.Fprint(w, "</ul>")
 	} else {
 		fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
-		for _, file := range db.PotentialFiles {
-			if file.NotAnExam {
-				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
-			}
+		for _, file := range db.NotAnExamFiles() {
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
 		}
 		fmt.Fprint(w, "</ul>")
 	}
@@ -76,6 +67,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		}
 		if len(r.FormValue("invalid")) > 0 {
 			file.NotAnExam = true
+			file.HandClassified = true
 			http.Redirect(w, r, "/admin/potential", 302)
 			if err := saveAndGenerate(); err != nil {
 				http.Error(w, err.Error(), 500)
@@ -109,6 +101,7 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		file.Course = course
 		file.Term = term
 		file.Name = name
+		file.HandClassified = true
 		if err := db.RemoveFile(file); err != nil {
 			http.Error(w, err.Error(), 500)
 			return
@@ -191,9 +184,12 @@ func handleAdminRemove404(w http.ResponseWriter, r *http.Request) {
 	fileChan := make(chan *examdb.File)
 
 	go func() {
-		files := make([]*examdb.File, len(db.PotentialFiles))
-		copy(files, db.PotentialFiles)
+		files := make([]*examdb.File, len(db.Files))
+		copy(files, db.Files)
 		for _, f := range files {
+			if !f.IsPotential() {
+				continue
+			}
 			fileChan <- f
 		}
 		close(fileChan)
@@ -314,7 +310,7 @@ func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Google Prediction Inferring")
 	log.Printf("Google Prediction Inferring")
 	processed := 0
-	for i, f := range db.PotentialFiles {
+	for i, f := range db.UnprocessedFiles() {
 		if skipInfer(f) {
 			continue
 		}

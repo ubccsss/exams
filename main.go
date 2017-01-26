@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"regexp"
-	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -124,58 +123,68 @@ var nameReplacements = map[string]string{
 
 func verifyConsistency() error {
 	log.Println("Verifying consistency of data and doing house keeping...")
-	for code, course := range db.Courses {
-		for yearnum, year := range course.Years {
-			for _, f := range year.Files {
-				f.Year = yearnum
-				f.Course = code
-				for pattern, term := range nameToTermMapping {
-					if !strings.Contains(f.Name, pattern) {
-						continue
+	/*
+		for code, course := range db.Courses {
+			for yearnum, year := range course.Years {
+				for _, f := range year.Files {
+					f.Year = yearnum
+					f.Course = code
+					for pattern, term := range nameToTermMapping {
+						if !strings.Contains(f.Name, pattern) {
+							continue
+						}
+
+						log.Printf("Fixing %+v", f)
+						f.Name = removeDuplicateWhitespace(strings.Replace(f.Name, pattern, "", -1))
+						f.Term = term
+						log.Printf("Fixed %+v", f)
+					}
+					for pattern, term := range nameReplacements {
+						if !strings.Contains(f.Name, pattern) {
+							continue
+						}
+
+						log.Printf("Fixing %+v", f)
+						f.Name = removeDuplicateWhitespace(strings.Replace(f.Name, pattern, term, -1))
+						log.Printf("Fixed %+v", f)
+					}
+					f.Path = strings.TrimPrefix(f.Path, "static/exams/")
+					f.Path = strings.TrimPrefix(f.Path, "static/")
+					if len(f.Hash) == 0 {
+						if err := f.ComputeHash(); err != nil {
+							return err
+						}
 					}
 
-					log.Printf("Fixing %+v", f)
-					f.Name = removeDuplicateWhitespace(strings.Replace(f.Name, pattern, "", -1))
-					f.Term = term
-					log.Printf("Fixed %+v", f)
+					f.HandClassified = true
 				}
-				for pattern, term := range nameReplacements {
-					if !strings.Contains(f.Name, pattern) {
-						continue
-					}
+				db.Files = append(db.Files, year.Files...)
+				year.Files = nil
+			}
+			course.Years = nil
+		}
 
-					log.Printf("Fixing %+v", f)
-					f.Name = removeDuplicateWhitespace(strings.Replace(f.Name, pattern, term, -1))
-					log.Printf("Fixed %+v", f)
-				}
-				f.Path = strings.TrimPrefix(f.Path, "static/exams/")
-				f.Path = strings.TrimPrefix(f.Path, "static/")
-				if len(f.Hash) == 0 {
-					if err := f.ComputeHash(); err != nil {
-						return err
-					}
+		for _, f := range db.PotentialFiles {
+			f.ComputeScore(&db)
+			f.Path = strings.TrimSpace(f.Path)
+			f.Source = strings.TrimSpace(f.Source)
+
+			const prefix = "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi"
+			if strings.HasPrefix(f.Source, prefix) {
+				stripped := strings.TrimPrefix(f.Source, prefix)
+				if url, ok := ugradPathToHTTP(stripped); ok {
+					f.Source = url
 				}
 			}
 		}
-	}
 
-	for _, f := range db.PotentialFiles {
-		f.ComputeScore(&db)
-		f.Path = strings.TrimSpace(f.Path)
-		f.Source = strings.TrimSpace(f.Source)
+		db.Files = append(db.Files, db.PotentialFiles...)
+		db.PotentialFiles = nil
 
-		const prefix = "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi"
-		if strings.HasPrefix(f.Source, prefix) {
-			stripped := strings.TrimPrefix(f.Source, prefix)
-			if url, ok := ugradPathToHTTP(stripped); ok {
-				f.Source = url
-			}
-		}
-	}
-
-	db.Mu.Lock()
-	defer db.Mu.Unlock()
-	sort.Sort(examdb.FileSlice(db.PotentialFiles))
+		db.Mu.Lock()
+		defer db.Mu.Unlock()
+		sort.Sort(examdb.FileSlice(db.PotentialFiles))
+	*/
 
 	return nil
 }

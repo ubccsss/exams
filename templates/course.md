@@ -15,8 +15,8 @@ Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
 
 {{ $years := .Years}}
 {{ range $key, $year := .YearSections }}
-{{ $value := index $years $year }}
-{{ if ne (len $value.Files) 0 }}
+{{ $files := index $years $year }}
+{{ if ne (len $files) 0 }}
 {{ if eq $year 0 }}
 ## Undated
 {{ else }}
@@ -24,7 +24,7 @@ Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
 {{ end }}
 | File | Term |
 |------|------|
-{{ range $file := $value.Files -}}
+{{ range $file := $files -}}
 |[{{ $file.Name }}](/{{ $file.Path}})|{{ $file.Term }}|
 {{ end }}
 {{ end }}

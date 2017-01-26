@@ -13,6 +13,17 @@ import (
 	"github.com/ubccsss/exams/ml"
 )
 
+func fileTree(files []*examdb.File) map[int][]*examdb.File {
+	m := map[int][]*examdb.File{}
+	for _, f := range files {
+		m[f.Year] = append(m[f.Year], f)
+	}
+	for _, files := range m {
+		sort.Sort(examdb.FileByTerm(files))
+	}
+	return m
+}
+
 // Course generates a course.
 func (g Generator) Course(c examdb.Course) error {
 	dir := path.Join(g.examsDir, c.Code)
@@ -20,31 +31,23 @@ func (g Generator) Course(c examdb.Course) error {
 		return err
 	}
 
+	files := g.db.FindCourseFiles(c)
 	data := struct {
 		examdb.Course
+		Years          map[int][]*examdb.File
 		YearSections   []int
 		PotentialFiles []*examdb.File
 	}{
 		Course:         c,
 		PotentialFiles: g.coursePotentialFiles[c.Code],
+		Years:          fileTree(files),
+		YearSections:   examdb.AllYears(files),
 	}
-
-	for y, files := range c.Years {
-		data.YearSections = append(data.YearSections, y)
-		sort.Sort(examdb.FileByTerm(files.Files))
-	}
-
-	sort.Sort(sort.Reverse(sort.IntSlice(data.YearSections)))
 
 	var buf bytes.Buffer
 	if err := g.templates.ExecuteTemplate(&buf, "course.md", data); err != nil {
 		return err
 	}
-	/*
-		if err := ioutil.WriteFile(path.Join(dir, "index.md"), buf.Bytes(), 0755); err != nil {
-			return err
-		}
-	*/
 	html := blackfriday.MarkdownCommon(buf.Bytes())
 	buf.Reset()
 	if _, err := buf.Write(html); err != nil {
@@ -68,8 +71,8 @@ func (g Generator) Course(c examdb.Course) error {
 
 func (g *Generator) indexCoursePotentialFiles() {
 	m := map[string][]*examdb.File{}
-	for _, f := range g.db.PotentialFiles {
-		if f.NotAnExam || f.Inferred != nil && f.NotAnExam {
+	for _, f := range g.db.Files {
+		if f.NotAnExam || f.Inferred != nil && f.NotAnExam || f.HandClassified {
 			continue
 		}
 

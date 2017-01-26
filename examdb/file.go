@@ -49,15 +49,16 @@ var (
 
 // File is a single exam file typically a PDF.
 type File struct {
-	Name      string  `json:",omitempty"`
-	Path      string  `json:",omitempty"`
-	Source    string  `json:",omitempty"`
-	Hash      string  `json:",omitempty"`
-	Score     float64 `json:",omitempty"`
-	Term      string  `json:",omitempty"`
-	NotAnExam bool    `json:",omitempty"`
-	Course    string  `json:",omitempty"`
-	Year      int     `json:",omitempty"`
+	Name           string  `json:",omitempty"`
+	Path           string  `json:",omitempty"`
+	Source         string  `json:",omitempty"`
+	Hash           string  `json:",omitempty"`
+	Score          float64 `json:",omitempty"`
+	Term           string  `json:",omitempty"`
+	NotAnExam      bool    `json:",omitempty"`
+	Course         string  `json:",omitempty"`
+	Year           int     `json:",omitempty"`
+	HandClassified bool    `json:",omitempty"`
 
 	LastResponseCode int `json:",omitempty"`
 
@@ -66,8 +67,13 @@ type File struct {
 }
 
 // PathOnDisk returns the path to the file on disk.
-func (f *File) PathOnDisk() string {
+func (f File) PathOnDisk() string {
 	return path.Join(config.ExamsDir, f.Path)
+}
+
+// IsPotential returns whether the file has been processed yet.
+func (f File) IsPotential() bool {
+	return !(f.NotAnExam || f.HandClassified)
 }
 
 // Reader opens the file either over HTTP or from disk and returns an

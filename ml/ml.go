@@ -216,17 +216,15 @@ func (d BayesianClassifier) Train(db *examdb.Database) error {
 
 	var files []*examdb.File
 
-	for _, c := range db.Courses {
-		for _, y := range c.Years {
-			for _, f := range y.Files {
-				if f.NotAnExam {
-					continue
-				}
-
-				files = append(files, f)
-			}
+	db.Mu.RLock()
+	for _, f := range db.Files {
+		if f.NotAnExam || !f.HandClassified {
+			continue
 		}
+
+		files = append(files, f)
 	}
+	db.Mu.RUnlock()
 
 	for i := range files {
 		j := rand.Intn(len(files))

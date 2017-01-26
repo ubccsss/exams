@@ -32,27 +32,13 @@ func exportToML(c *cli.Context) error {
 		isLabel[l] = i + 1
 	}
 
-	for _, c := range db.Courses {
-		for _, y := range c.Years {
-			for _, f := range y.Files {
-				class, ok := isLabel[f.Name]
-				if !ok {
-					continue
-				}
-
-				if err := convertAndSaveFileAsML(f, class); err != nil {
-					return err
-				}
-			}
-		}
-	}
-
-	for _, f := range db.PotentialFiles {
-		if !f.NotAnExam {
+	for _, f := range db.ProcessedFiles() {
+		class, ok := isLabel[f.Name]
+		if !ok {
 			continue
 		}
 
-		if err := convertAndSaveFileAsML(f, 0); err != nil {
+		if err := convertAndSaveFileAsML(f, class); err != nil {
 			return err
 		}
 	}
