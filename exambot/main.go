@@ -28,13 +28,13 @@ import (
 	piazza "github.com/d4l3k/piazza-api"
 	"github.com/temoto/robotstxt"
 	"github.com/ubccsss/exams/exambot/exambotlib"
+	"github.com/ubccsss/exams/workers"
 	"github.com/willf/bloom"
 )
 
 const (
-	userAgent   = "UBC CSSS Exam Bot vpc@ubccsss.org"
-	workerCount = 8
-	boltDBPath  = "exambot.boltdb"
+	userAgent  = "UBC CSSS Exam Bot vpc@ubccsss.org"
+	boltDBPath = "exambot.boltdb"
 
 	// bloom filter configuration
 	maxNumberOfPages  = 1000000
@@ -671,6 +671,75 @@ func (s *Spider) AddURLs(urls []string) int {
 	return added
 }
 
+func commandList(db *bolt.DB) {
+	inputChan := make(chan []byte, workers.Count)
+	seen := bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
+
+	var count int
+	var wg sync.WaitGroup
+	var seenMu sync.Mutex
+	var countMu sync.Mutex
+
+	for i := 0; i < workers.Count; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			var page Page
+
+			for v := range inputChan {
+				if err := json.Unmarshal(v, &page); err != nil {
+					log.Fatal(err)
+				}
+
+				seenMu.Lock()
+				s := seen.TestAndAddString(page.URL)
+				seenMu.Unlock()
+				if !s {
+					fmt.Println(page.URL)
+				}
+
+				for _, l := range page.Links {
+					seenMu.Lock()
+					s := seen.TestAndAddString(l)
+					seenMu.Unlock()
+					if !s {
+						fmt.Println(l)
+					}
+				}
+
+				countMu.Lock()
+				count++
+				printCount := count%10000 == 0
+				countMu.Unlock()
+				if printCount {
+					log.Printf("Count %d", count)
+				}
+			}
+		}()
+	}
+	if err := db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket(pageBucket)
+		if b == nil {
+			return errors.New("can't find bucket")
+		}
+
+		if err := b.ForEach(func(_, v []byte) error {
+			buf := make([]byte, len(v))
+			copy(buf, v)
+			inputChan <- buf
+			return nil
+		}); err != nil {
+			return err
+		}
+		return nil
+	}); err != nil {
+		log.Fatal(err)
+	}
+	close(inputChan)
+	wg.Wait()
+}
+
 var (
 	cpuprofile = flag.String("cpuprofile", "", "write cpu profile `file`")
 	memprofile = flag.String("memprofile", "", "write memory profile to `file`")
@@ -680,6 +749,7 @@ var (
 )
 
 func main() {
+
 	flag.Parse()
 	log.SetOutput(os.Stderr)
 
@@ -708,42 +778,7 @@ func main() {
 	if len(args) == 1 {
 		switch args[0] {
 		case "list":
-			if err := db.View(func(tx *bolt.Tx) error {
-				b := tx.Bucket(pageBucket)
-				if b == nil {
-					return errors.New("can't find bucket")
-				}
-
-				seen := bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
-				var page Page
-				var count int
-
-				if err := b.ForEach(func(k, v []byte) error {
-					count++
-					if err := json.Unmarshal(v, &page); err != nil {
-						return err
-					}
-					if !seen.TestAndAddString(page.URL) {
-						fmt.Println(page.URL)
-					}
-
-					for _, l := range page.Links {
-						if !seen.TestAndAddString(l) {
-							fmt.Println(l)
-						}
-					}
-					if count%10000 == 0 {
-						log.Printf("Count %d", count)
-					}
-					return nil
-				}); err != nil {
-					return err
-				}
-
-				return nil
-			}); err != nil {
-				log.Fatal(err)
-			}
+			commandList(db)
 			return
 		}
 	}
@@ -808,8 +843,8 @@ func main() {
 		go s.AddAndExpandURLs(urls, false)
 	}
 
-	log.Printf("Spinning up %d workers...", workerCount)
-	for i := 0; i < workerCount-1; i++ {
+	log.Printf("Spinning up %d workers...", workers.Count)
+	for i := 0; i < workers.Count-1; i++ {
 		go s.Worker()
 	}
 	s.Worker()

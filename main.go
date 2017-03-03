@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"html/template"
 	"io/ioutil"
 	"log"
 	"net"
@@ -11,6 +10,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/goji/httpauth"
@@ -19,11 +19,12 @@ import (
 	"github.com/ubccsss/exams/examdb"
 	"github.com/ubccsss/exams/generators"
 	"github.com/ubccsss/exams/ml"
+	"github.com/ubccsss/exams/workers"
 	"github.com/urfave/cli"
 )
 
 var (
-	templates = template.Must(template.ParseGlob(config.TemplateGlob))
+	templates = generators.Templates
 
 	db        examdb.Database
 	generator *generators.Generator
@@ -75,9 +76,6 @@ func loadDatabase() error {
 	db.Mu.Unlock()
 
 	if err != nil {
-		return err
-	}
-	if err := verifyConsistency(); err != nil {
 		return err
 	}
 	return nil
@@ -186,6 +184,56 @@ func verifyConsistency() error {
 		sort.Sort(examdb.FileSlice(db.PotentialFiles))
 	*/
 
+	fetched := struct {
+		sync.Mutex
+		count int
+	}{}
+
+	fileChan := make(chan *examdb.File, workers.Count)
+	var wg sync.WaitGroup
+	for i := 0; i < workers.Count; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			for f := range fileChan {
+				if err := db.FetchFileAndSave(f); err != nil {
+					log.Println(err)
+				}
+
+				fetched.Lock()
+				fetched.count++
+				count := fetched.count
+				fetched.Unlock()
+
+				if count%100 == 0 {
+					log.Printf("Fetched %d", count)
+					if err := saveDatabase(); err != nil {
+						log.Println(err)
+					}
+				}
+			}
+		}()
+	}
+
+	for _, f := range db.Files {
+		if len(f.Path) != 0 {
+			continue
+		}
+
+		if !(f.LastResponseCode == 200 || f.LastResponseCode == 0) {
+			continue
+		}
+
+		fileChan <- f
+	}
+	close(fileChan)
+	wg.Wait()
+
+	if err := saveDatabase(); err != nil {
+		log.Println(err)
+	}
+
 	return nil
 }
 
@@ -204,29 +252,10 @@ func serveSite(c *cli.Context) error {
 		log.Printf("Failed to load classifier. Classification tasks will not work.: %s", err)
 	}
 
-	secureMux := http.NewServeMux()
-
-	secureMux.HandleFunc("/admin/generate", handleGenerate)
-	secureMux.HandleFunc("/admin/potential", handlePotentialFileIndex)
-	secureMux.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
-	secureMux.HandleFunc("/admin/remove404", handleAdminRemove404)
-	secureMux.HandleFunc("/admin/file/", handleFile)
-
-	secureMux.HandleFunc("/admin/ml/bayesian/train", handleMLRetrain)
-	secureMux.HandleFunc("/admin/ml/google/train", handleMLRetrainGoogle)
-	secureMux.HandleFunc("/admin/ml/google/inferpotential", handleMLGoogleInferPotential)
-	secureMux.HandleFunc("/admin/ml/google/accuracy", handleMLGoogleAccuracy)
-
-	secureMux.HandleFunc("/admin/ingress/deptcourses", ingressDeptCourses)
-	secureMux.HandleFunc("/admin/ingress/deptfiles", ingressDeptFiles)
-	secureMux.HandleFunc("/admin/ingress/ubccsss", ingressUBCCSSS)
-	secureMux.HandleFunc("/admin/ingress/archive.org", ingressArchiveOrgFiles)
-
-	secureMux.HandleFunc("/admin/", handleAdminIndex)
-
 	username := c.String("user")
 	password := c.String("pass")
 	if len(password) > 0 {
+		secureMux := adminRoutes()
 		http.Handle("/admin/", httpauth.SimpleBasicAuth(username, password)(secureMux))
 	} else {
 		log.Println("No admin password set, interface disabled.")
@@ -236,7 +265,7 @@ func serveSite(c *cli.Context) error {
 	http.Handle("/", http.FileServer(http.Dir("static")))
 
 	// Launch 4 source workers
-	for i := 0; i < 4; i++ {
+	for i := 0; i < workers.Count; i++ {
 		go unprocessedSourceWorker()
 	}
 
@@ -255,6 +284,10 @@ func main() {
 	var err error
 	generator, err = generators.MakeGenerator(&db, config.TemplateGlob, config.ExamsDir)
 	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err := verifyConsistency(); err != nil {
 		log.Fatal(err)
 	}
 

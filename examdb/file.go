@@ -142,6 +142,14 @@ func (f *File) ComputeScore(db *Database) float64 {
 	return f.Score
 }
 
+// IdealDir returns the directory the file should be in.
+func (f File) IdealDir() string {
+	if f.IsPotential() || len(f.Course) == 0 {
+		return "potential"
+	}
+	return fmt.Sprintf("%s/%d", f.Course, f.Year)
+}
+
 // FileSlice attaches the methods of sort.Interface to []*File, sorting in increasing order.
 type FileSlice []*File
 

@@ -26,6 +26,11 @@ func fileTree(files []*examdb.File) map[int][]*examdb.File {
 
 // Course generates a course.
 func (g Generator) Course(c examdb.Course) error {
+	// Don't generate courses for unclassified files.
+	if len(c.Code) == 0 {
+		return nil
+	}
+
 	dir := path.Join(g.examsDir, c.Code)
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return err

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"path"
 	"sort"
 	"strconv"
@@ -13,14 +14,44 @@ import (
 
 	"github.com/ubccsss/exams/config"
 	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/generators"
 	"github.com/ubccsss/exams/ml"
 )
 
-func renderAdminHeader(w http.ResponseWriter) {
-	if err := templates.ExecuteTemplate(w, "adminhead.html", nil); err != nil {
-		handleErr(w, err)
-		return
-	}
+// Mappings to the new locations of the functions.
+var (
+	renderAdminHeader = generators.RenderAdminHeader
+	handleErr         = generators.HandleErr
+)
+
+// adminRoutes returns a mux for all of the admin endpoints.
+func adminRoutes() *http.ServeMux {
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/admin/potential", handlePotentialFileIndex)
+	mux.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
+	mux.HandleFunc("/admin/file/", handleFile)
+
+	mux.HandleFunc("/admin/generate", generators.PrettyJob(handleGenerate))
+	mux.HandleFunc("/admin/remove404", generators.PrettyJob(handleAdminRemove404))
+	mux.HandleFunc("/admin/duplicates", generators.PrettyJob(handleListDuplicates))
+	mux.HandleFunc("/admin/incorrectlocations", generators.PrettyJob(handleListIncorrectLocations))
+
+	// Machine Learning Endpoints
+	mux.HandleFunc("/admin/ml/bayesian/train", generators.PrettyJob(handleMLRetrain))
+	mux.HandleFunc("/admin/ml/google/train", generators.PrettyJob(handleMLRetrainGoogle))
+	mux.HandleFunc("/admin/ml/google/inferpotential", generators.PrettyJob(handleMLGoogleInferPotential))
+	mux.HandleFunc("/admin/ml/google/accuracy", generators.PrettyJob(handleMLGoogleAccuracy))
+
+	// Ingress Endpoints
+	mux.HandleFunc("/admin/ingress/deptcourses", generators.PrettyJob(ingressDeptCourses))
+	mux.HandleFunc("/admin/ingress/deptfiles", generators.PrettyJob(ingressDeptFiles))
+	mux.HandleFunc("/admin/ingress/ubccsss", generators.PrettyJob(ingressUBCCSSS))
+	mux.HandleFunc("/admin/ingress/archive.org", generators.PrettyJob(ingressArchiveOrgFiles))
+
+	mux.HandleFunc("/admin/", handleAdminIndex)
+
+	return mux
 }
 
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
@@ -141,8 +172,11 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		FileURL:    file.Source,
 	}
 
-	if len(meta.FileURL) == 0 {
-		meta.FileURL = path.Join("/", file.Path)
+	if len(file.Path) > 0 {
+		parts := strings.Split(file.Path, "/")
+		i := len(parts) - 1
+		parts[i] = url.PathEscape(parts[i])
+		meta.FileURL = path.Join("/", strings.Join(parts, "/"))
 	}
 	if file.Year > 0 {
 		meta.Year = strconv.Itoa(file.Year)
@@ -357,8 +391,4 @@ func handleMLRetrainGoogle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Write([]byte("Done."))
-}
-
-func handleErr(w http.ResponseWriter, err error) {
-	http.Error(w, fmt.Sprintf("%+v", err), 500)
 }

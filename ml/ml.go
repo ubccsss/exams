@@ -6,10 +6,10 @@ import (
 	"os"
 	"path"
 	"regexp"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
+	"unicode"
 
 	"github.com/bbalet/stopwords"
 	"github.com/d4l3k/docconv"
@@ -417,11 +417,14 @@ func urlToWords(uri string) []string {
 		return nil
 	}
 	return strings.FieldsFunc(uri, func(r rune) bool {
-		switch r {
-		case '\t', '~', ':', ' ', '-', '.', '/', '\\', '=', '?', '\n', '(', ',', ')', '[', ']', '{', '}', '_':
-			return true
-		}
-		return false
+		return !(unicode.IsLetter(r) || unicode.IsDigit(r))
+		/*
+			switch r {
+			case '\t', '~', ':', ' ', '-', '.', '/', '\\', '=', '?', '\n', '(', ',', ')', '[', ']', '{', '}', '_', '*':
+				return true
+			}
+			return false
+		*/
 	})
 }
 
@@ -518,30 +521,46 @@ func ExtractCourse(db *examdb.Database, f *examdb.File) string {
 	return bestMatch
 }
 
+// ExtractYear uses the text content of a file to infer the year it was from.
 func ExtractYear(f *examdb.File) int {
 	if f.Year > 0 {
 		return f.Year
 	}
 
-	lowerPath := strings.ToLower(f.Source)
-	years := util.YearRegexp.FindAllString(lowerPath, -1)
-	if len(years) > 0 {
-		n, _ := strconv.Atoi(years[len(years)-1])
-		return n
+	/*
+		lowerPath := strings.ToLower(f.Source)
+		years := util.YearRegexp.FindAllString(lowerPath, -1)
+		if len(years) > 0 {
+			n, _ := strconv.Atoi(years[len(years)-1])
+			return n
+		}
+	*/
+	words, err := fileToWordBag(f)
+	if err != nil {
+		log.Println(err)
+		return 0
 	}
-	return 0
+	return ExtractYearFromWords(words)
 }
 
-var dateTemplates = []string{
-	"January 2 2006",
-	"January 2006",
-	"2006",
+type dateTemplate struct {
+	tmpl     string
+	hasMonth bool
 }
 
-func ExtractYearSmart(words []string) int {
+var dateTemplates = []dateTemplate{
+	{"January 2 2006", true},
+	{"January 2006", true},
+	{"2006", false},
+	{"06", false},
+}
+
+// ExtractYearFromWords extracts the most frequent year found in the bag of
+// words and returns it.
+func ExtractYearFromWords(words []string) int {
 	var templateWordCount []int
 	for _, tmpl := range dateTemplates {
-		templateWordCount = append(templateWordCount, len(strings.Split(tmpl, " ")))
+		templateWordCount = append(templateWordCount, len(strings.Split(tmpl.tmpl, " ")))
 	}
 
 	var foundYears []int
@@ -553,11 +572,19 @@ func ExtractYearSmart(words []string) int {
 				continue
 			}
 			value := strings.Join(words[i:i+count], " ")
-			t, err := time.Parse(tmpl, value)
+			t, err := time.Parse(tmpl.tmpl, value)
 			if err != nil {
 				continue
 			}
-			foundYears = append(foundYears, convertDateToYear(t))
+			year := convertDateToYear(tmpl, t)
+			// Weight dates with months more than those without.
+			weight := 1
+			if tmpl.hasMonth {
+				weight = 2
+			}
+			for i := 0; i < weight; i++ {
+				foundYears = append(foundYears, year)
+			}
 			i += count - 1
 			break
 		}
@@ -587,9 +614,15 @@ func ExtractYearSmart(words []string) int {
 	return bestYear
 }
 
-func convertDateToYear(t time.Time) int {
-	if t.Month() < time.May && !(t.Month() == 1 && t.Day() == 1) {
-		return t.Year() - 1
+// convertDateToYear returns the year from t, unless the template hasMonth, in
+// which it checks if it's during January to April and subtracts 1 from the year
+// if that's the case.
+func convertDateToYear(tmpl dateTemplate, t time.Time) int {
+	if tmpl.hasMonth {
+		m := t.Month()
+		if m >= time.January && m <= time.April {
+			return t.Year() - 1
+		}
 	}
 	return t.Year()
 }

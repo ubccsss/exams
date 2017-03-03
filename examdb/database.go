@@ -326,6 +326,7 @@ func (db *Database) AddPotentialFiles(w io.Writer, files []*File) {
 
 // FetchFileAndSave fetches the file and saves it to a directory.
 func (db *Database) FetchFileAndSave(file *File) error {
+	log.Printf("Fetching %q", file.Source)
 	resp, err := file.Reader()
 	if err != nil {
 		return err
@@ -335,12 +336,11 @@ func (db *Database) FetchFileAndSave(file *File) error {
 	if len(file.Source) == 0 {
 		filename = file.Path
 	}
-	base := path.Base(filename)
-	dir := fmt.Sprintf("%s/%d", file.Course, file.Year)
+	dir := file.IdealDir()
 	if err := os.MkdirAll(path.Join(config.ExamsDir, dir), 0755); err != nil {
 		return err
 	}
-	attempt := base
+	attempt := path.Base(filename)
 	for i := 0; ; i++ {
 		if i > 0 {
 			attempt = incrementFileName(attempt)

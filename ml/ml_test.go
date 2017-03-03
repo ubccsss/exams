@@ -2,7 +2,6 @@ package ml
 
 import (
 	"reflect"
-	"strings"
 	"testing"
 
 	"github.com/jbrukh/bayesian"
@@ -102,7 +101,7 @@ func TestGenerateNGrams(t *testing.T) {
 	}
 }
 
-func TestExtractYearSmart(t *testing.T) {
+func TestExtractYearFromWords(t *testing.T) {
 	cases := []struct {
 		words string
 		want  int
@@ -112,12 +111,17 @@ func TestExtractYearSmart(t *testing.T) {
 		{"2015 2016", 2016},
 		{"2015 2015 2016", 2015},
 		{"2015 2016 January 5 2016", 2015},
+		{"January 2016", 2015},
+		{"April 2016", 2015},
+		{"May 2016", 2016},
+		{"https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs414/vprev/97-t2/414mt2-key.pdf potential/414mt2-key-3.pdf CPSC 414 97-98(T2) Midterm Exam #2", 1997},
+		{"http://www.ugrad.cs.ubc.ca/~cs418/2016-2/exams/midterm/a2015-2.pdf potential/a2015-2.pdf February 10, 2015 February 10, 2015", 2014},
 	}
 	for i, c := range cases {
-		words := strings.Split(c.words, " ")
-		out := ExtractYearSmart(words)
+		words := urlToWords(c.words)
+		out := ExtractYearFromWords(words)
 		if out != c.want {
-			t.Errorf("%d. ExtractYearSmart(%+v) = %+v; not %+v", i, words, out, c.want)
+			t.Errorf("%d. ExtractYearFromWords(%+v) = %+v; not %+v", i, words, out, c.want)
 		}
 	}
 }

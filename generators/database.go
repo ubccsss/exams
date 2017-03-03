@@ -33,6 +33,10 @@ func (g Generator) Database() error {
 	fileCounts := g.db.CourseFileCount()
 	log.Printf("fileCounts %+v", fileCounts)
 	for _, c := range g.db.Courses {
+		// Don't render unclassified files.
+		if len(c.Code) == 0 {
+			continue
+		}
 		cl := c.YearLevel()
 		cs, ok := l[cl]
 		if !ok {
