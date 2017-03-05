@@ -599,6 +599,10 @@ func ExtractYearFromWords(words []string) int {
 			if err != nil {
 				continue
 			}
+			// Don't use dates in the future.
+			if time.Now().Before(t) {
+				continue
+			}
 			year := convertDateToYear(tmpl, t)
 			// Weight dates with months more than those without.
 			weight := 1

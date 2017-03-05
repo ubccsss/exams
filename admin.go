@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"net/url"
 	"path"
@@ -341,8 +340,7 @@ func skipInfer(f *examdb.File) bool {
 }
 
 func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Google Prediction Inferring")
-	log.Printf("Google Prediction Inferring")
+	fmt.Fprintf(w, "Google Prediction Inferring\n")
 	processed := 0
 	for i, f := range db.UnprocessedFiles() {
 		if skipInfer(f) {
@@ -352,7 +350,6 @@ func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
 		classes, err := ml.DefaultGoogleClassifier.Classify(f, true)
 		if err != nil {
 			fmt.Fprintf(w, "%s: %s\n", f, err)
-			log.Printf("%s: %s\n", f, err)
 			continue
 		}
 
@@ -364,14 +361,13 @@ func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
 			Course:    ml.ExtractCourse(&db, f),
 		}
 
-		log.Printf("%d: inferred %#v", i, inferred)
+		fmt.Fprintf(w, "%d: inferred %#v\n", i, inferred)
 
 		f.Inferred = inferred
 
 		processed++
 		if processed%100 == 0 {
 			fmt.Fprintf(w, "... processed %d files\n", processed)
-			log.Printf("... processed %d files", processed)
 		}
 	}
 	if err := saveAndGenerate(); err != nil {

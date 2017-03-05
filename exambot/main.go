@@ -27,6 +27,7 @@ import (
 	archive "github.com/d4l3k/go-internetarchive"
 	piazza "github.com/d4l3k/piazza-api"
 	"github.com/temoto/robotstxt"
+	"github.com/ubccsss/exams/config"
 	"github.com/ubccsss/exams/exambot/exambotlib"
 	"github.com/ubccsss/exams/workers"
 	"github.com/willf/bloom"
@@ -671,12 +672,13 @@ func (s *Spider) AddURLs(urls []string) int {
 	return added
 }
 
-func commandList(db *bolt.DB) {
+func allLinks(db *bolt.DB) <-chan string {
+	outputChan := make(chan string, workers.Count)
 	inputChan := make(chan []byte, workers.Count)
 	seen := bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
 
-	var count int
 	var wg sync.WaitGroup
+	var count int
 	var seenMu sync.Mutex
 	var countMu sync.Mutex
 
@@ -696,7 +698,7 @@ func commandList(db *bolt.DB) {
 				s := seen.TestAndAddString(page.URL)
 				seenMu.Unlock()
 				if !s {
-					fmt.Println(page.URL)
+					outputChan <- page.URL
 				}
 
 				for _, l := range page.Links {
@@ -704,7 +706,7 @@ func commandList(db *bolt.DB) {
 					s := seen.TestAndAddString(l)
 					seenMu.Unlock()
 					if !s {
-						fmt.Println(l)
+						outputChan <- l
 					}
 				}
 
@@ -718,26 +720,57 @@ func commandList(db *bolt.DB) {
 			}
 		}()
 	}
-	if err := db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket(pageBucket)
-		if b == nil {
-			return errors.New("can't find bucket")
-		}
 
-		if err := b.ForEach(func(_, v []byte) error {
-			buf := make([]byte, len(v))
-			copy(buf, v)
-			inputChan <- buf
+	go func() {
+		if err := db.View(func(tx *bolt.Tx) error {
+			b := tx.Bucket(pageBucket)
+			if b == nil {
+				return errors.New("can't find bucket")
+			}
+
+			if err := b.ForEach(func(_, v []byte) error {
+				buf := make([]byte, len(v))
+				copy(buf, v)
+				inputChan <- buf
+				return nil
+			}); err != nil {
+				return err
+			}
 			return nil
 		}); err != nil {
-			return err
+			log.Fatal(err)
 		}
-		return nil
-	}); err != nil {
-		log.Fatal(err)
+		close(inputChan)
+		wg.Wait()
+		close(outputChan)
+	}()
+	return outputChan
+}
+
+func commandList(db *bolt.DB) {
+	for link := range allLinks(db) {
+		fmt.Println(link)
 	}
-	close(inputChan)
-	wg.Wait()
+}
+
+func commandExams(db *bolt.DB) {
+	var regexps []*regexp.Regexp
+	for _, pattern := range config.ExamFirstPass {
+		regexps = append(regexps, regexp.MustCompile(pattern))
+	}
+	for link := range allLinks(db) {
+		lower := strings.ToLower(link)
+		if !config.PDFRegexp.MatchString(lower) {
+			continue
+		}
+
+		for _, r := range regexps {
+			if r.MatchString(lower) {
+				fmt.Println(link)
+				break
+			}
+		}
+	}
 }
 
 var (
@@ -779,6 +812,9 @@ func main() {
 		switch args[0] {
 		case "list":
 			commandList(db)
+			return
+		case "exams":
+			commandExams(db)
 			return
 		}
 	}

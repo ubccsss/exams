@@ -114,6 +114,7 @@ func TestExtractYearFromWords(t *testing.T) {
 		{"January 2016", 2015},
 		{"April 2016", 2015},
 		{"May 2016", 2016},
+		{"3009 2499", 0},
 		{"https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs414/vprev/97-t2/414mt2-key.pdf potential/414mt2-key-3.pdf CPSC 414 97-98(T2) Midterm Exam #2", 1997},
 		{"http://www.ugrad.cs.ubc.ca/~cs418/2016-2/exams/midterm/a2015-2.pdf potential/a2015-2.pdf February 10, 2015 February 10, 2015", 2014},
 	}

@@ -12129,7 +12129,11 @@
       "Source": "https://www.ugrad.cs.ubc.ca/~cs430/mta/manual/manual.pdf",
       "Hash": "1b4e2a9ab2a86dee0f691c7f05cfee41ed9c3f65",
       "Score": 3,
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true,
+        "Course": "cs430"
+      }
     },
     {
       "Path": "potential/samplesolutions.pdf",
@@ -15329,7 +15333,12 @@
       "Path": "potential/533creport.pdf",
       "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca:80/%7emtan/533creport.pdf",
       "Hash": "474f5e4431ff42f7bbe2cef57d2c24d50d473a51",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Sample Midterm (Solution)",
+        "Term": "W2",
+        "Year": 1980
+      }
     },
     {
       "Path": "potential/johnprez.pdf",
@@ -17129,7 +17138,13 @@
       "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca:80/~conati/322-2001/midterm2001sol.pdf",
       "Hash": "474f5e4431ff42f7bbe2cef57d2c24d50d473a51",
       "Score": 2,
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Sample Midterm (Solution)",
+        "Term": "W2",
+        "Course": "cs322",
+        "Year": 2001
+      }
     },
     {
       "Path": "potential/Sketch2Pose_final.pdf",
@@ -24896,7 +24911,13 @@
       "Path": "potential/540report.pdf",
       "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca:80/%7emtan/540report.pdf",
       "Hash": "474f5e4431ff42f7bbe2cef57d2c24d50d473a51",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Sample Midterm (Solution)",
+        "Term": "W2",
+        "Course": "cs540",
+        "Year": 1980
+      }
     },
     {
       "Path": "potential/midterm%20report.pdf",
@@ -25396,7 +25417,12 @@
       "Path": "potential/533creport.pdf",
       "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca:80/%7emtan/533creport.pdf",
       "Hash": "474f5e4431ff42f7bbe2cef57d2c24d50d473a51",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Sample Midterm (Solution)",
+        "Term": "W2",
+        "Year": 1980
+      }
     },
     {
       "Path": "potential/practice-questions-2.pdf",
@@ -25523,7 +25549,13 @@
       "Path": "potential/review-4.pdf",
       "Source": "http://www.ugrad.cs.ubc.ca/~cs418/2016-2/exams/midterm/review/review.pdf",
       "Hash": "2fd642f46d79370514b1bc5371e9d6cdff6f5b7e",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final",
+        "Term": "W2",
+        "Course": "cs418",
+        "Year": 2016
+      }
     },
     {
       "Path": "potential/Question_02_09_2017__21_24_QZ_staticcontrolstructureexamplesfeb8.pdf",
@@ -25537,127 +25569,219 @@
       "Path": "potential/Practice16.pdf",
       "Source": "http://www.cs.ubc.ca/~little/cpsc425/Practice16.pdf",
       "Hash": "ade3153056c17f4ccccf4970637f79d7a81ac1e0",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Sample Midterm",
+        "Term": "W2",
+        "Course": "cs425"
+      }
     },
     {
       "Path": "potential/Midterm-1.pdf",
       "Source": "http://www.cs.ubc.ca/~conati/322/322-2016W2/slides/Midterm.pdf",
       "Hash": "d6af0be4fb69284bddfd697133d46d79cc3bda2b",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true,
+        "Course": "cs322",
+        "Year": 2016
+      }
     },
     {
       "Path": "potential/3NF_Synthesis__full_example.pdf",
       "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ix0usr0399p54o/irtyvevee5v5xu/iyyq2sav2l5p/3NF_Synthesis__full_example.pdf",
       "Hash": "fad7072d48f9fc98a959f76bc432b1d37535a7ac",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Midterm 1 (Solution)",
+        "Term": "W2",
+        "Course": "cs399"
+      }
     },
     {
       "Path": "potential/BCNF_examples.pdf",
       "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ix0usr0399p54o/irtyvevee5v5xu/iyfe0xd5zlmm/BCNF_examples.pdf",
       "Hash": "72fd0ec275f31a2ec3d00e5c6e675cf0a58d96f1",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final (Solution)",
+        "Term": "W1",
+        "Course": "cs399"
+      }
     },
     {
       "Path": "potential/BCNF_examples.pdf",
       "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ix0usr0399p54o/irtyvevee5v5xu/iyhwe331i3mr/BCNF_examples.pdf",
       "Hash": "0e976d0c8f775d8a86e1e7fb4561ad1318ddfd4b",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final (Solution)",
+        "Term": "W1",
+        "Course": "cs399"
+      }
     },
     {
       "Path": "potential/CPSC304BCNFExample.pdf",
       "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ix0usr0399p54o/gx6rnuxud8b7go/iyf2p3n58wfj/CPSC304BCNFExample.pdf",
       "Hash": "eca601c3fe1ade7c552559d356c6e9b8b6874706",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true,
+        "Course": "cs304"
+      }
     },
     {
       "Path": "potential/BCNF_examples-1.pdf",
       "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ix0usr0399p54o/irtyvevee5v5xu/iyhyrz8yo1ka/BCNF_examples.pdf",
       "Hash": "81bf81c722011fd3a78fe833963da15e8166d4cd",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final (Solution)",
+        "Term": "W2",
+        "Course": "cs399"
+      }
     },
     {
       "Path": "potential/sig-alternate-sample-6.pdf.html",
       "Source": "https://www.docdroid.net/5yvczkf/sig-alternate-sample.pdf.html",
       "Hash": "bf1199847ae112a9abf047414014919d055e98bf",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true
+      }
     },
     {
       "Path": "potential/sd-tosn-final-5.pdf",
       "Source": "http://research.microsoft.com/pubs/76131/sd-tosn-final.pdf",
       "Hash": "845bbe8a80bfae8fe273f64fc94b651ebe0bbbae",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true
+      }
     },
     {
       "Path": "potential/example-tree.pdf",
       "Source": "http://www.ugrad.cs.ubc.ca/~cs418/2016-2/lecture/01-25/src/example-tree.pdf",
       "Hash": "2abc574eebaeaa19e3f8855165510c7cba007730",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true,
+        "Course": "cs418",
+        "Year": 2025
+      }
     },
     {
       "Path": "potential/MoreQuestionsSolutions.pdf",
       "Source": "http://www.cs.ubc.ca/~conati/422/422-2010World/Final/MoreQuestionsSolutions.pdf",
       "Hash": "2cc620c83c4986c6732943bd037a67dc2d76d81d",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true,
+        "Course": "cs422",
+        "Year": 2010
+      }
     },
     {
       "Path": "potential/More%20Questions.pdf",
       "Source": "http://www.cs.ubc.ca/~conati/422/422-2010World/Final/More%20Questions.pdf",
       "Hash": "6f3796cb973b6ab71ed000688b74061c7a04b8a2",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true,
+        "Course": "cs422",
+        "Year": 2010
+      }
     },
     {
       "Path": "potential/vl2-sigcomm09-final-4.pdf",
       "Source": "http://research.microsoft.com/pubs/80693/vl2-sigcomm09-final.pdf",
       "Hash": "b796976c23ddb9f1b569964d8d91e1bc66b58b5b",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true
+      }
     },
     {
       "Path": "potential/problems-1.pdf",
       "Source": "http://www.cs.ubc.ca/~acm-web/practice/2016-01-09/problems/problems.pdf",
       "Hash": "d655aef06169577c0bc1cd0fb0cdd9d36a81a32e",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final (Solution)",
+        "Term": "W2",
+        "Year": 2009
+      }
     },
     {
       "Path": "potential/problems-1.pdf",
       "Source": "http://www.cs.ubc.ca/~acm-web/practice/2016-01-30/problems/problems.pdf",
       "Hash": "7510723439522c76802f69c42e072141dd088625",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final (Solution)",
+        "Term": "W2",
+        "Year": 2030
+      }
     },
     {
       "Path": "potential/problems-1.pdf",
       "Source": "http://www.cs.ubc.ca/~acm-web/practice/2015-07-18/problems/problems.pdf",
       "Hash": "a029c234e33b9cf1096dfd2ad65591e121a3a33a",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Sample Final (Solution)",
+        "Term": "W2",
+        "Year": 2018
+      }
     },
     {
       "Path": "potential/problemset-3.pdf",
       "Source": "http://www.cs.ubc.ca/~acm-web/practice/2014-10-25/problems/problemset.pdf",
       "Hash": "932bf03ed8444edee4262def6edc809124bdc597",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final (Solution)",
+        "Term": "W2",
+        "Year": 2025
+      }
     },
     {
       "Path": "potential/problemset-3.pdf",
       "Source": "http://www.cs.ubc.ca/~acm-web/practice/2015-10-10/problems/problemset.pdf",
       "Hash": "c6eddeadfe9942787a856ffcb1c8f6ace6e95635",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Final (Solution)",
+        "Term": "W2",
+        "Year": 2010
+      }
     },
     {
       "Path": "potential/WangFinal.pdf",
       "Source": "http://research.microsoft.com/%7Ecohen/WangFinal.pdf",
       "Hash": "a5e48a61ffad09fa79c5e0d3d8e9ef778358bdfa",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true
+      }
     },
     {
       "Path": "potential/U-Pass%20Review%20Final%20Report-4.pdf",
       "Source": "http://www.trek.ubc.ca/research/pdf/U-Pass%20Review%20Final%20Report.pdf",
       "Hash": "8a2827a10e17287af12faf943be1912da133e1d8",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true
+      }
     },
     {
       "Path": "potential/bhfinal-6.pdf",
       "Source": "http://ir.lib.sfu.ca/retrieve/272/bhfinal.pdf",
       "Hash": "75eab99f7bd46b722f76978b774039c457fca4d3",
-      "LastResponseCode": 200
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true
+      }
     },
     {
       "Name": "Midterm (Solution)",
