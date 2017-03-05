@@ -8,12 +8,14 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"path"
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/ubccsss/exams/archive.org"
@@ -23,42 +25,122 @@ import (
 
 // ingressDeptCourses sshes into the dept server and fetches the courses.
 func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Fprintf(w, "Fetching from ugrad servers...\n")
+
 	resp, err := exec.Command("ssh", "q7w9a@remote.ugrad.cs.ubc.ca", "-C", "ls /home/c").Output()
 	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	parts := bytes.Split(resp, []byte("\n"))
-	courseRegex := regexp.MustCompile("^cs\\d{3}$")
-	for _, part := range parts {
-		if !courseRegex.Match(part) {
-			continue
+		fmt.Fprintf(w, "%+v\n", err)
+	} else {
+		parts := bytes.Split(resp, []byte("\n"))
+		courseRegex := regexp.MustCompile("^cs\\d{3}$")
+		for _, part := range parts {
+			if !courseRegex.Match(part) {
+				continue
+			}
+			db.AddCourse(w, string(part), "")
 		}
-		db.AddCourse(w, string(part), "")
 	}
+
+	fmt.Fprintf(w, "Fetching from courses.students.ubc.ca...\n")
 
 	doc, err := goquery.NewDocument("https://courses.students.ubc.ca/cs/main?dept=CPSC&pname=subjarea&req=1&tname=subjareas")
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		fmt.Fprintf(w, "%+v\n", err)
+	} else {
+		doc.Find("#mainTable tr").Each(func(_ int, s *goquery.Selection) {
+			tds := s.Find("td")
+			link := tds.Find("a")
+			linkTitle := strings.ToLower(strings.TrimSpace(link.Text()))
+			if strings.HasPrefix(linkTitle, "cpsc ") {
+				course := "cs" + linkTitle[5:]
+				desc := strings.TrimSpace(tds.Eq(1).Text())
+				db.AddCourse(w, course, desc)
+			}
+		})
+	}
+
+	fmt.Fprintf(w, "Fetching from http://www.calendar.ubc.ca/archive/vancouver/...\n")
+
+	coursesRegexp, err := regexp.Compile(`^CPSC\s+(\d{3})\s+\(.+\)\s+(\w)?\s+(.+)$`)
+	if err != nil {
+		fmt.Fprintf(w, "%+v\n", err)
 		return
 	}
-	doc.Find("#mainTable tr").Each(func(_ int, s *goquery.Selection) {
-		tds := s.Find("td")
-		link := tds.Find("a")
-		linkTitle := strings.ToLower(strings.TrimSpace(link.Text()))
-		if strings.HasPrefix(linkTitle, "cpsc ") {
-			course := "cs" + linkTitle[5:]
-			desc := strings.TrimSpace(tds.Eq(1).Text())
-			db.AddCourse(w, course, desc)
-		}
-	})
 
-	fmt.Fprintf(w, "Done.")
+	currentYear := time.Now().Year()
+	lastTwoYear := currentYear - (currentYear/100)*100
+	for i := lastTwoYear; i >= 2; i-- {
+		url := fmt.Sprintf("http://www.calendar.ubc.ca/archive/vancouver/%.2d%.2d/courses.html", i, i+1)
+		doc, err := goquery.NewDocument(url)
+		if err != nil {
+			fmt.Fprintf(w, "%+v\n", err)
+			continue
+		}
+
+		subjectURL := getURLForLink(doc, "courses by subject code")
+		if len(subjectURL) == 0 {
+			fmt.Fprintf(w, "failed to find subject page for %q\n", url)
+			continue
+		}
+
+		subjectDoc, err := goquery.NewDocument(subjectURL)
+		if err != nil {
+			fmt.Fprintf(w, "%+v\n", err)
+			continue
+		}
+
+		coursesURL := getURLForLink(subjectDoc, "CPSC")
+		if len(coursesURL) == 0 {
+			fmt.Fprintf(w, "failed to find courses page for %q", subjectURL)
+			continue
+		}
+
+		coursesDoc, err := goquery.NewDocument(coursesURL)
+		if err != nil {
+			fmt.Fprintf(w, "%+v\n", err)
+			continue
+		}
+
+		coursesDoc.Find("dl > dt").Each(func(_ int, s *goquery.Selection) {
+			text := s.Text()
+			matches := coursesRegexp.FindStringSubmatch(text)
+			if len(matches) != 4 {
+				return
+			}
+			course := "cs" + matches[1] + matches[2]
+			desc := matches[3]
+			fmt.Fprintf(w, "%s: %s\n", course, desc)
+			db.AddCourse(w, course, desc)
+		})
+	}
+
+	fmt.Fprintf(w, "Done.\n")
 
 	if err := saveAndGenerate(); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+}
+
+func getURLForLink(doc *goquery.Document, text string) string {
+	target := strings.ToLower(strings.TrimSpace(text))
+	var found string
+	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
+		text := strings.ToLower(strings.TrimSpace(s.Text()))
+		if text == target {
+			found = s.AttrOr("href", "")
+		}
+	})
+	if len(found) == 0 {
+		return ""
+	}
+	u, err := url.Parse(found)
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+	return doc.Url.ResolveReference(u).String()
 }
 
 // ingressDeptFiles talks to the exams.cgi binary running on the ugrad servers and

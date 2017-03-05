@@ -292,7 +292,7 @@ func handleGenerate(w http.ResponseWriter, r *http.Request) {
 func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
-	if err := templates.ExecuteTemplate(w, "admin.html", nil); err != nil {
+	if err := generators.ExecuteTemplate(w, "admin.md", nil); err != nil {
 		handleErr(w, err)
 		return
 	}

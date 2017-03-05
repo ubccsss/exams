@@ -282,7 +282,7 @@ func main() {
 	}
 
 	var err error
-	generator, err = generators.MakeGenerator(&db, config.TemplateGlob, config.ExamsDir)
+	generator, err = generators.MakeGenerator(&db, config.ExamsDir)
 	if err != nil {
 		log.Fatal(err)
 	}

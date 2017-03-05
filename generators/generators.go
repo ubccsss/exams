@@ -2,6 +2,8 @@ package generators
 
 import (
 	"html/template"
+	"log"
+	"sync"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/pkg/errors"
@@ -14,25 +16,23 @@ type Generator struct {
 	templates            *template.Template
 	coursePotentialFiles map[string][]*examdb.File
 	layout               string
+	layoutOnce           sync.Once
 	examsDir             string
 }
 
 // MakeGenerator creates a new generator and loads all data required.
-func MakeGenerator(db *examdb.Database, templateGlob, examsDir string) (*Generator, error) {
-	templates, err := template.ParseGlob(templateGlob)
-	if err != nil {
-		return nil, err
-	}
+func MakeGenerator(db *examdb.Database, examsDir string) (*Generator, error) {
 	g := &Generator{
 		db:        db,
-		templates: templates,
+		templates: Templates,
 		examsDir:  examsDir,
 	}
-	layout, err := g.fetchTemplate()
-	if err != nil {
-		return nil, err
-	}
-	g.layout = layout
+
+	go func() {
+		if err := g.fetchLayout(); err != nil {
+			log.Println(err)
+		}
+	}()
 
 	return g, nil
 }

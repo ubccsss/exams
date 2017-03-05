@@ -24,7 +24,7 @@ iframe {
 <header>
   <h1><a href="/admin/potential">All</a> / {{ .File.Name }}</h1>
   <a href="{{ .File.Source }}">{{ .File.Source }}</a>
-  <a href="{{ .File.Path }}">{{ .File.Path }}</a>
+  <a href="{{ .FileURL }}">{{ .File.Path }}</a>
 </header>
 
 <article>
@@ -78,7 +78,7 @@ iframe {
       <input type="submit" value="Not An Exam / Invalid">
     </form>
   </div>
-  <iframe src="{{ if .File.Path }}/{{.File.Path}}{{else}}{{ .FileURL }}{{end}}">
+  <iframe src="{{ .FileURL }}">
   </iframe>
 </article>
 </well>

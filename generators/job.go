@@ -2,15 +2,9 @@ package generators
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
 	"time"
-
-	"github.com/ubccsss/exams/config"
 )
-
-// Templates are all of the HTML templates needed.
-var Templates = template.Must(template.ParseGlob(config.TemplateGlob))
 
 // PrettyJob wraps a plaintext job with a pretty HTML shell.
 func PrettyJob(f func(http.ResponseWriter, *http.Request)) func(http.ResponseWriter, *http.Request) {
@@ -18,14 +12,15 @@ func PrettyJob(f func(http.ResponseWriter, *http.Request)) func(http.ResponseWri
 	return func(w http.ResponseWriter, r *http.Request) {
 		RenderAdminHeader(w)
 
-		fmt.Fprintf(w, "<h1>Query: %s</h1>", r.URL.Path)
+		title := fmt.Sprintf("Query: %s", r.URL.Path)
+		fmt.Fprintf(w, "<h1>%s</h1>", title)
+		fmt.Fprintf(w, "<title>%s</title>", title)
 
 		start := time.Now()
 		fmt.Fprintf(w, "<p>Started at: %s</p>", start)
 
 		w.Write([]byte(`<script>
-		const int = setInterval(()=>window.scrollTo(0,document.body.offsetHeight),100);
-		document.addEventListener('load', () => {clearInterval(int)});
+		window.scrollerInterval = setInterval(()=>window.scrollTo(0,document.body.offsetHeight),100);
 		</script>`))
 
 		w.Write([]byte("<pre>"))
@@ -48,6 +43,11 @@ func PrettyJob(f func(http.ResponseWriter, *http.Request)) func(http.ResponseWri
 		f(w, r)
 		w.Write([]byte("</pre>"))
 		fmt.Fprintf(w, "<p>Time taken: %s, %s</p>", time.Since(start), time.Now())
+		fmt.Fprintf(w, `<p><a href="%s">Run Again</a></p>`, r.URL.Path)
+		w.Write([]byte(`<script>
+		window.scrollTo(0,document.body.offsetHeight);
+		clearInterval(window.scrollerInterval);
+		</script>`))
 	}
 }
 

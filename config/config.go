@@ -8,7 +8,8 @@ const (
 	ExamsDir         = StaticDir
 	UploadedExamsDir = "uploaded"
 	DBFile           = "data/exams.json"
-	TemplateGlob     = "templates/*"
+	TemplateDir      = "templates"
+	TemplateGlob     = TemplateDir + "/*"
 	ClassifierDir    = "data/classifiers"
 
 	// MaxFileSize is the max size of a file that we'll handle.

@@ -144,6 +144,9 @@ func (f *File) ComputeScore(db *Database) float64 {
 
 // IdealDir returns the directory the file should be in.
 func (f File) IdealDir() string {
+	if f.NotAnExam {
+		return "notanexam"
+	}
 	if f.IsPotential() || len(f.Course) == 0 {
 		return "potential"
 	}

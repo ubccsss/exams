@@ -103,6 +103,9 @@ type BayesianClassifier struct {
 	SampleClassifier   *bayesian.Classifier
 	SolutionClassifier *bayesian.Classifier
 	TermClassifier     *bayesian.Classifier
+
+	dir      string
+	loadOnce sync.Once
 }
 
 // MakeDocumentClassifier trains a document classifier with all files in the DB.
@@ -124,26 +127,34 @@ const (
 	TermClassifierFile     = "term.classifier"
 )
 
+func (d *BayesianClassifier) enforceLoaded() error {
+	var err error
+	d.loadOnce.Do(func() {
+		d.TypeClassifier, err = bayesian.NewClassifierFromFile(path.Join(d.dir, TypeClassifierFile))
+		if err != nil {
+			return
+		}
+		d.SampleClassifier, err = bayesian.NewClassifierFromFile(path.Join(d.dir, SampleClassifierFile))
+		if err != nil {
+			return
+		}
+		d.SolutionClassifier, err = bayesian.NewClassifierFromFile(path.Join(d.dir, SolutionClassifierFile))
+		if err != nil {
+			return
+		}
+		d.TermClassifier, err = bayesian.NewClassifierFromFile(path.Join(d.dir, TermClassifierFile))
+		if err != nil {
+			return
+		}
+	})
+	return err
+}
+
 // Load loads a classifier from a directory.
 func (d *BayesianClassifier) Load(dir string) error {
-	var err error
-	d.TypeClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, TypeClassifierFile))
-	if err != nil {
-		return err
-	}
-	d.SampleClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, SampleClassifierFile))
-	if err != nil {
-		return err
-	}
-	d.SolutionClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, SolutionClassifierFile))
-	if err != nil {
-		return err
-	}
-	d.TermClassifier, err = bayesian.NewClassifierFromFile(path.Join(dir, TermClassifierFile))
-	if err != nil {
-		return err
-	}
-	return nil
+	d.dir = dir
+
+	return d.enforceLoaded()
 }
 
 // Save saves a classifier to a directory.
@@ -211,6 +222,10 @@ func filesToWordBags(files []*examdb.File) (<-chan fileWords, <-chan error) {
 
 // Train trains a classifier from the database.
 func (d BayesianClassifier) Train(db *examdb.Database) error {
+	if err := d.enforceLoaded(); err != nil {
+		return err
+	}
+
 	log.Println("Training document classifier...")
 	documents := 0
 
@@ -276,6 +291,10 @@ func (d BayesianClassifier) Train(db *examdb.Database) error {
 
 // Classify returns the most likely labels for each function.
 func (d BayesianClassifier) Classify(f *examdb.File) (map[string]string, error) {
+	if err := d.enforceLoaded(); err != nil {
+		return nil, err
+	}
+
 	words, err := fileToWordBag(f)
 	if err != nil {
 		return nil, err
@@ -473,14 +492,18 @@ func LoadOrTrainClassifier(db *examdb.Database, classifierDir string) error {
 	if DefaultClassifier != nil {
 		return nil
 	}
-	log.Println("Loading classifier...")
-	DefaultClassifier = MakeDocumentClassifier()
-	if err := DefaultClassifier.Load(classifierDir); err != nil {
-		log.Printf("Failed to load classifier: %s", err)
-		if err := RetrainClassifier(db, classifierDir); err != nil {
-			return err
+	go func() {
+		start := time.Now()
+		log.Println("Loading classifier...")
+		DefaultClassifier = MakeDocumentClassifier()
+		if err := DefaultClassifier.Load(classifierDir); err != nil {
+			log.Printf("Failed to load classifier: %s", err)
+			if err := RetrainClassifier(db, classifierDir); err != nil {
+				log.Printf("Failed to retrain classifier: %s", err)
+			}
 		}
-	}
+		log.Printf("Loaded classifier. Took: %s", time.Since(start))
+	}()
 
 	return nil
 }

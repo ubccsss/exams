@@ -1,13 +1,78 @@
+<!DOCTYPE html>
+
+<link rel="shortcut icon" href="https://ubccsss.org/sites/all/themes/ubccsss.org-drupal-theme/favicon.ico" type="image/vnd.microsoft.icon"/>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat|PT+Sans|Roboto+Mono');
 body {
   margin-top: 60px;
-  font-family: 'Roboto', sans-serif;
+  font-family:'PT Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555555;
+  background-color: #ffffff;
+}
+h1,.h1,h2,.h2,h3,.h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h4,.h4,h5,.h5,h6,.h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+body .container {
+    padding: 0 15px;
+    margin: 20px auto 0;
+    max-width: 640px !important;
+}
+h1,.h1 {
+    font-size: 36px;
+}
+
+h2,.h2 {
+    font-size: 30px;
+}
+
+h3,.h3 {
+    font-size: 24px;
+}
+
+h4,.h4 {
+    font-size: 18px;
+}
+
+h5,.h5 {
+    font-size: 14px;
+}
+
+h6,.h6 {
+    font-size: 12px;
+}
+h1,h2,h3,h4,h5,h6 {
+  border-bottom: 1px solid #eeeeee;
+  color: #0a0e1a;
+  font-weight: 500;
+  line-height: 1.2;
 }
 h1,h2,h3,h4,h5,h6, header {
-  font-family: 'Roboto Slab', sans-serif;
+  font-family:'Montserrat','PT Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+header a:hover, header a:focus {
+  color: inherit;
+  text-decoration: inherit;
+}
+a:hover, a:focus {
+    color: #157ab5;
+    text-decoration: underline;
+}
+a:active, a:hover {
+    outline: 0;
+}
+a {
+    color: #2fa4e7;
+    text-decoration: none;
 }
 header {
-  width: 100%;
   padding: 0 20px;
   background-color: black;
   color: white;
@@ -15,19 +80,46 @@ header {
   line-height: 50px;
   top: 0;
   left: 0;
+  right: 0;
   position: fixed;
+
+  font-size: 0.9em !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
 }
 header a {
   color: white;
   text-decoration: none;
-  margin: 0 10px;
+  padding: 15px 15px;
 }
-.title {
-  font-size: 1.2em;
+header .container {
+  max-width: 768px !important;
+  margin: 0 auto !important;
+}
+pre {
+  background: #002b36!important;
+  color: #839496!important;
+  border: 1px solid rgba(255, 255, 255, .1) !important;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 20px;
+  font-family: 'Roboto Mono', monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 11pt;
+}
+.right {
+  float: right;
 }
 </style>
 <header>
-<a class="title" href="/admin/">Exambot Admin Panel</a>
-<a href="/admin/potential">Potential</a>
-<a href="/admin/needfix">Needfix</a>
+  <div class="container">
+    <a class="title" href="/admin/">Exambot Admin Panel</a>
+    <a href="/admin/potential">Potential</a>
+    <a href="/admin/needfix">Need Fix</a>
+
+    <span class="right">
+      <a href="/">Public View</a>
+    </span>
+  </div>
 </header>
