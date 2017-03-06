@@ -46,6 +46,7 @@ func adminRoutes() *http.ServeMux {
 	mux.HandleFunc("/admin/ingress/deptcourses", generators.PrettyJob(ingressDeptCourses))
 	mux.HandleFunc("/admin/ingress/deptfiles", generators.PrettyJob(ingressDeptFiles))
 	mux.HandleFunc("/admin/ingress/ubccsss", generators.PrettyJob(ingressUBCCSSS))
+	mux.HandleFunc("/admin/ingress/ubcmath", generators.PrettyJob(ingressUBCMath))
 	mux.HandleFunc("/admin/ingress/archive.org", generators.PrettyJob(ingressArchiveOrgFiles))
 
 	mux.HandleFunc("/admin/", handleAdminIndex)

@@ -588,6 +588,878 @@
     "cs649": {
       "Code": "cs649",
       "Desc": "Ph.D. Thesis"
+    },
+    "math 001": {
+      "Code": "math 001",
+      "Desc": "Algebra"
+    },
+    "math 002": {
+      "Code": "math 002",
+      "Desc": "Pre-Calculus"
+    },
+    "math 003": {
+      "Code": "math 003",
+      "Desc": "Differential Calculus I"
+    },
+    "math 004": {
+      "Code": "math 004",
+      "Desc": "Differential Calculus II"
+    },
+    "math 098": {
+      "Code": "math 098",
+      "Desc": "Pre-Calculus I"
+    },
+    "math 099": {
+      "Code": "math 099",
+      "Desc": "Pre-Calculus II"
+    },
+    "math 100": {
+      "Code": "math 100",
+      "Desc": "Differential Calculus with Applications to Physical Sciences and Engineering"
+    },
+    "math 101": {
+      "Code": "math 101",
+      "Desc": "Integral Calculus with Applications to Physical Sciences and Engineering"
+    },
+    "math 102": {
+      "Code": "math 102",
+      "Desc": "Differential Calculus with applications to Life Sciences"
+    },
+    "math 103": {
+      "Code": "math 103",
+      "Desc": "Integral Calculus with Applications to Life Sciences"
+    },
+    "math 104": {
+      "Code": "math 104",
+      "Desc": "Differential Calculus with Applications to Commerce and Social Sciences"
+    },
+    "math 105": {
+      "Code": "math 105",
+      "Desc": "Integral Calculus with Applications to Commerce and Social Sciences"
+    },
+    "math 110": {
+      "Code": "math 110",
+      "Desc": "Differential Calculus"
+    },
+    "math 111": {
+      "Code": "math 111",
+      "Desc": "Elementary Calculus"
+    },
+    "math 120": {
+      "Code": "math 120",
+      "Desc": "Differential Calculus"
+    },
+    "math 121": {
+      "Code": "math 121",
+      "Desc": "Integral Calculus"
+    },
+    "math 152": {
+      "Code": "math 152",
+      "Desc": "Linear Systems"
+    },
+    "math 180": {
+      "Code": "math 180",
+      "Desc": "Differential Calculus with Physical Applications"
+    },
+    "math 184": {
+      "Code": "math 184",
+      "Desc": "Differential Calculus for Social Science and Commerce"
+    },
+    "math 190": {
+      "Code": "math 190",
+      "Desc": "Calculus Survey"
+    },
+    "math 200": {
+      "Code": "math 200",
+      "Desc": "Calculus III"
+    },
+    "math 210": {
+      "Code": "math 210",
+      "Desc": "Introduction to Mathematical Computing"
+    },
+    "math 215": {
+      "Code": "math 215",
+      "Desc": "Elementary Differential Equations I"
+    },
+    "math 217": {
+      "Code": "math 217",
+      "Desc": "Multivariable and Vector Calculus"
+    },
+    "math 220": {
+      "Code": "math 220",
+      "Desc": "Analysis"
+    },
+    "math 221": {
+      "Code": "math 221",
+      "Desc": "Matrix Algebra"
+    },
+    "math 223": {
+      "Code": "math 223",
+      "Desc": "Linear Algebra"
+    },
+    "math 226": {
+      "Code": "math 226",
+      "Desc": "Advanced Calculus I"
+    },
+    "math 227": {
+      "Code": "math 227",
+      "Desc": "Advanced Calculus II"
+    },
+    "math 230": {
+      "Code": "math 230",
+      "Desc": "Introduction to Finite Mathematics"
+    },
+    "math 231": {
+      "Code": "math 231",
+      "Desc": "Topics in Finite Mathematics"
+    },
+    "math 253": {
+      "Code": "math 253",
+      "Desc": "Multivariable Calculus"
+    },
+    "math 255": {
+      "Code": "math 255",
+      "Desc": "Ordinary Differential Equations"
+    },
+    "math 256": {
+      "Code": "math 256",
+      "Desc": "Differential equations"
+    },
+    "math 257": {
+      "Code": "math 257",
+      "Desc": "Partial Differential Equations"
+    },
+    "math 263": {
+      "Code": "math 263",
+      "Desc": "Multivariable and Vector Calculus"
+    },
+    "math 264": {
+      "Code": "math 264",
+      "Desc": "Vector Calculus for Electrical Engineering"
+    },
+    "math 265": {
+      "Code": "math 265",
+      "Desc": "Linear Differential Equations"
+    },
+    "math 266": {
+      "Code": "math 266",
+      "Desc": "Vector calculus and complex variables"
+    },
+    "math 267": {
+      "Code": "math 267",
+      "Desc": "Mathematical Methods for Electrical and Computer Engineering"
+    },
+    "math 278": {
+      "Code": "math 278",
+      "Desc": "Linear Systems and Differential Equations"
+    },
+    "math 300": {
+      "Code": "math 300",
+      "Desc": "Introduction to Complex Variables"
+    },
+    "math 301": {
+      "Code": "math 301",
+      "Desc": "Applied Analysis"
+    },
+    "math 302": {
+      "Code": "math 302",
+      "Desc": "Introduction to Probability"
+    },
+    "math 303": {
+      "Code": "math 303",
+      "Desc": "Introduction to Stochastic Processes"
+    },
+    "math 305": {
+      "Code": "math 305",
+      "Desc": "Applied Complex Analysis"
+    },
+    "math 307": {
+      "Code": "math 307",
+      "Desc": "Applied Linear Algebra"
+    },
+    "math 308": {
+      "Code": "math 308",
+      "Desc": "Euclidean Geometry"
+    },
+    "math 309": {
+      "Code": "math 309",
+      "Desc": "Topics in Geometry"
+    },
+    "math 310": {
+      "Code": "math 310",
+      "Desc": "Abstract Linear Algebra"
+    },
+    "math 312": {
+      "Code": "math 312",
+      "Desc": "Introduction to Number Theory"
+    },
+    "math 313": {
+      "Code": "math 313",
+      "Desc": "Topics in Number Theory"
+    },
+    "math 314": {
+      "Code": "math 314",
+      "Desc": "Real Variables"
+    },
+    "math 316": {
+      "Code": "math 316",
+      "Desc": "Elementary Differential Equations II"
+    },
+    "math 317": {
+      "Code": "math 317",
+      "Desc": "Calculus IV"
+    },
+    "math 318": {
+      "Code": "math 318",
+      "Desc": "Probability with Physical Applications"
+    },
+    "math 320": {
+      "Code": "math 320",
+      "Desc": "Real Variables I"
+    },
+    "math 321": {
+      "Code": "math 321",
+      "Desc": "Real Variables II"
+    },
+    "math 322": {
+      "Code": "math 322",
+      "Desc": "Introduction to Algebra"
+    },
+    "math 323": {
+      "Code": "math 323",
+      "Desc": "Introduction to Rings and Modules"
+    },
+    "math 331": {
+      "Code": "math 331",
+      "Desc": "Problem Solving"
+    },
+    "math 335": {
+      "Code": "math 335",
+      "Desc": "Introduction to Mathematics"
+    },
+    "math 336": {
+      "Code": "math 336",
+      "Desc": "Mathematics by Inquiry"
+    },
+    "math 337": {
+      "Code": "math 337",
+      "Desc": "Mathematics for Teaching"
+    },
+    "math 340": {
+      "Code": "math 340",
+      "Desc": "Introduction to Linear Programming"
+    },
+    "math 342": {
+      "Code": "math 342",
+      "Desc": "Algebra, Coding Theory, and Cryptography"
+    },
+    "math 345": {
+      "Code": "math 345",
+      "Desc": "Applied Nonlinear Dynamics and Chaos"
+    },
+    "math 358": {
+      "Code": "math 358",
+      "Desc": "Engineering Analysis"
+    },
+    "math 360": {
+      "Code": "math 360",
+      "Desc": "Mathematical Modeling in Science"
+    },
+    "math 361": {
+      "Code": "math 361",
+      "Desc": "Introduction to Mathematical Biology"
+    },
+    "math 398": {
+      "Code": "math 398",
+      "Desc": "Co-operative Work Placement I"
+    },
+    "math 399": {
+      "Code": "math 399",
+      "Desc": "Co-operative Work Placement II"
+    },
+    "math 400": {
+      "Code": "math 400",
+      "Desc": "Applied Partial Differential Equations"
+    },
+    "math 401": {
+      "Code": "math 401",
+      "Desc": "Green's Functions and Variational Methods"
+    },
+    "math 402": {
+      "Code": "math 402",
+      "Desc": "Calculus of Variations"
+    },
+    "math 403": {
+      "Code": "math 403",
+      "Desc": "Stabilization and Optimal Control of Dynamical Systems"
+    },
+    "math 405": {
+      "Code": "math 405",
+      "Desc": "Numerical Methods for Differential Equations"
+    },
+    "math 406": {
+      "Code": "math 406",
+      "Desc": "Variational and Approximate Methods in Applied Mathematics"
+    },
+    "math 407": {
+      "Code": "math 407",
+      "Desc": "Applied Matrix Analysis"
+    },
+    "math 412": {
+      "Code": "math 412",
+      "Desc": "Theory of Modules"
+    },
+    "math 414": {
+      "Code": "math 414",
+      "Desc": "Mathematical Demonstrations"
+    },
+    "math 415": {
+      "Code": "math 415",
+      "Desc": "Introduction to Mathematical Logic"
+    },
+    "math 416": {
+      "Code": "math 416",
+      "Desc": "Ordinary Differential Equations"
+    },
+    "math 417": {
+      "Code": "math 417",
+      "Desc": "Partial Differential Equations"
+    },
+    "math 418": {
+      "Code": "math 418",
+      "Desc": "Probability"
+    },
+    "math 419": {
+      "Code": "math 419",
+      "Desc": "Stochastic Processes"
+    },
+    "math 420": {
+      "Code": "math 420",
+      "Desc": "Real Analysis I"
+    },
+    "math 421": {
+      "Code": "math 421",
+      "Desc": "Real Analysis II"
+    },
+    "math 422": {
+      "Code": "math 422",
+      "Desc": "Groups and Fields"
+    },
+    "math 423": {
+      "Code": "math 423",
+      "Desc": "Topics in Algebra"
+    },
+    "math 424": {
+      "Code": "math 424",
+      "Desc": "Classical Differential Geometry"
+    },
+    "math 425": {
+      "Code": "math 425",
+      "Desc": "Introduction to Modern Differential Geometry"
+    },
+    "math 426": {
+      "Code": "math 426",
+      "Desc": "Introduction to Topology"
+    },
+    "math 427": {
+      "Code": "math 427",
+      "Desc": "Topics in Topology"
+    },
+    "math 428": {
+      "Code": "math 428",
+      "Desc": "Mathematical Classical Mechanics I"
+    },
+    "math 429": {
+      "Code": "math 429",
+      "Desc": "Mathematical Classical Mechanics II"
+    },
+    "math 430c": {
+      "Code": "math 430c",
+      "Desc": "Special Topics in Analysis"
+    },
+    "math 431c": {
+      "Code": "math 431c",
+      "Desc": "Special Topics in Geometry"
+    },
+    "math 432c": {
+      "Code": "math 432c",
+      "Desc": "Special Topics in Algebra"
+    },
+    "math 437": {
+      "Code": "math 437",
+      "Desc": "Number Theory"
+    },
+    "math 440": {
+      "Code": "math 440",
+      "Desc": "Complex Analysis"
+    },
+    "math 441": {
+      "Code": "math 441",
+      "Desc": "Modelling of Discrete Optimization Problems"
+    },
+    "math 442": {
+      "Code": "math 442",
+      "Desc": "Optimization in Graphs and Networks"
+    },
+    "math 443": {
+      "Code": "math 443",
+      "Desc": "Graph Theory"
+    },
+    "math 444": {
+      "Code": "math 444",
+      "Desc": "Mathematical Research and Writing"
+    },
+    "math 445": {
+      "Code": "math 445",
+      "Desc": "Mathematical Modeling: Applications in the Natural and Social Sciences"
+    },
+    "math 446": {
+      "Code": "math 446",
+      "Desc": "Topics in the History of Mathematics I"
+    },
+    "math 447": {
+      "Code": "math 447",
+      "Desc": "Topics in the History of Mathematics II"
+    },
+    "math 448": {
+      "Code": "math 448",
+      "Desc": "Directed Studies in Mathematics"
+    },
+    "math 448a": {
+      "Code": "math 448a",
+      "Desc": "Directed Studies in Mathematics - DIRECTED STUDIES"
+    },
+    "math 449c": {
+      "Code": "math 449c",
+      "Desc": "Honours Reading"
+    },
+    "math 449d": {
+      "Code": "math 449d",
+      "Desc": "Honours Reading - HONOURS READING"
+    },
+    "math 449f": {
+      "Code": "math 449f",
+      "Desc": "Honours Reading - HONOURS READING"
+    },
+    "math 450": {
+      "Code": "math 450",
+      "Desc": "Asymptotic and Perturbation Methods"
+    },
+    "math 462": {
+      "Code": "math 462",
+      "Desc": "Projects in Mathematical Biology"
+    },
+    "math 498": {
+      "Code": "math 498",
+      "Desc": "Co-operative Work Placement III"
+    },
+    "math 499": {
+      "Code": "math 499",
+      "Desc": "Co-operative Work Placement IV"
+    },
+    "math 500": {
+      "Code": "math 500",
+      "Desc": "Mathematical Logic"
+    },
+    "math 501": {
+      "Code": "math 501",
+      "Desc": "Algebra I"
+    },
+    "math 502": {
+      "Code": "math 502",
+      "Desc": "Algebra II"
+    },
+    "math 503": {
+      "Code": "math 503",
+      "Desc": "Algebraic Structures I"
+    },
+    "math 504": {
+      "Code": "math 504",
+      "Desc": "Algebraic Structures II"
+    },
+    "math 507": {
+      "Code": "math 507",
+      "Desc": "Measure Theory and Integration"
+    },
+    "math 508": {
+      "Code": "math 508",
+      "Desc": "Complex Analysis I"
+    },
+    "math 509": {
+      "Code": "math 509",
+      "Desc": "Complex Analysis II"
+    },
+    "math 510": {
+      "Code": "math 510",
+      "Desc": "Functional Analysis"
+    },
+    "math 511": {
+      "Code": "math 511",
+      "Desc": "Operator Theory and Applications"
+    },
+    "math 512": {
+      "Code": "math 512",
+      "Desc": "Quantum Theory"
+    },
+    "math 513": {
+      "Code": "math 513",
+      "Desc": "Statistical Mechanics"
+    },
+    "math 514": {
+      "Code": "math 514",
+      "Desc": "Ordinary Differential Equations I"
+    },
+    "math 515": {
+      "Code": "math 515",
+      "Desc": "Ordinary Differential Equations II"
+    },
+    "math 516": {
+      "Code": "math 516",
+      "Desc": "Partial Differential Equations I"
+    },
+    "math 517": {
+      "Code": "math 517",
+      "Desc": "Partial Differential Equations II"
+    },
+    "math 518": {
+      "Code": "math 518",
+      "Desc": "Nonlinear Differential Equations"
+    },
+    "math 519": {
+      "Code": "math 519",
+      "Desc": "Fluid Mechanics I"
+    },
+    "math 520": {
+      "Code": "math 520",
+      "Desc": "Fluid Mechanics II"
+    },
+    "math 521": {
+      "Code": "math 521",
+      "Desc": "Numerical Analysis of Partial Differential Equations"
+    },
+    "math 522": {
+      "Code": "math 522",
+      "Desc": "Numerical Analysis"
+    },
+    "math 523": {
+      "Code": "math 523",
+      "Desc": "Combinatorial Optimization"
+    },
+    "math 525": {
+      "Code": "math 525",
+      "Desc": "Differential Geometry I"
+    },
+    "math 526": {
+      "Code": "math 526",
+      "Desc": "Differential Geometry II"
+    },
+    "math 527": {
+      "Code": "math 527",
+      "Desc": "Algebraic Topology I"
+    },
+    "math 528": {
+      "Code": "math 528",
+      "Desc": "Algebraic Topology II"
+    },
+    "math 529": {
+      "Code": "math 529",
+      "Desc": "Differential Topology"
+    },
+    "math 530": {
+      "Code": "math 530",
+      "Desc": "Geometric Topology I"
+    },
+    "math 531": {
+      "Code": "math 531",
+      "Desc": "Geometric Topology II"
+    },
+    "math 532": {
+      "Code": "math 532",
+      "Desc": "Algebraic Geometry I"
+    },
+    "math 533": {
+      "Code": "math 533",
+      "Desc": "Algebraic Geometry II"
+    },
+    "math 534": {
+      "Code": "math 534",
+      "Desc": "Lie Theory I"
+    },
+    "math 535": {
+      "Code": "math 535",
+      "Desc": "Lie Theory II"
+    },
+    "math 537": {
+      "Code": "math 537",
+      "Desc": "Algebraic Number Theory I"
+    },
+    "math 538": {
+      "Code": "math 538",
+      "Desc": "Algebraic Number Theory II"
+    },
+    "math 539": {
+      "Code": "math 539",
+      "Desc": "Analytic Number Theory I"
+    },
+    "math 540": {
+      "Code": "math 540",
+      "Desc": "Analytic Number Theory II"
+    },
+    "math 541": {
+      "Code": "math 541",
+      "Desc": "Harmonic Analysis I"
+    },
+    "math 542": {
+      "Code": "math 542",
+      "Desc": "Harmonic Analysis II"
+    },
+    "math 543": {
+      "Code": "math 543",
+      "Desc": "Discrete Harmonic Analysis"
+    },
+    "math 544": {
+      "Code": "math 544",
+      "Desc": "Probability I"
+    },
+    "math 545": {
+      "Code": "math 545",
+      "Desc": "Probability II"
+    },
+    "math 546": {
+      "Code": "math 546",
+      "Desc": "Continuous Time Stochastic Processes"
+    },
+    "math 547": {
+      "Code": "math 547",
+      "Desc": "Optimal Control Theory"
+    },
+    "math 548": {
+      "Code": "math 548",
+      "Desc": "Discrete Random Processes"
+    },
+    "math 549a": {
+      "Code": "math 549a",
+      "Desc": "Thesis for Master's Degree - MASTERS THESIS"
+    },
+    "math 549b": {
+      "Code": "math 549b",
+      "Desc": "Thesis for Master's Degree - MASTERS THESIS"
+    },
+    "math 549c": {
+      "Code": "math 549c",
+      "Desc": "Thesis for Master's Degree"
+    },
+    "math 550": {
+      "Code": "math 550",
+      "Desc": "Methods of Asymptotic Analysis"
+    },
+    "math 551": {
+      "Code": "math 551",
+      "Desc": "Perturbation Methods for Differential Equations"
+    },
+    "math 552": {
+      "Code": "math 552",
+      "Desc": "Introduction to Dynamical Systems"
+    },
+    "math 553": {
+      "Code": "math 553",
+      "Desc": "Advanced Dynamical Systems"
+    },
+    "math 554": {
+      "Code": "math 554",
+      "Desc": "Symmetries and Differential Equations"
+    },
+    "math 555": {
+      "Code": "math 555",
+      "Desc": "Compressed Sensing"
+    },
+    "math 556": {
+      "Code": "math 556",
+      "Desc": "Industrial Mathematical Modelling"
+    },
+    "math 557": {
+      "Code": "math 557",
+      "Desc": "Linear and Nonlinear Waves"
+    },
+    "math 559": {
+      "Code": "math 559",
+      "Desc": "Complex Fluids"
+    },
+    "math 560": {
+      "Code": "math 560",
+      "Desc": "Mathematical Biology I"
+    },
+    "math 561": {
+      "Code": "math 561",
+      "Desc": "Mathematical Biology II"
+    },
+    "math 562": {
+      "Code": "math 562",
+      "Desc": "Introduction to Mathematical Neurobiology"
+    },
+    "math 563": {
+      "Code": "math 563",
+      "Desc": "Modeling of Cell-Scale Biology"
+    },
+    "math 564": {
+      "Code": "math 564",
+      "Desc": "Evolutionary Dynamics"
+    },
+    "math 566": {
+      "Code": "math 566",
+      "Desc": "Theory of Optimal Transportation"
+    },
+    "math 567": {
+      "Code": "math 567",
+      "Desc": "Nonlinear Wave Equations"
+    },
+    "math 589": {
+      "Code": "math 589",
+      "Desc": "M.Sc. Major Essay"
+    },
+    "math 590c": {
+      "Code": "math 590c",
+      "Desc": "Graduate Seminar"
+    },
+    "math 591": {
+      "Code": "math 591",
+      "Desc": "Graduate Seminar in Applied Mathematics"
+    },
+    "math 592a": {
+      "Code": "math 592a",
+      "Desc": "Topics in Automorphic Forms - AUTOMORPHIC FORM"
+    },
+    "math 592b": {
+      "Code": "math 592b",
+      "Desc": "Topics in Automorphic Forms - AUTOMORPHIC FORM"
+    },
+    "math 592d": {
+      "Code": "math 592d",
+      "Desc": "Topics in Automorphic Forms"
+    },
+    "math 597": {
+      "Code": "math 597",
+      "Desc": "Co-operative Work Placement I"
+    },
+    "math 598": {
+      "Code": "math 598",
+      "Desc": "Co-operative Work Placement II"
+    },
+    "math 599": {
+      "Code": "math 599",
+      "Desc": "Mathematics Teaching Techniques"
+    },
+    "math 600c": {
+      "Code": "math 600c",
+      "Desc": "Topics in Algebra"
+    },
+    "math 600d": {
+      "Code": "math 600d",
+      "Desc": "Topics in Algebra - TOPICS IN ALGBRA"
+    },
+    "math 601c": {
+      "Code": "math 601c",
+      "Desc": "Topics in Analysis"
+    },
+    "math 602c": {
+      "Code": "math 602c",
+      "Desc": "Topics in Geometry"
+    },
+    "math 602d": {
+      "Code": "math 602d",
+      "Desc": "Topics in Geometry - TOPICS GEOMETRY"
+    },
+    "math 603c": {
+      "Code": "math 603c",
+      "Desc": "Topics in Topology"
+    },
+    "math 603d": {
+      "Code": "math 603d",
+      "Desc": "Topics in Topology - TOPICS TOPOLOGY"
+    },
+    "math 604c": {
+      "Code": "math 604c",
+      "Desc": "Topics in Optimization"
+    },
+    "math 604d": {
+      "Code": "math 604d",
+      "Desc": "Topics in Optimization - TPCS OPTIMZATION"
+    },
+    "math 605c": {
+      "Code": "math 605c",
+      "Desc": "Topics in Applied Mathematics"
+    },
+    "math 606c": {
+      "Code": "math 606c",
+      "Desc": "Topics in Differential Equations"
+    },
+    "math 607c": {
+      "Code": "math 607c",
+      "Desc": "Topics in Numerical Analysis"
+    },
+    "math 607e": {
+      "Code": "math 607e",
+      "Desc": "Topics in Numerical Analysis - TPCS NUMERIC ANL"
+    },
+    "math 608c": {
+      "Code": "math 608c",
+      "Desc": "Topics in Probability"
+    },
+    "math 609c": {
+      "Code": "math 609c",
+      "Desc": "Topics in Mathematical Physics"
+    },
+    "math 610c": {
+      "Code": "math 610c",
+      "Desc": "Topics in Pure Mathematics"
+    },
+    "math 611c": {
+      "Code": "math 611c",
+      "Desc": "Topics in Functional Analysis"
+    },
+    "math 612c": {
+      "Code": "math 612c",
+      "Desc": "Topics in Mathematical Biology"
+    },
+    "math 613": {
+      "Code": "math 613",
+      "Desc": "Topics in Number Theory"
+    },
+    "math 613d": {
+      "Code": "math 613d",
+      "Desc": "Topics in Number Theory"
+    },
+    "math 614d": {
+      "Code": "math 614d",
+      "Desc": "Topics in Mathematical Finance"
+    },
+    "math 615a": {
+      "Code": "math 615a",
+      "Desc": "Topics in Algebraic Geometry - ALGEBRAIC GEOMET"
+    },
+    "math 615d": {
+      "Code": "math 615d",
+      "Desc": "Topics in Algebraic Geometry"
+    },
+    "math 616d": {
+      "Code": "math 616d",
+      "Desc": "Topics in Discrete Mathematics"
+    },
+    "math 620a": {
+      "Code": "math 620a",
+      "Desc": "Directed Studies in Mathematics - DIRECT STDS MATH"
+    },
+    "math 620c": {
+      "Code": "math 620c",
+      "Desc": "Directed Studies in Mathematics"
+    },
+    "math 620e": {
+      "Code": "math 620e",
+      "Desc": "Directed Studies in Mathematics - DIRECT STDS MATH"
+    },
+    "math 649": {
+      "Code": "math 649",
+      "Desc": "Ph.D. Thesis"
     }
   },
   "Files": [
@@ -10246,6 +11118,8 @@
       "Source": "https://www.ugrad.cs.ubc.ca/~cs314/Vjan2011/finaltopics.pdf",
       "Hash": "009f157d3c8d246b6eb884953f95bebe7d3d5819",
       "Score": 4,
+      "NotAnExam": true,
+      "HandClassified": true,
       "LastResponseCode": 200,
       "Inferred": {
         "NotAnExam": true,
@@ -25833,6 +26707,4978 @@
         "Course": "cs304",
         "Year": 2011
       }
+    },
+    {
+      "Name": "Final",
+      "Path": "math 516/2008/516_2008WT1-2.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/516_2008WT1.pdf",
+      "Hash": "9c249ad14f75245aa5ee58fae816307ff70f5d57",
+      "Term": "W1",
+      "Course": "math 516",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 422/2012/422+501_2012WT1-2.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/422+501_2012WT1.pdf",
+      "Hash": "41d8e670599447d2662a6cc9650e5837cdb6aa5a",
+      "Term": "W1",
+      "Course": "math 422",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 422/2013/422+501_2013WT1-2.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/422+501_2013WT1.pdf",
+      "Hash": "5cfc15c94aaf5e2f60e3a1dbed941b8cf9411c26",
+      "Term": "W1",
+      "Course": "math 422",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 545/2013/545_2013WT2-2.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/545_2013WT2.pdf",
+      "Hash": "ebcfb4ef36900e97a7ebf3f4ec4f51acf81b9276",
+      "Term": "W2",
+      "Course": "math 545",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 545/2013/545_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/545_2013WT2.pdf",
+      "Hash": "ebcfb4ef36900e97a7ebf3f4ec4f51acf81b9276",
+      "Term": "W2",
+      "Course": "math 545",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 516/2008/516_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/516_2008WT1.pdf",
+      "Hash": "9c249ad14f75245aa5ee58fae816307ff70f5d57",
+      "Term": "W1",
+      "Course": "math 516",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 437/2011/437+537_2011WT1-2.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/437+537_2011WT1.pdf",
+      "Hash": "fff14019b3f61895d6abd980a44bcdf850b0dd6d",
+      "Term": "W1",
+      "Course": "math 437",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 437/2006/437+537_2006WT1-2.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/437+537_2006WT1.pdf",
+      "Hash": "f4131333eb7180644db1a86d582e820fa7a8539c",
+      "Term": "W1",
+      "Course": "math 437",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 516/2008/516_2008WT1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/516_2008WT1.pdf",
+      "Hash": "9c249ad14f75245aa5ee58fae816307ff70f5d57",
+      "Term": "W1",
+      "Course": "math 516",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 437/2011/437+537_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/437+537_2011WT1.pdf",
+      "Hash": "fff14019b3f61895d6abd980a44bcdf850b0dd6d",
+      "Term": "W1",
+      "Course": "math 437",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 423/2007/423+502_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/423+502_2007WT2.pdf",
+      "Hash": "b593bedabaa9da23c596f4b434b1551cbb7787d7",
+      "Term": "W2",
+      "Course": "math 423",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 545/2013/545_2013WT2.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/545_2013WT2.pdf",
+      "Hash": "ebcfb4ef36900e97a7ebf3f4ec4f51acf81b9276",
+      "Term": "W2",
+      "Course": "math 545",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2005/100+180_2005WT1-3.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2005WT1.pdf",
+      "Hash": "6e1a4c2a41b6085fdfdba11311766418697ddfda",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2008/100+180_2008WT1-3.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2008WT1.pdf",
+      "Hash": "59b34522bddb69689c7008eb6d588cfac92b0980",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2006/100+180_2006WT1-3.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2006WT1.pdf",
+      "Hash": "7383a07828e89cecf844562bf7cf274f22d34621",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2009/100+180_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2009WT1.pdf",
+      "Hash": "05108cde39c4648318b0a6097b554400e9550076",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2007/100+180_2007WT1-3.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2007WT1.pdf",
+      "Hash": "1cf4fca9cc445b7ed773c8df6a3946622199fab0",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2012/100+180_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2012WT1.pdf",
+      "Hash": "8bf8a374d7d398a5d7749808d03350dfb7a171fc",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2012/100+180_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2012WT2.pdf",
+      "Hash": "135c78d4c8c98ff34f3b6f4b1abfd811dc84aba8",
+      "Term": "W2",
+      "Course": "math 100",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2013/100+180_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2013WT2.pdf",
+      "Hash": "17536776a9a06c37413b0aa91bc9ef97762534d5",
+      "Term": "W2",
+      "Course": "math 100",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2014/100+180_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2014WT1.pdf",
+      "Hash": "d2e65a0c3de4763fb4a3f8e6a660b566bafee27e",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2015/100+180_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2015WT1.pdf",
+      "Hash": "7548b1b4938d83cfd9579671f96b578bbeddb70a",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2004/101_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2004WT2.pdf",
+      "Hash": "ead1330bdc24ae89c13f66128716daf47eb7e5f4",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2005/101_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2005WT2.pdf",
+      "Hash": "4ddc02ed96225eecdf9ac6b3727016459a75eee3",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2006/101_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2006WT2.pdf",
+      "Hash": "8553166caa4dbad2168bdc51cda748963a05f48a",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2013/100+180_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2013WT1.pdf",
+      "Hash": "2a2e6cf28c9bc458747928a99ebe6b5169bc118b",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2007/101_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2007WT2.pdf",
+      "Hash": "345051eb7cc888fe5f2a77c5d21e23329a76c42d",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2011/100+180_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2011WT1.pdf",
+      "Hash": "4c04543f6bbe9f5f1e10a526e45b0f909fe55441",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2010/101_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2010WT2.pdf",
+      "Hash": "c900b3691cf70208bd3a89309732df1f7cfe3ff9",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2008/101_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2008WT2.pdf",
+      "Hash": "dc1e342c27247b41c71e8553674c3da557cd0359",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2009/101_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2009WT2.pdf",
+      "Hash": "2c545de9441ec7395693534686a54cb687e7ef5e",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 100/2010/100+180_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/100+180_2010WT1.pdf",
+      "Hash": "7189cde3745fac88e3afadc050e7197a07480817",
+      "Term": "W1",
+      "Course": "math 100",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2012/101_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2012WT2.pdf",
+      "Hash": "da9adf5327ac94ba0a6f1b88e767740d4ca78c83",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2011/101_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2011WT2.pdf",
+      "Hash": "11a5085a237eecf7a0efc963684af9f9a7d312cc",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2006/102_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2006WT1.pdf",
+      "Hash": "1a55f7d98c0696c9308d0d5bde3a9f2f44dc1427",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2013/101_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2013WT2.pdf",
+      "Hash": "760963a38efddaa081162b242cd35e033f1acb18",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2014/101_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2014WT1.pdf",
+      "Hash": "4ca1244d50a6be41310a07556307a4e1b6b34b5c",
+      "Term": "W1",
+      "Course": "math 101",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2008/102_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2008WT1.pdf",
+      "Hash": "39822baf3d6f39728392d3a882d4249c6a389a18",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2009/102_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2009WT1.pdf",
+      "Hash": "d744b3f4e59f5356863b1832e095cf5e4b6994f0",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 101/2014/101_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/101_2014WT2.pdf",
+      "Hash": "303ec75985a9c43b1fb971ea6c98275ace8c6013",
+      "Term": "W2",
+      "Course": "math 101",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2010/102_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2010WT1.pdf",
+      "Hash": "fa73baf6914eea6d3d09cfbef2069908ffa43ed3",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2012/102_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2012WT1.pdf",
+      "Hash": "57bf758d7884509acd2776956b5a07a0c9f69677",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2004/103_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2004WT2.pdf",
+      "Hash": "6629415d4c1d5c65dc6ba49638644b8d1d32e8ee",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2005/103_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2005WT2.pdf",
+      "Hash": "f7ab6b47bc29aa9e556f8cbf554055c2af933b54",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2011/102_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2011WT1.pdf",
+      "Hash": "4aaa9cecabde0bcaa677894e5a1acdd889eeae46",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2013/102_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2013WT1.pdf",
+      "Hash": "3f6e3b1a3b1e361558086d45f362f1b1ac009b39",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2008/103_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2008WT2.pdf",
+      "Hash": "f98d32c72b85c8048f4993acf0b682b2ea8a0da5",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2009/103_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2009WT2.pdf",
+      "Hash": "76aee8f9f4e9e0f24bd4b51a10b3ec57a1cebb40",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 102/2014/102_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/102_2014WT1.pdf",
+      "Hash": "5221b933deb1ebbbc9ad27baed21105a5daea528",
+      "Term": "W1",
+      "Course": "math 102",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2011/103_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2011WT2.pdf",
+      "Hash": "3bfaa853d8bf34b44ceab6f8d77700fdf9f8aa48",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2010/103_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2010WT2.pdf",
+      "Hash": "a8ee0826a1373a6638afaa001b8179fafa10df73",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2013/103_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2013WT2.pdf",
+      "Hash": "add04aabe0e8298502fdd8aaf5191f17b08b81a1",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2014/103_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2014WT2.pdf",
+      "Hash": "e4dacea556d11fe9313b238b0f4718ddf8540b05",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2008/104+184_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2008WT1.pdf",
+      "Hash": "7226906082f368a0e704ba75cf3ba6d8ea993381",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 103/2012/103_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/103_2012WT2.pdf",
+      "Hash": "86304076ce529f82bb60eca635213ea815c86fb7",
+      "Term": "W2",
+      "Course": "math 103",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2006/104+184_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2006WT1.pdf",
+      "Hash": "2a305ea5ce197829bdff62525ec79f7d0fb9f386",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2009/104+184_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2009WT1.pdf",
+      "Hash": "ea9a6945bdffb81e1c633e30d5e00f93df0a0d2f",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2012/104+184_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2012WT2.pdf",
+      "Hash": "75595849e972c6e4302ee74ffc293c14b0c478ad",
+      "Term": "W2",
+      "Course": "math 104",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2011/104+184_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2011WT1.pdf",
+      "Hash": "4efef501da70d12bd71ace8917bcd3d50a11b5eb",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2010/104+184_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2010WT1.pdf",
+      "Hash": "85811b5755899656f89b23500cd2ca48b7c02852",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2014/104+184_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2014WT1.pdf",
+      "Hash": "5ca70257ebc87300af076b1bd2f1f1db2cbbb0b2",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2013/104+184_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2013WT1.pdf",
+      "Hash": "3f23d7e08414a851b35aea87bb392d15d88eb93f",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2005/105_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2005WT2.pdf",
+      "Hash": "9db85dda975546207d8aea2d3242d8b41cadeb2f",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2004/105_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2004WT2.pdf",
+      "Hash": "b76e8e441946c2b8f15f2a7bef5991130acdd3d2",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2012/104+184_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2012WT1.pdf",
+      "Hash": "31307be93b22f1dc7eade8acaffacb2944ed0fd2",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2009/105_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2009WT2.pdf",
+      "Hash": "673e4f53fb9a81e87f5be8175b43684cc109db92",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2008/105_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2008WT2.pdf",
+      "Hash": "fcddd9b1d8abae0b4419a6956bef18c4ae5f76c4",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2012/105_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2012WT2.pdf",
+      "Hash": "08408fc58f3c0d024c2a7a58b2d30daef96f7cfb",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2011/105_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2011WT2.pdf",
+      "Hash": "448d9a9fa979774b8e187fd179fd8a7e6503c7bb",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2013/105_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2013WT2.pdf",
+      "Hash": "032c41d9598924cfc5806939d2e933853eac172d",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 104/2015/104+184_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/104+184_2015WT1.pdf",
+      "Hash": "ffec07be6961aae962bcc56028b2f5dc242ead9a",
+      "Term": "W1",
+      "Course": "math 104",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 110/2011/110_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/110_2011WT1.pdf",
+      "Hash": "e6b041a660ac5c36e94621a8018d3ae3526f33c1",
+      "Term": "W1",
+      "Course": "math 110",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2010/105_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2010WT2.pdf",
+      "Hash": "76338d5d96656b2ce9158676a2ce58e1f5206808",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 110/2011/110_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/110_2011WT2.pdf",
+      "Hash": "d73034e8d5e0812fa66cedaff63d439de91700cb",
+      "Term": "W2",
+      "Course": "math 110",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 110/2012/110_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/110_2012WT2.pdf",
+      "Hash": "04355a8c4f238e333e675ee5f149ce57d222326e",
+      "Term": "W2",
+      "Course": "math 110",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 105/2014/105_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/105_2014WT2.pdf",
+      "Hash": "c264af26e482cf10cf77e395bfcd9ef2d8e5e007",
+      "Term": "W2",
+      "Course": "math 105",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 120/2006/120_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/120_2006WT1.pdf",
+      "Hash": "48af24eae315013b5e871e3eb23584e5e05bf201",
+      "Term": "W1",
+      "Course": "math 120",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 110/2013/110_2013WT1_sec003-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/110_2013WT1_sec003.pdf",
+      "Hash": "78f37872861ec685c0454bdc5f66f49b6a6137f6",
+      "Term": "W1",
+      "Course": "math 110",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 120/2007/120_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/120_2007WT1.pdf",
+      "Hash": "dea81d5afe46bc386cbf5bb11de23aa94144520b",
+      "Term": "W1",
+      "Course": "math 120",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 120/2009/120_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/120_2009WT1.pdf",
+      "Hash": "7f1e2b70b97b8803bfa0355afc8224640e32b79a",
+      "Term": "W1",
+      "Course": "math 120",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 120/2010/120_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/120_2010WT1.pdf",
+      "Hash": "ee67a8b2e7820c08b28d5ecf735d51fab606b6ae",
+      "Term": "W1",
+      "Course": "math 120",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 120/2012/120_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/120_2012WT1.pdf",
+      "Hash": "401f952f20497f71509f413675209adb81ca14d7",
+      "Term": "W1",
+      "Course": "math 120",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 110/2013/110_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/110_2013WT2.pdf",
+      "Hash": "feb4d34d7fa3cddbef5f0b18dc740e2e66488239",
+      "Term": "W2",
+      "Course": "math 110",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 120/2011/120_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/120_2011WT1.pdf",
+      "Hash": "be0d08f8d5503bdf5498ef710e36a7b664993692",
+      "Term": "W1",
+      "Course": "math 120",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 121/2006/121_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/121_2006WT2.pdf",
+      "Hash": "ea6511b459db0ef6584e409dc4eb0291a270723f",
+      "Term": "W2",
+      "Course": "math 121",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 121/2004/121_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/121_2004WT2.pdf",
+      "Hash": "505190147c3d1b27f6fc5269ef34a7477791d188",
+      "Term": "W2",
+      "Course": "math 121",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 121/2008/121_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/121_2008WT2.pdf",
+      "Hash": "0616d43b0d1d684d91fcf8699feec253750ed11e",
+      "Term": "W2",
+      "Course": "math 121",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 121/2009/121_2009WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/121_2009WT2_sec201.pdf",
+      "Hash": "f9c4c76e43689099cb4dea128401e07b4808cf63",
+      "Term": "W2",
+      "Course": "math 121",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 121/2011/121_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/121_2011WT2.pdf",
+      "Hash": "8671f67381b552762c484efcea1da6125bac4541",
+      "Term": "W2",
+      "Course": "math 121",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2005/152_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2005WT2.pdf",
+      "Hash": "ef91b8e0e2eac0437c62a267831577b12f167955",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2004/152_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2004WT2.pdf",
+      "Hash": "935f029875e844b388ff5db1e3b7e80637d0249d",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2007/152_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2007WT2.pdf",
+      "Hash": "cb7c7b993cdcd3549398c71402baf00f5be5aad5",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 121/2013/121_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/121_2013WT2.pdf",
+      "Hash": "b8778fb9c498767fab1583fead52b96107e7c148",
+      "Term": "W2",
+      "Course": "math 121",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2008/152_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2008WT2.pdf",
+      "Hash": "ad897ca81b897cd74fdc887369e1fb567947249e",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2010/152_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2010WT2.pdf",
+      "Hash": "16f8f320933227ea8ba689a15dec7cc7ae6140d1",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2009/152_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2009WT2.pdf",
+      "Hash": "c8f6ef5868e7bd5d26cab33a2a3c2bd407985392",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2011/152_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2011WT2.pdf",
+      "Hash": "fdfb085aa0a769c229eb092c7d1af9570815fc6d",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 190/2010/190_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/190_2010WT1.pdf",
+      "Hash": "47e30063e896bacc6d2dc0af548a01ef3fa5e6af",
+      "Term": "W1",
+      "Course": "math 190",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2012/152_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2012WT2.pdf",
+      "Hash": "64f695357fe40a6e0ed6285954eb8ae195ff830d",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2005/200_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2005WT1.pdf",
+      "Hash": "574f0d6bdec3ae6e340360385aba69b89c4e88fc",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2014/152_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2014WT2.pdf",
+      "Hash": "bf1ded3309447c28013c0a93031406c82636779d",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2004/200_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2004WT2.pdf",
+      "Hash": "a26f4dd4995513c9c58cd7c2e63ce74e68ebbd05",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2005/200_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2005WT2.pdf",
+      "Hash": "6e0084cd6b712240f2aa8fa31131cdeaf5f68726",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2006/200_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2006WT1.pdf",
+      "Hash": "a06d9df4ceb214dae5b3179100312efe8e81913c",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2006/200_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2006WT2.pdf",
+      "Hash": "71073ef5ef1cfa5338e7e74a1a8479950f91d4c9",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2007/200_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2007WT1.pdf",
+      "Hash": "ec2bec6b7a9e33fa6d47c2cb6b469b6be0cf667c",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2008/200_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2008WT1.pdf",
+      "Hash": "850b9c1fa2a6c2fd39e8db4a94c73a352f2d799a",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2007/200_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2007WT2.pdf",
+      "Hash": "dd96502ea3643765393c7fae8f32d0f907a0e5e5",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2008/200_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2008WT2.pdf",
+      "Hash": "2556823450339cc6246766e0aa784b2cac4bdfc7",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2009/200_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2009WT1.pdf",
+      "Hash": "7c2d173eff9a65793b202c38f25868d07be4b0ec",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2010/200_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2010WT1.pdf",
+      "Hash": "d0e775fa2d2f16dd1fa7d22ab1036da88911a4a8",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2010/200_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2010WT2.pdf",
+      "Hash": "250cb0b697ebddbbd2d590e6e42d47398c10ce75",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2011/200_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2011WT1.pdf",
+      "Hash": "148602cf3d09ad67a994436aeb11c489c276efce",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2009/200_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2009WT2.pdf",
+      "Hash": "03551cfba5925265c9ad5dcdc1c32bde6f5e53db",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2011/200_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2011WT2.pdf",
+      "Hash": "027ba787b12e5c5267d3980cba24537c95268f0b",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2012/200_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2012WT1.pdf",
+      "Hash": "4f1209183e75026b42d877d671e1ae0026603fea",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2013/200_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2013WT1.pdf",
+      "Hash": "ed4835485a3d16266c670ecf09d1667f0e67a182",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2014/200_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2014WT1.pdf",
+      "Hash": "b552ecafb35c644bd35cb8139f29119507b12320",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2013/200_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2013WT2.pdf",
+      "Hash": "f49432a331be65534021c98a79646fe8d588fb76",
+      "Term": "W2",
+      "Course": "math 200",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 210/2008/210_2008WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/210_2008WT2_sec201.pdf",
+      "Hash": "dd0fb7c8a985417dd3d8033657e47591af830c1d",
+      "Term": "W2",
+      "Course": "math 210",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 200/2015/200_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/200_2015WT1.pdf",
+      "Hash": "43d62907e8d0b2461e505d7e92ae269ced4c846c",
+      "Term": "W1",
+      "Course": "math 200",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 210/2012/210_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/210_2012WT2.pdf",
+      "Hash": "f006f2ed08da6f0e4d2eceb05d64d863b808fed4",
+      "Term": "W2",
+      "Course": "math 210",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 210/2013/210_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/210_2013WT2.pdf",
+      "Hash": "df287987bccd968bed31ae9f1aca91e1371b24f0",
+      "Term": "W2",
+      "Course": "math 210",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2004/215+255_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2004WT2.pdf",
+      "Hash": "0ae0f27932e83f22b9e1eb493af934bc3de8bd98",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2005/215+255_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2005WT2.pdf",
+      "Hash": "a995c3b68f8628576e4c4ed2ac85993d6fa07b1f",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 210/2014/210_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/210_2014WT2.pdf",
+      "Hash": "c4c9572acc534c91d66bde2af958526f21340e5f",
+      "Term": "W2",
+      "Course": "math 210",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2006/215+255_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2006WT2.pdf",
+      "Hash": "386c780b8d8a49c0be72e175f35e7e82e9f6b05a",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2006/215+255_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2006WT1.pdf",
+      "Hash": "d566bd452fab2196c0e27998916430d3e9786c99",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2008/215+255_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2008WT2.pdf",
+      "Hash": "91741c3fb03309f5ae1c155df536fa2d0cf3ecd1",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2005/215+255_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2005WT1.pdf",
+      "Hash": "56010fb3caf1fb7b6139bc1daa44ad959b813c90",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2009/215+255_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2009WT1.pdf",
+      "Hash": "010d19c5cf6902173af6897a94c20f3771fc1d17",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2009/215+255_2009WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2009WT2_sec201.pdf",
+      "Hash": "fdb3d0bf206e8c121e32a728b5f2c5f2f0b94a50",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2007/215+255_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2007WT1.pdf",
+      "Hash": "ae3265e8ded7b8253d636bd8fcc3fa09b9632631",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2010/215+255_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2010WT2.pdf",
+      "Hash": "05cab203cef90acd425f3ba994babba82a09cfb3",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2010/215+255_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2010WT1.pdf",
+      "Hash": "1ebc1c19276ca904318f4939bb25ef85ce565f1b",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2011/215+255_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2011WT1.pdf",
+      "Hash": "e1959d48a5311d905f443b92e8003c206b6b0ace",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2011/215+255_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2011WT2.pdf",
+      "Hash": "4274f58369382438316771793e6c847649876e1e",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2012/215+255_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2012WT2.pdf",
+      "Hash": "a87447fcfa4bb9843aad700d06f0bfef72a28811",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2014/215+255_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2014WT1.pdf",
+      "Hash": "ef20c8b5f64fbadaa9f1ef5a23f2c547d9e15f67",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2013/215+255_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2013WT2.pdf",
+      "Hash": "a37eabd033dee700cd25cc3dfe7b5dfd91b628e4",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2014/215_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215_2014WT2.pdf",
+      "Hash": "38f884f86829512128bd60722beb2aab8d9bf420",
+      "Term": "W2",
+      "Course": "math 215",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 215/2013/215+255_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/215+255_2013WT1.pdf",
+      "Hash": "7e29e0798ab74f6e788c10806cee4c1a6e9f591f",
+      "Term": "W1",
+      "Course": "math 215",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 217/2008/217_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/217_2008WT1.pdf",
+      "Hash": "af7b1dc793afa46c9b9e207516881a39966b3907",
+      "Term": "W1",
+      "Course": "math 217",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 217/2006/217_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/217_2006WT1.pdf",
+      "Hash": "719e2f37ae57f3b2ac7be47bcad54aa47333f05a",
+      "Term": "W1",
+      "Course": "math 217",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 217/2005/217_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/217_2005WT1.pdf",
+      "Hash": "ba5e31428bcab4fa53bd2c2d930d998a95a93cd9",
+      "Term": "W1",
+      "Course": "math 217",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2004/220_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2004WT2.pdf",
+      "Hash": "1765b3599316382cd68db1e3ea37fbea02cb9221",
+      "Term": "W2",
+      "Course": "math 220",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 217/2013/217_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/217_2013WT1.pdf",
+      "Hash": "604f3bfa91cecb5943cd5800ef167089d7f0e289",
+      "Term": "W1",
+      "Course": "math 217",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 217/2011/217_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/217_2011WT1.pdf",
+      "Hash": "1d261f36afd471bfaec26e22147eb0a12231d3aa",
+      "Term": "W1",
+      "Course": "math 217",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2007/220_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2007WT2.pdf",
+      "Hash": "e55b06c9a137729b7d389b636ff07eabc5be3679",
+      "Term": "W2",
+      "Course": "math 220",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2005/220_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2005WT1.pdf",
+      "Hash": "513f79c79cd18cef8a73661c944665db58d5d85f",
+      "Term": "W1",
+      "Course": "math 220",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2008/220_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2008WT2.pdf",
+      "Hash": "75e68bbaf34bb3157879a638a2395f52dfbc576f",
+      "Term": "W2",
+      "Course": "math 220",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2009/220_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2009WT1.pdf",
+      "Hash": "d1236e09582458c620a9351db08bea3e9a341c12",
+      "Term": "W1",
+      "Course": "math 220",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2010/220_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2010WT2.pdf",
+      "Hash": "be54236ac20b548330acbf1567c2ac2451c84c81",
+      "Term": "W2",
+      "Course": "math 220",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2011/220_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2011WT1.pdf",
+      "Hash": "2da9ec2b00dd19cce1d85e7e7533645f8d7ea9df",
+      "Term": "W1",
+      "Course": "math 220",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2010/220_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2010WT1.pdf",
+      "Hash": "7e2634a0bc7b6c018b9f3931256a4d6c55cba557",
+      "Term": "W1",
+      "Course": "math 220",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2012/220_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2012WT2.pdf",
+      "Hash": "bdfab895eae188e76268f4a376a5544e48936d4c",
+      "Term": "W2",
+      "Course": "math 220",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2013/220_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2013WT1.pdf",
+      "Hash": "2973268e6418521aa040f2912fafc7bb04c84329",
+      "Term": "W1",
+      "Course": "math 220",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2014/220_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2014WT1.pdf",
+      "Hash": "491dde19402b2d30e5fb029f69bc7f6ef148d1cb",
+      "Term": "W1",
+      "Course": "math 220",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2004/221_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2004WT2.pdf",
+      "Hash": "44da623ac21bcc34d2b8c419fd7fefd16c67df31",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2005/221_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2005WT1.pdf",
+      "Hash": "9bd630cef71612a7c697237d2259990d1020ea0f",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2005/221_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2005WT2.pdf",
+      "Hash": "2aacfcc35852daf705ebfae9bdab281bd09863b4",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2006/221_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2006WT1.pdf",
+      "Hash": "b13e4dcbbfdbfa562cad9a715cbdd72cd94db3ca",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2006/221_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2006WT2.pdf",
+      "Hash": "c2e979ac24b329f6ef1705cef838439d78d2c98a",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2007/221_2007WT1_sec102-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2007WT1_sec102.pdf",
+      "Hash": "a9ee908ad675aa8b0a804aabcba903a5e498f747",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2007/221_2007WT1_sec101-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2007WT1_sec101.pdf",
+      "Hash": "72416731dfc753fa71c738769584b0f524ee8e28",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2007/221_2007WT1_sec103-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2007WT1_sec103.pdf",
+      "Hash": "040db8c41365bb3d8be710baa6c4e2748ac18ed4",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2007/221_2007WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2007WT2_sec201.pdf",
+      "Hash": "9182656e6d6be0610428a16444119c1fa5eb4dee",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2007/221_2007WT2_sec202-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2007WT2_sec202.pdf",
+      "Hash": "326c06cf2f825f02a9af7dc99852028e739ba0eb",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2007/221_2007WT2_sec203-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2007WT2_sec203.pdf",
+      "Hash": "106e5b0b88ab65f179da1593069d7a263928b4a5",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2008/221_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2008WT1.pdf",
+      "Hash": "f384214bf1d5f174848980209203e30e68044d39",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2009/221_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2009WT1.pdf",
+      "Hash": "8363fcc2933a0399c45b8f5a5caef3925d731529",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2008/221_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2008WT2.pdf",
+      "Hash": "572ee31dc14ea9a4a4720a4ead21d3095f55beaf",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2009/221_2009WT2_sec201+203-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2009WT2_sec201+203.pdf",
+      "Hash": "6d8112f03563954ee2dafb9d5cd7aabd05f2f4d7",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2009/221_2009WT2_sec202-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2009WT2_sec202.pdf",
+      "Hash": "c0c5d7d7ccf5e15e77c3fd83794b0fb481e4933c",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2011/221_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2011WT1.pdf",
+      "Hash": "a18df0a92fe176fc14a98924cb3939e6e5b11a8d",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2012/221_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2012WT2.pdf",
+      "Hash": "cdb38d24cb6f0222e76eb0723a8ce32ccd961e64",
+      "Term": "W2",
+      "Course": "math 221",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 152/2013/152_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/152_2013WT2.pdf",
+      "Hash": "f6fe90bb31646819b8b9f82d8d9499905e7a663c",
+      "Term": "W2",
+      "Course": "math 152",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2004/223_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2004WT2.pdf",
+      "Hash": "c4895d0badadf984b094530d599e97b233160f57",
+      "Term": "W2",
+      "Course": "math 223",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 221/2015/221_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/221_2015WT1.pdf",
+      "Hash": "99eae82a56de8a12f4e39be0ead524d767791ef5",
+      "Term": "W1",
+      "Course": "math 221",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2006/223_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2006WT1.pdf",
+      "Hash": "cd68b895d30c1ec18def678f929167b4772c91de",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2008/223_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2008WT1.pdf",
+      "Hash": "3e2d9c993314b6c161b43c7ca7f3851a72077183",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2007/223_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2007WT1.pdf",
+      "Hash": "f6c494ef9f99b2851b6581abe4aa393b6a042d3c",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2008/223_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2008WT2.pdf",
+      "Hash": "d75c865fdabe4e2d22bca144d5b8f6d98781a140",
+      "Term": "W2",
+      "Course": "math 223",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2009/223_2009WT1_sec101-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2009WT1_sec101.pdf",
+      "Hash": "3409bbc03897e1ff84c81863e3cbd05d933291d5",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 220/2012/220_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/220_2012WT1.pdf",
+      "Hash": "8adcbafad74690f2d5fe089c43c1bc6b136c2b9d",
+      "Term": "W1",
+      "Course": "math 220",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2010/223_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2010WT1.pdf",
+      "Hash": "04340e9913c024442f83f0d9ae7e9ed49d98c050",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2012/223_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2012WT1.pdf",
+      "Hash": "5275590359990e9617b58953ac8c07dbccadb6dc",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2011/223_2011WT1_sec101-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2011WT1_sec101.pdf",
+      "Hash": "15f3f8836fdaa8e2e16710a689a6e634ab8f985f",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2000/226_2000WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2000WT1.pdf",
+      "Hash": "6a9a4b27bfa0f559c75e5f7dbcbd8f58d45673c3",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2000,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2001/226_2001WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2001WT1.pdf",
+      "Hash": "ff6820360061b3f6256dbd1927224c2ae39c164e",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2001,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2003/226_2003WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2003WT1.pdf",
+      "Hash": "bfeca93117b106f729b672833b067f42897320c4",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2003,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 223/2013/223_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/223_2013WT1.pdf",
+      "Hash": "1d5e8ed9e4763e07e719073a6173f5e477461485",
+      "Term": "W1",
+      "Course": "math 223",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2002/226_2002WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2002WT1.pdf",
+      "Hash": "25a388e35f5868491d2087db61ad71d93c767f29",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2002,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2005/226_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2005WT1.pdf",
+      "Hash": "86c8c614c6fba7ea580bc39482e48bee0d1da618",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2007/226_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2007WT1.pdf",
+      "Hash": "c545d0385bf1aec58e504f2d2542b18eeb3f73d1",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2006/226_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2006WT1.pdf",
+      "Hash": "9447424fb0fc89edbf2d67c241d8f85707684e47",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2010/226_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2010WT1.pdf",
+      "Hash": "f9759a4e43772e8ae5a1135b2b3b790a22e12d51",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2009/226_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2009WT1.pdf",
+      "Hash": "ab7ea6bb30a03d7a077895f86e111edc86d037a2",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 226/2011/226_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/226_2011WT1.pdf",
+      "Hash": "a70cd5bf7feead7e57955528228ddcaafd5773d7",
+      "Term": "W1",
+      "Course": "math 226",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 227/2004/227_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/227_2004WT2.pdf",
+      "Hash": "010f3aabfa811227ca841f17aaf5e937245194b9",
+      "Term": "W2",
+      "Course": "math 227",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 227/2008/227_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/227_2008WT2.pdf",
+      "Hash": "24278b35fa1d9b5358b28b731f8c01f502a05fe2",
+      "Term": "W2",
+      "Course": "math 227",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 227/2005/227_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/227_2005WT2.pdf",
+      "Hash": "aa80406a3ff1859bf0e4b818a5a43244c26c85b6",
+      "Term": "W2",
+      "Course": "math 227",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 227/2012/227_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/227_2012WT2.pdf",
+      "Hash": "901f81858062fbae811e2b59542729a4ccc6b074",
+      "Term": "W2",
+      "Course": "math 227",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 230/2008/230_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/230_2008WT1.pdf",
+      "Hash": "33829e4939770b51de5a37bc7959a7e0b5dbe30e",
+      "Term": "W1",
+      "Course": "math 230",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 227/2010/227_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/227_2010WT2.pdf",
+      "Hash": "950b5371242a4bfa5b5a946411bfa100d1430cd1",
+      "Term": "W2",
+      "Course": "math 227",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2007/253_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2007WT1.pdf",
+      "Hash": "56ee2c483ce79bb56aac421fb2ec6af025044120",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2010/253_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2010WT1.pdf",
+      "Hash": "9fefd53ac20b3f6400865b63275e05177fe3b2a6",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 230/2011/230_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/230_2011WT1.pdf",
+      "Hash": "295013abc5265b6d5f9c500080a7c233730625fc",
+      "Term": "W1",
+      "Course": "math 230",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2009/253_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2009WT1.pdf",
+      "Hash": "b322629fc5105387133485cb55ce91a78d6eb99b",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2011/253_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2011WT1.pdf",
+      "Hash": "dfbd509d60e18b1fb0b1166266dc4f3f6d6dd446",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2014/253_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2014WT1.pdf",
+      "Hash": "351d1655be4db83db4d771d8a1d2af07c87a0775",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2012/253_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2012WT1.pdf",
+      "Hash": "1db133b9e0b76fb87168ce1e29786454a48befae",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2004/256_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2004WT2.pdf",
+      "Hash": "a4ab8b7d84533fa6774f05762e5e4119eb494aed",
+      "Term": "W2",
+      "Course": "math 256",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2007/256_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2007WT2.pdf",
+      "Hash": "337bd9b633e4982be086f44c76403fb77b23a9d2",
+      "Term": "W2",
+      "Course": "math 256",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2006/256_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2006WT2.pdf",
+      "Hash": "81dcdac82be221b573b7862addaed5ad2e9217e2",
+      "Term": "W2",
+      "Course": "math 256",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2008/256_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2008WT2.pdf",
+      "Hash": "bdd69647bc6368f0afec5e0354087e418edd6ca9",
+      "Term": "W2",
+      "Course": "math 256",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2009/256_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2009WT2.pdf",
+      "Hash": "6b21760e35d08d2821f8a471d5d78e280cbda2ec",
+      "Term": "W2",
+      "Course": "math 256",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2015/253_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2015WT1.pdf",
+      "Hash": "45697b1e2f874070e110410ff0ea5f9ff4a07960",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2013/256_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2013WT1.pdf",
+      "Hash": "0708307f8bb033b0569b33e48c2fd2bdfeb22263",
+      "Term": "W1",
+      "Course": "math 256",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2012/256_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2012WT2.pdf",
+      "Hash": "c39254b0c51ae1d7ab4aa63951352bbb83218220",
+      "Term": "W2",
+      "Course": "math 256",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2014/256_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2014WT1.pdf",
+      "Hash": "9ec5289445f31faa82aac6697c5d433fd56cc34f",
+      "Term": "W1",
+      "Course": "math 256",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2004/257+316_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2004WT2.pdf",
+      "Hash": "b7d671522cc0b181d81ab69bcd3c06235efb4c7d",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2005/257+316_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2005WT1.pdf",
+      "Hash": "147e89a59d9690840e2afed8e5bae9e86af791d1",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 253/2013/253_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/253_2013WT1.pdf",
+      "Hash": "36b7d07035667b5b1dfe7312815f415b1f8e2df4",
+      "Term": "W1",
+      "Course": "math 253",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2006/257+316_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2006WT2.pdf",
+      "Hash": "6721367f7493e15d88df2cb5385f2fc9bca48fbe",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2007/257+316_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2007WT1.pdf",
+      "Hash": "9128dad77ec80330202c1100e411c64b9cc3d807",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2005/257+316_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2005WT2.pdf",
+      "Hash": "f1285994cfabcae8d82c53363775f84aadd94b0a",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2007/257+316_2007WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2007WT2_sec201.pdf",
+      "Hash": "635df56e0bc20f34611325ed34797fb1e5dfc8a5",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2009/257+316_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2009WT1.pdf",
+      "Hash": "3137df97cf1d243c0252c89717a266c2b96a9eff",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2008/257+316_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2008WT1.pdf",
+      "Hash": "a4962e44259791d71fb3e3d2c1e25ce80f7158a6",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2008/257+316_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2008WT2.pdf",
+      "Hash": "d0fe97cfe41aa8311acdcf19a4cf59b2bacd176a",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2009/257+316_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2009WT2.pdf",
+      "Hash": "5509c15eae442b7494a7f7e2cbe79f7eed80f6bb",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2011/257+316_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2011WT1.pdf",
+      "Hash": "13014f074417a9e7972f503cdf40ddcdd5b9b751",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2011/257+316_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2011WT2.pdf",
+      "Hash": "ae89f9c6d14b2793666f0f7a9547c24505bd5a79",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2010/257+316_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2010WT1.pdf",
+      "Hash": "22e12a105e39e7067a3848bf333e75959dd722a3",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2012/257+316_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2012WT1.pdf",
+      "Hash": "cb5b6f8d1ced96515cde7b7bb125b049004696ce",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2012/257+316_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2012WT2.pdf",
+      "Hash": "569c7cac316e4500378cbd1ea37b2e33c869b011",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2013/257+316_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2013WT1.pdf",
+      "Hash": "9243094494a554205c46c9e77a9a8f9a2f153b2c",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2014/257+316_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2014WT1.pdf",
+      "Hash": "0f4c5f8757f3b7901262e80dff6eaa38e8b04fa3",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2013/257+316_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2013WT2.pdf",
+      "Hash": "8a0395a489c080acd90acb1cc2034c813b7b4a3f",
+      "Term": "W2",
+      "Course": "math 257",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 257/2015/257+316_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/257+316_2015WT1.pdf",
+      "Hash": "eaa9791df3a8020e597ec4921080900c3a01b97b",
+      "Term": "W1",
+      "Course": "math 257",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 263/2006/263_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/263_2006WT1.pdf",
+      "Hash": "5de59f7994b6b8fbdb2de9318a3ae383b0a54c75",
+      "Term": "W1",
+      "Course": "math 263",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 263/2007/263_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/263_2007WT1.pdf",
+      "Hash": "1fef8d2a23d9b12d3bed75eb5fe82aa7e544c133",
+      "Term": "W1",
+      "Course": "math 263",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 263/2009/263_2009WT1_sec101-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/263_2009WT1_sec101.pdf",
+      "Hash": "b3036a0d0b1cb19e6f9eaadf3577019de4f3f937",
+      "Term": "W1",
+      "Course": "math 263",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 263/2009/263_2009WT1_sec102-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/263_2009WT1_sec102.pdf",
+      "Hash": "57e2ea87358881192250423131e1a97d5b09671e",
+      "Term": "W1",
+      "Course": "math 263",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2005/265_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2005WT1.pdf",
+      "Hash": "07a9384845edbe17f57f1179750528e39b91b590",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 263/2010/263_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/263_2010WT1.pdf",
+      "Hash": "75ff4ceefa1f6af007c029b55896c914151c96fd",
+      "Term": "W1",
+      "Course": "math 263",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2007/265_2007WT1_sec101-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2007WT1_sec101.pdf",
+      "Hash": "40fa2deb0817554b01e40e49c9f3ba4c23751c6f",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2007/265_2007WT1_sec102-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2007WT1_sec102.pdf",
+      "Hash": "43fc38d90238c53296a5a1e93c19d905b796da16",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2007/265_2007WT1_sec103-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2007WT1_sec103.pdf",
+      "Hash": "fb5a61a57d1b149af37d5a29b435f3a8758dd152",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2009/265_2009WT1_sec101-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2009WT1_sec101.pdf",
+      "Hash": "8a07e29e0c2a1318c8ac765ddc1ba8d7b8a26df0",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2010/265_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2010WT1.pdf",
+      "Hash": "898c6191c59c8aaa73e04627ce0e2a55473b5102",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2008/265_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2008WT1.pdf",
+      "Hash": "5a93f7f86125966981477627ba5c29049443b93c",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 267/2004/267_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/267_2004WT2.pdf",
+      "Hash": "334c28cfd92becb1aef7710b5f85a7b2017f9a61",
+      "Term": "W2",
+      "Course": "math 267",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2012/265_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2012WT1.pdf",
+      "Hash": "bf46be800d35446be5f05bcb40b96e91fdb22988",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 267/2006/267_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/267_2006WT2.pdf",
+      "Hash": "210be56acabbc041cafde063c1daec27d29e3c2c",
+      "Term": "W2",
+      "Course": "math 267",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 265/2011/265_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/265_2011WT1.pdf",
+      "Hash": "35a2be4426576aa5f48fe6bf5a78d3c1734c2c35",
+      "Term": "W1",
+      "Course": "math 265",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 267/2009/267_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/267_2009WT1.pdf",
+      "Hash": "8a25c20a53d8a00ba532b393fb48614fd213b030",
+      "Term": "W1",
+      "Course": "math 267",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 267/2008/267_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/267_2008WT2.pdf",
+      "Hash": "6f36598377b741e99242eab0fec17bc7a4b63990",
+      "Term": "W2",
+      "Course": "math 267",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 267/2009/267_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/267_2009WT2.pdf",
+      "Hash": "5f5aabc6da3d67cdab7bd45071f3d81cc8a0850a",
+      "Term": "W2",
+      "Course": "math 267",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 267/2011/267_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/267_2011WT1.pdf",
+      "Hash": "3a683f225dd2cee26d3bc649a9936c7339eb069f",
+      "Term": "W1",
+      "Course": "math 267",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 267/2012/267_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/267_2012WT1.pdf",
+      "Hash": "94c18b0ef9fba40020d941368d9940c889fa7827",
+      "Term": "W1",
+      "Course": "math 267",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 256/2013/256_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/256_2013WT2.pdf",
+      "Hash": "e685220a849a656d1b7ec674e24f41c35e04e362",
+      "Term": "W2",
+      "Course": "math 256",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2005/300_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2005WT1.pdf",
+      "Hash": "509f26f21bafff9a61b36f2427346b3b6c2f0e0b",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2005/300_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2005WT2.pdf",
+      "Hash": "29a6c648b9a435f4c199fcdbb519ae198fc6986d",
+      "Term": "W2",
+      "Course": "math 300",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2007/300_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2007WT1.pdf",
+      "Hash": "b5d4a6262a83d81eb5ef2ba1f1569869f1f94fb2",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2009/300_2009WT1_sec101+102-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2009WT1_sec101+102.pdf",
+      "Hash": "9ed698294e41c670689820dbfcf8dd99d93d7208",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2008/300_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2008WT2.pdf",
+      "Hash": "394f501b75f80196981e5a5c8c3dd5e7a2b9ca32",
+      "Term": "W2",
+      "Course": "math 300",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2004/300_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2004WT2.pdf",
+      "Hash": "6d94ee66ed24f7576e50be6dc48d0f5525a7ccd3",
+      "Term": "W2",
+      "Course": "math 300",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2011/300_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2011WT1.pdf",
+      "Hash": "5fd857e0692abfa0fa6311a020dce911c938f6b1",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2008/300_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2008WT1.pdf",
+      "Hash": "684ad202e34491c4350c0c47aff2b1c7bcb82380",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2010/300_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2010WT1.pdf",
+      "Hash": "52a4fb100ac2c7fe1789ab48c5c04a75246a46f2",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2004/301_2004WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2004WT2_sec201.pdf",
+      "Hash": "6acac93fdd7abeffe0c57d37117077d2cab5c717",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2014/300_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2014WT1.pdf",
+      "Hash": "19487ed736eadeec01033754755e8e33d8c6d02d",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2011/300_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2011WT2.pdf",
+      "Hash": "c0f1c95df17adee534b23dac3b4869f08ded0ae4",
+      "Term": "W2",
+      "Course": "math 300",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 300/2012/300_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/300_2012WT1.pdf",
+      "Hash": "f8493f1a3bca449f919f8c6984ec5439d492de69",
+      "Term": "W1",
+      "Course": "math 300",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2006/301_2006WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2006WT2_sec201.pdf",
+      "Hash": "0a32c1e6c89a6a10ae40e80d95474bba9d54441a",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2009/301_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2009WT2.pdf",
+      "Hash": "f19d68f7df89910f2d740a9fba7300f992fc3a8c",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2008/301_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2008WT2.pdf",
+      "Hash": "0d37c8449963837055693bd9b1fc3a30a446a552",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2010/301_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2010WT2.pdf",
+      "Hash": "bbb06ceae7ae4d93c137cd0b31c597a13876bbca",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2007/301_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2007WT2.pdf",
+      "Hash": "36e1ad91c16b981c5d0a2c6013b4d1ac58f1d5a8",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2011/301_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2011WT2.pdf",
+      "Hash": "df5f95cbd5ecb92c96d53d369f152f36fe44fc6b",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2013/301_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2013WT2.pdf",
+      "Hash": "c19a06d513f0a4dd169c0c5a93704da625709abc",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2012/301_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2012WT2.pdf",
+      "Hash": "697e20e3a55720151c32ac7e4c420e48dc69d7f8",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 302/2004/302_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/302_2004WT2.pdf",
+      "Hash": "8482e98803b600043d0f50d9815842206c8e00e3",
+      "Term": "W2",
+      "Course": "math 302",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 302/2009/302_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/302_2009WT1.pdf",
+      "Hash": "ce7bb9fb4e80d7b64c04973ce77951b8ce1d266a",
+      "Term": "W1",
+      "Course": "math 302",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 302/2010/302_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/302_2010WT1.pdf",
+      "Hash": "d1d81ca7094d03d0379c8ed4ffa66642057f38dc",
+      "Term": "W1",
+      "Course": "math 302",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 302/2012/302_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/302_2012WT2.pdf",
+      "Hash": "9166dd1b7b84623fc2724ccc7bd54e3afe8a0ff1",
+      "Term": "W2",
+      "Course": "math 302",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 302/2011/302_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/302_2011WT1.pdf",
+      "Hash": "5f1667b679aeb2cda7022c06226f319f301b58e8",
+      "Term": "W1",
+      "Course": "math 302",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 302/2012/302_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/302_2012WT1.pdf",
+      "Hash": "70c0e9b9098dbccb1040431285055d48333723bf",
+      "Term": "W1",
+      "Course": "math 302",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2007/303_2007WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2007WT2_sec201.pdf",
+      "Hash": "e684a9c16c07a590109bf5c343462989d656243c",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2004/303_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2004WT2.pdf",
+      "Hash": "a6a011fa72706936e52a52f1821743a5b7b3fe29",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2008/303_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2008WT2.pdf",
+      "Hash": "f7639cda3c3c73ccd1256868663bf3a7633c0341",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 301/2014/301_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/301_2014WT2.pdf",
+      "Hash": "dafffa477261e00c394be879ea1c1f33fe6633f5",
+      "Term": "W2",
+      "Course": "math 301",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 302/2015/302_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/302_2015WT1.pdf",
+      "Hash": "033f7aa94809dfd337bc0a59068af3c80fe51c65",
+      "Term": "W1",
+      "Course": "math 302",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2009/303_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2009WT2.pdf",
+      "Hash": "4459cc44cb25b142e393756b5c35f1a9786d3d08",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2012/303_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2012WT2.pdf",
+      "Hash": "d53c2964eaa5f86e76e9a8bb0101aa853d60ca30",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2011/303_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2011WT2.pdf",
+      "Hash": "cbb8046fe34886436b13a4f8dc69d7b2c16b4353",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2010/303_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2010WT2.pdf",
+      "Hash": "930440ac742aaad854616bbae49d9e6eff0055fb",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 305/2010/305_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/305_2010WT1.pdf",
+      "Hash": "c15e4123699ce3b18e904402f8fafa3dda3799b1",
+      "Term": "W1",
+      "Course": "math 305",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 305/2012/305_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/305_2012WT1.pdf",
+      "Hash": "f044c5832d4daf09d1478b2eabf7024c9526df93",
+      "Term": "W1",
+      "Course": "math 305",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2013/303_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2013WT2.pdf",
+      "Hash": "e499334f4aa52aa0f684e6758e8d59481328d76a",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 303/2014/303_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/303_2014WT2.pdf",
+      "Hash": "251780789398b009db2d0d6e4f4141ec8262fc6d",
+      "Term": "W2",
+      "Course": "math 303",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2005/307_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2005WT1.pdf",
+      "Hash": "ab9c976a0a4069fcb174542df58f3daa0c9cb74f",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2004/307_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2004WT2.pdf",
+      "Hash": "d131c4b67988ef4c72ad416f8384791eaf51c241",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 305/2013/305_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/305_2013WT1.pdf",
+      "Hash": "2a64e8cf31f70bc25c811c0b86939b668b74d99c",
+      "Term": "W1",
+      "Course": "math 305",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2006/307_2006WT1_sec101-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2006WT1_sec101.pdf",
+      "Hash": "57738d02b43b905df7d02ce82a653e6c3fab74db",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 305/2014/305_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/305_2014WT1.pdf",
+      "Hash": "24097391f9627014f5b60a08134b70e141b63b4a",
+      "Term": "W1",
+      "Course": "math 305",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2006/307_2006WT1_sec102-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2006WT1_sec102.pdf",
+      "Hash": "db2efc279e3cb453b6c69d3003408e841b6b97d4",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2005/307_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2005WT2.pdf",
+      "Hash": "c086a210c7ba59c88521e0a7d18420c77f1e5d04",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2008/307_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2008WT1.pdf",
+      "Hash": "aa5ee2b0d298180e41e01899643832a4ab14f5bc",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2008/307_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2008WT2.pdf",
+      "Hash": "c462e5013356fedb72031516058eb841b1eed525",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2009/307_2009WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2009WT2_sec201.pdf",
+      "Hash": "22dada6d0b7e811d95b39ef9bd320dca8cc89da7",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2010/307_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2010WT1.pdf",
+      "Hash": "55f7cddfc5ba17ec00e37a0d8776df07b65a0dfa",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2011/307_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2011WT2.pdf",
+      "Hash": "2aca8614d5b63d96afd42719e1ee39b4f6d7c857",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2012/307_2012WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2012WT2_sec201.pdf",
+      "Hash": "7a8e3d27839ab038a1d39f961e2d7f99229e813c",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2012/307_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2012WT1.pdf",
+      "Hash": "b8efeb4d8a750cd5c80f64d6334186a17bd46f17",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2013/307_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2013WT1.pdf",
+      "Hash": "dfb2acaf993f5b2e2578b7fa09e2b1c594a07fb6",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2014/307_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2014WT1.pdf",
+      "Hash": "37f1b877b5411db2ac8b9f30db43b0657f98c513",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2013/307_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2013WT2.pdf",
+      "Hash": "22ab3017583e77b482039df1ebd38a3ad23f51dd",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2015/307_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2015WT1.pdf",
+      "Hash": "29b779319490c3e5303adb73ec54669d4c8b7edc",
+      "Term": "W1",
+      "Course": "math 307",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 307/2012/307_2012WT2_sec202-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/307_2012WT2_sec202.pdf",
+      "Hash": "dd27fa46479a5ebb49cc02e8508fc2ad3a383036",
+      "Term": "W2",
+      "Course": "math 307",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 308/2008/308_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/308_2008WT2.pdf",
+      "Hash": "ddd93b596ca9f37b2cef42ea9dfce8d9ee8f153e",
+      "Term": "W2",
+      "Course": "math 308",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 308/2011/308_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/308_2011WT1.pdf",
+      "Hash": "ff6e71539f01184c13d4bad1546bccc606979110",
+      "Term": "W1",
+      "Course": "math 308",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 308/2010/308_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/308_2010WT1.pdf",
+      "Hash": "99deceed2fa838d9d9af7429fed0bc28dcc7a2e0",
+      "Term": "W1",
+      "Course": "math 308",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 310/2008/310_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/310_2008WT2.pdf",
+      "Hash": "77697c3359a8d118fbbdb7a9d3480aec95b99a03",
+      "Term": "W2",
+      "Course": "math 310",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 309/2007/309_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/309_2007WT2.pdf",
+      "Hash": "ffce09dc11d4c128d9f780fb24ca74e04d776e6e",
+      "Term": "W2",
+      "Course": "math 309",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 308/2014/308_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/308_2014WT1.pdf",
+      "Hash": "cdc16be3ef5531fc68613a4265e5922f0f6ce91c",
+      "Term": "W1",
+      "Course": "math 308",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 310/2013/310_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/310_2013WT2.pdf",
+      "Hash": "aefc0b3c0b5197cd0b3a47b3e69880333a4b8f07",
+      "Term": "W2",
+      "Course": "math 310",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 312/2005/312_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/312_2005WT1.pdf",
+      "Hash": "468a06e7211f124cd08635aa1a27f28b7b510196",
+      "Term": "W1",
+      "Course": "math 312",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 310/2012/310_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/310_2012WT2.pdf",
+      "Hash": "74053da133f7787a2adc554d585decf7373bab9f",
+      "Term": "W2",
+      "Course": "math 310",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 312/2008/312_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/312_2008WT1.pdf",
+      "Hash": "d84c9964e68496ebc3d6da755d5ae5ea5f198aa8",
+      "Term": "W1",
+      "Course": "math 312",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 312/2010/312_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/312_2010WT1.pdf",
+      "Hash": "4fd1a149a46c474d2b3a112bcd43ff446e5d081a",
+      "Term": "W1",
+      "Course": "math 312",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 312/2009/312_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/312_2009WT1.pdf",
+      "Hash": "067ac49c0e9fc2fb1dd0efcea3cd178989219898",
+      "Term": "W1",
+      "Course": "math 312",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 312/2012/312_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/312_2012WT1.pdf",
+      "Hash": "b155e9a57c9f19c7e8435cc8d612b992536248a5",
+      "Term": "W1",
+      "Course": "math 312",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 313/2004/313_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/313_2004WT2.pdf",
+      "Hash": "d402992dc0c3cc431c3851378abb56016ecc5b5f",
+      "Term": "W2",
+      "Course": "math 313",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 312/2013/312_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/312_2013WT1.pdf",
+      "Hash": "2f092e981db405ea387e267b513694d973337f9c",
+      "Term": "W1",
+      "Course": "math 312",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 313/2012/313_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/313_2012WT2.pdf",
+      "Hash": "9c49ac702f6bca16b30696e07a52fb4348d70fd2",
+      "Term": "W2",
+      "Course": "math 313",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 316/2005/316_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/316_2005WT2.pdf",
+      "Hash": "ed9ec9e0ee3b3092bdca4ce871341e778edf06db",
+      "Term": "W2",
+      "Course": "math 316",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 312/2014/312_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/312_2014WT1.pdf",
+      "Hash": "66fdfb6e8c7213a5be4fe0295edba122d91f52f0",
+      "Term": "W1",
+      "Course": "math 312",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 316/2007/316_2007WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/316_2007WT2_sec201.pdf",
+      "Hash": "46cb6814f0f235707ee83f7359c27c8b3f8508f7",
+      "Term": "W2",
+      "Course": "math 316",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 316/2010/316_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/316_2010WT2.pdf",
+      "Hash": "333ab46968ad908567afe4226a7372ac3b98e8b0",
+      "Term": "W2",
+      "Course": "math 316",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2005/317_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2005WT2.pdf",
+      "Hash": "f2a4fe68aacf15145a2462c64d37fe8c49df2547",
+      "Term": "W2",
+      "Course": "math 317",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2005/317_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2005WT1.pdf",
+      "Hash": "ecd7b2f0d887568f33d8c3a4677ea8318ff61b8f",
+      "Term": "W1",
+      "Course": "math 317",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2006/317_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2006WT1.pdf",
+      "Hash": "398cf24d6dfd9758b5f09fde6fbf296e2a52e493",
+      "Term": "W1",
+      "Course": "math 317",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2006/317_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2006WT2.pdf",
+      "Hash": "642fbac5bed201d650d1958bf2b3492d4e557cc9",
+      "Term": "W2",
+      "Course": "math 317",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2004/317_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2004WT2.pdf",
+      "Hash": "2c7fc30f865e8806b2988213878083145a6e159f",
+      "Term": "W2",
+      "Course": "math 317",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2008/317_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2008WT1.pdf",
+      "Hash": "ae63f5d7e7048c0df661156f817757b493e193b2",
+      "Term": "W1",
+      "Course": "math 317",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 308/2009/308_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/308_2009WT1.pdf",
+      "Hash": "5497a77d0257420baad127d250c88cf818f23064",
+      "Term": "W1",
+      "Course": "math 308",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2008/317_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2008WT2.pdf",
+      "Hash": "3b36151e094e7181f0ae2a88c17c23d5d44bda3d",
+      "Term": "W2",
+      "Course": "math 317",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2007/317_2007WT2_sec202-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2007WT2_sec202.pdf",
+      "Hash": "ff7b9d90da15826a14679aec72b28df6e0a38ecd",
+      "Term": "W2",
+      "Course": "math 317",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2009/317_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2009WT2.pdf",
+      "Hash": "8d21a4f4544d8279677aad80f55ec76728bf004c",
+      "Term": "W2",
+      "Course": "math 317",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2012/317_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2012WT1.pdf",
+      "Hash": "5019b768b4f610d342fec37a815b156783001950",
+      "Term": "W1",
+      "Course": "math 317",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2010/317_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2010WT1.pdf",
+      "Hash": "731f93bb030685cdae28d357a1b6023720472574",
+      "Term": "W1",
+      "Course": "math 317",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2011/317_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2011WT1.pdf",
+      "Hash": "2721b0d2085783c2d870f45191ee4a4890ea6b6f",
+      "Term": "W1",
+      "Course": "math 317",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 317/2013/317_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/317_2013WT1.pdf",
+      "Hash": "831fff99942f92690b8378feebbfdfe185d2398d",
+      "Term": "W1",
+      "Course": "math 317",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2005/318_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2005WT2.pdf",
+      "Hash": "d15da91a76822df75f11c318aefd1e3e71dd7301",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2004/318_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2004WT2.pdf",
+      "Hash": "1790cf99d6c1f525e1aeb5015dcbe028dbb77d23",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2009/318_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2009WT2.pdf",
+      "Hash": "123000ae4380a7f08c45be18bedc978784e94259",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2010/318_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2010WT2.pdf",
+      "Hash": "f33c75b3bd3c1bd95e233dcd68b83b57804ce7c3",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2011/318_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2011WT2.pdf",
+      "Hash": "e0c7a68da01e7fcafb2cb125ac2fe6772f49e280",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2012/318_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2012WT2.pdf",
+      "Hash": "d212c647b9daf055ff409fc503ba89d748642acc",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 320/2007/320_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/320_2007WT1.pdf",
+      "Hash": "6808c0aef03e270c8af807dae0c62e669f8af1e2",
+      "Term": "W1",
+      "Course": "math 320",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2007/318_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2007WT2.pdf",
+      "Hash": "ac9be4b9400c2c96009fd2daa6cc9e0bffc6e298",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2014/318_2014WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2014WT2.pdf",
+      "Hash": "627271d050812f9e7bf0ea865e6abe898bb0b6ff",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 320/2012/320_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/320_2012WT1.pdf",
+      "Hash": "47d3a82a7bc712ddd898596a3c44b8ee60f9c5fd",
+      "Term": "W1",
+      "Course": "math 320",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 320/2014/320_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/320_2014WT1.pdf",
+      "Hash": "f18e9ec0676d43d194c588e75b92e798c33f9550",
+      "Term": "W1",
+      "Course": "math 320",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 318/2008/318_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/318_2008WT2.pdf",
+      "Hash": "8a63b392940852b6b3dc42632e8c5d9c4f30c64c",
+      "Term": "W2",
+      "Course": "math 318",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 321/2005/321_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/321_2005WT2.pdf",
+      "Hash": "73bcb6950a97e318a39ddcbd073482a044d9e10f",
+      "Term": "W2",
+      "Course": "math 321",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 321/2007/321_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/321_2007WT2.pdf",
+      "Hash": "66332fa5664444483b78907486ea85757fb0abaa",
+      "Term": "W2",
+      "Course": "math 321",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 320/2013/320_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/320_2013WT1.pdf",
+      "Hash": "1b69e2651a2170fa12a3a4e3918ecd32da20f1c2",
+      "Term": "W1",
+      "Course": "math 320",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 320/2015/320_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/320_2015WT1.pdf",
+      "Hash": "6f273565a71f05b383ab02d6df5c6576c4d37f25",
+      "Term": "W1",
+      "Course": "math 320",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 322/2008/322_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/322_2008WT1.pdf",
+      "Hash": "9d6b6e82417b681ad43b648c89de61b425efee89",
+      "Term": "W1",
+      "Course": "math 322",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 321/2008/321_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/321_2008WT2.pdf",
+      "Hash": "a0aecd17bbed91923e1e98c1dfc9f02af137f8e9",
+      "Term": "W2",
+      "Course": "math 321",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 321/2009/321_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/321_2009WT2.pdf",
+      "Hash": "fdd68e6e4170485109e684a420e55d14125817c4",
+      "Term": "W2",
+      "Course": "math 321",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 322/2009/322_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/322_2009WT1.pdf",
+      "Hash": "0546d306729612c477dc2e438e14dce4484342c9",
+      "Term": "W1",
+      "Course": "math 322",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 322/2010/322_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/322_2010WT1.pdf",
+      "Hash": "1b26ecf18affaab9985f295c98c6f88fc94b4fda",
+      "Term": "W1",
+      "Course": "math 322",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 322/2011/322_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/322_2011WT1.pdf",
+      "Hash": "2ebf93b3454e4f1eb9725aed6e384961aeadd4f1",
+      "Term": "W1",
+      "Course": "math 322",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 323/2012/323_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/323_2012WT2.pdf",
+      "Hash": "fa2a13c4b0b73ee0f1afcdc48634a493d15e2a31",
+      "Term": "W2",
+      "Course": "math 323",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 335/2006/335_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/335_2006WT2.pdf",
+      "Hash": "0574ecfe771ed7d8ce7470775814829b4b3c6253",
+      "Term": "W2",
+      "Course": "math 335",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 322/2012/322_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/322_2012WT1.pdf",
+      "Hash": "db9ab0de0a16353b695fbca0fbb7027fd15dc182",
+      "Term": "W1",
+      "Course": "math 322",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 331/2006/331_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/331_2006WT2.pdf",
+      "Hash": "23ff7c27ca7552b5e3523a7242fc2d2128572a00",
+      "Term": "W2",
+      "Course": "math 331",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 335/2007/335_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/335_2007WT2.pdf",
+      "Hash": "d975195f0b4595de4f6a16240e2b84da884705c3",
+      "Term": "W2",
+      "Course": "math 335",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 335/2009/335_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/335_2009WT2.pdf",
+      "Hash": "92902c778df8a174fd098283cbdccb7bd0268436",
+      "Term": "W2",
+      "Course": "math 335",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 335/2008/335_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/335_2008WT2.pdf",
+      "Hash": "6e3ab47a2ad1b3f9d3accdd0772be2cb88cae81e",
+      "Term": "W2",
+      "Course": "math 335",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2006/340_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2006WT2.pdf",
+      "Hash": "914f3a32567b33b4b31560e7bf766c7a2a072c2d",
+      "Term": "W2",
+      "Course": "math 340",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 335/2004/335_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/335_2004WT2.pdf",
+      "Hash": "5cf6e0460d1f645c99a25509db11f70c45696737",
+      "Term": "W2",
+      "Course": "math 335",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2008/340_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2008WT1.pdf",
+      "Hash": "f1435f4cf5c6cba95d0a5b183c1b920fc00de9da",
+      "Term": "W1",
+      "Course": "math 340",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2008/340_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2008WT2.pdf",
+      "Hash": "47f2d9f6234535c15305ccfabd2d997b8bc3ea7b",
+      "Term": "W2",
+      "Course": "math 340",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2010/340_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2010WT1.pdf",
+      "Hash": "b37b9f50215c8f4221f36b9b6019496b60db7dbd",
+      "Term": "W1",
+      "Course": "math 340",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2009/340_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2009WT1.pdf",
+      "Hash": "0f5ae93e54586473137b9b7e82782df4ef6e7b58",
+      "Term": "W1",
+      "Course": "math 340",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 335/2012/335_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/335_2012WT2.pdf",
+      "Hash": "a3285965527ba84d776ae024c54a1507cbe0c52f",
+      "Term": "W2",
+      "Course": "math 335",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2011/340_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2011WT1.pdf",
+      "Hash": "9a472afb311af9e860c53c7b07c535e67f862f38",
+      "Term": "W1",
+      "Course": "math 340",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2010/340_2010WT2_sec202-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2010WT2_sec202.pdf",
+      "Hash": "d813ed8cf24247bf0a26b00847df7ef10e5e35e7",
+      "Term": "W2",
+      "Course": "math 340",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2011/340_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2011WT2.pdf",
+      "Hash": "ebca6b25d750dc84aae48b035215f05a8ae2677b",
+      "Term": "W2",
+      "Course": "math 340",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 342/2008/342_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/342_2008WT2.pdf",
+      "Hash": "888ce7eba6367c67094950973f2321f5d6e60bff",
+      "Term": "W2",
+      "Course": "math 342",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 342/2010/342_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/342_2010WT1.pdf",
+      "Hash": "e6a4e1d0ec9d7b9366688611e5979ae762a7d601",
+      "Term": "W1",
+      "Course": "math 342",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 340/2014/340_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/340_2014WT1.pdf",
+      "Hash": "85d266426dd881f8fdad87d3f0b0beb22b031d6f",
+      "Term": "W1",
+      "Course": "math 340",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 342/2013/342_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/342_2013WT2.pdf",
+      "Hash": "5c9d7e1ae32bb268ca25bf8570649170fb7ce84f",
+      "Term": "W2",
+      "Course": "math 342",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 345/2005/345_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/345_2005WT2.pdf",
+      "Hash": "da720b9f080d1b50968dca2bba9b839ff7e637d3",
+      "Term": "W2",
+      "Course": "math 345",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 342/2011/342_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/342_2011WT1.pdf",
+      "Hash": "8e41140d604a276094465d0a4d6bb5f818c2f065",
+      "Term": "W1",
+      "Course": "math 342",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 345/2006/345_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/345_2006WT2.pdf",
+      "Hash": "541a6d7abc2e9ff5d54037a070bdbd6571a59237",
+      "Term": "W2",
+      "Course": "math 345",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 345/2008/345_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/345_2008WT2.pdf",
+      "Hash": "14752f00147daf02a955c4717a4f5315bf5a3722",
+      "Term": "W2",
+      "Course": "math 345",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 345/2011/345_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/345_2011WT2.pdf",
+      "Hash": "44fa4a44b73f7417639fe83bd575296dd0565358",
+      "Term": "W2",
+      "Course": "math 345",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 400/2005/400_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/400_2005WT1.pdf",
+      "Hash": "859c8c78bae1e9005dd95151d0b27dec063a60a0",
+      "Term": "W1",
+      "Course": "math 400",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 361/2008/361_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/361_2008WT2.pdf",
+      "Hash": "f52171823b73ceb895dd30d7b727cf7d92689da4",
+      "Term": "W2",
+      "Course": "math 361",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 400/2010/400_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/400_2010WT1.pdf",
+      "Hash": "0eeb23f24a664a975df73177554a97310304e21c",
+      "Term": "W1",
+      "Course": "math 400",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 400/2011/400_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/400_2011WT1.pdf",
+      "Hash": "ec0a94978695a8ff5a641bee7d2d2cde5c51796e",
+      "Term": "W1",
+      "Course": "math 400",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 400/2013/400_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/400_2013WT1.pdf",
+      "Hash": "496be556b0aba8750356479d281a77c526be5f56",
+      "Term": "W1",
+      "Course": "math 400",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 400/2012/400_2012WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/400_2012WT1.pdf",
+      "Hash": "4715f5074d4f3cf68c73bd9fa9f73000f84d3c30",
+      "Term": "W1",
+      "Course": "math 400",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 400/2013/400_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/400_2013WT2.pdf",
+      "Hash": "1804e19ba3cf863f653a0dc55ccb1ba09358b6ae",
+      "Term": "W2",
+      "Course": "math 400",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 400/2015/400_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/400_2015WT1.pdf",
+      "Hash": "f12b3e1904f91a528ba5bab3169e2ec17597935a",
+      "Term": "W1",
+      "Course": "math 400",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2005/401_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2005WT2.pdf",
+      "Hash": "c279d75623e387ac57452c638cd3425a7c11d362",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2007/401_2007WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2007WT2.pdf",
+      "Hash": "b1517288775aeab9a5b3837b7255435f1151be89",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2006/401_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2006WT2.pdf",
+      "Hash": "979e99834d877945565f514b160c572a2c3d1651",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2008/401_2008WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2008WT2.pdf",
+      "Hash": "a48761865651a357a8e5c5145ef884c6e644a9ef",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2009/401_2009WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2009WT2.pdf",
+      "Hash": "d9213764598fe1c2a308d7f6f3e7bebd4eba36c9",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2010/401_2010WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2010WT2.pdf",
+      "Hash": "512b48029472652b25dc272ae1743dc2ef62f1de",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2013/401_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2013WT2.pdf",
+      "Hash": "1f528696f0131bd291f8e1ecee1cb4f80dffb5dd",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 402/2007/402_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/402_2007WT1.pdf",
+      "Hash": "87aa0074eb4de11cff7de3fca5bca48df0d190d6",
+      "Term": "W1",
+      "Course": "math 402",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 401/2011/401_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/401_2011WT2.pdf",
+      "Hash": "b9f5b62232f53efdf16ce16b5f174fabb5daccdf",
+      "Term": "W2",
+      "Course": "math 401",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 402/2005/402_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/402_2005WT1.pdf",
+      "Hash": "a0dd33eb9c647d6145c0847f0021010c5d3e3d5d",
+      "Term": "W1",
+      "Course": "math 402",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 403/2006/403_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/403_2006WT1.pdf",
+      "Hash": "1321c29a27e1e87e5213ad04b54d82f2c4d3da75",
+      "Term": "W1",
+      "Course": "math 403",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 405/2010/405+607E_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/405+607E_2010WT1.pdf",
+      "Hash": "74e2d353809f1a3393804ab896582968ea80d97e",
+      "Term": "W1",
+      "Course": "math 405",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 405/2013/405+607E_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/405+607E_2013WT1.pdf",
+      "Hash": "531b6e92b617674c901cb71c5d87a05df8c0b491",
+      "Term": "W1",
+      "Course": "math 405",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 405/2014/405+607E_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/405+607E_2014WT1.pdf",
+      "Hash": "f48355df3cb3c90135e4a8e1bceb6a764471743f",
+      "Term": "W1",
+      "Course": "math 405",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 405/2011/405+607E_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/405+607E_2011WT1.pdf",
+      "Hash": "3ad539d81488235fd21075edf4ec073dc988baca",
+      "Term": "W1",
+      "Course": "math 405",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 361/2006/361_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/361_2006WT1.pdf",
+      "Hash": "b3ec8caf8db8e5b43175d2d6c433db3ac84efdd0",
+      "Term": "W1",
+      "Course": "math 361",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 414/2004/414_2004WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/414_2004WT2.pdf",
+      "Hash": "4ff33515792a6b313f40330a248dce25fd30b68a",
+      "Term": "W2",
+      "Course": "math 414",
+      "Year": 2004,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 414/2008/414_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/414_2008WT1.pdf",
+      "Hash": "a998c455da5ab343282e39734caf8594917945e5",
+      "Term": "W1",
+      "Course": "math 414",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 405/2015/405+607E_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/405+607E_2015WT1.pdf",
+      "Hash": "2a0ccf28846744cfe2964ae0554060b52607f02d",
+      "Term": "W1",
+      "Course": "math 405",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 412/2013/412_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/412_2013WT2.pdf",
+      "Hash": "2a519be1b138c9dcb9f07b46e07cc31bd590d945",
+      "Term": "W2",
+      "Course": "math 412",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 414/2013/414_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/414_2013WT1.pdf",
+      "Hash": "6439d26a833d3c826a7bc518b8ce470a66f98117",
+      "Term": "W1",
+      "Course": "math 414",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 418/2008/418_2008WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/418_2008WT1.pdf",
+      "Hash": "612d1d1feb4f6ae29019f2766d514f2b18018d0a",
+      "Term": "W1",
+      "Course": "math 418",
+      "Year": 2008,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 418/2006/418_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/418_2006WT1.pdf",
+      "Hash": "0f8588aaee4199ca05adc9b761c8d9b9b879b106",
+      "Term": "W1",
+      "Course": "math 418",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 418/2013/418+544_2013WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/418+544_2013WT1.pdf",
+      "Hash": "601cb0f50991b1b3552a743279052fa92f71514e",
+      "Term": "W1",
+      "Course": "math 418",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 418/2011/418_2011WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/418_2011WT1.pdf",
+      "Hash": "66c64447459ba8fdf9f6a09c171e05779c8488e9",
+      "Term": "W1",
+      "Course": "math 418",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 418/2010/418_2010WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/418_2010WT1.pdf",
+      "Hash": "b37e5569bfe7e39fde11bc9cd2472638c66d989f",
+      "Term": "W1",
+      "Course": "math 418",
+      "Year": 2010,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 419/2005/419_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/419_2005WT2.pdf",
+      "Hash": "321aedf241e12a324188a61d2a50fc73f20fd361",
+      "Term": "W2",
+      "Course": "math 419",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 419/2006/419_2006WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/419_2006WT2.pdf",
+      "Hash": "e57cfa517705ec508d11d2f7bfdf099bed0e2430",
+      "Term": "W2",
+      "Course": "math 419",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 419/2011/419_2011WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/419_2011WT2.pdf",
+      "Hash": "83f829088d14db310a4c397622ecef2aba5003d1",
+      "Term": "W2",
+      "Course": "math 419",
+      "Year": 2011,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 419/2007/419_2007WT2_sec201-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/419_2007WT2_sec201.pdf",
+      "Hash": "d3544b698fbe920962bbaedd45c61212108eed18",
+      "Term": "W2",
+      "Course": "math 419",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 420/2005/420+507_2005WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/420+507_2005WT1.pdf",
+      "Hash": "9423c6a334f8a4af711aabe0e602e649fb773aae",
+      "Term": "W1",
+      "Course": "math 420",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 420/2006/420+507_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/420+507_2006WT1.pdf",
+      "Hash": "d5d8916065a7ba4e20e89607a4b81aa04f9489f4",
+      "Term": "W1",
+      "Course": "math 420",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 420/2007/420_2007WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/420_2007WT1.pdf",
+      "Hash": "ac32c47c48fedd80cced1a53b8972dde1019181f",
+      "Term": "W1",
+      "Course": "math 420",
+      "Year": 2007,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 420/2015/420+507_2015WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/420+507_2015WT1.pdf",
+      "Hash": "adb4f1936e617f427fd0130d94f26adc6cd72e2c",
+      "Term": "W1",
+      "Course": "math 420",
+      "Year": 2015,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 419/2012/419_2012WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/419_2012WT2.pdf",
+      "Hash": "d7e7a08c3bdfc4162ee0d4faf861c785af710840",
+      "Term": "W2",
+      "Course": "math 419",
+      "Year": 2012,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 420/2014/420_2014WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/420_2014WT1.pdf",
+      "Hash": "62f9183f268b8cb93c00728f2e1516b9d4133b5e",
+      "Term": "W1",
+      "Course": "math 420",
+      "Year": 2014,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 421/2005/421_2005WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/421_2005WT2.pdf",
+      "Hash": "9c2b3bb871d5a4ae7021d8e0e2079c67e45885bd",
+      "Term": "W2",
+      "Course": "math 421",
+      "Year": 2005,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 422/2009/422+501_2009WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/422+501_2009WT1.pdf",
+      "Hash": "4a0753b4aa8b46e7f048a1cb898e8caff05abef9",
+      "Term": "W1",
+      "Course": "math 422",
+      "Year": 2009,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 422/2006/422+501_2006WT1-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/422+501_2006WT1.pdf",
+      "Hash": "9c3881b436a14191bf890fa95efa182652646225",
+      "Term": "W1",
+      "Course": "math 422",
+      "Year": 2006,
+      "HandClassified": true,
+      "LastResponseCode": 200
+    },
+    {
+      "Name": "Final",
+      "Path": "math 421/2013/421+510_2013WT2-1.pdf",
+      "Source": "https://www.math.ubc.ca/Ugrad/pastExams/Files/421+510_2013WT2.pdf",
+      "Hash": "fcfd72a78f3985c77bcd821e2d4edb0c06da8dda",
+      "Term": "W2",
+      "Course": "math 421",
+      "Year": 2013,
+      "HandClassified": true,
+      "LastResponseCode": 200
     }
   ]
 }

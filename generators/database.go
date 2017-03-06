@@ -3,7 +3,6 @@ package generators
 import (
 	"bytes"
 	"io/ioutil"
-	"log"
 	"os"
 	"path"
 	"strings"
@@ -11,10 +10,11 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/pkg/errors"
 	"github.com/russross/blackfriday"
+	"github.com/ubccsss/exams/config"
 )
 
 // Database generates an index of all courses.
-func (g Generator) Database() error {
+func (g *Generator) Database() error {
 	dir := g.examsDir
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return errors.Wrapf(err, "mkdirall %q", dir)
@@ -31,12 +31,11 @@ func (g Generator) Database() error {
 
 	l := level{}
 	fileCounts := g.db.CourseFileCount()
-	log.Printf("fileCounts %+v", fileCounts)
 	for _, c := range g.db.Courses {
-		// Don't render unclassified files.
-		if len(c.Code) == 0 {
+		if !config.DisplayDepartment[c.Department()] {
 			continue
 		}
+
 		cl := c.YearLevel()
 		cs, ok := l[cl]
 		if !ok {

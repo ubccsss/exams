@@ -24,3 +24,4 @@
 ## Ingress
 
 * [Department Courses](/admin/ingress/deptcourses)
+* [UBC Math Finals](/admin/ingress/ubcmath)

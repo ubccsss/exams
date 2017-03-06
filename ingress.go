@@ -15,11 +15,15 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/ubccsss/exams/archive.org"
+	"github.com/ubccsss/exams/config"
 	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/ml"
+	"github.com/ubccsss/exams/workers"
 	"github.com/urfave/cli"
 )
 
@@ -42,77 +46,90 @@ func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	fmt.Fprintf(w, "Fetching from courses.students.ubc.ca...\n")
+	for _, dept := range config.Departments {
+		fmt.Fprintf(w, "Fetching courses for: %s\n", dept)
+		fmt.Fprintf(w, "Fetching from courses.students.ubc.ca...\n")
 
-	doc, err := goquery.NewDocument("https://courses.students.ubc.ca/cs/main?dept=CPSC&pname=subjarea&req=1&tname=subjareas")
-	if err != nil {
-		fmt.Fprintf(w, "%+v\n", err)
-	} else {
-		doc.Find("#mainTable tr").Each(func(_ int, s *goquery.Selection) {
-			tds := s.Find("td")
-			link := tds.Find("a")
-			linkTitle := strings.ToLower(strings.TrimSpace(link.Text()))
-			if strings.HasPrefix(linkTitle, "cpsc ") {
-				course := "cs" + linkTitle[5:]
-				desc := strings.TrimSpace(tds.Eq(1).Text())
+		coursesURL := fmt.Sprintf("https://courses.students.ubc.ca/cs/main?dept=%s&pname=subjarea&req=1&tname=subjareas", dept)
+		doc, err := goquery.NewDocument(coursesURL)
+		if err != nil {
+			fmt.Fprintf(w, "%+v\n", err)
+		} else {
+			doc.Find("#mainTable tr").Each(func(_ int, s *goquery.Selection) {
+				tds := s.Find("td")
+				link := tds.Find("a")
+				linkTitle := strings.ToLower(strings.TrimSpace(link.Text()))
+				if strings.HasPrefix(linkTitle, strings.ToLower(dept)+" ") {
+					course := linkTitle
+					// TODO(d4l3k): Remove special case for CS.
+					if dept == config.ComputerScience {
+						course = "cs" + linkTitle[5:]
+					}
+					desc := strings.TrimSpace(tds.Eq(1).Text())
+					db.AddCourse(w, course, desc)
+				}
+			})
+		}
+
+		fmt.Fprintf(w, "Fetching from http://www.calendar.ubc.ca/archive/vancouver/...\n")
+
+		coursesRegexp, err := regexp.Compile(fmt.Sprintf(`^%s\s+(\d{3})\s+\(.+\)\s+(\w)?\s+(.+)$`, dept))
+		if err != nil {
+			fmt.Fprintf(w, "%+v\n", err)
+			return
+		}
+
+		currentYear := time.Now().Year()
+		lastTwoYear := currentYear - (currentYear/100)*100
+		for i := lastTwoYear; i >= 2; i-- {
+			url := fmt.Sprintf("http://www.calendar.ubc.ca/archive/vancouver/%.2d%.2d/courses.html", i, i+1)
+			doc, err := goquery.NewDocument(url)
+			if err != nil {
+				fmt.Fprintf(w, "%+v\n", err)
+				continue
+			}
+
+			subjectURL := getURLForLink(doc, "courses by subject code")
+			if len(subjectURL) == 0 {
+				fmt.Fprintf(w, "failed to find subject page for %q\n", url)
+				continue
+			}
+
+			subjectDoc, err := goquery.NewDocument(subjectURL)
+			if err != nil {
+				fmt.Fprintf(w, "%+v\n", err)
+				continue
+			}
+
+			coursesURL := getURLForLink(subjectDoc, dept)
+			if len(coursesURL) == 0 {
+				fmt.Fprintf(w, "failed to find courses page for %q", subjectURL)
+				continue
+			}
+
+			coursesDoc, err := goquery.NewDocument(coursesURL)
+			if err != nil {
+				fmt.Fprintf(w, "%+v\n", err)
+				continue
+			}
+
+			coursesDoc.Find("dl > dt").Each(func(_ int, s *goquery.Selection) {
+				text := s.Text()
+				matches := coursesRegexp.FindStringSubmatch(text)
+				if len(matches) != 4 {
+					return
+				}
+				courseNumber := matches[1] + matches[2]
+				course := dept + " " + courseNumber
+				// TODO(d4l3k): Remove special case for CS.
+				if dept == config.ComputerScience {
+					course = "cs" + courseNumber
+				}
+				desc := matches[3]
+				fmt.Fprintf(w, "%s: %s\n", course, desc)
 				db.AddCourse(w, course, desc)
-			}
-		})
-	}
-
-	fmt.Fprintf(w, "Fetching from http://www.calendar.ubc.ca/archive/vancouver/...\n")
-
-	coursesRegexp, err := regexp.Compile(`^CPSC\s+(\d{3})\s+\(.+\)\s+(\w)?\s+(.+)$`)
-	if err != nil {
-		fmt.Fprintf(w, "%+v\n", err)
-		return
-	}
-
-	currentYear := time.Now().Year()
-	lastTwoYear := currentYear - (currentYear/100)*100
-	for i := lastTwoYear; i >= 2; i-- {
-		url := fmt.Sprintf("http://www.calendar.ubc.ca/archive/vancouver/%.2d%.2d/courses.html", i, i+1)
-		doc, err := goquery.NewDocument(url)
-		if err != nil {
-			fmt.Fprintf(w, "%+v\n", err)
-			continue
+			})
 		}
-
-		subjectURL := getURLForLink(doc, "courses by subject code")
-		if len(subjectURL) == 0 {
-			fmt.Fprintf(w, "failed to find subject page for %q\n", url)
-			continue
-		}
-
-		subjectDoc, err := goquery.NewDocument(subjectURL)
-		if err != nil {
-			fmt.Fprintf(w, "%+v\n", err)
-			continue
-		}
-
-		coursesURL := getURLForLink(subjectDoc, "CPSC")
-		if len(coursesURL) == 0 {
-			fmt.Fprintf(w, "failed to find courses page for %q", subjectURL)
-			continue
-		}
-
-		coursesDoc, err := goquery.NewDocument(coursesURL)
-		if err != nil {
-			fmt.Fprintf(w, "%+v\n", err)
-			continue
-		}
-
-		coursesDoc.Find("dl > dt").Each(func(_ int, s *goquery.Selection) {
-			text := s.Text()
-			matches := coursesRegexp.FindStringSubmatch(text)
-			if len(matches) != 4 {
-				return
-			}
-			course := "cs" + matches[1] + matches[2]
-			desc := matches[3]
-			fmt.Fprintf(w, "%s: %s\n", course, desc)
-			db.AddCourse(w, course, desc)
-		})
 	}
 
 	fmt.Fprintf(w, "Done.\n")
@@ -246,6 +263,95 @@ func ingressUBCCSSS(w http.ResponseWriter, r *http.Request) {
 			}
 		})
 	}
+
+	if err := saveAndGenerate(); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	fmt.Fprintf(w, "Done.")
+}
+
+var matchExamTitleRegexp = regexp.MustCompile(`^(\d{4})(WT1|WT2|S)(\(sec.*\))?$`)
+
+// ingressUBCMath ingresses the exams on the math department's site.
+func ingressUBCMath(w http.ResponseWriter, r *http.Request) {
+	doc, err := goquery.NewDocument("https://www.math.ubc.ca/Ugrad/pastExams/")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	filesChan := make(chan *examdb.File, workers.Count)
+	var wg sync.WaitGroup
+
+	for i := 0; i < workers.Count; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			for f := range filesChan {
+				if err := db.FetchFileAndSave(f); err != nil {
+					fmt.Fprintf(w, "%s: %+v\n", f, err)
+				}
+			}
+		}()
+	}
+
+	doc.Find("#main table[align=center] tr").Each(func(_ int, s *goquery.Selection) {
+		childrenCount := s.Children().Length()
+		if childrenCount != 2 {
+			return
+		}
+
+		parts := strings.Split(s.Find("th").Text(), "+")
+		if len(parts) == 0 {
+			return
+		}
+
+		code := strings.ToLower(fmt.Sprintf("%s %s", config.Math, parts[0]))
+
+		s.Find("td a[href]").Each(func(_ int, s *goquery.Selection) {
+			matches := matchExamTitleRegexp.FindStringSubmatch(s.Text())
+			if len(matches) < 3 {
+				return
+			}
+			year := ml.ExtractYearFromWords(matches)
+			var term string
+			switch matches[2] {
+			case "WT1":
+				term = examdb.TermW1
+			case "WT2":
+				term = examdb.TermW2
+			case "S":
+				term = examdb.TermS
+			default:
+				log.Fatalf("invalid term: %#v", matches)
+			}
+
+			u, err := url.Parse(s.AttrOr("href", ""))
+			if err != nil {
+				fmt.Fprintf(w, "%+v\n", err)
+				return
+			}
+			absURL := doc.Url.ResolveReference(u).String()
+
+			f := examdb.File{
+				Course:         code,
+				Year:           year,
+				Term:           term,
+				Name:           "Final",
+				Source:         absURL,
+				HandClassified: true,
+			}
+
+			fmt.Fprintf(w, "%#v\n", f)
+			filesChan <- &f
+		})
+	})
+
+	close(filesChan)
+	wg.Wait()
 
 	if err := saveAndGenerate(); err != nil {
 		http.Error(w, err.Error(), 500)

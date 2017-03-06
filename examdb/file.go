@@ -15,6 +15,13 @@ import (
 	"github.com/ubccsss/exams/util"
 )
 
+// Term labels
+const (
+	TermW1 = "W1"
+	TermW2 = "W2"
+	TermS  = "S"
+)
+
 var (
 	// ExamLabels are all the possible labels that a file can fall under.
 	ExamLabels = []string{
@@ -37,7 +44,7 @@ var (
 	}
 
 	// ExamTerms are all the possible terms that a file can fall under.
-	ExamTerms = []string{"W1", "W2", "S"}
+	ExamTerms = []string{TermW1, TermW2, TermS}
 
 	// FileNameScoreRegexes are a list of regexps and values that can be used to
 	// rank files based on how likely they are an exam.
