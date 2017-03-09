@@ -85,6 +85,7 @@ func saveDatabase() error {
 	db.Mu.RLock()
 	defer db.Mu.RUnlock()
 
+	start := time.Now()
 	raw, err := json.MarshalIndent(db, "", "  ")
 	if err != nil {
 		return err
@@ -92,6 +93,7 @@ func saveDatabase() error {
 	if err := ioutil.WriteFile(config.DBFile, raw, 0755); err != nil {
 		return err
 	}
+	log.Printf("Saved database in %s.", time.Since(start))
 	return nil
 }
 

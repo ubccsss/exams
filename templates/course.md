@@ -25,7 +25,7 @@ Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
 | File | Term |
 |------|------|
 {{ range $file := $files -}}
-|[{{ $file.Name }}](/{{ $file.Path}})|{{ $file.Term }}|
+|[{{ $file.Name }}]({{ $file.Path | pathToURL }})|{{ $file.Term }}|
 {{ end }}
 {{ end }}
 {{ end }}
@@ -34,24 +34,33 @@ Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
 ## Other Possible Files
 
 These are files that we've automatically discovered and think might be exams but
-haven't gotten around to indexing them. These labels have been automatically
-assigned using machine learning.
+haven't gotten around to manually indexing them. These labels have been
+automatically assigned using machine learning.
 
-| File | Year | Term |
-|------|------|------|
-{{ range $file := .PotentialFiles -}}
+{{ $names := .FileNames }}
+
+{{ if ne (len .CompletedML) 0 }}
+| File | Type | Year | Term |
+|------|------|------|------|
+{{ range $file := .CompletedML -}}
 {{- if $file.Inferred -}}
-|[{{ if len $file.Inferred.Name }}{{ $file.Inferred.Name }}{{else}}{{$file.Source}}{{end}}]({{$file.Source}})| {{$file.Inferred.Year}} | {{$file.Inferred.Term}}|
-{{end -}}
+|[{{ index $names $file.Hash }}]({{ $file.Path | pathToURL }}) |
+{{- $file.Inferred.Name -}}
+| {{ $file.Inferred.Year -}}
+| {{ $file.Inferred.Term }}|
+{{ end -}}
+{{ end }}
 {{ end }}
 
+{{ if ne (len .PendingML) 0 }}
 ### Pending Machine Learning Labels
 
-{{ range $file := .PotentialFiles -}}
+{{ range $file := .PendingML -}}
 {{- if not $file.Inferred -}}
 * {{ $file.Source }}
 {{end -}}
 {{end}}
+{{ end }}
 
 {{ end }}
 

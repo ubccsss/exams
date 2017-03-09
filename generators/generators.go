@@ -1,19 +1,20 @@
 package generators
 
 import (
-	"html/template"
 	"log"
 	"sync"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/pkg/errors"
 	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/workers"
 )
 
 // Generator contains all generators.
 type Generator struct {
 	db                   *examdb.Database
-	templates            *template.Template
+	courseFiles          map[string][]*examdb.File
 	coursePotentialFiles map[string][]*examdb.File
 	layout               string
 	layoutOnce           sync.Once
@@ -23,9 +24,8 @@ type Generator struct {
 // MakeGenerator creates a new generator and loads all data required.
 func MakeGenerator(db *examdb.Database, examsDir string) (*Generator, error) {
 	g := &Generator{
-		db:        db,
-		templates: Templates,
-		examsDir:  examsDir,
+		db:       db,
+		examsDir: examsDir,
 	}
 
 	go func() {
@@ -39,17 +39,57 @@ func MakeGenerator(db *examdb.Database, examsDir string) (*Generator, error) {
 
 // All generates all files that there are generates for.
 func (g *Generator) All() error {
-	g.indexCoursePotentialFiles()
+	start := time.Now()
+	g.indexCourseFiles()
 
-	if err := g.Database(); err != nil {
-		return errors.Wrap(err, "database")
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	var dbErr error
+	go func() {
+		defer wg.Done()
+
+		start := time.Now()
+		if err := g.Database(); err != nil {
+			dbErr = errors.Wrap(err, "database")
+			return
+		}
+		log.Printf("Generated index in %s.", time.Since(start))
+	}()
+
+	startCourses := time.Now()
+
+	courseChan := make(chan *examdb.Course, workers.Count)
+	errorChan := make(chan error, workers.Count)
+	for i := 0; i < workers.Count; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			for course := range courseChan {
+				if err := g.Course(course); err != nil {
+					errorChan <- errors.Wrapf(err, "course %+v", course)
+					return
+				}
+			}
+		}()
 	}
 
 	for _, course := range g.db.Courses {
-		if err := g.Course(*course); err != nil {
-			return errors.Wrapf(err, "course %+v", course)
-		}
+		courseChan <- course
 	}
+	close(courseChan)
+	wg.Wait()
+	close(errorChan)
+	if dbErr != nil {
+		return dbErr
+	}
+	for err := range errorChan {
+		return err
+	}
+
+	log.Printf("Generated in %s. Course pages in %s.", time.Since(start), time.Since(startCourses))
+
 	return nil
 }
 

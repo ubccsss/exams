@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"path/filepath"
 	"sort"
 
 	"github.com/PuerkitoBio/goquery"
@@ -25,7 +26,7 @@ func fileTree(files []*examdb.File) map[int][]*examdb.File {
 }
 
 // Course generates a course.
-func (g Generator) Course(c examdb.Course) error {
+func (g *Generator) Course(c *examdb.Course) error {
 	// Don't generate courses for unclassified files.
 	if len(c.Code) == 0 {
 		return nil
@@ -36,21 +37,45 @@ func (g Generator) Course(c examdb.Course) error {
 		return err
 	}
 
-	files := g.db.FindCourseFiles(c)
+	files := g.courseFiles[c.Code]
+	potentialFiles := g.coursePotentialFiles[c.Code]
+	sort.Sort(examdb.FileByYearTermName(potentialFiles))
+
+	fileNames := map[string]string{}
+	for _, f := range potentialFiles {
+		fileNames[f.Hash] = filepath.Base(f.Source)
+	}
+
+	var pendingML []*examdb.File
+	var completedML []*examdb.File
+	for _, f := range potentialFiles {
+		if f.Inferred != nil {
+			completedML = append(completedML, f)
+		} else {
+			pendingML = append(pendingML, f)
+		}
+	}
+
 	data := struct {
-		examdb.Course
+		*examdb.Course
 		Years          map[int][]*examdb.File
+		FileNames      map[string]string
 		YearSections   []int
 		PotentialFiles []*examdb.File
+		CompletedML    []*examdb.File
+		PendingML      []*examdb.File
 	}{
 		Course:         c,
-		PotentialFiles: g.coursePotentialFiles[c.Code],
+		PotentialFiles: potentialFiles,
 		Years:          fileTree(files),
 		YearSections:   examdb.AllYears(files),
+		FileNames:      fileNames,
+		CompletedML:    completedML,
+		PendingML:      pendingML,
 	}
 
 	var buf bytes.Buffer
-	if err := g.templates.ExecuteTemplate(&buf, "course.md", data); err != nil {
+	if err := Templates.ExecuteTemplate(&buf, "course.md", data); err != nil {
 		return err
 	}
 	html := blackfriday.MarkdownCommon(buf.Bytes())
@@ -74,15 +99,30 @@ func (g Generator) Course(c examdb.Course) error {
 	return nil
 }
 
-func (g *Generator) indexCoursePotentialFiles() {
-	m := map[string][]*examdb.File{}
+func (g *Generator) indexCourseFiles() {
+	g.db.Mu.RLock()
+	defer g.db.Mu.RUnlock()
+
+	classified := map[string][]*examdb.File{}
+	potential := map[string][]*examdb.File{}
 	for _, f := range g.db.Files {
-		if f.NotAnExam || f.Inferred != nil && f.NotAnExam || f.HandClassified {
+		if f.HandClassified {
+			classified[f.Course] = append(classified[f.Course], f)
 			continue
 		}
 
-		predicted := ml.ExtractCourse(g.db, f)
-		m[predicted] = append(m[predicted], f)
+		if f.NotAnExam || (f.Inferred != nil && f.Inferred.NotAnExam) {
+			continue
+		}
+
+		var predicted string
+		if f.Inferred != nil {
+			predicted = f.Inferred.Course
+		} else {
+			predicted = ml.ExtractCourse(g.db, f)
+		}
+		potential[predicted] = append(potential[predicted], f)
 	}
-	g.coursePotentialFiles = m
+	g.courseFiles = classified
+	g.coursePotentialFiles = potential
 }

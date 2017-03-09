@@ -316,7 +316,7 @@ func ingressUBCMath(w http.ResponseWriter, r *http.Request) {
 			if len(matches) < 3 {
 				return
 			}
-			year := ml.ExtractYearFromWords(matches)
+			year, _ := ml.ExtractYearFromWords(matches)
 			var term string
 			switch matches[2] {
 			case "WT1":
@@ -349,6 +349,90 @@ func ingressUBCMath(w http.ResponseWriter, r *http.Request) {
 			filesChan <- &f
 		})
 	})
+
+	close(filesChan)
+	wg.Wait()
+
+	if err := saveAndGenerate(); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	fmt.Fprintf(w, "Done.")
+}
+
+// ingressUBCLaw ingresses the exams on the law department's site.
+func ingressUBCLaw(w http.ResponseWriter, r *http.Request) {
+	doc, err := goquery.NewDocument("http://law.library.ubc.ca/exams/")
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	filesChan := make(chan *examdb.File, workers.Count)
+	var wg sync.WaitGroup
+
+	for i := 0; i < workers.Count; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			for f := range filesChan {
+				if err := db.FetchFileAndSave(f); err != nil {
+					fmt.Fprintf(w, "%s: %+v\n", f, err)
+				}
+			}
+		}()
+	}
+
+	var pages []string
+	doc.Find(".entry-content a[href]").Each(func(_ int, s *goquery.Selection) {
+		u, err := url.Parse(s.AttrOr("href", ""))
+		if err != nil {
+			fmt.Fprintf(w, "%+v\n", err)
+			return
+		}
+		absURL := doc.Url.ResolveReference(u).String()
+		pages = append(pages, absURL)
+	})
+
+	for _, page := range pages {
+		doc, err := goquery.NewDocument(page)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		date := strings.Split(doc.Find("h1").Text(), " – ")[0]
+		t, err := time.Parse("2006 January", date)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		year, term := ml.ConvertDateToYearTerm(t)
+
+		doc.Find(".entry-content table a[href]").Each(func(_ int, s *goquery.Selection) {
+			code := strings.TrimSpace(strings.ToLower(strings.Split(s.Text(), ":")[0]))
+			u, err := url.Parse(s.AttrOr("href", ""))
+			if err != nil {
+				fmt.Fprintf(w, "%+v\n", err)
+				return
+			}
+			absURL := doc.Url.ResolveReference(u).String()
+
+			f := examdb.File{
+				Course:         code,
+				Year:           year,
+				Term:           term,
+				Name:           "Final",
+				Source:         absURL,
+				HandClassified: true,
+			}
+
+			fmt.Fprintf(w, "%#v\n", f)
+			filesChan <- &f
+		})
+	}
 
 	close(filesChan)
 	wg.Wait()

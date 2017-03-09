@@ -52,7 +52,7 @@ func (g *Generator) Database() error {
 	}
 
 	var buf bytes.Buffer
-	if err := g.templates.ExecuteTemplate(&buf, "index.md", l); err != nil {
+	if err := Templates.ExecuteTemplate(&buf, "index.md", l); err != nil {
 		return err
 	}
 	html := blackfriday.MarkdownCommon(buf.Bytes())

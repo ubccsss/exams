@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 	"path"
-	"path/filepath"
 	"strings"
 
 	zglob "github.com/mattn/go-zglob"
@@ -14,7 +15,7 @@ import (
 
 // findDuplicates returns all duplicates/extra files on disk that don't have a
 // corresponding DB entry.
-func findDuplicates(db *examdb.Database) ([]string, error) {
+func findDuplicates(w io.Writer, db *examdb.Database) ([]string, error) {
 	var duplicate []string
 
 	pattern := path.Join(config.StaticDir, "**/*.pdf*")
@@ -25,23 +26,52 @@ func findDuplicates(db *examdb.Database) ([]string, error) {
 
 	for _, path := range paths {
 		// Strip off config.StaticDir
-		staticPath := filepath.Join(filepath.SplitList(path)[1:]...)
+		staticPath := strings.TrimPrefix(path, config.StaticDir+"/")
 		f := db.FindFileByPath(staticPath)
 		if f == nil {
-			duplicate = append(duplicate, path)
+			f := examdb.File{
+				Path: staticPath,
+			}
+			if err := f.ComputeHash(); err != nil {
+				return nil, err
+			}
+			f2 := db.FindFile(f.Hash)
+			if f2 == nil {
+				fmt.Fprintf(w, "file not in DB: %q\n", staticPath)
+			} else {
+				fmt.Fprintf(w, "%q -> %q\n", staticPath, f2.Path)
+				duplicate = append(duplicate, staticPath)
+			}
 		}
 	}
 	return duplicate, nil
 }
 
 func handleListDuplicates(w http.ResponseWriter, r *http.Request) {
-	duplicates, err := findDuplicates(&db)
+	duplicates, err := findDuplicates(w, &db)
 	if err != nil {
 		handleErr(w, err)
 		return
 	}
 	for _, d := range duplicates {
 		fmt.Fprintf(w, "%s\n", d)
+	}
+	w.Write([]byte("Done."))
+}
+
+func handleRemoveDuplicates(w http.ResponseWriter, r *http.Request) {
+	duplicates, err := findDuplicates(w, &db)
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+	for _, d := range duplicates {
+		fmt.Fprintf(w, "Removing: %s\n", d)
+		p := path.Join(config.StaticDir, d)
+		if err := os.Remove(p); err != nil {
+			handleErr(w, err)
+			return
+		}
 	}
 	w.Write([]byte("Done."))
 }

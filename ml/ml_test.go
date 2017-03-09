@@ -3,8 +3,10 @@ package ml
 import (
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/jbrukh/bayesian"
+	"github.com/ubccsss/exams/examdb"
 )
 
 func TestURLToWords(t *testing.T) {
@@ -24,6 +26,7 @@ func TestURLToWords(t *testing.T) {
 			" a \n b:  [(c,)] \n",
 			[]string{"a", "b", "c"},
 		},
+		{"February 27th , 2003", []string{"february", "27th", "2003"}},
 	}
 	for i, c := range cases {
 		out := urlToWords(c.uri)
@@ -115,14 +118,53 @@ func TestExtractYearFromWords(t *testing.T) {
 		{"April 2016", 2015},
 		{"May 2016", 2016},
 		{"3009 2499", 0},
+		{"80 80 November 2016", 2016},
 		{"https://web.archive.org/web/2222/http://www.ugrad.cs.ubc.ca/~cs414/vprev/97-t2/414mt2-key.pdf potential/414mt2-key-3.pdf CPSC 414 97-98(T2) Midterm Exam #2", 1997},
 		{"http://www.ugrad.cs.ubc.ca/~cs418/2016-2/exams/midterm/a2015-2.pdf potential/a2015-2.pdf February 10, 2015 February 10, 2015", 2014},
+
+		// st, nd, rd, th
+		{"80 December 1st 2016", 2016},
+		{"80 December 2nd 2016", 2016},
+		{"80 December 3rd 2016", 2016},
+		{"80 December 12th 2016", 2016},
+		{"80 December 12th 2016", 2016},
 	}
 	for i, c := range cases {
 		words := urlToWords(c.words)
-		out := ExtractYearFromWords(words)
+		out, _ := ExtractYearFromWords(words)
 		if out != c.want {
 			t.Errorf("%d. ExtractYearFromWords(%+v) = %+v; not %+v", i, words, out, c.want)
+		}
+	}
+}
+
+func TestConvertDateToYearTerm(t *testing.T) {
+	cases := []struct {
+		date string
+		year int
+		term string
+	}{
+		{"2016 January", 2015, examdb.TermW2},
+		{"2016 February", 2015, examdb.TermW2},
+		{"2016 March", 2015, examdb.TermW2},
+		{"2016 April", 2015, examdb.TermW2},
+		{"2016 May", 2016, examdb.TermS},
+		{"2016 June", 2016, examdb.TermS},
+		{"2016 July", 2016, examdb.TermS},
+		{"2016 August", 2016, examdb.TermS},
+		{"2016 September", 2016, examdb.TermW1},
+		{"2016 October", 2016, examdb.TermW1},
+		{"2016 November", 2016, examdb.TermW1},
+		{"2016 December", 2016, examdb.TermW1},
+	}
+	for i, c := range cases {
+		date, err := time.Parse("2006 January", c.date)
+		if err != nil {
+			t.Fatal(err)
+		}
+		year, term := ConvertDateToYearTerm(date)
+		if year != c.year || term != c.term {
+			t.Errorf("%d. ExtractYearFromWords(%+v) = %+v, %+v; not %+v, %+v", i, date, year, term, c.year, c.term)
 		}
 	}
 }

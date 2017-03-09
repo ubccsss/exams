@@ -8,6 +8,7 @@ import (
 	"io"
 	"log"
 	"path"
+	"strconv"
 	"strings"
 	"sync"
 
@@ -15,8 +16,8 @@ import (
 	"golang.org/x/time/rate"
 	prediction "google.golang.org/api/prediction/v1.6"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/ubccsss/exams/examdb"
+	"github.com/ubccsss/exams/workers"
 
 	"cloud.google.com/go/storage"
 )
@@ -84,7 +85,8 @@ func MakeGoogleClassifier() (*GoogleClassifier, error) {
 		Trainedmodels: predictionService.Trainedmodels,
 
 		// Google Prediction API allows for 100 requests every 100 seconds.
-		Limiter: rate.NewLimiter(rate.Limit(100/100), 100),
+		// *it's been increased to 1000/100s
+		Limiter: rate.NewLimiter(rate.Limit(1000/100), 1000),
 	}, nil
 }
 
@@ -94,11 +96,12 @@ func fileFeatures(f *examdb.File) ([]string, error) {
 		source = f.Path
 	}
 	source = strings.Join(urlToWords(source), " ")
-	wordBag, meta, err := fileContentWords(f)
+	wordBag, meta, err := fileToWordBagMeta(f)
 	if err != nil {
 		return nil, err
 	}
-	features := []string{source, strings.Join(wordBag, " ")}
+	year, term := ExtractYearFromWords(wordBag)
+	features := []string{source, strings.Join(wordBag, " "), strconv.Itoa(year), term}
 	for _, prop := range []string{
 		"Author",
 		"File size",
@@ -151,43 +154,70 @@ func (c *GoogleClassifier) Train(db *examdb.Database) error {
 		fileNames[classifier] = fileName
 	}
 
-	var files []*examdb.File
-
-	db.Mu.RLock()
-	for _, f := range db.Files {
-		if f.NotAnExam || f.HandClassified {
-			files = append(files, f)
+	fileChan := make(chan *examdb.File)
+	go func() {
+		db.Mu.RLock()
+		defer db.Mu.RUnlock()
+		for _, f := range db.Files {
+			if f.NotAnExam || f.HandClassified {
+				fileChan <- f
+			}
 		}
+		close(fileChan)
+	}()
+
+	type featuresClass struct {
+		classifier string
+		features   []string
 	}
-	db.Mu.RUnlock()
+	featureChan := make(chan featuresClass, workers.Count)
 
+	var wg sync.WaitGroup
 	count := 0
-	for _, f := range files {
-		classes := map[string]string{}
-		for classifier, fun := range fileClassifiers {
-			class, ok := fun(f)
-			if !ok {
-				continue
-			}
-			classes[classifier] = class
-		}
-		if len(classes) == 0 {
-			continue
-		}
-		features, err := fileFeatures(f)
-		if err != nil {
-			log.Println(err)
-			continue
-		}
-		for classifier, class := range classes {
-			if err := csvWriters[classifier].Write(append([]string{class}, features...)); err != nil {
-				return err
-			}
-		}
+	for i := 0; i < workers.Count; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for f := range fileChan {
+				classes := map[string]string{}
+				for classifier, fun := range fileClassifiers {
+					class, ok := fun(f)
+					if !ok {
+						continue
+					}
+					classes[classifier] = class
+				}
+				if len(classes) == 0 {
+					continue
+				}
+				features, err := fileFeatures(f)
+				if err != nil {
+					log.Println(err)
+					continue
+				}
+				for classifier, class := range classes {
+					featureChan <- featuresClass{
+						classifier: classifier,
+						features:   append([]string{class}, features...),
+					}
+				}
 
-		count++
-		if count%100 == 0 {
-			log.Printf("uploaded %d...", count)
+				count++
+				if count%100 == 0 {
+					log.Printf("uploaded %d...", count)
+				}
+			}
+		}()
+	}
+
+	go func() {
+		wg.Wait()
+		close(featureChan)
+	}()
+
+	for f := range featureChan {
+		if err := csvWriters[f.classifier].Write(f.features); err != nil {
+			return err
 		}
 	}
 
@@ -293,7 +323,7 @@ func (c *GoogleClassifier) ReportAccuracy(w io.Writer) error {
 
 	ctx := context.Background()
 	for class := range fileClassifiers {
-		fmt.Fprintf(w, "%s:\n", class)
+		fmt.Fprintf(w, "%s\n", class)
 		if err := c.Limiter.Wait(ctx); err != nil {
 			return err
 		}
@@ -302,7 +332,8 @@ func (c *GoogleClassifier) ReportAccuracy(w io.Writer) error {
 		if err != nil {
 			return err
 		}
-		spew.Fdump(w, resp)
+		fmt.Fprintf(w, "  - status: %s\n", resp.TrainingStatus)
+		fmt.Fprintf(w, "  - accuracy: %#v\n", resp.ModelInfo)
 	}
 	return nil
 }

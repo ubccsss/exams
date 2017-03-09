@@ -11,7 +11,6 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/bbalet/stopwords"
 	"github.com/d4l3k/docconv"
 	"github.com/jbrukh/bayesian"
 	"github.com/ubccsss/exams/examdb"
@@ -402,15 +401,13 @@ func fileContentWords(f *examdb.File) ([]string, map[string]string, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	txt = strings.ToLower(txt)
-	txt = stopwords.CleanString(txt, "en", false)
 	return urlToWords(txt), meta, nil
 }
 
-func fileToWordBag(f *examdb.File) ([]string, error) {
-	words, _, err := fileContentWords(f)
+func fileToWordBagMeta(f *examdb.File) ([]string, map[string]string, error) {
+	words, meta, err := fileContentWords(f)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if len(f.Source) > 0 {
 		words = append(words, urlToWords(strings.ToLower(f.Source))...)
@@ -428,23 +425,29 @@ func fileToWordBag(f *examdb.File) ([]string, error) {
 
 	words = append(words, independentWords...)
 
-	return words, nil
+	return words, meta, nil
+}
+
+func fileToWordBag(f *examdb.File) ([]string, error) {
+	words, _, err := fileToWordBagMeta(f)
+	return words, err
 }
 
 func urlToWords(uri string) []string {
 	if len(uri) == 0 {
 		return nil
 	}
-	return strings.FieldsFunc(uri, func(r rune) bool {
+	uri = strings.ToLower(uri)
+	words := strings.FieldsFunc(uri, func(r rune) bool {
 		return !(unicode.IsLetter(r) || unicode.IsDigit(r))
-		/*
-			switch r {
-			case '\t', '~', ':', ' ', '-', '.', '/', '\\', '=', '?', '\n', '(', ',', ')', '[', ']', '{', '}', '_', '*':
-				return true
-			}
-			return false
-		*/
 	})
+	return words
+
+	// We've disabled stopwords since it removes all numbers.
+	/*
+		txt := stopwords.CleanString(strings.Join(words, " "), "en", false)
+		return strings.Split(txt, " ")
+	*/
 }
 
 func splitDatesOut(words []string) []string {
@@ -545,9 +548,9 @@ func ExtractCourse(db *examdb.Database, f *examdb.File) string {
 }
 
 // ExtractYear uses the text content of a file to infer the year it was from.
-func ExtractYear(f *examdb.File) int {
+func ExtractYear(f *examdb.File) (int, string) {
 	if f.Year > 0 {
-		return f.Year
+		return f.Year, f.Term
 	}
 
 	/*
@@ -561,7 +564,7 @@ func ExtractYear(f *examdb.File) int {
 	words, err := fileToWordBag(f)
 	if err != nil {
 		log.Println(err)
-		return 0
+		return 0, examdb.TermUnknown
 	}
 	return ExtractYearFromWords(words)
 }
@@ -573,6 +576,10 @@ type dateTemplate struct {
 
 var dateTemplates = []dateTemplate{
 	{"January 2 2006", true},
+	{"January 2st 2006", true},
+	{"January 2nd 2006", true},
+	{"January 2rd 2006", true},
+	{"January 2th 2006", true},
 	{"January 2006", true},
 	{"2006", false},
 	{"06", false},
@@ -580,13 +587,15 @@ var dateTemplates = []dateTemplate{
 
 // ExtractYearFromWords extracts the most frequent year found in the bag of
 // words and returns it.
-func ExtractYearFromWords(words []string) int {
+func ExtractYearFromWords(words []string) (int, string) {
 	var templateWordCount []int
 	for _, tmpl := range dateTemplates {
 		templateWordCount = append(templateWordCount, len(strings.Split(tmpl.tmpl, " ")))
 	}
 
 	var foundYears []int
+	var foundYearsHasMonth []int
+	var foundTerms []string
 
 	for i := 0; i < len(words); i++ {
 		for j, tmpl := range dateTemplates {
@@ -603,13 +612,11 @@ func ExtractYearFromWords(words []string) int {
 			if time.Now().Before(t) {
 				continue
 			}
-			year := convertDateToYear(tmpl, t)
-			// Weight dates with months more than those without.
-			weight := 1
+			year, term := convertDateToYear(tmpl, t)
 			if tmpl.hasMonth {
-				weight = 2
-			}
-			for i := 0; i < weight; i++ {
+				foundYearsHasMonth = append(foundYearsHasMonth, year)
+				foundTerms = append(foundTerms, term)
+			} else {
 				foundYears = append(foundYears, year)
 			}
 			i += count - 1
@@ -617,39 +624,91 @@ func ExtractYearFromWords(words []string) int {
 		}
 	}
 
+	// Dates with months are inherently more accurate and avoids random duplicate
+	// numbers.
+	if len(foundYearsHasMonth) > 0 {
+		foundYears = foundYearsHasMonth
+	}
+
+	return mostFrequentInt(foundYears, 0), mostFrequentString(foundTerms, examdb.TermUnknown)
+}
+
+// mostFrequentInt returns the most frequent integer. If there is a tie, it uses
+// the one specified last. If there are no elements it returns fallback.
+func mostFrequentInt(arr []int, fallback int) int {
 	frequency := map[int]int{}
 	lastIndex := map[int]int{}
+	best := fallback
 
-	var bestYear int
-
-	for i, year := range foundYears {
-		frequency[year]++
-		lastIndex[year] = i
+	for i, n := range arr {
+		frequency[n]++
+		lastIndex[n] = i
 	}
 
 	for year, freq := range frequency {
-		bestFreq := frequency[bestYear]
+		bestFreq := frequency[best]
 		if freq > bestFreq {
-			bestYear = year
+			best = year
 		} else if freq == bestFreq {
-			if lastIndex[year] > lastIndex[bestYear] {
-				bestYear = year
+			if lastIndex[year] > lastIndex[best] {
+				best = year
 			}
 		}
 	}
 
-	return bestYear
+	return best
+}
+
+// mostFrequentString returns the most frequent string. If there is a tie, it uses
+// the one specified last. If there are no elements it returns fallback.
+func mostFrequentString(arr []string, fallback string) string {
+	frequency := map[string]int{}
+	lastIndex := map[string]int{}
+	best := fallback
+
+	for i, n := range arr {
+		frequency[n]++
+		lastIndex[n] = i
+	}
+
+	for year, freq := range frequency {
+		bestFreq := frequency[best]
+		if freq > bestFreq {
+			best = year
+		} else if freq == bestFreq {
+			if lastIndex[year] > lastIndex[best] {
+				best = year
+			}
+		}
+	}
+
+	return best
 }
 
 // convertDateToYear returns the year from t, unless the template hasMonth, in
 // which it checks if it's during January to April and subtracts 1 from the year
 // if that's the case.
-func convertDateToYear(tmpl dateTemplate, t time.Time) int {
+func convertDateToYear(tmpl dateTemplate, t time.Time) (int, string) {
 	if tmpl.hasMonth {
+		var term string
 		m := t.Month()
 		if m >= time.January && m <= time.April {
-			return t.Year() - 1
+			term = examdb.TermW2
+		} else if m >= time.May && m <= time.August {
+			term = examdb.TermS
+		} else if m >= time.September && m <= time.December {
+			term = examdb.TermW1
 		}
+
+		if term == examdb.TermW2 {
+			return t.Year() - 1, term
+		}
+		return t.Year(), term
 	}
-	return t.Year()
+	return t.Year(), examdb.TermUnknown
+}
+
+// ConvertDateToYearTerm returns the year and the term from t.
+func ConvertDateToYearTerm(t time.Time) (int, string) {
+	return convertDateToYear(dateTemplate{hasMonth: true}, t)
 }

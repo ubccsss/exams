@@ -19,14 +19,24 @@ import (
 
 // Database stores all of the courses and files.
 type Database struct {
+	// Courses should not be accessed without locking Mu.
 	Courses map[string]*Course `json:",omitempty"`
-	Files   []*File            `json:",omitempty"`
+	// Files should not be accessed without locking Mu.
+	Files []*File `json:",omitempty"`
 	//PotentialFiles []*File            `json:",omitempty"`
 	SourceHashes map[string]string `json:",omitempty"`
 	Mu           sync.RWMutex      `json:"-"`
 
 	UnprocessedSources   []*File      `json:",omitempty"`
 	UnprocessedSourcesMu sync.RWMutex `json:"-"`
+}
+
+// MakeDatabase makes a new database.
+func MakeDatabase() *Database {
+	return &Database{
+		Courses:      map[string]*Course{},
+		SourceHashes: map[string]string{},
+	}
 }
 
 // CoursesNoFiles returns the courses with no files.
@@ -41,6 +51,7 @@ func (db *Database) CoursesNoFiles() []string {
 	return classes
 }
 
+// FileCount contains file counts for a number of different categories.
 type FileCount struct {
 	Total, HandClassified, Potential, NotAnExam int
 }
@@ -105,12 +116,18 @@ func (db *Database) findFileLocked(hash string) *File {
 }
 
 // FindFileByPath returns the file with the matching path.
-func (db *Database) FindFileByPath(path string) *File {
+func (db *Database) FindFileByPath(fp string) *File {
 	db.Mu.RLock()
 	defer db.Mu.RUnlock()
 
+	if len(fp) == 0 {
+		return nil
+	}
+
 	for _, f := range db.Files {
-		if f.Path == path {
+		// Allow matching "/0/foo" and "0/foo" due to a bug causing the first to be
+		// generated.
+		if path.Join("/", f.Path) == path.Join("/", fp) {
 			return f
 		}
 	}
@@ -118,7 +135,7 @@ func (db *Database) FindFileByPath(path string) *File {
 }
 
 // FindCourseFiles returns all files with the specified course.
-func (db *Database) FindCourseFiles(c Course) []*File {
+func (db *Database) FindCourseFiles(c *Course) []*File {
 	db.Mu.RLock()
 	defer db.Mu.RUnlock()
 
@@ -133,6 +150,8 @@ func (db *Database) FindCourseFiles(c Course) []*File {
 	return files
 }
 
+// ProcessedFiles returns all files that have been "processed" or are not
+// potential.
 func (db *Database) ProcessedFiles() []*File {
 	db.Mu.RLock()
 	defer db.Mu.RUnlock()
@@ -148,6 +167,23 @@ func (db *Database) ProcessedFiles() []*File {
 	return files
 }
 
+// DisplayCourses returns all course codes that should be displayed in
+// alphabetical order.
+func (db *Database) DisplayCourses() []string {
+	db.Mu.RLock()
+	defer db.Mu.RUnlock()
+
+	var courses []string
+	for code, c := range db.Courses {
+		if config.DisplayDepartment[c.Department()] {
+			courses = append(courses, code)
+		}
+	}
+	sort.Strings(courses)
+	return courses
+}
+
+// UnprocessedFiles returns all files that haven't been processed.
 func (db *Database) UnprocessedFiles() []*File {
 	db.Mu.RLock()
 	defer db.Mu.RUnlock()
@@ -163,6 +199,7 @@ func (db *Database) UnprocessedFiles() []*File {
 	return files
 }
 
+// NotAnExamFiles returns all files that aren't exams.
 func (db *Database) NotAnExamFiles() []*File {
 	db.Mu.RLock()
 	defer db.Mu.RUnlock()
@@ -203,23 +240,41 @@ func validFileName(name string) bool {
 	return false
 }
 
+// NeedFixReasons contains a file and the reasons it needs to be fixed.
+type NeedFixReasons struct {
+	File    *File
+	Reasons []string
+}
+
 // NeedFix returns all files that are potentially missing required information.
-func (db *Database) NeedFix() []*File {
+func (db *Database) NeedFix() []NeedFixReasons {
 	db.Mu.RLock()
 	defer db.Mu.RUnlock()
 
-	var files []*File
+	var files []NeedFixReasons
+	var reasons NeedFixReasons
 	for _, f := range db.Files {
 		if !f.HandClassified {
 			continue
 		}
-		if !validFileName(f.Name) {
-			files = append(files, f)
-			continue
+
+		reasons = NeedFixReasons{
+			File:    f,
+			Reasons: nil,
 		}
 
+		if !validFileName(f.Name) {
+			reasons.Reasons = append(reasons.Reasons, "invalid file name")
+		}
 		if f.Term == "" {
-			files = append(files, f)
+			reasons.Reasons = append(reasons.Reasons, "missing term")
+		}
+		if f.Year == 0 {
+			reasons.Reasons = append(reasons.Reasons, "missing year")
+		}
+
+		if len(reasons.Reasons) > 0 {
+			files = append(files, reasons)
 		}
 	}
 	return files

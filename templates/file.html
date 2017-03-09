@@ -49,7 +49,7 @@ iframe {
       <select name="course">
         <option value="">Select Course Code</option>
         {{ $predicted := .Course }}
-        {{ range $course, $v := .Courses }}
+        {{ range $course := .Courses }}
         <option value="{{$course}}" {{if eq $course $predicted}}selected{{end}}>{{$course}}</option>
         {{ end }}
       </select>
@@ -61,7 +61,7 @@ iframe {
       <br>
       <label>Term</label><br>
       <p class="detected">Detected: {{.DetectedTerm}}</p>
-      <select name="term" size=4>
+      <select name="term" size=5>
         <option value="">Select Term</option>
         {{ $predicted := .Term }}
         {{ range $term := .Terms }}

@@ -22,9 +22,20 @@ import (
 // Templates are all of the HTML templates needed.
 var Templates *template.Template
 
+var templateFuncs = template.FuncMap{
+	"pathToURL": func(fp string) string {
+		base := path.Base(fp)
+		rest := path.Dir(fp)
+		return path.Join("/", rest, url.PathEscape(base))
+	},
+}
+
 func updateTemplates() {
 	log.Printf("%s/: changed! Loading templates...", config.TemplateDir)
-	Templates = template.Must(template.ParseGlob(config.TemplateGlob))
+	t := template.New("templates")
+	t.Funcs(templateFuncs)
+	template.Must(t.ParseGlob(config.TemplateGlob))
+	Templates = t
 }
 
 func updateTemplatesDebounced() chan struct{} {
@@ -214,6 +225,11 @@ func (g *Generator) fetchLayout() error {
 			err = err2
 			return
 		}
+
+		// This replaces the ubccsss.org Google Analytics code with the one for
+		// exams.ubccsss.org.
+		layout = strings.Replace(layout, "UA-88004303-1", "UA-88004303-3", -1)
+
 		g.layout = layout
 		log.Printf("Fetched layout template. Took %s", time.Since(start))
 	})

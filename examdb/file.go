@@ -8,7 +8,9 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/ubccsss/exams/config"
@@ -17,9 +19,10 @@ import (
 
 // Term labels
 const (
-	TermW1 = "W1"
-	TermW2 = "W2"
-	TermS  = "S"
+	TermW1      = "W1"
+	TermW2      = "W2"
+	TermS       = "S"
+	TermUnknown = "unknown"
 )
 
 var (
@@ -44,7 +47,7 @@ var (
 	}
 
 	// ExamTerms are all the possible terms that a file can fall under.
-	ExamTerms = []string{TermW1, TermW2, TermS}
+	ExamTerms = []string{TermW1, TermW2, TermS, TermUnknown}
 
 	// FileNameScoreRegexes are a list of regexps and values that can be used to
 	// rank files based on how likely they are an exam.
@@ -56,16 +59,17 @@ var (
 
 // File is a single exam file typically a PDF.
 type File struct {
-	Name           string  `json:",omitempty"`
-	Path           string  `json:",omitempty"`
-	Source         string  `json:",omitempty"`
-	Hash           string  `json:",omitempty"`
-	Score          float64 `json:",omitempty"`
-	Term           string  `json:",omitempty"`
-	NotAnExam      bool    `json:",omitempty"`
-	Course         string  `json:",omitempty"`
-	Year           int     `json:",omitempty"`
-	HandClassified bool    `json:",omitempty"`
+	Name           string    `json:",omitempty"`
+	Path           string    `json:",omitempty"`
+	Source         string    `json:",omitempty"`
+	Hash           string    `json:",omitempty"`
+	Score          float64   `json:",omitempty"`
+	Term           string    `json:",omitempty"`
+	NotAnExam      bool      `json:",omitempty"`
+	Course         string    `json:",omitempty"`
+	Year           int       `json:",omitempty"`
+	HandClassified bool      `json:",omitempty"`
+	Updated        time.Time `json:",omitempty"`
 
 	LastResponseCode int `json:",omitempty"`
 
@@ -75,6 +79,10 @@ type File struct {
 
 // PathOnDisk returns the path to the file on disk.
 func (f File) PathOnDisk() string {
+	// Only for tests.
+	if filepath.IsAbs(f.Path) && strings.HasPrefix(f.Path, os.TempDir()) {
+		return f.Path
+	}
 	return path.Join(config.ExamsDir, f.Path)
 }
 
@@ -210,3 +218,46 @@ func (p FileByTerm) Less(i, j int) bool {
 	return a < b
 }
 func (p FileByTerm) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
+
+// FileByYearTermName attaches the methods of sort.Interface to []*File, sorting in
+// decreasing order by year, then increasing order by term and name.
+type FileByYearTermName []*File
+
+func (p FileByYearTermName) Len() int { return len(p) }
+func (p FileByYearTermName) Less(i, j int) bool {
+	// Sort by year
+	a := fileYear(p[i])
+	b := fileYear(p[j])
+	if a == b {
+		// Sort by term
+		at := fileTerm(p[i])
+		bt := fileTerm(p[j])
+		if at == bt {
+			// Sort by name
+			return strings.ToLower(p[i].Name) < strings.ToLower(p[j].Name)
+		}
+		return at < bt
+	}
+	return a >= b
+}
+func (p FileByYearTermName) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
+
+func fileYear(f *File) int {
+	if f.Year > 0 {
+		return f.Year
+	}
+	if f.Inferred != nil {
+		return f.Inferred.Year
+	}
+	return 0
+}
+
+func fileTerm(f *File) string {
+	if f.Term != "" {
+		return f.Term
+	}
+	if f.Inferred != nil {
+		return f.Inferred.Term
+	}
+	return ""
+}
