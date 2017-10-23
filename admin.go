@@ -67,21 +67,43 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprintf(w, "<p>Unprocessed files: %d, Processed: %d, Not An Exam: %d, Total: %d</p>", count.Potential, count.HandClassified, count.NotAnExam, count.Total)
 	w.Write([]byte(`
-		<a href="/admin/potential">Unprocessed</a>
-		<a href="/admin/potential?invalid">Not Exams/Invalid</a>`))
+		<a href="/admin/potential">Unprocessed</a>,
+		<a href="/admin/potential?invalid">Not Exams/Invalid</a>,
+		<a href="/admin/potential?inferred">Inferred: Unprocessed</a>,
+		<a href="/admin/potential?inferred&invalid">Inferred: Not Exams/Invalid</a>
+		`))
 
 	_, showInvalid := r.URL.Query()["invalid"]
+	_, showInferred := r.URL.Query()["inferred"]
 
-	if !showInvalid {
-		fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
-		for _, file := range db.UnprocessedFiles() {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
-		}
-		fmt.Fprint(w, "</ul>")
-	} else {
+	if showInvalid && !showInferred {
 		fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
 		for _, file := range db.NotAnExamFiles() {
 			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
+		}
+		fmt.Fprint(w, "</ul>")
+	} else if showInvalid && showInferred {
+		fmt.Fprint(w, "<h1>Inferred: Not Exam/Invalid</h1><ul>")
+		for _, file := range db.Files {
+			if file.Inferred == nil || !file.Inferred.NotAnExam || file.HandClassified {
+				continue
+			}
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
+		}
+		fmt.Fprint(w, "</ul>")
+	} else if !showInvalid && showInferred {
+		fmt.Fprint(w, "<h1>Inferred: Unprocessed</h1><ul>")
+		for _, file := range db.Files {
+			if file.Inferred == nil || file.Inferred.NotAnExam || file.HandClassified {
+				continue
+			}
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
+		}
+		fmt.Fprint(w, "</ul>")
+	} else {
+		fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
+		for _, file := range db.UnprocessedFiles() {
+			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
 		}
 		fmt.Fprint(w, "</ul>")
 	}

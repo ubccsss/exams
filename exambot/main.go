@@ -34,7 +34,7 @@ import (
 )
 
 const (
-	userAgent  = "UBC CSSS Exam Bot vpc@ubccsss.org"
+	userAgent  = "UBC CSSS Exam Bot webmaster@ubccsss.org"
 	boltDBPath = "exambot.boltdb"
 
 	// bloom filter configuration
