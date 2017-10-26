@@ -47,7 +47,7 @@ func findDuplicates(w io.Writer, db *examdb.Database) ([]string, error) {
 	return duplicate, nil
 }
 
-func handleListDuplicates(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleListDuplicates(w http.ResponseWriter, r *http.Request) {
 	duplicates, err := findDuplicates(w, &db)
 	if err != nil {
 		handleErr(w, err)
@@ -59,7 +59,7 @@ func handleListDuplicates(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Done."))
 }
 
-func handleRemoveDuplicates(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleRemoveDuplicates(w http.ResponseWriter, r *http.Request) {
 	duplicates, err := findDuplicates(w, &db)
 	if err != nil {
 		handleErr(w, err)
@@ -76,7 +76,7 @@ func handleRemoveDuplicates(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Done."))
 }
 
-func handleListIncorrectLocations(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleListIncorrectLocations(w http.ResponseWriter, r *http.Request) {
 	for _, f := range db.Files {
 		if len(f.Path) == 0 {
 			continue

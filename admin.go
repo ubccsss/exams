@@ -3,19 +3,14 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"net/url"
-	"path"
 	"sort"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
-	"github.com/ubccsss/exams/config"
+	"github.com/ubccsss/exams/db"
 	"github.com/ubccsss/exams/examdb"
 	"github.com/ubccsss/exams/generators"
-	"github.com/ubccsss/exams/ml"
-	"github.com/ubccsss/exams/workers"
 )
 
 // Mappings to the new locations of the functions.
@@ -25,43 +20,46 @@ var (
 )
 
 // adminRoutes returns a mux for all of the admin endpoints.
-func adminRoutes() *http.ServeMux {
+func (s *server) adminRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/admin/potential", handlePotentialFileIndex)
-	mux.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
-	mux.HandleFunc("/admin/file/", handleFile)
+	mux.HandleFunc("/admin/potential", s.handlePotentialFileIndex)
+	mux.HandleFunc("/admin/needfix", s.handleNeedFixFileIndex)
+	mux.HandleFunc("/admin/file/", s.handleFile)
 
-	mux.HandleFunc("/admin/generate", generators.PrettyJob(handleGenerate))
-	mux.HandleFunc("/admin/remove404", generators.PrettyJob(handleAdminRemove404))
-	mux.HandleFunc("/admin/duplicates", generators.PrettyJob(handleListDuplicates))
-	mux.HandleFunc("/admin/removeDuplicates", generators.PrettyJob(handleRemoveDuplicates))
-	mux.HandleFunc("/admin/incorrectlocations", generators.PrettyJob(handleListIncorrectLocations))
+	mux.HandleFunc("/admin/generate", generators.PrettyJob(s.handleGenerate))
+	mux.HandleFunc("/admin/duplicates", generators.PrettyJob(s.handleListDuplicates))
+	mux.HandleFunc("/admin/removeDuplicates", generators.PrettyJob(s.handleRemoveDuplicates))
+	mux.HandleFunc("/admin/incorrectlocations", generators.PrettyJob(s.handleListIncorrectLocations))
 
 	// Machine Learning Endpoints
-	mux.HandleFunc("/admin/ml/bayesian/train", generators.PrettyJob(handleMLRetrain))
-	mux.HandleFunc("/admin/ml/google/train", generators.PrettyJob(handleMLRetrainGoogle))
-	mux.HandleFunc("/admin/ml/google/inferpotential", generators.PrettyJob(handleMLGoogleInferPotential))
-	mux.HandleFunc("/admin/ml/google/accuracy", generators.PrettyJob(handleMLGoogleAccuracy))
+	/*
+		mux.HandleFunc("/admin/ml/bayesian/train", generators.PrettyJob(s.handleMLRetrain))
+		mux.HandleFunc("/admin/ml/google/train", generators.PrettyJob(s.handleMLRetrainGoogle))
+		mux.HandleFunc("/admin/ml/google/inferpotential", generators.PrettyJob(s.handleMLGoogleInferPotential))
+		mux.HandleFunc("/admin/ml/google/accuracy", generators.PrettyJob(s.handleMLGoogleAccuracy))
+	*/
 
 	// Ingress Endpoints
-	mux.HandleFunc("/admin/ingress/deptcourses", generators.PrettyJob(ingressDeptCourses))
-	mux.HandleFunc("/admin/ingress/deptfiles", generators.PrettyJob(ingressDeptFiles))
-	mux.HandleFunc("/admin/ingress/ubccsss", generators.PrettyJob(ingressUBCCSSS))
-	mux.HandleFunc("/admin/ingress/ubcmath", generators.PrettyJob(ingressUBCMath))
-	mux.HandleFunc("/admin/ingress/ubclaw", generators.PrettyJob(ingressUBCLaw))
-	mux.HandleFunc("/admin/ingress/archive.org", generators.PrettyJob(ingressArchiveOrgFiles))
+	/*
+		mux.HandleFunc("/admin/ingress/deptcourses", generators.PrettyJob(ingressDeptCourses))
+		mux.HandleFunc("/admin/ingress/deptfiles", generators.PrettyJob(ingressDeptFiles))
+		mux.HandleFunc("/admin/ingress/ubccsss", generators.PrettyJob(ingressUBCCSSS))
+		mux.HandleFunc("/admin/ingress/ubcmath", generators.PrettyJob(ingressUBCMath))
+		mux.HandleFunc("/admin/ingress/ubclaw", generators.PrettyJob(ingressUBCLaw))
+		mux.HandleFunc("/admin/ingress/archive.org", generators.PrettyJob(ingressArchiveOrgFiles))
+	*/
 
-	mux.HandleFunc("/admin/", handleAdminIndex)
+	mux.HandleFunc("/admin/", s.handleAdminIndex)
 
 	return mux
 }
 
-func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
+func (s *server) handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
 
-	count := db.FileCount()
+	count := s.db.FileCount()
 
 	fmt.Fprintf(w, "<title>Potential Files</title>")
 
@@ -73,43 +71,61 @@ func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 		<a href="/admin/potential?inferred&invalid">Inferred: Not Exams/Invalid</a>
 		`))
 
-	_, showInvalid := r.URL.Query()["invalid"]
-	_, showInferred := r.URL.Query()["inferred"]
-
-	if showInvalid && !showInferred {
-		fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
-		for _, file := range db.NotAnExamFiles() {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
-		}
-		fmt.Fprint(w, "</ul>")
-	} else if showInvalid && showInferred {
-		fmt.Fprint(w, "<h1>Inferred: Not Exam/Invalid</h1><ul>")
-		for _, file := range db.Files {
-			if file.Inferred == nil || !file.Inferred.NotAnExam || file.HandClassified {
-				continue
-			}
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
-		}
-		fmt.Fprint(w, "</ul>")
-	} else if !showInvalid && showInferred {
-		fmt.Fprint(w, "<h1>Inferred: Unprocessed</h1><ul>")
-		for _, file := range db.Files {
-			if file.Inferred == nil || file.Inferred.NotAnExam || file.HandClassified {
-				continue
-			}
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
-		}
-		fmt.Fprint(w, "</ul>")
-	} else {
-		fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
-		for _, file := range db.UnprocessedFiles() {
-			fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
-		}
-		fmt.Fprint(w, "</ul>")
+	files, err := s.db.Files(db.File{})
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
 	}
+	fmt.Fprint(w, "<h1>All Files</h1><ul>")
+	for _, file := range files {
+		fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.SourceURL, file.URL)
+	}
+	fmt.Fprint(w, "</ul>")
+
+	/*
+		_, showInvalid := r.URL.Query()["invalid"]
+		_, showInferred := r.URL.Query()["inferred"]
+
+		if showInvalid && !showInferred {
+			fmt.Fprint(w, "<h1>Not Exams/Invalid</h1><ul>")
+			files, err := s.db.NotAnExamFiles()
+			if err != nil {
+				http.Error(w, err.Error(), 500)
+				return
+			}
+			for _, file := range files {
+				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.SourceURL, file.URL)
+			}
+			fmt.Fprint(w, "</ul>")
+		} else if showInvalid && showInferred {
+			fmt.Fprint(w, "<h1>Inferred: Not Exam/Invalid</h1><ul>")
+			for _, file := range s.db.Files {
+				if file.Inferred == nil || !file.Inferred.NotAnExam || file.HandClassified {
+					continue
+				}
+				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
+			}
+			fmt.Fprint(w, "</ul>")
+		} else if !showInvalid && showInferred {
+			fmt.Fprint(w, "<h1>Inferred: Unprocessed</h1><ul>")
+			for _, file := range db.Files {
+				if file.Inferred == nil || file.Inferred.NotAnExam || file.HandClassified {
+					continue
+				}
+				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a></li>`, file.Hash, file.Source, file.Path)
+			}
+			fmt.Fprint(w, "</ul>")
+		} else {
+			fmt.Fprint(w, "<h1>Unprocessed</h1><ul>")
+			for _, file := range db.UnprocessedFiles() {
+				fmt.Fprintf(w, `<li><a href="/admin/file/%s">%s %s</a> %.0f</li>`, file.Hash, file.Source, file.Path, file.Score)
+			}
+			fmt.Fprint(w, "</ul>")
+		}
+	*/
 }
 
-func handleFilePost(w http.ResponseWriter, r *http.Request, file *examdb.File) {
+func (s *server) handleFilePost(w http.ResponseWriter, r *http.Request, file *db.File) {
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -147,15 +163,15 @@ func handleFilePost(w http.ResponseWriter, r *http.Request, file *examdb.File) {
 		return
 	}
 	file.Year = year
-	file.Course = course
-	file.Term = term
-	file.Name = name
-	file.HandClassified = true
-	if err := db.RemoveFile(file); err != nil {
+	file.Course, err = s.db.Course(course)
+	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	if err := db.FetchFileAndSave(file); err != nil {
+	file.Term = term
+	file.Label = name
+	file.HandClassified = true
+	if err := s.db.SaveFile(file); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
@@ -171,23 +187,30 @@ func handleFilePost(w http.ResponseWriter, r *http.Request, file *examdb.File) {
 	}
 }
 
-func handleFile(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleFile(w http.ResponseWriter, r *http.Request) {
 	parts := strings.Split(r.URL.Path, "/")
 	hash := parts[len(parts)-1]
-	file := db.FindFile(hash)
-	if file == nil {
-		http.Error(w, "not found", 404)
+	file, err := s.db.File(hash)
+	if err != nil {
+		handleErr(w, err)
 		return
 	}
 
 	if r.Method == "POST" {
-		handleFilePost(w, r, file)
+		s.handleFilePost(w, r, &file)
 		return
 	}
 
 	w.Header().Set("Content-Type", "text/html")
+
+	displayCourses, err := s.db.DisplayCourses()
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+
 	meta := struct {
-		File         *examdb.File
+		File         db.File
 		Courses      []string
 		Course       string
 		Year         string
@@ -199,17 +222,14 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		DetectedTerm string
 	}{
 		File:       file,
-		Courses:    db.DisplayCourses(),
+		Courses:    displayCourses,
 		Terms:      examdb.ExamTerms,
 		QuickNames: examdb.ExamLabels,
-		FileURL:    file.Source,
+		FileURL:    file.SourceURL,
 	}
 
-	if len(file.Path) > 0 {
-		parts := strings.Split(file.Path, "/")
-		i := len(parts) - 1
-		parts[i] = url.PathEscape(parts[i])
-		meta.FileURL = path.Join("/", strings.Join(parts, "/"))
+	if len(file.URL) > 0 {
+		meta.FileURL = file.URL
 	}
 	if file.Year > 0 {
 		meta.Year = strconv.Itoa(file.Year)
@@ -217,24 +237,29 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	if len(file.Term) > 0 {
 		meta.Term = file.Term
 	}
-	if len(file.Course) > 0 {
-		meta.Course = file.Course
+	if len(file.Course.Title()) > 0 {
+		meta.Course = file.Course.Title()
 	}
 
-	if len(meta.Course) == 0 {
-		meta.Course = ml.ExtractCourse(&db, file)
-	}
+	/*
+		if len(meta.Course) == 0 {
+			meta.Course = ml.ExtractCourse(&db, file)
+		}
+	*/
 
-	year, _ := ml.ExtractYear(file)
+	//year, _ := ml.ExtractYear(file)
+	year := 0
 	meta.Year = strconv.Itoa(year)
 
-	classes, err := ml.DefaultGoogleClassifier.Classify(file, false)
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	meta.DetectedName = labelsToName(classes["type"], classes["sample"], classes["solution"])
-	meta.DetectedTerm = classes["term"]
+	/*
+		classes, err := ml.DefaultGoogleClassifier.Classify(file, false)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		meta.DetectedName = labelsToName(classes["type"], classes["sample"], classes["solution"])
+		meta.DetectedTerm = classes["term"]
+	*/
 
 	if len(meta.Term) == 0 {
 		meta.Term = meta.DetectedTerm
@@ -244,60 +269,6 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-}
-
-func handleAdminRemove404(w http.ResponseWriter, r *http.Request) {
-	const workers = 8
-
-	fileChan := make(chan *examdb.File)
-
-	go func() {
-		files := make([]*examdb.File, len(db.Files))
-		copy(files, db.Files)
-		for _, f := range files {
-			if !f.IsPotential() {
-				continue
-			}
-			fileChan <- f
-		}
-		close(fileChan)
-	}()
-
-	var wg sync.WaitGroup
-	for i := 0; i < workers; i++ {
-		wg.Add(1)
-		go func() {
-			for f := range fileChan {
-				if len(f.Path) > 0 {
-					continue
-				}
-				isExamsCGI := strings.HasPrefix(f.Source, "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi")
-				if f.LastResponseCode == 403 && isExamsCGI {
-					// Remove 403ed exams.cgi endpoints.
-				} else if !(f.LastResponseCode == 404 || f.LastResponseCode == 0) {
-					continue
-				}
-
-				reader, err := f.Reader()
-				if err != nil {
-					is404 := strings.Contains(err.Error(), "got 404")
-					is403 := strings.Contains(err.Error(), "got 403")
-					remove := is404 || isExamsCGI && is403
-					fmt.Fprintf(w, "%s: %s (Removing %t)\n", f, err, remove)
-					if remove {
-						if err := db.RemoveFile(f); err != nil {
-							handleErr(w, err)
-						}
-					}
-					continue
-				}
-				reader.Close()
-			}
-			wg.Done()
-		}()
-	}
-	wg.Wait()
-	w.Write([]byte("Done."))
 }
 
 func labelsToName(typ, samp, sol string) string {
@@ -314,7 +285,7 @@ func labelsToName(typ, samp, sol string) string {
 	return strings.Join(bits, " ")
 }
 
-func handleGenerate(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
 	if err := saveAndGenerate(); err != nil {
 		handleErr(w, err)
@@ -323,7 +294,7 @@ func handleGenerate(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Done in %s.", time.Now().Sub(start))
 }
 
-func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
 	if err := generators.ExecuteTemplate(w, "admin.md", nil); err != nil {
@@ -332,7 +303,7 @@ func handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
 
@@ -364,7 +335,8 @@ func handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, `</tbody></table>`)
 }
 
-func handleMLRetrain(w http.ResponseWriter, r *http.Request) {
+/*
+func (s *server) handleMLRetrain(w http.ResponseWriter, r *http.Request) {
 	if err := ml.RetrainClassifier(&db, config.ClassifierDir); err != nil {
 		handleErr(w, err)
 		return
@@ -372,12 +344,13 @@ func handleMLRetrain(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Done."))
 }
 
-func handleMLGoogleAccuracy(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleMLGoogleAccuracy(w http.ResponseWriter, r *http.Request) {
 	if err := ml.DefaultGoogleClassifier.ReportAccuracy(w); err != nil {
 		handleErr(w, err)
 		return
 	}
 }
+*/
 
 // If always is true, things will be inferred if more than 24 hours old.
 func skipInfer(f *examdb.File, always bool) bool {
@@ -385,7 +358,8 @@ func skipInfer(f *examdb.File, always bool) bool {
 	return f.NotAnExam || f.HandClassified || (f.Inferred != nil && (len(f.Inferred.Name) > 0 || f.Inferred.NotAnExam) && !should) || (f.LastResponseCode != 200 && f.LastResponseCode != 0)
 }
 
-func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
+/*
+func (s *server) handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Google Prediction Inferring\n")
 
 	alwaysInfer := r.URL.RawQuery == "alwaysinfer"
@@ -454,7 +428,7 @@ func handleMLGoogleInferPotential(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func handleMLRetrainGoogle(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleMLRetrainGoogle(w http.ResponseWriter, r *http.Request) {
 	model, err := ml.MakeGoogleClassifier()
 	if err != nil {
 		handleErr(w, err)
@@ -466,3 +440,4 @@ func handleMLRetrainGoogle(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write([]byte("Done."))
 }
+*/

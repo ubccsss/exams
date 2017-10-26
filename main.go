@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"io/ioutil"
 	"log"
 	"net"
@@ -16,6 +17,8 @@ import (
 	"github.com/goji/httpauth"
 	"github.com/pkg/errors"
 	"github.com/ubccsss/exams/config"
+	"github.com/ubccsss/exams/db"
+	"github.com/ubccsss/exams/exambot"
 	"github.com/ubccsss/exams/examdb"
 	"github.com/ubccsss/exams/generators"
 	"github.com/ubccsss/exams/ml"
@@ -26,7 +29,7 @@ import (
 var (
 	templates = generators.Templates
 
-	db        examdb.Database
+	oldDB     examdb.Database
 	generator *generators.Generator
 )
 
@@ -249,21 +252,24 @@ func saveAndGenerate() error {
 	return nil
 }
 
-func serveSite(c *cli.Context) error {
+var (
+	user = flag.String("user", "admin", "")
+	pass = flag.String("pass", "", "")
+)
+
+func (s *server) serveSite(c *cli.Context) error {
 	if err := ml.LoadOrTrainClassifier(&db, config.ClassifierDir); err != nil {
 		log.Printf("Failed to load classifier. Classification tasks will not work.: %s", err)
 	}
 
-	username := c.String("user")
-	password := c.String("pass")
-	if len(password) > 0 {
-		secureMux := adminRoutes()
-		http.Handle("/admin/", httpauth.SimpleBasicAuth(username, password)(secureMux))
+	if len(*pass) > 0 {
+		secureMux := s.adminRoutes()
+		http.Handle("/admin/", httpauth.SimpleBasicAuth(*user, *pass)(secureMux))
 	} else {
 		log.Println("No admin password set, interface disabled.")
 	}
 
-	http.HandleFunc("/upload", handleFileUpload)
+	http.HandleFunc("/upload", s.handleFileUpload)
 	http.Handle("/", http.FileServer(http.Dir("static")))
 
 	// Launch 4 source workers
@@ -276,25 +282,47 @@ func serveSite(c *cli.Context) error {
 	return http.ListenAndServe(bindAddr, nil)
 }
 
+var (
+	dbType   = flag.String("dbtype", "postgres", "the database connection type")
+	dbParams = flag.String("db", "host=localhost user=examdb dbname=examdb sslmode=disable password=examdb", "the database connection string")
+)
+
+type server struct {
+	db *db.DB
+}
+
 func main() {
+	log.SetOutput(os.Stderr)
 	log.SetFlags(log.Flags() | log.Lshortfile)
+
+	flag.Parse()
+
+	var err error
+	db, err = db.Open(*dbType, *dbParams)
+	if err != nil {
+		return log.Fatal("failed to connect to db: %+v", err)
+	}
 
 	if err := loadDatabase(); err != nil {
 		log.Printf("tried to load database: %s", err)
 	}
 
-	var err error
 	generator, err = generators.MakeGenerator(&db, config.ExamsDir)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if err := verifyConsistency(); err != nil {
-		log.Fatal(err)
+	go func() {
+		if err := exambot.Run(db); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	s := server{
+		db: db,
 	}
 
-	app := setupCommands()
-	if err := app.Run(os.Args); err != nil {
+	if err := s.serveSite(nil); err != nil {
 		log.Fatal(err)
 	}
 }
