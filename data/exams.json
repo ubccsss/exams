@@ -10939,26 +10939,6 @@
       "Updated": "0001-01-01T00:00:00Z"
     },
     {
-      "Name": "Midterm",
-      "Path": "cs213/2015/213-2015-mt.pdf",
-      "Hash": "af0573c434f79b095e34115573acf3d9aca730a9",
-      "Term": "W2",
-      "Course": "cs213",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "Midterm (Solution)",
-      "Path": "cs213/2015/213-2015-mt-soln.pdf",
-      "Hash": "a898d34f6ed86572474c9da5418ae5f175d5b731",
-      "Term": "W2",
-      "Course": "cs213",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
       "Name": "Sample Midterm",
       "Path": "cs213/2015/213-2015-practice-mt.pdf",
       "Hash": "c6dd7a25bc9a1cf83d318d30aa57b10eb56cd68a",
@@ -11011,6 +10991,7 @@
       "Hash": "af0573c434f79b095e34115573acf3d9aca730a9",
       "Term": "W2",
       "Course": "cs213",
+      "Year": 2015,
       "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z"
     },
@@ -11020,6 +11001,7 @@
       "Hash": "a898d34f6ed86572474c9da5418ae5f175d5b731",
       "Term": "W2",
       "Course": "cs213",
+      "Year": 2015,
       "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z"
     },
@@ -11035,22 +11017,6 @@
       "Name": "213-2015-finalreview.pdf",
       "Path": "cs213/0/213-2015-finalreview.pdf",
       "Hash": "d548c56a28f295f6455d1364708b16e47fb2746e",
-      "Course": "cs213",
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "cs213-MidPracticeQuestions.pdf",
-      "Path": "cs213/0/cs213-MidPracticeQuestions.pdf",
-      "Hash": "f2d9198c7f7ea5024ca819e63d516e164acc4668",
-      "Course": "cs213",
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "cs213-MidPracticeSolutions.pdf",
-      "Path": "cs213/0/cs213-MidPracticeSolutions.pdf",
-      "Hash": "2b8f5d4d6a7d68ec1aea06fb5a58db74dc586f75",
       "Course": "cs213",
       "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z"
@@ -11231,21 +11197,6 @@
       "Year": 2014,
       "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Path": "potential/quiz2Sample.pdf",
-      "Source": "https://www.ugrad.cs.ubc.ca/~cs121/2008W2/Exams/quiz2Sample.pdf",
-      "Hash": "49e96aee77df2b8c5f06198898fb955fb1847137",
-      "Score": 5,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Quiz 1",
-        "Term": "W2",
-        "Course": "cs121",
-        "Year": 2008,
-        "Updated": "2017-03-07T16:35:34.061558191-08:00"
-      }
     },
     {
       "Path": "potential/cpsc-121-2012-s2-quiz5.pdf",
@@ -11954,20 +11905,6 @@
         "Course": "cs418",
         "Year": 2012,
         "Updated": "2017-03-07T16:35:42.608289943-08:00"
-      }
-    },
-    {
-      "Path": "potential/midterm-solns.pdf?attredirects=0\u0026d=1",
-      "Source": "https://sites.google.com/site/ubccpsc3142010w1/exams/midterm-solns.pdf?attredirects=0\u0026d=1",
-      "Hash": "ca8db6c67217e27bc43679c7cbc57c0330892d91",
-      "Score": 5,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "NotAnExam": true,
-        "Course": "cs314",
-        "Year": 2010,
-        "Updated": "2017-03-07T16:35:42.131828243-08:00"
       }
     },
     {
@@ -13263,20 +13200,6 @@
         "Course": "cs444",
         "Year": 2010,
         "Updated": "2017-03-07T16:36:09.72790015-08:00"
-      }
-    },
-    {
-      "Path": "potential/sampleExam1.pdf",
-      "Source": "http://www.ugrad.cs.ubc.ca/~cs219/Handouts/sampleExam1.pdf",
-      "Hash": "3aaef7885650393b556ef9b3deb4799d3b50d783",
-      "Score": 4,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "NotAnExam": true,
-        "Course": "cs219",
-        "Year": 1995,
-        "Updated": "2017-03-07T16:36:06.542700378-08:00"
       }
     },
     {
@@ -14765,17 +14688,22 @@
       }
     },
     {
-      "Path": "potential/sampleExam1.pdf",
+      "Name": "Sample Test 1",
+      "Path": "cs219/2002/sampleExam1.pdf",
       "Source": "http://www.ugrad.cs.ubc.ca/~cs219/Handouts/sampleExam1.pdf",
       "Hash": "3aaef7885650393b556ef9b3deb4799d3b50d783",
       "Score": 4,
+      "Term": "W1",
+      "Course": "cs219",
+      "Year": 2002,
+      "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z",
       "LastResponseCode": 200,
       "Inferred": {
         "NotAnExam": true,
         "Course": "cs219",
         "Year": 1995,
-        "Updated": "2017-03-07T16:36:46.991081855-08:00"
+        "Updated": "2017-03-07T16:36:06.542700378-08:00"
       }
     },
     {
@@ -15007,21 +14935,6 @@
         "Course": "cs320",
         "Year": 2016,
         "Updated": "0001-01-01T00:00:00Z"
-      }
-    },
-    {
-      "Path": "potential/CPSC444FinalExamReviewQuestions.pdf",
-      "Source": "https://www.ugrad.cs.ubc.ca/~cs444/resources/fromPrevious/CPSC444FinalExamReviewQuestions.pdf",
-      "Hash": "ec48dc81228f5dd370caad11a0ef8ca12119080d",
-      "Score": 5,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Sample Final",
-        "Term": "W2",
-        "Course": "cs444",
-        "Year": 2010,
-        "Updated": "2017-03-07T16:36:51.346962153-08:00"
       }
     },
     {
@@ -17173,10 +17086,15 @@
       }
     },
     {
-      "Path": "potential/CPSC444FinalExamReviewQuestions.pdf",
+      "Name": "Sample Final",
+      "Path": "cs444/2005/CPSC444FinalExamReviewQuestions.pdf",
       "Source": "https://www.ugrad.cs.ubc.ca/~cs444/resources/fromPrevious/CPSC444FinalExamReviewQuestions.pdf",
       "Hash": "ec48dc81228f5dd370caad11a0ef8ca12119080d",
       "Score": 5,
+      "Term": "W2",
+      "Course": "cs444",
+      "Year": 2005,
+      "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z",
       "LastResponseCode": 200,
       "Inferred": {
@@ -17184,7 +17102,7 @@
         "Term": "W2",
         "Course": "cs444",
         "Year": 2010,
-        "Updated": "2017-03-07T16:37:24.612220502-08:00"
+        "Updated": "2017-03-07T16:36:51.346962153-08:00"
       }
     },
     {
@@ -17468,21 +17386,6 @@
       "Score": 4,
       "Updated": "0001-01-01T00:00:00Z",
       "LastResponseCode": 403
-    },
-    {
-      "Path": "potential/mid-a.pdf",
-      "Source": "https://www.ugrad.cs.ubc.ca/~cs421/2005/exams/mid-a.pdf",
-      "Hash": "8b7b9b257a96210fa1ef1ea56ca2e1d0db84db0d",
-      "Score": 4,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Midterm (Solution)",
-        "Term": "W1",
-        "Course": "cs421",
-        "Year": 2005,
-        "Updated": "2017-03-07T16:37:28.529263414-08:00"
-      }
     },
     {
       "Path": "potential/fex.pdf",
@@ -21481,11 +21384,12 @@
       }
     },
     {
+      "Path": "potential/cs542_final.pdf",
       "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca/~sfingram/cs542_final.pdf",
       "Hash": "25dbc3516faa57b564b5719b1862ca903b454b61",
       "Score": 2,
       "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 404,
+      "LastResponseCode": 200,
       "Inferred": {
         "NotAnExam": true,
         "Updated": "0001-01-01T00:00:00Z"
@@ -22459,6 +22363,8 @@
       "Source": "https://www.ugrad.cs.ubc.ca/~cs314/slides/finalExam.pdf",
       "Hash": "42da75aaeac8764b6e7e2b912f110a5e8fffd895",
       "Score": 3,
+      "NotAnExam": true,
+      "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z",
       "LastResponseCode": 200,
       "Inferred": {
@@ -22637,6 +22543,8 @@
       "Source": "https://www.ugrad.cs.ubc.ca/~cs100/2016W2/slides/programming-1-final.pdf",
       "Hash": "46577a7a6820728166e64c20a036390d9b0d4820",
       "Score": 3,
+      "NotAnExam": true,
+      "HandClassified": true,
       "Updated": "0001-01-01T00:00:00Z",
       "LastResponseCode": 200,
       "Inferred": {
@@ -23331,11 +23239,12 @@
       }
     },
     {
+      "Path": "potential/cs517_final.pdf",
       "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca/~sfingram/cs517_final.pdf",
       "Hash": "7affbd3d9e1e8586379514ba973eff0b86ff5ae5",
       "Score": 2,
       "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 404,
+      "LastResponseCode": 200,
       "Inferred": {
         "NotAnExam": true,
         "Updated": "0001-01-01T00:00:00Z"
@@ -48714,6 +48623,83 @@
         "Course": "cs527",
         "Year": 2015,
         "Updated": "2017-03-07T16:36:32.041022739-08:00"
+      }
+    },
+    {
+      "Name": "Sample Midterm",
+      "Path": "cs213/0/cs213-MidPracticeQuestions.pdf",
+      "Hash": "f2d9198c7f7ea5024ca819e63d516e164acc4668",
+      "Term": "unknown",
+      "Course": "cs213",
+      "HandClassified": true,
+      "Updated": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Name": "Sample Midterm (Solution)",
+      "Path": "cs213/0/cs213-MidPracticeSolutions.pdf",
+      "Hash": "2b8f5d4d6a7d68ec1aea06fb5a58db74dc586f75",
+      "Term": "unknown",
+      "Course": "cs213",
+      "HandClassified": true,
+      "Updated": "0001-01-01T00:00:00Z"
+    },
+    {
+      "Name": "Midterm (Solution)",
+      "Path": "cs421/2005/mid-a.pdf",
+      "Source": "https://www.ugrad.cs.ubc.ca/~cs421/2005/exams/mid-a.pdf",
+      "Hash": "8b7b9b257a96210fa1ef1ea56ca2e1d0db84db0d",
+      "Score": 4,
+      "Term": "unknown",
+      "Course": "cs421",
+      "Year": 2005,
+      "HandClassified": true,
+      "Updated": "0001-01-01T00:00:00Z",
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Midterm (Solution)",
+        "Term": "W1",
+        "Course": "cs421",
+        "Year": 2005,
+        "Updated": "2017-03-07T16:37:28.529263414-08:00"
+      }
+    },
+    {
+      "Name": "Sample Quiz 2",
+      "Path": "cs121/2007/quiz2Sample.pdf",
+      "Source": "https://www.ugrad.cs.ubc.ca/~cs121/2008W2/Exams/quiz2Sample.pdf",
+      "Hash": "49e96aee77df2b8c5f06198898fb955fb1847137",
+      "Score": 5,
+      "Term": "W2",
+      "Course": "cs121",
+      "Year": 2007,
+      "HandClassified": true,
+      "Updated": "0001-01-01T00:00:00Z",
+      "LastResponseCode": 200,
+      "Inferred": {
+        "Name": "Quiz 1",
+        "Term": "W2",
+        "Course": "cs121",
+        "Year": 2008,
+        "Updated": "2017-03-07T16:35:34.061558191-08:00"
+      }
+    },
+    {
+      "Name": "Midterm (Solution)",
+      "Path": "cs314/2010/midterm-solns.pdf?attredirects=0\u0026d=1",
+      "Source": "https://sites.google.com/site/ubccpsc3142010w1/exams/midterm-solns.pdf?attredirects=0\u0026d=1",
+      "Hash": "ca8db6c67217e27bc43679c7cbc57c0330892d91",
+      "Score": 5,
+      "Term": "W1",
+      "Course": "cs314",
+      "Year": 2010,
+      "HandClassified": true,
+      "Updated": "0001-01-01T00:00:00Z",
+      "LastResponseCode": 200,
+      "Inferred": {
+        "NotAnExam": true,
+        "Course": "cs314",
+        "Year": 2010,
+        "Updated": "2017-03-07T16:35:42.131828243-08:00"
       }
     }
   ]
