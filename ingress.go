@@ -1,31 +1,6 @@
 package main
 
-import (
-	"bufio"
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"io"
-	"log"
-	"net/http"
-	"net/url"
-	"os"
-	"os/exec"
-	"path"
-	"regexp"
-	"strconv"
-	"strings"
-	"sync"
-	"time"
-
-	"github.com/PuerkitoBio/goquery"
-	"github.com/ubccsss/exams/archive.org"
-	"github.com/ubccsss/exams/config"
-	"github.com/ubccsss/exams/examdb"
-	"github.com/ubccsss/exams/ml"
-	"github.com/ubccsss/exams/workers"
-	"github.com/urfave/cli"
-)
+/*
 
 // ingressDeptCourses sshes into the dept server and fetches the courses.
 func ingressDeptCourses(w http.ResponseWriter, r *http.Request) {
@@ -503,3 +478,4 @@ func setupIngressCommands() cli.Command {
 		},
 	}
 }
+*/

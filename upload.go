@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -10,10 +9,9 @@ import (
 	"strconv"
 
 	"github.com/ubccsss/exams/config"
-	"github.com/ubccsss/exams/examdb"
 )
 
-func handleFileUpload(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleFileUpload(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		handleErr(w, errors.New("POST required"))
 		return
@@ -33,9 +31,10 @@ func handleFileUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	course := r.URL.Query().Get("course")
-	if _, ok := db.Courses[course]; !ok {
-		http.Error(w, "invalid course ID", http.StatusBadRequest)
+	courseID := r.URL.Query().Get("course")
+	course, err := s.db.Course(courseID)
+	if err != nil {
+		handleErr(w, err)
 		return
 	}
 
@@ -83,16 +82,23 @@ func handleFileUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	db.AddPotentialFiles(os.Stderr, []*examdb.File{{
-		Name:   name,
-		Course: course,
-		Year:   yeari,
-		Term:   term,
-		Path:   fpath,
-	}})
+	_ = course
+	_ = yeari
 
-	fmt.Fprintf(w, `<h1>Uploaded Successful</h1>
-	<p>Thank you for your contribution!</p>
-	<a href="/%s/">Return to %s</a>.`,
-		course, course)
+	handleErr(w, errors.New("not implemented yet"))
+
+	/*
+		s.db.AddPotentialFiles(os.Stderr, []*examdb.File{{
+			Name:   name,
+			Course: course,
+			Year:   yeari,
+			Term:   term,
+			Path:   fpath,
+		}})
+
+		fmt.Fprintf(w, `<h1>Uploaded Successful</h1>
+		<p>Thank you for your contribution!</p>
+		<a href="/%s/">Return to %s</a>.`,
+			course, course)
+	*/
 }

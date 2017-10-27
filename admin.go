@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -24,13 +23,14 @@ func (s *server) adminRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/admin/potential", s.handlePotentialFileIndex)
-	mux.HandleFunc("/admin/needfix", s.handleNeedFixFileIndex)
+	//mux.HandleFunc("/admin/needfix", s.handleNeedFixFileIndex)
 	mux.HandleFunc("/admin/file/", s.handleFile)
 
-	mux.HandleFunc("/admin/generate", generators.PrettyJob(s.handleGenerate))
-	mux.HandleFunc("/admin/duplicates", generators.PrettyJob(s.handleListDuplicates))
-	mux.HandleFunc("/admin/removeDuplicates", generators.PrettyJob(s.handleRemoveDuplicates))
-	mux.HandleFunc("/admin/incorrectlocations", generators.PrettyJob(s.handleListIncorrectLocations))
+	/*
+		mux.HandleFunc("/admin/duplicates", generators.PrettyJob(s.handleListDuplicates))
+		mux.HandleFunc("/admin/removeDuplicates", generators.PrettyJob(s.handleRemoveDuplicates))
+		mux.HandleFunc("/admin/incorrectlocations", generators.PrettyJob(s.handleListIncorrectLocations))
+	*/
 
 	// Machine Learning Endpoints
 	/*
@@ -134,14 +134,10 @@ func (s *server) handleFilePost(w http.ResponseWriter, r *http.Request, file *db
 		file.NotAnExam = true
 		file.HandClassified = true
 		http.Redirect(w, r, "/admin/potential", 302)
-		if err := saveDatabase(); err != nil {
-			handleErr(w, err)
-			return
-		}
 		return
 	}
-	course := r.FormValue("course")
-	if len(course) == 0 {
+	courseID := r.FormValue("course")
+	if len(courseID) == 0 {
 		http.Error(w, "must specify course", 400)
 		return
 	}
@@ -163,11 +159,16 @@ func (s *server) handleFilePost(w http.ResponseWriter, r *http.Request, file *db
 		return
 	}
 	file.Year = year
-	file.Course, err = s.db.Course(course)
+
+	course, err := s.db.Course(courseID)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+
+	file.CourseFaculty = course.Faculty
+	file.CourseCode = course.Code
+
 	file.Term = term
 	file.Label = name
 	file.HandClassified = true
@@ -179,11 +180,6 @@ func (s *server) handleFilePost(w http.ResponseWriter, r *http.Request, file *db
 		http.Redirect(w, r, redirectParam[0], 302)
 	} else {
 		http.Redirect(w, r, "/admin/potential", 302)
-	}
-
-	if err := saveDatabase(); err != nil {
-		handleErr(w, err)
-		return
 	}
 }
 
@@ -237,8 +233,9 @@ func (s *server) handleFile(w http.ResponseWriter, r *http.Request) {
 	if len(file.Term) > 0 {
 		meta.Term = file.Term
 	}
-	if len(file.Course.Title()) > 0 {
-		meta.Course = file.Course.Title()
+	course := db.Course{Faculty: file.CourseFaculty, Code: file.CourseCode}.Title()
+	if len(course) > 0 {
+		meta.Course = course
 	}
 
 	/*
@@ -285,15 +282,6 @@ func labelsToName(typ, samp, sol string) string {
 	return strings.Join(bits, " ")
 }
 
-func (s *server) handleGenerate(w http.ResponseWriter, r *http.Request) {
-	start := time.Now()
-	if err := saveAndGenerate(); err != nil {
-		handleErr(w, err)
-		return
-	}
-	fmt.Fprintf(w, "Done in %s.", time.Now().Sub(start))
-}
-
 func (s *server) handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
@@ -303,6 +291,7 @@ func (s *server) handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+/*
 func (s *server) handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
@@ -334,6 +323,7 @@ func (s *server) handleNeedFixFileIndex(w http.ResponseWriter, r *http.Request) 
 	}
 	fmt.Fprint(w, `</tbody></table>`)
 }
+*/
 
 /*
 func (s *server) handleMLRetrain(w http.ResponseWriter, r *http.Request) {

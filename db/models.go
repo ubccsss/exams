@@ -3,9 +3,7 @@ package db
 import (
 	"database/sql/driver"
 	"encoding/json"
-	"fmt"
 	"sync"
-	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -32,68 +30,6 @@ func MigrateDB(db *gorm.DB) error {
 		}
 	}
 	return nil
-}
-
-type ToFetch struct {
-	URL    string `gorm:"primary_key"`
-	Title  string
-	Source File
-
-	CreatedAt time.Time
-}
-
-type File struct {
-	Hash string `gorm:"primary_key"`
-
-	FileName    string
-	SourceURL   string `gorm:"index"`
-	LastFetched time.Time
-	StatusCode  int
-
-	URL string
-
-	Title       string
-	ContentType string
-	Text        string
-	OCRText     string
-
-	Links   LinkArray
-	ToFetch []ToFetch
-
-	Referer      string
-	RefererTitle string
-
-	Label     string
-	Term      string
-	NotAnExam bool
-	Course    Course
-	Year      int
-
-	HandClassified bool
-
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt *time.Time
-}
-
-type Course struct {
-	Faculty string `gorm:"primary_key"`
-	Code    int    `gorm:"primary_key"`
-
-	Desc string
-
-	Files []File
-
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt *time.Time
-}
-
-func (c Course) Title() string {
-	if (c.Faculty) == "" {
-		return ""
-	}
-	return fmt.Sprintf("%s %03d", c.Faculty, c.Code)
 }
 
 type Link struct {
