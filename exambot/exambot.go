@@ -72,6 +72,8 @@ var (
 		{URL: "https://www.cs.ubc.ca/our-department/people"},
 		{URL: "https://ubccpsc.github.io"},
 		{URL: "piazza://"},
+		{URL: "http://www.math.ubc.ca/~jf/courses/421/"},
+		{URL: "http://www.math.ubc.ca/People/people.shtml?group=Faculty"},
 	}
 
 	archiveSearchPrefixes = []string{
@@ -95,6 +97,7 @@ var (
 
 	validHosts = map[string]host{
 		"www.cs.ubc.ca":       host{},
+		"www.math.ubc.ca":     host{},
 		"www.ugrad.cs.ubc.ca": host{},
 		"blogs.ubc.ca":        host{},
 		"sites.google.com": host{
@@ -500,10 +503,6 @@ func (s *Spider) printStats() {
 		return
 	}
 	log.Printf("Pending ToFetch %d", n)
-}
-
-type spiderState struct {
-	ToVisit []URLScore
 }
 
 // Load loads the spider state.

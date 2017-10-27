@@ -26,6 +26,8 @@ func (s *server) adminRoutes() *http.ServeMux {
 	//mux.HandleFunc("/admin/needfix", s.handleNeedFixFileIndex)
 	mux.HandleFunc("/admin/file/", s.handleFile)
 
+	mux.Handle("/admin/qor/", s.db.AdminMux("/admin/qor/"))
+
 	/*
 		mux.HandleFunc("/admin/duplicates", generators.PrettyJob(s.handleListDuplicates))
 		mux.HandleFunc("/admin/removeDuplicates", generators.PrettyJob(s.handleRemoveDuplicates))

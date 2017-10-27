@@ -12,14 +12,15 @@ import (
 
 var migrateLock sync.Mutex
 
+var models = []interface{}{
+	&File{},
+	&ToFetch{},
+	&Course{},
+}
+
 // MigrateDB migrates the database models. This should only be called by the db
 // and testdb packages.
 func MigrateDB(db *gorm.DB) error {
-	models := []interface{}{
-		&File{},
-		&ToFetch{},
-		&Course{},
-	}
 
 	migrateLock.Lock()
 	defer migrateLock.Unlock()
