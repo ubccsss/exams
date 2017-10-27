@@ -42,7 +42,8 @@ const (
 	userAgent = "UBC CSSS Exam Bot webmaster@ubccsss.org"
 
 	// bloom filter configuration
-	maxNumberOfPages  = 10000000
+	pageFactor        = 10
+	minPages          = 100000
 	falsePositiveRate = 0.00001
 
 	toFetchBatchSize = 10000
@@ -59,12 +60,6 @@ func compileRegexes(patterns ...string) []*regexp.Regexp {
 }
 
 var (
-	pageBucket            = []byte("pages")
-	pageHashBucket        = []byte("pagehash")
-	assortedBucket        = []byte("assorted")
-	bloomFilterSeenKey    = []byte("bloom:seen")
-	bloomFilterVisitedKey = []byte("bloom:visited")
-
 	seedURLs = []db.Link{
 		{URL: "https://www.cs.ubc.ca/~schmidtm/Courses/340-F16/"},
 		{URL: "http://www.cs.ubc.ca/~pcarter/"},
@@ -74,6 +69,12 @@ var (
 		{URL: "piazza://"},
 		{URL: "http://www.math.ubc.ca/~jf/courses/421/"},
 		{URL: "http://www.math.ubc.ca/People/people.shtml?group=Faculty"},
+		{URL: "https://www.math.ubc.ca/Ugrad/pastExams/"},
+		{URL: "https://matheducationresources.github.io/pdf_version/"},
+		{URL: "http://law.library.ubc.ca/exams/"},
+		{URL: "http://econ101.sites.olt.ubc.ca/exams/"},
+		{URL: "http://faculty.arts.ubc.ca/nmalhotra/"},
+		{URL: "http://cmp.cus.ca/about-us/resource-center/"},
 	}
 
 	archiveSearchPrefixes = []string{
@@ -81,6 +82,8 @@ var (
 		"https://www.cs.ubc.ca/~",
 		"https://blogs.ubc.ca/cpsc",
 		"https://www.cs.ubc.ca/people/",
+		"https://www.stat.ubc.ca/~",
+		"https://www.phas.ubc.ca/~",
 	}
 
 	blacklist = compileRegexes(
@@ -96,39 +99,53 @@ var (
 	)
 
 	validHosts = map[string]host{
-		"www.cs.ubc.ca":       host{},
-		"www.math.ubc.ca":     host{},
-		"www.ugrad.cs.ubc.ca": host{},
-		"blogs.ubc.ca":        host{},
+		"law-library.sites.olt.ubc.ca":  host{},
+		"law.library.ubc.ca":            host{},
+		"www.cs.ubc.ca":                 host{},
+		"www.math.ubc.ca":               host{},
+		"www.ugrad.cs.ubc.ca":           host{},
+		"blogs.ubc.ca":                  host{},
+		"cdn.ubc.ca":                    host{},
+		"www.phas.ubc.ca":               host{},
+		"www.stat.ubc.ca":               host{},
+		"www.zoology.ubc.ca":            host{},
+		"wood120.sites.olt.ubc.ca":      host{},
+		"educ-kin2016.sites.olt.ubc.ca": host{},
+		"wiki.ubc.ca": host{
+			blacklist: compileRegexes(
+				`&action=edit`,
+				`&action=history`,
+				`&action=info`,
+				`&oldid=\d+`,
+				`&printable=yes`,
+				`/api.php`,
+				`file_talk:`,
+				`special:`,
+				`template:`,
+				`thread:`,
+				`user_talk:`,
+			),
+		},
+		"matheducationresources.github.io": host{},
+		"faculty.arts.ubc.ca":              host{},
+		"http://econ.arts.ubc.ca":          host{},
+		"economics.ubc.ca":                 host{},
 		"sites.google.com": host{
 			whitelist: compileRegexes(
 				".*(cs|cpsc)\\d{3}.*",
 			),
 		},
-		"ubccpsc.github.io": host{},
+		"montoya.econ.ubc.ca":      host{},
+		"econ101.sites.olt.ubc.ca": host{},
+		"ubccpsc.github.io":        host{},
+		"cus.ca":                   host{},
+		"cpm.cus.ca":               host{},
 		"github.com": host{
 			whitelist: compileRegexes(
 				"^https://github.com/ubccpsc.*$",
+				"^https://github.com/MathEducationResources.*$",
 			),
 		},
-	}
-	scoreRegexes = map[int][]*regexp.Regexp{
-		-1: compileRegexes(
-			"final",
-			"exam",
-			"midterm",
-			"sample",
-			"mt",
-			"(cs|cpsc)\\d{3}",
-			"(20|19)\\d{2}",
-		),
-		1: compileRegexes(
-			"report",
-			"presentation",
-			"thesis",
-			"slide",
-			"print",
-		),
 	}
 )
 
@@ -197,6 +214,7 @@ func removeWhitespace(s string) string {
 	return whitespaceRegexp.ReplaceAllString(s, " ")
 }
 
+// validURL returns whether the specified URL is valid for scraping.
 func validURL(uri string) (bool, error) {
 	lower := strings.ToLower(uri)
 	u, err := url.Parse(uri)
@@ -223,6 +241,17 @@ func validURL(uri string) (bool, error) {
 		}
 	}
 	if !matchesWhiteList {
+		return false, nil
+	}
+	matchesBlackList := false
+	for _, pattern := range hostRules.blacklist {
+		match := pattern.MatchString(lower)
+		if match {
+			matchesBlackList = true
+			break
+		}
+	}
+	if matchesBlackList {
 		return false, nil
 	}
 
@@ -368,6 +397,11 @@ func (s *Spider) fetchURL(tf db.ToFetch) (db.File, error) {
 	bodyReader := io.TeeReader(reader, hasher)
 
 	mediaType, _, err := mime.ParseMediaType(f.ContentType)
+	if err != nil {
+		return db.File{}, err
+	}
+
+	noFollow := false
 
 	if mediaType == "text/html" || mediaType == "text/xml" {
 		doc, err := goquery.NewDocumentFromReader(bodyReader)
@@ -401,6 +435,16 @@ func (s *Spider) fetchURL(tf db.ToFetch) (db.File, error) {
 			}
 		})
 		f.Links = links
+
+		tags := doc.Find(`meta[name="robots"]`).AttrOr("content", "")
+		if len(tags) > 0 {
+			for _, tag := range strings.Split(tags, ",") {
+				tag = strings.TrimSpace(tag)
+				if tag == "nofollow" {
+					noFollow = true
+				}
+			}
+		}
 	} else if mediaType == "application/pdf" {
 		body, err := ioutil.ReadAll(bodyReader)
 		if err != nil {
@@ -434,30 +478,15 @@ func (s *Spider) fetchURL(tf db.ToFetch) (db.File, error) {
 		return db.File{}, err
 	}
 
+	if noFollow {
+		f.Links = nil
+	}
+
 	f.Text = removeWhitespace(enforceUTF8(f.Text))
 	if len(f.Hash) == 0 {
 		f.Hash = hex.EncodeToString(hasher.Sum(nil))
 	}
 	return f, nil
-}
-
-func (f *URLScore) computeScore() {
-	path := strings.ToLower(f.URL)
-	var score int
-	for s, rs := range scoreRegexes {
-		for _, r := range rs {
-			if r.MatchString(path) {
-				score += s
-			}
-		}
-	}
-	f.Score = score
-}
-
-// URLScore is a single URL and a score
-type URLScore struct {
-	URL   string
-	Score int `json:",omitempty"`
 }
 
 // Spider is an exam spider.
@@ -467,7 +496,8 @@ type Spider struct {
 
 		ToVisit []db.ToFetch
 
-		Seen *bloom.BloomFilter
+		SeenURLs   *bloom.BloomFilter
+		SeenHashes *bloom.BloomFilter
 	}
 	Bucket *backblaze.Bucket
 	DB     *db.DB
@@ -481,9 +511,6 @@ func MakeSpider(db *db.DB, bucket *backblaze.Bucket, p *piazza.HTMLWrapper) *Spi
 		Piazza: p,
 		Bucket: bucket,
 	}
-
-	s.Mu.Seen = bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
-	log.Printf("Fetched bloom filter: m %d k %d", s.Mu.Seen.Cap(), s.Mu.Seen.K())
 
 	go s.statsMonitor()
 
@@ -510,11 +537,21 @@ func (s *Spider) Load() error {
 	s.Mu.Lock()
 	defer s.Mu.Unlock()
 
-	if err := s.DB.PopulateSeenVisited(s.Mu.Seen); err != nil {
+	n, err := s.DB.SeenURLCount()
+	if err != nil {
 		return err
 	}
 
-	return nil
+	maxNumberOfPages := uint(n * pageFactor)
+	if maxNumberOfPages < minPages {
+		maxNumberOfPages = minPages
+	}
+
+	s.Mu.SeenURLs = bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
+	s.Mu.SeenHashes = bloom.NewWithEstimates(maxNumberOfPages, falsePositiveRate)
+	log.Printf("Fetched bloom filter: m %d k %d", s.Mu.SeenURLs.Cap(), s.Mu.SeenURLs.K())
+
+	return s.DB.PopulateSeenVisited(s.Mu.SeenURLs, s.Mu.SeenHashes)
 }
 
 var ErrNoMoreToFetches = errors.New("no ToFetches found")
@@ -571,21 +608,19 @@ func (s *Spider) Worker() {
 			continue
 		}
 
-		// Only follow links if 200 status code.
-		if page.StatusCode == http.StatusOK {
+		s.Mu.Lock()
+		seenHash := s.Mu.SeenHashes.TestAndAddString(page.Hash)
+		s.Mu.Unlock()
+
+		// Only expand URLs if we've never seen that hash before and it's a 200
+		// code. This is to prevent recursive paths that never terminate.
+		if !seenHash && page.StatusCode == http.StatusOK {
 			if err := s.AddAndExpandURLs(page, true); err != nil {
 				log.Printf("WORKER err: %+v", err)
 				continue
 			}
 		}
 	}
-}
-
-func pageKey(url string) []byte {
-	return []byte("page:" + url)
-}
-func hashKey(hash string) []byte {
-	return []byte("pagehash:" + hash)
 }
 
 // AddAndExpandURLs cleans the URLs and adds them.
@@ -671,7 +706,7 @@ func (s *Spider) AddURLs(urls []db.ToFetch) (int, error) {
 
 	for _, url := range urls {
 		s.Mu.Lock()
-		seen := s.Mu.Seen.TestAndAddString(url.URL)
+		seen := s.Mu.SeenURLs.TestAndAddString(url.URL)
 		s.Mu.Unlock()
 
 		if seen && !alwaysVisit(url.URL) {

@@ -73,3 +73,11 @@ func (db *DB) ToFetchCount() (int, error) {
 	}
 	return count, nil
 }
+
+func (db *DB) SeenURLCount() (int, error) {
+	var count int
+	if err := db.DB.Model(ToFetch{}).Unscoped().Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}

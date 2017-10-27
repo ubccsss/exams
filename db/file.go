@@ -57,6 +57,14 @@ func (db *DB) FileCount() examdb.FileCount {
 	return c
 }
 
+func (db *DB) TotalFileCount() (int, error) {
+	var count int
+	if err := db.DB.Model(File{}).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
 func (db *DB) File(hash string) (File, error) {
 	var f File
 	if err := db.DB.Preload("Course").First(&f, hash).Error; err != nil {

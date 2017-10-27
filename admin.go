@@ -22,6 +22,7 @@ var (
 func (s *server) adminRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("/admin/scrapeinfo", s.handleScrapeInfo)
 	mux.HandleFunc("/admin/potential", s.handlePotentialFileIndex)
 	//mux.HandleFunc("/admin/needfix", s.handleNeedFixFileIndex)
 	mux.HandleFunc("/admin/file/", s.handleFile)
@@ -288,6 +289,61 @@ func (s *server) handleAdminIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)
 	if err := generators.ExecuteTemplate(w, "admin.md", nil); err != nil {
+		handleErr(w, err)
+		return
+	}
+}
+
+func (s *server) handleScrapeInfo(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	renderAdminHeader(w)
+
+	type contentType struct {
+		Type  string
+		Count int
+	}
+
+	data := struct {
+		Pending, Files, Seen int
+		Types                []contentType
+	}{}
+
+	var err error
+	data.Pending, err = s.db.ToFetchCount()
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+
+	data.Seen, err = s.db.SeenURLCount()
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+
+	data.Files, err = s.db.TotalFileCount()
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+
+	rows, err := s.db.DB.Raw("select content_type, count(*) as count from files group by content_type order by count desc").Rows()
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var ct contentType
+		if err := rows.Scan(&ct.Type, &ct.Count); err != nil {
+			handleErr(w, err)
+			return
+		}
+		data.Types = append(data.Types, ct)
+	}
+
+	if err := generators.ExecuteTemplate(w, "scrapeinfo.md", data); err != nil {
 		handleErr(w, err)
 		return
 	}

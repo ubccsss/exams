@@ -2,7 +2,8 @@
 
 # Admin Dashboard
 
-* [Regenerate All Static HTML Files](/admin/generate)
+* [Scrape Info](/admin/scrapeinfo)
+
 * [Potential Unindexed Files](/admin/potential)
 * [Files That Might Need To Be Fixed](/admin/needfix)
 * [Remove Potential Files That 404](/admin/remove404)
