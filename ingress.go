@@ -1,5 +1,63 @@
 package main
 
+import (
+	"fmt"
+	"net/http"
+	"net/url"
+	"strings"
+
+	"github.com/PuerkitoBio/goquery"
+)
+
+const (
+	browseURL = "https://courses.students.ubc.ca/cs/main?pname=subjarea&tname=subjareas&req=0"
+)
+
+func (s *server) handleIngressCourses(w http.ResponseWriter, r *http.Request) {
+	base, err := url.Parse(browseURL)
+	if err != nil {
+		handleErr(w, err)
+		return
+	}
+	var subjectIndexURLs []string
+	{
+		fmt.Fprintf(w, "GET %q\n", browseURL)
+		doc, err := goquery.NewDocument(browseURL)
+		if err != nil {
+			handleErr(w, err)
+			return
+		}
+		doc.Find("#mainTable tbody tr").Each(func(i int, s *goquery.Selection) {
+			href := s.Find("a").AttrOr("href", "")
+			if len(href) == 0 {
+				return
+			}
+			rel, err := url.Parse(href)
+			if err != nil {
+				handleErr(w, err)
+				return
+			}
+			resolved := base.ResolveReference(rel).String()
+			subjectIndexURLs = append(subjectIndexURLs, resolved)
+		})
+	}
+
+	for _, siURL := range subjectIndexURLs {
+		fmt.Fprintf(w, "GET %q\n", siURL)
+		doc, err := goquery.NewDocument(siURL)
+		if err != nil {
+			handleErr(w, err)
+			return
+		}
+		doc.Find("#mainTable tbody tr").Each(func(i int, s *goquery.Selection) {
+			tds := s.Find("td")
+			code := strings.TrimSpace(tds.Eq(0).Text())
+			title := strings.TrimSpace(tds.Eq(1).Text())
+			fmt.Fprintf(w, "Found: %q: %q\n", code, title)
+		})
+	}
+}
+
 /*
 
 // ingressDeptCourses sshes into the dept server and fetches the courses.

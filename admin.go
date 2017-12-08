@@ -44,6 +44,7 @@ func (s *server) adminRoutes() *http.ServeMux {
 	*/
 
 	// Ingress Endpoints
+	mux.HandleFunc("/admin/ingress/courses", generators.PrettyJob(s.handleIngressCourses))
 	/*
 		mux.HandleFunc("/admin/ingress/deptcourses", generators.PrettyJob(ingressDeptCourses))
 		mux.HandleFunc("/admin/ingress/deptfiles", generators.PrettyJob(ingressDeptFiles))

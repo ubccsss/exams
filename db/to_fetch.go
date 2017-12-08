@@ -8,6 +8,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+// ToFetch holds a URL that should be fetched and processed. If DeletedAt is
+// set, that means we've either already processed the URL, or we don't want to.
 type ToFetch struct {
 	URL   string `gorm:"primary_key"`
 	Title string
@@ -20,10 +22,14 @@ type ToFetch struct {
 	DeletedAt *time.Time
 }
 
+// AddToFetch adds a ToFetch object to the database or updates the existing one
+// if it already exists.
 func (db *DB) AddToFetch(tf ToFetch) error {
 	return db.DB.Where(ToFetch{URL: tf.URL}).Assign(tf).FirstOrCreate(&tf).Error
 }
 
+// BulkAddToFetch bulk adds ToFetch entries to the database. If there's a URL
+// conflict, it is not inserted.
 func (db *DB) BulkAddToFetch(tfs []ToFetch) (int, error) {
 	if len(tfs) == 0 {
 		return 0, nil
@@ -46,6 +52,7 @@ func (db *DB) BulkAddToFetch(tfs []ToFetch) (int, error) {
 	return int(resp.RowsAffected), resp.Error
 }
 
+// DeleteToFetch marks a URL as deleted.
 func (db *DB) DeleteToFetch(url string) error {
 	if len(url) == 0 {
 		return errors.New("url must not be empty")
@@ -58,7 +65,7 @@ func (db *DB) RandomToFetch(count int) ([]ToFetch, error) {
 	var tf []ToFetch
 	if err := db.DB.
 		Unscoped().
-		Raw("SELECT url, title, source, created_at, deleted_at FROM to_fetches TABLESAMPLE BERNOULLI (? * 100.0 / (SELECT count(*) FROM to_fetches WHERE deleted_at is NULL)) WHERE deleted_at is NULL", count).
+		Raw("SELECT url, title, source, created_at, deleted_at FROM to_fetches TABLESAMPLE BERNOULLI (least(100, ? * 100.0 / (SELECT count(*) FROM to_fetches WHERE deleted_at is NULL))) WHERE deleted_at is NULL", count).
 		Find(&tf).Error; err != nil {
 		return nil, err
 	}
@@ -74,6 +81,7 @@ func (db *DB) ToFetchCount() (int, error) {
 	return count, nil
 }
 
+// SeenURLCount returns the total number of seen URLs in the database.
 func (db *DB) SeenURLCount() (int, error) {
 	var count int
 	if err := db.DB.Model(ToFetch{}).Unscoped().Count(&count).Error; err != nil {

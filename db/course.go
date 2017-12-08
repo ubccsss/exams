@@ -3,7 +3,6 @@ package db
 import (
 	"fmt"
 	"regexp"
-	"strconv"
 	"strings"
 	"time"
 
@@ -12,7 +11,7 @@ import (
 
 type Course struct {
 	Faculty string `gorm:"primary_key"`
-	Code    int    `gorm:"primary_key"`
+	Code    string `gorm:"primary_key"`
 
 	Desc string
 
@@ -27,30 +26,27 @@ func (c Course) Title() string {
 	if (c.Faculty) == "" {
 		return ""
 	}
-	return fmt.Sprintf("%s %03d", c.Faculty, c.Code)
+	return fmt.Sprintf("%s %s", c.Faculty, c.Code)
 }
 
 var courseMap = map[string]string{
 	"CS": "CPSC",
 }
 
-var courseRegexp = regexp.MustCompile(`(\w{2,4})\s*(\d{3})`)
+var courseRegexp = regexp.MustCompile(`(\w{2,4})\s*(\d{3}\w?)`)
 
-// GetCourse parses "CPSC 103" -> "CPSC", 103
-func GetCourse(course string) (string, int, error) {
+// GetCourse parses "CPSC 103" -> "CPSC", "103"
+func GetCourse(course string) (string, string, error) {
 	matches := courseRegexp.FindStringSubmatch(course)
 	if len(matches) != 3 {
-		return "", 0, errors.Errorf("expected match length of 3 for %q: got %+v", course, matches)
+		return "", "", errors.Errorf("expected match length of 3 for %q: got %+v", course, matches)
 	}
 	faculty := strings.ToUpper(matches[1])
 	mapped, ok := courseMap[faculty]
 	if ok {
 		faculty = mapped
 	}
-	code, err := strconv.Atoi(matches[2])
-	if err != nil {
-		return "", 0, err
-	}
+	code := strings.ToUpper(matches[2])
 	return faculty, code, nil
 }
 

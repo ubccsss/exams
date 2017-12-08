@@ -12,6 +12,7 @@ import (
 	"log"
 	"mime"
 	"net/http"
+	"net/http/cookiejar"
 	_ "net/http/pprof"
 	"net/url"
 	"os"
@@ -29,6 +30,7 @@ import (
 	archive "github.com/d4l3k/go-internetarchive"
 	"github.com/temoto/robotstxt"
 	"github.com/willf/bloom"
+	"golang.org/x/net/publicsuffix"
 	backblaze "gopkg.in/kothar/go-backblaze.v0"
 
 	piazza "github.com/d4l3k/piazza-api"
@@ -165,7 +167,7 @@ func makeGet(url string) (*http.Response, error) {
 	req.Header.Set("User-Agent", userAgent)
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		log.Printf("GET err %s: %s", url, err)
+		log.Printf("GET err %s: %+v", url, err)
 		return nil, err
 	}
 	log.Printf("GET %d %s", resp.StatusCode, url)
@@ -226,6 +228,10 @@ func validURL(uri string) (bool, error) {
 		return true, nil
 	}
 
+	if u.Scheme != "https" && u.Scheme != "http" {
+		return false, nil
+	}
+
 	// Check valid hosts
 	hostRules, ok := validHosts[u.Host]
 	if !ok {
@@ -280,7 +286,11 @@ func validURLRobots(u *url.URL) (bool, error) {
 	if !ok {
 		resp, err := makeGet(fmt.Sprintf("https://%s/robots.txt", u.Host))
 		if err != nil {
-			return false, nil
+			// Attempt http as fallback.
+			resp, err = makeGet(fmt.Sprintf("http://%s/robots.txt", u.Host))
+			if err != nil {
+				return false, nil
+			}
 		}
 		defer resp.Body.Close()
 
@@ -401,8 +411,6 @@ func (s *Spider) fetchURL(tf db.ToFetch) (db.File, error) {
 		return db.File{}, err
 	}
 
-	noFollow := false
-
 	if mediaType == "text/html" || mediaType == "text/xml" {
 		doc, err := goquery.NewDocumentFromReader(bodyReader)
 		if err != nil {
@@ -414,7 +422,7 @@ func (s *Spider) fetchURL(tf db.ToFetch) (db.File, error) {
 
 		var links []db.Link
 		doc.Find("a").Each(func(_ int, s *goquery.Selection) {
-			title := s.Text()
+			title := removeWhitespace(enforceUTF8(s.Text()))
 			uri := s.AttrOr("href", "")
 
 			ref, err := url.Parse(uri)
@@ -441,7 +449,7 @@ func (s *Spider) fetchURL(tf db.ToFetch) (db.File, error) {
 			for _, tag := range strings.Split(tags, ",") {
 				tag = strings.TrimSpace(tag)
 				if tag == "nofollow" {
-					noFollow = true
+					f.NoFollow = true
 				}
 			}
 		}
@@ -478,10 +486,11 @@ func (s *Spider) fetchURL(tf db.ToFetch) (db.File, error) {
 		return db.File{}, err
 	}
 
-	if noFollow {
+	if f.NoFollow {
 		f.Links = nil
 	}
 
+	f.Title = removeWhitespace(enforceUTF8(f.Title))
 	f.Text = removeWhitespace(enforceUTF8(f.Text))
 	if len(f.Hash) == 0 {
 		f.Hash = hex.EncodeToString(hasher.Sum(nil))
@@ -577,48 +586,62 @@ func (s *Spider) GetURL() (db.ToFetch, error) {
 	return ret, nil
 }
 
+func (s *Spider) doWork() error {
+	tf, err := s.GetURL()
+	if err == ErrNoMoreToFetches {
+		log.Println("No URLs queued to visit!")
+		time.Sleep(10 * time.Second)
+		return nil
+	} else if err != nil {
+		return err
+	}
+
+	valid, err := validURL(tf.URL)
+	if err != nil {
+		return err
+	}
+	if !valid {
+		if err := s.DB.DeleteToFetch(tf.URL); err != nil {
+			return err
+		}
+		return nil
+	}
+
+	page, err := s.fetchURL(tf)
+	if err != nil {
+		return err
+	}
+
+	if err := s.DB.SaveFile(&page); err != nil {
+		log.Printf("%+v", page)
+		log.Printf("%q %q %q", page.SourceURL, page.Title, page.Text)
+		return err
+	}
+
+	if err := s.DB.DeleteToFetch(tf.URL); err != nil {
+		return err
+	}
+
+	s.Mu.Lock()
+	seenHash := s.Mu.SeenHashes.TestAndAddString(page.Hash)
+	s.Mu.Unlock()
+
+	// Only expand URLs if we've never seen that hash before and it's a 200
+	// code. This is to prevent recursive paths that never terminate.
+	if !seenHash && page.StatusCode == http.StatusOK {
+		if err := s.AddAndExpandURLs(page, true); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 // Worker ...
 func (s *Spider) Worker() {
 	for {
-		tf, err := s.GetURL()
-		if err == ErrNoMoreToFetches {
-			log.Println("No URLs queued to visit!")
-			time.Sleep(10 * time.Second)
-			continue
-		} else if err != nil {
+		if err := s.doWork(); err != nil {
 			log.Printf("WORKER err: %+v", err)
-			continue
-		}
-
-		page, err := s.fetchURL(tf)
-		if err != nil {
-			log.Printf("WORKER err: %+v", err)
-			continue
-		}
-
-		if err := s.DB.SaveFile(&page); err != nil {
-			log.Printf("%+v", page)
-			log.Printf("%q %q %q", page.SourceURL, page.Title, page.Text)
-			log.Printf("WORKER err: %+v", err)
-			continue
-		}
-
-		if err := s.DB.DeleteToFetch(tf.URL); err != nil {
-			log.Printf("WORKER err: %+v", err)
-			continue
-		}
-
-		s.Mu.Lock()
-		seenHash := s.Mu.SeenHashes.TestAndAddString(page.Hash)
-		s.Mu.Unlock()
-
-		// Only expand URLs if we've never seen that hash before and it's a 200
-		// code. This is to prevent recursive paths that never terminate.
-		if !seenHash && page.StatusCode == http.StatusOK {
-			if err := s.AddAndExpandURLs(page, true); err != nil {
-				log.Printf("WORKER err: %+v", err)
-				continue
-			}
 		}
 	}
 }
@@ -733,6 +756,11 @@ var (
 )
 
 func Run(dbconn *db.DB, bucket *backblaze.Bucket) error {
+	jar, err := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+	if err != nil {
+		log.Fatal(err)
+	}
+	http.DefaultClient.Jar = jar
 
 	go func() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))

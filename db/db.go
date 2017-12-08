@@ -73,9 +73,11 @@ func (db *DB) PopulateSeenVisited(urls *bloom.BloomFilter, hashes *bloom.BloomFi
 
 func (db *DB) AdminMux(path string) *http.ServeMux {
 	a := admin.New(&admin.AdminConfig{DB: db.DB})
-	for _, m := range models {
-		a.AddResource(m)
-	}
+	course := a.AddResource(&Course{})
+	course.NewAttrs("Faculty", "Code", "Desc")
+	course.EditAttrs("Desc")
+	course.IndexAttrs("Faculty", "Code", "Desc", "CreatedAt", "UpdatedAt")
+
 	mux := http.NewServeMux()
 	a.MountTo(path, mux)
 	return mux

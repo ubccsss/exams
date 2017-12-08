@@ -23,8 +23,9 @@ type File struct {
 	Text        string
 	OCRText     string
 
-	Links   LinkArray `gorm:"type:text"`
-	ToFetch []ToFetch `gorm:"ForeignKey:Source"`
+	NoFollow bool
+	Links    LinkArray `gorm:"type:text"`
+	ToFetch  []ToFetch `gorm:"ForeignKey:Source"`
 
 	RefererHash string
 	Refered     []File `gorm:"ForeignKey:RefererHash"`
@@ -33,7 +34,7 @@ type File struct {
 	Term          string
 	NotAnExam     bool
 	CourseFaculty string
-	CourseCode    int
+	CourseCode    string
 	Year          int
 
 	HandClassified bool
