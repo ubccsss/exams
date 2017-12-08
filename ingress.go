@@ -49,11 +49,15 @@ func (s *server) handleIngressCourses(w http.ResponseWriter, r *http.Request) {
 			handleErr(w, err)
 			return
 		}
-		doc.Find("#mainTable tbody tr").Each(func(i int, s *goquery.Selection) {
-			tds := s.Find("td")
+		doc.Find("#mainTable tbody tr").Each(func(i int, sel *goquery.Selection) {
+			tds := sel.Find("td")
 			code := strings.TrimSpace(tds.Eq(0).Text())
 			title := strings.TrimSpace(tds.Eq(1).Text())
+
 			fmt.Fprintf(w, "Found: %q: %q\n", code, title)
+			if err := s.db.AddCourse(code, title); err != nil {
+				fmt.Fprintf(w, "err %+v\n", err)
+			}
 		})
 	}
 }

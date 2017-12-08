@@ -1,6 +1,8 @@
 package db
 
 import (
+	"path"
+	"strings"
 	"time"
 
 	"github.com/ubccsss/exams/examdb"
@@ -32,6 +34,8 @@ type File struct {
 
 	Label         string
 	Term          string
+	Sample        bool
+	Solution      bool
 	NotAnExam     bool
 	CourseFaculty string
 	CourseCode    string
@@ -42,6 +46,17 @@ type File struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt *time.Time
+}
+
+func (f File) DetectedName() string {
+	parts := []string{f.Label}
+	if f.Sample {
+		parts = append(parts, "Sample")
+	}
+	if f.Solution {
+		parts = append(parts, "Solution")
+	}
+	return strings.Join(parts, " ")
 }
 
 func (db *DB) SaveFile(f *File) error {
@@ -85,3 +100,32 @@ func (db *DB) Files(filter File) ([]File, error) {
 func (db *DB) NotAnExamFiles() ([]File, error) {
 	return db.Files(File{NotAnExam: true})
 }
+
+// FileByTerm attaches the methods of sort.Interface to []*File, sorting in
+// increasing order by name.
+type FileByTerm []File
+
+func (p FileByTerm) Len() int { return len(p) }
+
+var termOrder = map[string]int{
+	"W1": -3,
+	"W2": -2,
+	"S":  -1,
+}
+
+func (p FileByTerm) Less(i, j int) bool {
+	a := termOrder[p[i].Term]
+	b := termOrder[p[j].Term]
+	if a == b {
+		c := strings.ToLower(p[i].DetectedName())
+		d := strings.ToLower(p[j].DetectedName())
+		if c == d {
+			e := strings.ToLower(path.Base(p[i].SourceURL))
+			f := strings.ToLower(path.Base(p[j].SourceURL))
+			return e < f
+		}
+		return c < d
+	}
+	return a < b
+}
+func (p FileByTerm) Swap(i, j int) { p[i], p[j] = p[j], p[i] }

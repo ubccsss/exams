@@ -19,6 +19,8 @@ import (
 	"github.com/ubccsss/exams/config"
 )
 
+const staticDir = "static"
+
 // Templates are all of the HTML templates needed.
 var Templates *template.Template
 
@@ -175,14 +177,15 @@ func (g *Generator) fetchLayout() error {
 			return
 		}
 
-		stylesheets.First().SetAttr("href", "/style.css")
+		styleFile := path.Join(staticDir, "style.css")
+		stylesheets.First().SetAttr("href", path.Join("/", styleFile))
 		stylesheets.Slice(1, stylesheets.Length()).Remove()
 
 		if _, err = buf.WriteTo(&importBuf); err != nil {
 			return
 		}
 
-		if err = ioutil.WriteFile(path.Join(g.examsDir, "style.css"), importBuf.Bytes(), 0755); err != nil {
+		if err = ioutil.WriteFile(styleFile, importBuf.Bytes(), 0755); err != nil {
 			return
 		}
 
@@ -204,10 +207,11 @@ func (g *Generator) fetchLayout() error {
 			return
 		}
 
-		scripts.First().SetAttr("src", "/scripts.js")
+		scriptFile := path.Join(staticDir, "scripts.js")
+		scripts.First().SetAttr("src", path.Join("/", scriptFile))
 		scripts.Slice(1, scripts.Length()).Remove()
 
-		if err = ioutil.WriteFile(path.Join(g.examsDir, "scripts.js"), buf.Bytes(), 0755); err != nil {
+		if err = ioutil.WriteFile(scriptFile, buf.Bytes(), 0755); err != nil {
 			return
 		}
 

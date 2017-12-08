@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -29,11 +30,25 @@ func (c Course) Title() string {
 	return fmt.Sprintf("%s %s", c.Faculty, c.Code)
 }
 
+var yearRegexp = regexp.MustCompile(`\d{3}`)
+
+// YearLevel returns a string representing the year level in the form "x00".
+func (c Course) YearLevel() string {
+	// Zero out last two digits.
+	num, _ := strconv.Atoi(yearRegexp.FindString(c.Code))
+	number := (num / 100) * 100
+	return strings.ToUpper(fmt.Sprintf("%s %.3d", c.Faculty, number))
+}
+
+func (c Course) CanonicalURL() string {
+	return fmt.Sprintf("/%s%s/", c.Faculty, c.Code)
+}
+
 var courseMap = map[string]string{
 	"CS": "CPSC",
 }
 
-var courseRegexp = regexp.MustCompile(`(\w{2,4})\s*(\d{3}\w?)`)
+var courseRegexp = regexp.MustCompile(`(\w{2,4})\s*\+*(\d{3}\w?)`)
 
 // GetCourse parses "CPSC 103" -> "CPSC", "103"
 func GetCourse(course string) (string, string, error) {
@@ -84,4 +99,16 @@ func (db *DB) DisplayCourses() ([]string, error) {
 		disp = append(disp, c.Title())
 	}
 	return disp, nil
+}
+
+func (db *DB) AddCourse(code, desc string) error {
+	faculty, code, err := GetCourse(code)
+	if err != nil {
+		return err
+	}
+	var course Course
+	if err := db.DB.FirstOrCreate(&course, Course{Faculty: faculty, Code: code, Desc: desc}).Error; err != nil {
+		return err
+	}
+	return nil
 }

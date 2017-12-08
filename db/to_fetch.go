@@ -65,7 +65,7 @@ func (db *DB) RandomToFetch(count int) ([]ToFetch, error) {
 	var tf []ToFetch
 	if err := db.DB.
 		Unscoped().
-		Raw("SELECT url, title, source, created_at, deleted_at FROM to_fetches TABLESAMPLE BERNOULLI (least(100, ? * 100.0 / (SELECT count(*) FROM to_fetches WHERE deleted_at is NULL))) WHERE deleted_at is NULL", count).
+		Raw("SELECT url, title, source, created_at, deleted_at FROM to_fetches TABLESAMPLE BERNOULLI (least(100, ? * 100.0 / (SELECT greatest(count(*), 100) FROM to_fetches WHERE deleted_at is NULL))) WHERE deleted_at is NULL", count).
 		Find(&tf).Error; err != nil {
 		return nil, err
 	}

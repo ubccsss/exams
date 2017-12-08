@@ -2,101 +2,105 @@ package generators
 
 import (
 	"bytes"
-	"io/ioutil"
-	"os"
-	"path"
 	"path/filepath"
 	"sort"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/russross/blackfriday"
+	"github.com/ubccsss/exams/db"
 	"github.com/ubccsss/exams/examdb"
 	"github.com/ubccsss/exams/ml"
 )
 
-func fileTree(files []*examdb.File) map[int][]*examdb.File {
-	m := map[int][]*examdb.File{}
+func fileTree(files []db.File) map[int][]db.File {
+	m := map[int][]db.File{}
 	for _, f := range files {
 		m[f.Year] = append(m[f.Year], f)
 	}
 	for _, files := range m {
-		sort.Sort(examdb.FileByTerm(files))
+		sort.Sort(db.FileByTerm(files))
 	}
 	return m
 }
 
 // Course generates a course.
-func (g *Generator) Course(c *examdb.Course) error {
+func (g *Generator) Course(c db.Course) (string, error) {
 	// Don't generate courses for unclassified files.
 	if len(c.Code) == 0 {
-		return nil
+		return "", nil
 	}
 
-	dir := path.Join(g.examsDir, c.Code)
-	if err := os.MkdirAll(dir, 0755); err != nil {
-		return err
+	allFiles, err := g.dbNew.Files(db.File{CourseCode: c.Code, CourseFaculty: c.Faculty})
+	if err != nil {
+		return "", err
 	}
+	var files []db.File
+	var potentialFiles []db.File
 
-	files := g.courseFiles[c.Code]
-	potentialFiles := g.coursePotentialFiles[c.Code]
-	sort.Sort(examdb.FileByYearTermName(potentialFiles))
-
-	fileNames := map[string]string{}
-	for _, f := range potentialFiles {
-		fileNames[f.Hash] = filepath.Base(f.Source)
-	}
-
-	var pendingML []*examdb.File
-	var completedML []*examdb.File
-	for _, f := range potentialFiles {
-		if f.Inferred != nil {
-			completedML = append(completedML, f)
+	for _, f := range allFiles {
+		if f.HandClassified {
+			files = append(files, f)
 		} else {
-			pendingML = append(pendingML, f)
+			potentialFiles = append(potentialFiles, f)
 		}
 	}
 
+	fileNames := map[string]string{}
+	for _, f := range potentialFiles {
+		fileNames[f.Hash] = filepath.Base(f.SourceURL)
+	}
+
 	data := struct {
-		*examdb.Course
-		Years          map[int][]*examdb.File
+		Title string
+		db.Course
+		Years          map[int][]db.File
 		FileNames      map[string]string
 		YearSections   []int
-		PotentialFiles []*examdb.File
-		CompletedML    []*examdb.File
-		PendingML      []*examdb.File
+		PotentialFiles []db.File
 	}{
+		Title:          c.Title(),
 		Course:         c,
 		PotentialFiles: potentialFiles,
 		Years:          fileTree(files),
-		YearSections:   examdb.AllYears(files),
+		YearSections:   AllYears(files),
 		FileNames:      fileNames,
-		CompletedML:    completedML,
-		PendingML:      pendingML,
 	}
 
 	var buf bytes.Buffer
 	if err := Templates.ExecuteTemplate(&buf, "course.md", data); err != nil {
-		return err
+		return "", err
 	}
 	html := blackfriday.MarkdownCommon(buf.Bytes())
 	buf.Reset()
 	if _, err := buf.Write(html); err != nil {
-		return err
+		return "", err
 	}
 	doc, err := goquery.NewDocumentFromReader(&buf)
 	if err != nil {
-		return err
+		return "", err
 	}
 	addStyleClasses(doc)
 	htmlStr, err := doc.Html()
 	if err != nil {
-		return err
+		return "", err
 	}
-	styled := g.renderTemplateExam(c.Code, htmlStr)
-	if err := ioutil.WriteFile(path.Join(dir, "index.html"), []byte(styled), 0755); err != nil {
-		return err
+	return g.renderTemplateExam(c.Title(), htmlStr), nil
+}
+
+// AllYears returns all years in the list of files.
+func AllYears(files []db.File) []int {
+	fileM := map[int]struct{}{}
+	var years []int
+	for _, f := range files {
+		if _, ok := fileM[f.Year]; ok {
+			continue
+		}
+
+		fileM[f.Year] = struct{}{}
+		years = append(years, f.Year)
 	}
-	return nil
+	sort.Sort(sort.Reverse(sort.IntSlice(years)))
+	return years
 }
 
 func (g *Generator) indexCourseFiles() {

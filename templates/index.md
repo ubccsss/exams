@@ -9,6 +9,6 @@ You can find our collection of CPSC exams and quizzes here. They’re sorted by 
 |COURSE|DESCRIPTION|FILES|POTENTIAL|
 |------|-----------|-----|---------|
 {{ range $cid, $c := $courses -}}
-|[{{$c.Name}}](./{{$cid}}/)|{{$c.Desc}}|{{$c.FileCount}}|{{$c.PotentialFileCount}}|
+|[{{$c.Name}}]({{$cid}})|{{$c.Desc}}|{{$c.FileCount}}|{{$c.PotentialFileCount}}|
 {{end -}}
 {{ end }}

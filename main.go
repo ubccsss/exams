@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/goji/httpauth"
+	"github.com/gorilla/mux"
 	"github.com/ubccsss/exams/config"
 	"github.com/ubccsss/exams/db"
 	"github.com/ubccsss/exams/exambot"
@@ -85,22 +86,59 @@ func (s *server) serveSite() error {
 		}
 	*/
 
+	r := mux.NewRouter()
+
 	if len(*pass) > 0 {
 		secureMux := s.adminRoutes()
-		http.Handle("/admin/", httpauth.SimpleBasicAuth(*user, *pass)(secureMux))
+		r.Handle("/admin/", httpauth.SimpleBasicAuth(*user, *pass)(secureMux))
 	} else {
 		log.Println("No admin password set, interface disabled.")
 	}
 
-	http.HandleFunc("/upload", s.handleFileUpload)
-	http.Handle("/", http.FileServer(http.Dir("static")))
+	r.HandleFunc("/upload", s.handleFileUpload)
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	r.HandleFunc("/{course}/", s.handleCourse)
+	r.HandleFunc("/", s.handleIndex)
 
 	log.Printf("Listening on %s...", *bind)
-	return http.ListenAndServe(*bind, nil)
+	return http.ListenAndServe(*bind, r)
+}
+
+func (s *server) handleCourse(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	course := vars["course"]
+	c, err := s.db.Course(course)
+	if err != nil {
+		http.Error(w, err.Error(), 404)
+		return
+	}
+
+	if r.URL.Path != c.CanonicalURL() {
+		http.Redirect(w, r, c.CanonicalURL(), http.StatusTemporaryRedirect)
+	}
+
+	body, err := s.generator.Course(c)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	w.Header().Set("Content-Type", "text/html")
+	w.Write([]byte(body))
+}
+
+func (s *server) handleIndex(w http.ResponseWriter, r *http.Request) {
+	body, err := s.generator.Database()
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	w.Header().Set("Content-Type", "text/html")
+	w.Write([]byte(body))
 }
 
 type server struct {
-	db *db.DB
+	db        *db.DB
+	generator *generators.Generator
 }
 
 func main() {
@@ -132,10 +170,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	generator, err = generators.MakeGenerator(&oldDB, config.ExamsDir)
+	generator, err = generators.MakeGenerator(s.db)
 	if err != nil {
 		log.Fatal(err)
 	}
+	s.generator = generator
 
 	go func() {
 		if err := exambot.Run(s.db, bucket); err != nil {

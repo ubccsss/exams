@@ -26,6 +26,6 @@
 
 ## Ingress
 
-* [Department Courses](/admin/ingress/deptcourses)
+* [Courses](/admin/ingress/courses)
 * [UBC Math Finals](/admin/ingress/ubcmath)
 * [UBC Law Finals](/admin/ingress/ubclaw)

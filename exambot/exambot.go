@@ -608,6 +608,12 @@ func (s *Spider) doWork() error {
 	}
 
 	page, err := s.fetchURL(tf)
+
+	// if there's an error, don't waste time refetching that URL
+	if err := s.DB.DeleteToFetch(tf.URL); err != nil {
+		return err
+	}
+
 	if err != nil {
 		return err
 	}
@@ -615,10 +621,6 @@ func (s *Spider) doWork() error {
 	if err := s.DB.SaveFile(&page); err != nil {
 		log.Printf("%+v", page)
 		log.Printf("%q %q %q", page.SourceURL, page.Title, page.Text)
-		return err
-	}
-
-	if err := s.DB.DeleteToFetch(tf.URL); err != nil {
 		return err
 	}
 

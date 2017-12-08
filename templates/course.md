@@ -2,15 +2,15 @@
 th:first-child { width: 100000px; }
 </style>
 
-# {{ .Code }}
+# {{ .Title }}
 {{ if ne (len .Desc) 0 }}
 <p><strong>Description:</strong> {{.Desc}}</p>
 {{end}}
 
 {{ if ne (len .Years) 0 }}
-These are all the exams for {{ .Code }}.
+These are all the exams for {{ .Title }}.
 {{ else }}
-Sorry, we don't have any exams for {{ .Code }}. Please upload some below!
+Sorry, we don't have any exams for {{ .Title }}. Please upload some below!
 {{ end }}
 
 {{ $years := .Years}}
@@ -67,7 +67,7 @@ automatically assigned using machine learning.
 ## Upload
 
 <style>input#shouldbeempty{display:none;}</style>
-<form method="POST" action="/upload?course={{.Code}}" enctype="multipart/form-data">
+<form method="POST" action="/upload?course={{.Title}}" enctype="multipart/form-data">
   <div class="form-group">
     <label for="name">File Type</label>
     <br>
@@ -112,9 +112,4 @@ automatically assigned using machine learning.
   <input type="text" id="shouldbeempty" name="shouldbeempty">
   <button type="submit" class="btn btn-default">Upload</button>
 </form>
-
-
-## Other Resources
-
-See `handin` at https://fn.lc/hw/{{ .Code }}.
 
