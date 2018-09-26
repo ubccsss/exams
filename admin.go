@@ -206,16 +206,18 @@ func handleFile(w http.ResponseWriter, r *http.Request) {
 	year, _ := ml.ExtractYear(file)
 	meta.Year = strconv.Itoa(year)
 
-	classes, err := ml.DefaultGoogleClassifier.Classify(file, false)
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	meta.DetectedName = labelsToName(classes["type"], classes["sample"], classes["solution"])
-	meta.DetectedTerm = classes["term"]
+	if ml.DefaultGoogleClassifier != nil {
+		classes, err := ml.DefaultGoogleClassifier.Classify(file, false)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		meta.DetectedName = labelsToName(classes["type"], classes["sample"], classes["solution"])
+		meta.DetectedTerm = classes["term"]
 
-	if len(meta.Term) == 0 {
-		meta.Term = meta.DetectedTerm
+		if len(meta.Term) == 0 {
+			meta.Term = meta.DetectedTerm
+		}
 	}
 
 	if err := templates.ExecuteTemplate(w, "file.html", meta); err != nil {

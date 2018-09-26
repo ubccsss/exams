@@ -6,7 +6,7 @@ import (
 	"os"
 	"sort"
 
-	"code.sajari.com/docconv"
+	"github.com/d4l3k/docconv"
 	"github.com/ubccsss/exams/examdb"
 	"github.com/urfave/cli"
 )

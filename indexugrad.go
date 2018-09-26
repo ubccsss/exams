@@ -12,6 +12,8 @@ import (
 	"github.com/urfave/cli"
 )
 
+const SSHTimeout = 60
+
 func indexUGrad(c *cli.Context) error {
 	ssh := &easyssh.MakeConfig{
 		User:   c.String("user"),
@@ -22,7 +24,7 @@ func indexUGrad(c *cli.Context) error {
 	}
 
 	// Call Run method with command you want to run on remote server.
-	response, err := ssh.Run(`find /home/c/cs*/public_html -name "*.html" -maxdepth 2`)
+	response, _, _, err := ssh.Run(`find /home/c/cs*/public_html -name "*.html" -maxdepth 2`, SSHTimeout)
 	// Handle errors
 	if err != nil {
 		return err
