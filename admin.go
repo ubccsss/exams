@@ -28,7 +28,9 @@ var (
 func adminRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/admin/potential", handlePotentialFileIndex)
+	mux.HandleFunc("/admin/potential", handlePotentialNew)
+	mux.HandleFunc("/admin/potential_old", handlePotentialFileIndex)
+
 	mux.HandleFunc("/admin/needfix", handleNeedFixFileIndex)
 	mux.HandleFunc("/admin/file/", handleFile)
 
@@ -57,6 +59,48 @@ func adminRoutes() *http.ServeMux {
 	return mux
 }
 
+func handlePotentialNew(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	renderAdminHeader(w)
+
+	_, showInvalid := r.URL.Query()["invalid"]
+
+	meta := struct{
+		Groups map[string][]*examdb.File
+		ViewInvalid bool
+	}{
+		ViewInvalid: showInvalid,
+	}
+
+	groups := make(map[string][]*examdb.File)
+	if !showInvalid {
+		files := db.UnprocessedFiles()
+
+		for _, f := range files {
+			if len(f.Course) > 0 {
+				groups[f.Course] = append(groups[f.Course], f)
+			} else {
+				groups["unclassified"] = append(groups["unclassified"], f)
+			}
+		}
+
+		meta.Groups = groups
+	} else {
+		files := db.NotAnExamFiles()
+
+		for _, f := range files {
+			groups["invalid"] = append(groups["invalid"], f)
+		}
+
+		meta.Groups = groups
+	}
+	if err := templates.ExecuteTemplate(w, "potential.html", meta); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+// This is NOT used for normal display, just for the invalid ones
 func handlePotentialFileIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	renderAdminHeader(w)

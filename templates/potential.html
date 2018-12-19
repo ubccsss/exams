@@ -1,0 +1,34 @@
+
+<title>Potential Files</title>
+
+<h2><a href="/admin/potential">Unprocessed</a></h2>
+<h2><a href="/admin/potential?invalid">Not Exams/Invalid</a></h2>
+
+{{if .ViewInvalid}}<h1>Invalid</h1>{{else}}<h1>Unprocessed</h1><ul>{{end}}
+{{ range $name, $group := .Groups }}
+	<h3>{{ $name }}</h3>
+	{{if (not (eq $name "unclassified"))}}
+		<table>
+		<tr> 
+			<th>Course</th>
+			<th>Term</th>
+			<th>Link</th>
+		</tr>
+		{{ range $file := $group }}
+			    <tr>
+				<td>{{ $file.Course }}</td>
+				<td>{{ $file.Term }}</td>
+				<td><a href="/admin/file/{{ $file.Hash }}">Link</a></td>
+			    </tr>
+		{{ end }}
+		</table>
+	{{ else }}
+		<table>
+		<th> <td>Link</td></th>
+		{{ range $file := $group }}
+		    <tr><td><a href="/admin/file/{{ $file.Hash }}">Link</a></td></tr>
+		{{ end }}
+		</table>
+	{{ end }}
+
+{{ end }}
