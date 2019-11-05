@@ -100,7 +100,7 @@ func (g *Generator) renderTemplate(title, content string) string {
 	return fmt.Sprintf(g.layout, title, content)
 }
 
-const templateURL = "https://ubccsss.org/services"
+const templateURL = "https://ubccsss.org/services/"
 
 var importRegexp = regexp.MustCompile("@import .*;")
 
@@ -139,7 +139,7 @@ func (g *Generator) fetchLayout() error {
 			s.SetAttr("href", resolved.String())
 		})
 
-		doc.Find("script[src]").Each(func(_ int, s *goquery.Selection) {
+		doc.Find("script[src], img[src]").Each(func(_ int, s *goquery.Selection) {
 			url, err2 := url.Parse(s.AttrOr("src", ""))
 			if err2 != nil {
 				err = err2
@@ -175,7 +175,9 @@ func (g *Generator) fetchLayout() error {
 			return
 		}
 
-		stylesheets.First().SetAttr("href", "/style.css")
+		stylesheet := stylesheets.First()
+		stylesheet.SetAttr("href", "/style.css")
+		stylesheet.RemoveAttr("integrity")
 		stylesheets.Slice(1, stylesheets.Length()).Remove()
 
 		if _, err = buf.WriteTo(&importBuf); err != nil {
@@ -215,9 +217,9 @@ func (g *Generator) fetchLayout() error {
 		parts := strings.Split(title.Text(), "|")
 		title.ReplaceWithHtml("<title>%s |" + parts[len(parts)-1] + "</title>")
 
-		section := doc.Find(".main-container .row > section")
+		section := doc.Find("body > .container .row")
 		children := section.Children()
-		children.First().ReplaceWithHtml(`%s`)
+		children.First().ReplaceWithHtml(`<div>%s</div>`)
 		children.Remove()
 
 		layout, err2 := doc.Html()
