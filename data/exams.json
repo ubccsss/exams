@@ -10115,127 +10115,6 @@
       "Updated": "0001-01-01T00:00:00Z"
     },
     {
-      "Name": "Final",
-      "Path": "cs340/2015/340-2015-F.pdf",
-      "Hash": "537832f84659d1313bf043776963651ea6694b1e",
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "Final (Solution)",
-      "Path": "cs340/2015/340-2015-Fsol.pdf",
-      "Hash": "033752cffd03147b1afafd2efa679e0844905ed7",
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "Midterm",
-      "Path": "cs340/2015/340-2015-MT.pdf",
-      "Hash": "9568610e3b950d4d0cb23fa4819c9961ab0910c3",
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "Midterm",
-      "Path": "cs340/2015/MT.pdf",
-      "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ipvreq5srx61e6/hzmvl01upe67mz/iuiohig8aivt/MT.pdf",
-      "Hash": "7bc9f95cfd1a865e676cbea9053aaa7965f2a435",
-      "Score": 1,
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "NotAnExam": true,
-        "Updated": "0001-01-01T00:00:00Z"
-      }
-    },
-    {
-      "Name": "Midterm (Solution)",
-      "Path": "cs340/2015/340-2015-MTsol.pdf",
-      "Hash": "a3367623d72bf73a7f569ba20031eb056cfac40a",
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "Midterm (Solution)",
-      "Path": "cs340/2015/MTsol.pdf",
-      "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ipvreq5srx61e6/hzmvl01upe67mz/iuiohuhucqiq/MTsol.pdf",
-      "Hash": "a49cb024ea1cf7bd2a9f41da203ca72f4ab2ec9d",
-      "Score": 1,
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Midterm (Solution)",
-        "Term": "W1",
-        "Updated": "0001-01-01T00:00:00Z"
-      }
-    },
-    {
-      "Name": "Final Practice Questions",
-      "Path": "cs340/2015/340-2015-final-practice.pdf",
-      "Hash": "0b73a5acbe68ca253db2effffabd26339a95fef9",
-      "Course": "cs340",
-      "Year": 2015,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "Midterm (Solution)",
-      "Path": "cs340/2016/340-2016-MTsol.pdf",
-      "Hash": "300ec5169f55d4f7d66cb9278d2e355f489b2644",
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2016,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
-      "Name": "Midterm (Solution)",
-      "Path": "cs340/2016/MTsol.pdf",
-      "Source": "https://d1b10bmlvqabco.cloudfront.net/attach/ipvreq5srx61e6/hzmvl01upe67mz/iv5nvtexu612/MTsol.pdf",
-      "Hash": "19d4844523f336be83d392cde1dc8c7e9e6d7c36",
-      "Score": 1,
-      "Term": "W1",
-      "Course": "cs340",
-      "Year": 2016,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Midterm (Solution)",
-        "Term": "W1",
-        "Updated": "0001-01-01T00:00:00Z"
-      }
-    },
-    {
-      "Name": "Final Topics",
-      "Path": "cs340/2016/340-2016-final-topics.pdf",
-      "Hash": "ebc59d780126ba44e1457672c1aefbdc94dbfd90",
-      "Course": "cs340",
-      "Year": 2016,
-      "HandClassified": true,
-      "Updated": "0001-01-01T00:00:00Z"
-    },
-    {
       "Name": "Midterm",
       "Path": "cs418/2003/midterm.pdf",
       "Source": "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi/home/c/cs418/public_html/2003-fall/exam/midterm.pdf",
@@ -18775,21 +18654,6 @@
       }
     },
     {
-      "Path": "potential/finalreview-1.pdf",
-      "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca/~murphyk/teaching/cs340-fall07/finalreview.pdf",
-      "Hash": "e5d3f3c02f2837d9cea3d8271dfdbc6fb91718b0",
-      "Score": 3,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Midterm (Solution)",
-        "Term": "W1",
-        "Course": "cs340",
-        "Year": 2012,
-        "Updated": "2017-03-07T16:38:15.730465109-08:00"
-      }
-    },
-    {
       "Path": "potential/Visual%20Variables%20in%20Adaptive%20Visualizations_FINAL.pdf?attredirects=0\u0026d=1",
       "Source": "https://sites.google.com/site/useradaptivevisualization/wuav-2013-documents/Visual%20Variables%20in%20Adaptive%20Visualizations_FINAL.pdf?attredirects=0\u0026d=1",
       "Hash": "c3bbc7fd6fc66ebfefaf1f44c9c6f873cbfba87a",
@@ -19318,21 +19182,6 @@
       }
     },
     {
-      "Path": "potential/final-4pp.pdf",
-      "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca/~murphyk/teaching/cs340-fall06/lectures/final-4pp.pdf",
-      "Hash": "ad8237e262f0cf68aa61cb94f324341997aa63c1",
-      "Score": 3,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Final (Solution)",
-        "Term": "S",
-        "Course": "cs340",
-        "Year": 2010,
-        "Updated": "2017-03-07T16:38:57.280756787-08:00"
-      }
-    },
-    {
       "Path": "potential/finalpresent-1.pdf",
       "Source": "http://www.cs.ubc.ca/~tmm/courses/cpsc533c-07-fall/projects/cody/finalpresent.pdf",
       "Hash": "08acb0c0a62315d644e1e4c19399ea40789f6477",
@@ -19646,21 +19495,6 @@
         "Course": "cs210",
         "Year": 2012,
         "Updated": "2017-03-07T16:39:05.292132275-08:00"
-      }
-    },
-    {
-      "Path": "/0/midtermreview.pdf",
-      "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca:80/~murphyk/teaching/cs340-fall07/midtermreview.pdf",
-      "Hash": "6dfef4867ea25a5a463c7baf1cb39829cbaaf298",
-      "Score": 3,
-      "NotAnExam": true,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Midterm (Solution)",
-        "Term": "W1",
-        "Course": "cs340",
-        "Updated": "0001-01-01T00:00:00Z"
       }
     },
     {
@@ -20982,21 +20816,6 @@
         "Course": "cs414",
         "Year": 2014,
         "Updated": "2017-03-07T16:39:55.183588607-08:00"
-      }
-    },
-    {
-      "Path": "/0/midtermreview.pdf",
-      "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca:80/~murphyk/teaching/cs340-fall07/midtermreview.pdf",
-      "Hash": "6dfef4867ea25a5a463c7baf1cb39829cbaaf298",
-      "Score": 3,
-      "NotAnExam": true,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Midterm (Solution)",
-        "Term": "W1",
-        "Course": "cs340",
-        "Updated": "0001-01-01T00:00:00Z"
       }
     },
     {
@@ -23607,21 +23426,6 @@
       }
     },
     {
-      "Path": "potential/final-4pp.pdf",
-      "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca/~murphyk/teaching/cs340-fall06/lectures/final-4pp.pdf",
-      "Hash": "ad8237e262f0cf68aa61cb94f324341997aa63c1",
-      "Score": 3,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Final (Solution)",
-        "Term": "S",
-        "Course": "cs340",
-        "Year": 2010,
-        "Updated": "2017-03-07T16:41:35.695420405-08:00"
-      }
-    },
-    {
       "Path": "potential/foobar.pdf",
       "Source": "https://www.ugrad.cs.ubc.ca/~q7w9a/exams.cgi/exams.cgi/home/n/norm/minijava-final/foobar.pdf",
       "Hash": "4baab26dd0a4f013c3457434f3f07b1a106f413d",
@@ -23731,21 +23535,6 @@
         "Term": "W2",
         "Year": 2033,
         "Updated": "0001-01-01T00:00:00Z"
-      }
-    },
-    {
-      "Path": "potential/finalreview-1.pdf",
-      "Source": "https://web.archive.org/web/2222/http://www.cs.ubc.ca/~murphyk/teaching/cs340-fall07/finalreview.pdf",
-      "Hash": "e5d3f3c02f2837d9cea3d8271dfdbc6fb91718b0",
-      "Score": 3,
-      "Updated": "0001-01-01T00:00:00Z",
-      "LastResponseCode": 200,
-      "Inferred": {
-        "Name": "Midterm (Solution)",
-        "Term": "W1",
-        "Course": "cs340",
-        "Year": 2012,
-        "Updated": "2017-03-07T16:41:33.563412287-08:00"
       }
     },
     {
